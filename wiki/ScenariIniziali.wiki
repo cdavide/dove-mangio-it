@@ -62,7 +62,7 @@ Il gestore di un locale può:
 
 ===PROJECT PLAN===
 
-|| ===PRIORITÀ=== || ===TASK=== || ===DURATA FULL-TIME=== || ===DURATA PART-TIME=== || ===RISORSE STIMATE===||
+||*PRIORITÀ* || *TASK* || *DURATA FULL-TIME* || *DURATA PART-TIME* || *RISORSE STIMATE*||
 || 1 || analisi (discussione schema ER, definizione dizionario dati, esecuzione analisi object-oriented, CRC cards) || 3 settimane || 5 settimane || 3 persone ||
 || 1 || design (definizione dei moduli software e delle interfacce, mappa delle pagine web, specifica delle API per interazione “aggregatore di eventi”) || 1 settimana || 2 settimane || 3 persone||
 || 1 || creazione schema database e stored procedures || 3 giorni || 1 settimana || 2 persone mysql ||
