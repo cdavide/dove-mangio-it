@@ -60,21 +60,18 @@ IPOTESI NUOVA FUNZIONALITA
 
 PROJECT PLAN
 
-PRIORITÀ	TASK	DURATA FULL-TIME	DURATA PART-TIME	RISORSE STIMATE
-1	analisi (discussione schema ER, definizione dizionario dati, esecuzione analisi object-oriented, CRC cards)	3 settimane	5 settimane	3 persone
-1	design (definizione dei moduli software e delle interfacce, mappa delle pagine web, specifica delle API per interazione “aggregatore di eventi”)	1 settimana	2 settimane	3 persone
-1	creazione schema database e stored procedures	3 giorni	1 settimana	2 persone
-mysql
-1	creazione gestione utenti database	1 giorno	2 giorni	2 persone,
-openID, Facebook,
-Twitter
-1	creazione modulo per la gestione dei menù	3 giorni	5 giorni	2 persone
-2	creazione modulo gestione degli eventi e delle news	2 giorni	4 giorni	2 persone 
-1	creazione delle funzionalità di ricerca	1 settimana	2 settimane	2 persone,
-Google maps, fusion table, javascript
-1	creazione modulo per la geolocalizzazione e integrazione con maps 	spike		2 persone, Google maps, fusion table, javascript
-2	gestione delle valutazioni dei locali registrati (qualità, velocità, cortesia, affollamento, giudizio complessivo) 	2 giorni	3 giorni	2 persone, 
-3	Creazione modulo notizie del giorno (personalizzazione prima pagina: tipologia notizie sport, economia ecc..)	3 giorni	4 giorni	2 persone, Google News
-4	Studio e applicazione algoritmi per raccomandation 	1 settimana	2 settimane	2 persone 
-1	integrazione e testing del sistema 	2 settimana	???	3 persone, JUnit
-4	modulo gestione prenotazione tavoli	2 settimane	3 settimane	3 persone
+|| PRIORITÀ || TASK || DURATA FULL-TIME || DURATA PART-TIME || RISORSE STIMATE ||
+|| 1 || analisi (discussione schema ER, definizione dizionario dati, esecuzione analisi object-oriented, CRC cards) || 3 settimane || 5 settimane || 3 persone ||
+|| 1 || design (definizione dei moduli software e delle interfacce, mappa delle pagine web, specifica delle API per interazione “aggregatore di eventi”) || 1 settimana || 2 settimane || 3 persone||
+|| 1 || creazione schema database e stored procedures || 3 giorni || 1 settimana || 2 persone
+mysql||
+|| 1 || creazione gestione utenti database || 1 giorno || 2 giorni || 2 persone, openID, Facebook, Twitter||
+|| 1 || creazione modulo per la gestione dei menù || 3 giorni || 5 giorni || 2 persone||
+|| 2 || creazione modulo gestione degli eventi e delle news || 2 giorni || 4 giorni || 2 persone||
+|| 1 || creazione delle funzionalità di ricerca || 1 settimana || 2 settimane || 2 persone, Google maps, fusion table, javascript||
+|| 1 || creazione modulo per la geolocalizzazione e integrazione con maps 	spike		2 persone, Google maps, fusion table, javascript
+|| 2 || gestione delle valutazioni dei locali registrati (qualità, velocità, cortesia, affollamento, giudizio complessivo) 	2 giorni	3 giorni	2 persone, 
+|| 3 || Creazione modulo notizie del giorno (personalizzazione prima pagina: tipologia notizie sport, economia ecc..)	3 giorni	4 giorni	2 persone, Google News
+|| 4 ||Studio e applicazione algoritmi per raccomandation 	1 settimana	2 settimane	2 persone 
+|| 1 || integrazione e testing del sistema 	2 settimana	???	3 persone, JUnit
+|| 4 || modulo gestione prenotazione tavoli	2 settimane	3 settimane	3 persone
