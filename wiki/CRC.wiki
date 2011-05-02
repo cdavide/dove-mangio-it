@@ -1,0 +1,48 @@
+#labels Collaboration,Responsibility,Class
+|| CLASSE ||
+|| Responsibility || Collaboration||
+
+|| Piatto ||
+|| Fornisce le sue caratteristiche  || Menù ||
+
+||CombinazionePiatti ||
+|| Fornisce le sue caratteristiche || Menù ||
+
+||Menù||
+|| Permette di memorizzare e presentare i piatti di un locale || Piatto <br/> Combinazione Piatto <br/> Locale ||
+
+||Locale||
+|| Conosce il menù <br/> Conosce gli eventi <br/> Conosce le News <br/> Conosce la valutazione <br/> Conosce la sua posizione || Menù <br/> News <br/>Evento <br/> Valutazione  ||
+
+||Utente||
+|| Conosce la sua posizione || ||
+
+||UtenteRegistrato||
+|| È un utente <br/> Conosce le sue caratteristiche <br/> Conosce le sue preferenze <br/> Conosce le sue valutazioni || Valutazione <br/> Locale <br/> Piatto <br/> CombinazionePiatti <br/> News ||
+
+||Gestore||
+|| È un utente <br/> Conosce il suo locale <br/>  || Locale ||
+
+||Evento || 
+|| Conosce le sue caratteristiche || Locale <br/> API collaborazione progetto aggregatore d'eventi ||
+
+||News||
+||Conosce le sue caratteristiche || Locale||
+
+||Valutazione||
+||Conosce il locale a cui si riferisce <br/> Conosce l'utente che l'ha creata <br/> Conosce i propri valori || Utente <br/> Locale ||
+
+||ControlloreGestore||
+|| Aggiungi/Elimina/Modifica piatto <br/> Aggiungi/Elimina/Modifica menù <br/> Aggiungi/Elimina/Modifica combinazionePiatto <br/> Aggiungi/Elimina/Modifica Evento <br/> Aggiungi/Elimina/Modifica News <br/>Controlla e modifica le caratteristiche del locale <br/> Creazione di un report mensile || Locale <br/> Gestore <br/> News <br/>Evento <br/> Menù <br/> Piatto <br/> CombinazionePiatto ||
+
+||ViewGestore||
+|| Visualizza dati locale <br/> Crea grafici statistiche e valutazioni <br/> Crea i form per aggiungere/modificare piatti, piatti combinati, eventi, news, menù || Locale <br/> Gestore <br/> News <br/>Evento <br/> Menù <br/> Piatto <br/> CombinazionePiatto ||
+
+||ControlloreUtenteRegistrato||
+|| Permette la registrazione <br/> Permette di modificare i dati utente <br/> Aggiunge/Elimina una preferenza <br/> Aggiunge/Elimina una valutazione || UtenteRegistrato <br/> Utente <br/>Valutazione ||
+
+||ControlloreRicerche||
+|| Consulta il database di piatti, combinazionePiatti, menù, locali, valutazioni <br/> Utilizza le API di Maps <br/> Filtra i risultati in base a parametri di ricerca  || Locale <br/> Gestore <br/> Menù <br/> Piatto <br/> CombinazionePiatto || 
+
+||ViewRicerche||
+|| Presenta il form per effettuare una ricerca rapida o avanzata <br/> Visualizza risultati ricerca || Locale <br/> Menù <br/> API Fusion Tables <br/> API Maps ||
