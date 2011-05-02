@@ -1,3 +1,5 @@
+=Scenari iniziali e prima versione di project plan=
+
 Si vuole realizzare una piattaforma che permetta di far comunicare ristoratori (self service bar ristoranti e piole per il pranzo) e clienti.
 Il servizio consente alle aziende registrate di pubblicare un menù del giorno.
 Tramite il sito internet e l’applicazione per smartphone è possibile visualizzare su una mappa (integrazione API Google Maps) i locali in base a criteri quali distanza da un indirizzo, prezzo, menù e tag (celiaco,vegetariano…).
@@ -5,7 +7,7 @@ L’accesso al servizio deve essere disponibile a utenti occasionali (non regist
 
 Per i gestori dei locali sarà possibile conoscere il trend mensile del proprio locale, confrontarlo con la media della zona e visualizzare i menù di maggior successo.
 
-RUOLI UTENTE
+===RUOLI UTENTE===
 L’utente non registrato può:
 - ricercari i menu dei locali secondo diversi criteri di ricerca(distanza da posizione corrente, classe del cibo, prezzo, ecc);
 - registrarsi;
@@ -32,17 +34,17 @@ Il gestore di un locale può:
 - inserire news per il proprio locale;
 - inserire eventi speciali legati  al locale.
 
-RELATED WORKS
+===RELATED WORKS===
 - MyTable  www.mytable.it/
-	- solo prenotazione locali, solo posti con menu fisso, recensione e valutazione da parte 		degli utenti
+	- solo prenotazione locali, solo posti con menu fisso, recensione e valutazione da parte degli utenti
 - 4square foursquare.com/ 
-	- è un social network, permette di comunicare la propria posizione e recensire i locali  e 		luoghi
+	- è un social network, permette di comunicare la propria posizione e recensire i locali e luoghi
 - Trip Advisor www.tripadvisor.it/
 	- solo valutazione e commenti locali già registrati al sito
 
 
 
-SPIKES
+===SPIKES===
 - Creazione di applicazioni per android e iphone;
 - Utilizzo delle API di: Facebook, Twitter, Open ID (login);
 - Utilizzo delle API di: Facebook, Twitter (per integrazione eventi)
@@ -54,13 +56,13 @@ SPIKES
 - Utilizzo https per sessione Google;
 - Utilizzo JUnit per il testing.
 
-IPOTESI NUOVA FUNZIONALITA
+===IPOTESI NUOVA FUNZIONALITA===
 - gruppi di utenti  (colleghi di lavoro) il sistema propone locale più adatto alle abitudini alimentari di tutti, e si offre per coordinare l’orario per il pranzo;
 
 
-PROJECT PLAN
+===PROJECT PLAN===
 
-|| PRIORITÀ || TASK || DURATA FULL-TIME || DURATA PART-TIME || RISORSE STIMATE ||
+|| ===PRIORITÀ=== || ===TASK=== || ===DURATA FULL-TIME=== || ===DURATA PART-TIME=== || ===RISORSE STIMATE===||
 || 1 || analisi (discussione schema ER, definizione dizionario dati, esecuzione analisi object-oriented, CRC cards) || 3 settimane || 5 settimane || 3 persone ||
 || 1 || design (definizione dei moduli software e delle interfacce, mappa delle pagine web, specifica delle API per interazione “aggregatore di eventi”) || 1 settimana || 2 settimane || 3 persone||
 || 1 || creazione schema database e stored procedures || 3 giorni || 1 settimana || 2 persone
@@ -69,9 +71,9 @@ mysql||
 || 1 || creazione modulo per la gestione dei menù || 3 giorni || 5 giorni || 2 persone||
 || 2 || creazione modulo gestione degli eventi e delle news || 2 giorni || 4 giorni || 2 persone||
 || 1 || creazione delle funzionalità di ricerca || 1 settimana || 2 settimane || 2 persone, Google maps, fusion table, javascript||
-|| 1 || creazione modulo per la geolocalizzazione e integrazione con maps 	spike		2 persone, Google maps, fusion table, javascript
-|| 2 || gestione delle valutazioni dei locali registrati (qualità, velocità, cortesia, affollamento, giudizio complessivo) 	2 giorni	3 giorni	2 persone, 
-|| 3 || Creazione modulo notizie del giorno (personalizzazione prima pagina: tipologia notizie sport, economia ecc..)	3 giorni	4 giorni	2 persone, Google News
-|| 4 ||Studio e applicazione algoritmi per raccomandation 	1 settimana	2 settimane	2 persone 
-|| 1 || integrazione e testing del sistema 	2 settimana	???	3 persone, JUnit
-|| 4 || modulo gestione prenotazione tavoli	2 settimane	3 settimane	3 persone
+|| 1 || creazione modulo per la geolocalizzazione e integrazione con maps || spike	|| 2 persone, Google maps, fusion table, javascript ||
+|| 2 || gestione delle valutazioni dei locali registrati (qualità, velocità, cortesia, affollamento, giudizio complessivo) || 2 giorni || 3 giorni || 2 persone ||
+|| 3 || Creazione modulo notizie del giorno (personalizzazione prima pagina: tipologia notizie sport, economia ecc..)	 || 3 giorni || 4 giorni || 2 persone, Google News ||
+|| 4 ||Studio e applicazione algoritmi per raccomandation || 1 settimana || 2 settimane || 2 persone ||
+|| 1 || integrazione e testing del sistema	|| 2 settimana || ??? || 3 persone, JUnit ||
+|| 4 || modulo gestione prenotazione tavoli || 2 settimane || 3 settimane || 3 persone ||
