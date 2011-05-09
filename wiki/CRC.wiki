@@ -3,13 +3,13 @@
 || Responsibility || Collaboration||
 
 || Piatto ||
-|| Fornisce le sue caratteristiche  || Menù ||
+|| Fornisce le sue caratteristiche <br/> idPiatto <br/> nome <br/> categoria <br/> prezzo <br/> flags vari || Menù ||
 
 ||CombinazionePiatti ||
-|| Fornisce le sue caratteristiche || Menù ||
+|| Fornisce le sue caratteristiche <br/>idCombo <br/> descrizioneCombo <br/> prezzo <br/> flagVari || Menù ||
 
 ||Menu||
-|| Permette di memorizzare e presentare i piatti di un locale || Piatto <br/> Combinazione Piatto <br/> Locale ||
+|| Permette di memorizzare e presentare i piatti di un locale <br/> listaPiatti <br/> validità || Piatto <br/> Combinazione Piatto <br/> Locale ||
 
 ||Locale||
 || Conosce il menù <br/> Conosce gli eventi <br/> Conosce le News <br/> Conosce la valutazione <br/> Conosce la sua posizione || Menù <br/> News <br/>Evento <br/> Valutazione  ||
