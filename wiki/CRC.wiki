@@ -12,7 +12,7 @@
 || Permette di memorizzare e presentare i piatti di un locale <br/> listaPiatti <br/> validità || Piatto <br/> Combinazione Piatto <br/> Locale ||
 
 ||Locale||
-|| Conosce il menù <br/> Conosce gli eventi <br/> Conosce le News <br/> Conosce la valutazione <br/> Conosce la sua posizione || Menù <br/> News <br/>Evento <br/> Valutazione  ||
+|| Conosce il menù <br/>Conosce le combinazioni di piatti <br/> Conosce gli eventi <br/> Conosce le News <br/> Conosce la valutazione <br/> Conosce la sua posizione <br/> menu <br/>comboPiatti <br/> || Menù <br/> News <br/>Evento <br/> Valutazione  ||
 
 ||Utente||
 || Conosce la sua posizione || ||
