@@ -8,7 +8,7 @@
 ||CombinazionePiatti ||
 || Fornisce le sue caratteristiche || Menù ||
 
-||Menù||
+||ListaPiatti||
 || Permette di memorizzare e presentare i piatti di un locale || Piatto <br/> Combinazione Piatto <br/> Locale ||
 
 ||Locale||
