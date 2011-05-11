@@ -45,16 +45,16 @@ Il gestore di un locale può:
 
 
 ===SPIKES===
-- Creazione di applicazioni per android e iphone;
-- Utilizzo delle API di: Facebook, Twitter, Open ID (login);
-- Utilizzo delle API di: Facebook, Twitter (per integrazione eventi)
-- Utilizzo delle API di maps per geolocalizzazione dell’utente;
-- Utilizzo delle Fusion Tables;
-- Utilizzo Ajax per “text suggestion”;
-- Utilizzo Enterprise java Bean e servlet (2 componenti non hanno frequentato LabSWeb);
-- Utilizzo Java Server Faces per la creazione rapida di interfacce utente; ???
-- Utilizzo https per sessione Google;
-- Utilizzo JUnit per il testing.
+- Creazione di applicazioni per android e iphone <br/>
+- Utilizzo delle API di: Facebook, Twitter, Open ID (login) <br/>
+- Utilizzo delle API di: Facebook, Twitter (per integrazione eventi) <br/>
+- Utilizzo delle API di maps per geolocalizzazione dell’utente <br/>
+- Utilizzo delle Fusion Tables <br/>
+- Utilizzo Ajax per “text suggestion” <br/>
+- Utilizzo Enterprise java Bean e servlet (2 componenti non hanno frequentato LabSWeb) <br/>
+- Utilizzo Java Server Faces per la creazione rapida di interfacce utente <br/>
+- Utilizzo https per sessione Google <br/>
+- Utilizzo JUnit per il testing <br/>
 
 ===IPOTESI NUOVA FUNZIONALITA===
 - gruppi di utenti  (colleghi di lavoro) il sistema propone locale più adatto alle abitudini alimentari di tutti, e si offre per coordinare l’orario per il pranzo;
