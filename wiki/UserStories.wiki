@@ -7,37 +7,39 @@ Esempi di user stories per il progetto.
 
 == User Story 1 ==
 Il gestore vuole aggiungere una nuova combinazione di piatti:
- - eseguo il login
- - il sistema presenta le combinazioni già create
- - Tramite una interfaccia di scelte multiple si crea la combinazione assegnando un prezzo
- - salva la combinazione
+ * eseguo il login
+ * il sistema presenta le combinazioni già create
+ * Tramite una interfaccia di scelte multiple si crea la combinazione assegnando un prezzo
+ * il sistema salva la combinazione
+ * il gestore viene reindirizzato alla lista di tutte le sue combinazioni
 
 == User Story 2 ==
 Il gestore imposta il menu giornaliero
- - eseguo il login 
- - una pagina offre la possibilità di inserire piatti di diverse tipologie  assegnandogli anche un prezzo
- - il sistema suggerisce al gestore i piatti ricordandosi quelli già inseriti in passato
- - il gestore può impostare una validità al menu
- - salva la combinazione
+ * il gestore esegue il login 
+ * una pagina offre la possibilità di inserire piatti di diverse tipologie  assegnandogli anche un prezzo
+ * il sistema suggerisce al gestore i piatti ricordandosi quelli già inseriti in passato
+ * il gestore può impostare una validità al menu
+ * il sistema salva la combinazione
+ * il gestore viene reindirizzato alla lista di tutte le sue combinazioni
 == User Story 3 == 
 Un utente effettua una ricerca 
- - il sistema localizza la posizione dell'utente (automaticamente o inserendo l'indirizzo) 
- - l'utente specifica i criteri di ricerca 
- - il sistema filtra i risultati in base ai criteri specificati e li visualizza su una mappa
+ * il sistema localizza la posizione dell'utente (automaticamente o inserendo l'indirizzo) 
+ * l'utente specifica i criteri di ricerca 
+ * il sistema filtra i risultati in base ai criteri specificati e li visualizza su una mappa
 
 == User Story 4 == 
 Un utente registrato valuta un locale
- - l'utente effettua una ricerca per reperire la pagina del locale che vuole giudicare
- - il sistema controlla che l'utente sia autenticato
- - se l'utente ha già fornito una valutazione per il locale viene presentata la possibilità di modificarla
- - l'utente effettua il giudizio
- - il sistema salva le preferenze
+ * l'utente effettua una ricerca per reperire la pagina del locale che vuole giudicare
+ * il sistema controlla che l'utente sia autenticato
+ * se l'utente ha già fornito una valutazione per il locale viene presentata la possibilità di modificarla
+ * l'utente effettua il giudizio
+ * il sistema salva le preferenze
 
 == User Story 5 == 
 Un gestore effettua la registrazione al servizio
- - il sistema offre un form da compilare con le informazioni sull'azienda (indirizzo, partita iva, ragione sociale)
- - il gestore inserisce i dati
- - il sistema controlla la validità di tali dati
- - il sistema invia una email di conferma al gestore interessato con un link per abilitare l'azienda
- - il gestore dell'azienda segue il link
- - il sistema abilita l'azienda e invita il nuovo utente a personalizzare la pagina
+ * il sistema offre un form da compilare con le informazioni sull'azienda (indirizzo, partita iva, ragione sociale)
+ * il gestore inserisce i dati
+ * il sistema controlla la validità di tali dati
+ * il sistema invia una email di conferma al gestore interessato con un link per abilitare l'azienda
+ * il gestore dell'azienda segue il link
+ * il sistema abilita l'azienda e invita il nuovo utente a personalizzare la pagina
