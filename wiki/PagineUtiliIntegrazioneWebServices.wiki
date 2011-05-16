@@ -1,0 +1,5 @@
+http://twitter4j.org/en/code-examples.html#oauth
+
+http://code.google.com/p/oauth-signpost/wiki/TwitterAndSignpost
+
+http://apiwiki.twitter.com/w/page/22554657/OAuth-Examples
