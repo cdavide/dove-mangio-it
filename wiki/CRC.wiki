@@ -11,7 +11,8 @@
 ||Menu||
 || Permette di memorizzare e presentare i piatti di un locale <br/>idLocale <br/> listaPiatti <br/> validità || Piatto <br/> Combinazione Piatto <br/> Locale ||
 
-||Locale||(Locale rappresenta anche il proprietario del locale)
+(Locale rappresenta anche il proprietario del locale)
+||Locale||
 || Conosce il menù <br/>Conosce le combinazioni di piatti <br/> Conosce gli eventi <br/> Conosce le News <br/> Conosce la valutazione <br/> Conosce la sua posizione <br/> menu <br/>comboPiatti <br/> idLocale <br/>nome<br/>foto<br/>indirizzo<br/>coordinate<br/>ListaCombo<br/>nome proprietario<br/>partita iva || Menù <br/> News <br/>Evento <br/> Valutazione  ||
 
 ||Utente||
@@ -23,10 +24,12 @@
 ||Proprietario||
 || deprecato, informazioni inglobate in Locale<br/>  || Locale ||
 
-||Evento ||(ha una data oltre la quale perde di validità, es "spaghettata di Natale") 
+(ha una data oltre la quale perde di validità, es "spaghettata di Natale") 
+||Evento ||
 || Conosce le sue caratteristiche <br/>idEvento<br/>idLocale<br/>data inizio<br/>data fine<br/>descrizione<br/>|| Locale <br/> API collaborazione progetto aggregatore d'eventi ||
 
-||News||(informazioni che non predono di validità,es"nuovo cuoco")
+(informazioni che non predono di validità,es"nuovo cuoco")
+||News||
 ||Conosce le sue caratteristiche idNews<br/>idLocale<br/>data inizio<br/>descrizione<br/> || Locale||
 
 ||Valutazione||
@@ -35,14 +38,15 @@
 ||ControlloreLocale||
 || Aggiungi/Elimina/Modifica piatto <br/> Aggiungi/Elimina/Modifica menù <br/> Aggiungi/Elimina/Modifica combinazionePiatto <br/> Aggiungi/Elimina/Modifica Evento <br/> Aggiungi/Elimina/Modifica News <br/>Controlla e modifica le caratteristiche del locale <br/> Creazione di un report mensile || Locale <br/> News <br/>Evento <br/> Menù <br/> Piatto <br/> CombinazionePiatto ||
 
-||ViewGestore||
-|| Visualizza dati locale <br/> Crea grafici statistiche e valutazioni <br/> Crea i form per aggiungere/modificare piatti, piatti combinati, eventi, news, menù || Locale <br/> Gestore <br/> News <br/>Evento <br/> Menù <br/> Piatto <br/> CombinazionePiatto ||
+(possibile partizionamento in "ViewLocale" e "ViewGestioneLocale"
+||ViewLocale||
+|| Visualizza dati locale <br/> Crea grafici statistiche e valutazioni <br/> Crea i form per aggiungere/modificare piatti, piatti combinati, eventi, news, menù || Locale <br/> News <br/>Evento <br/> Menù <br/> Piatto <br/> CombinazionePiatto ||
 
 ||ControlloreUtenteRegistrato||
 || Permette la registrazione <br/> Permette di modificare i dati utente <br/> Aggiunge/Elimina una preferenza <br/> Aggiunge/Modifica una valutazione || UtenteRegistrato <br/> Utente <br/>Valutazione ||
 
 ||ControlloreRicerche||
-|| Consulta il database di piatti, combinazionePiatti, menù, locali, valutazioni <br/> Utilizza le API di Maps <br/> Filtra i risultati in base a parametri di ricerca  || Locale <br/> Gestore <br/> Menù <br/> Piatto <br/> CombinazionePiatto || 
+|| Consulta il database di piatti, combinazionePiatti, menù, locali, valutazioni <br/> Utilizza le API di Maps <br/> Filtra i risultati in base a parametri di ricerca  || Locale <br/> Menù <br/> Piatto <br/> CombinazionePiatto || 
 
 ||ViewRicerche||
 || Presenta il form per effettuare una ricerca rapida o avanzata <br/> Visualizza risultati ricerca || Locale <br/> Menù <br/> API Fusion Tables <br/> API Maps ||
