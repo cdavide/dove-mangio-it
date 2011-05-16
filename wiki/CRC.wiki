@@ -6,40 +6,40 @@
 || Fornisce le sue caratteristiche <br/> idPiatto <br/> nome <br/> categoria <br/> prezzo <br/> flags vari || Menù ||
 
 ||CombinazionePiatti ||
-|| Fornisce le sue caratteristiche <br/>idCombo <br/> descrizioneCombo <br/> prezzo <br/> flagVari || Menù ||
+|| Fornisce le sue caratteristiche <br/>idCombo <br/> descrizioneCombo <br/> prezzo <br/> flagVari <br/> idLocale|| Menù ||
 
 ||Menu||
-|| Permette di memorizzare e presentare i piatti di un locale <br/> listaPiatti <br/> validità || Piatto <br/> Combinazione Piatto <br/> Locale ||
+|| Permette di memorizzare e presentare i piatti di un locale <br/>idLocale <br/> listaPiatti <br/> validità || Piatto <br/> Combinazione Piatto <br/> Locale ||
 
-||Locale||
-|| Conosce il menù <br/>Conosce le combinazioni di piatti <br/> Conosce gli eventi <br/> Conosce le News <br/> Conosce la valutazione <br/> Conosce la sua posizione <br/> menu <br/>comboPiatti <br/> || Menù <br/> News <br/>Evento <br/> Valutazione  ||
+||Locale||(Locale rappresenta anche il proprietario del locale)
+|| Conosce il menù <br/>Conosce le combinazioni di piatti <br/> Conosce gli eventi <br/> Conosce le News <br/> Conosce la valutazione <br/> Conosce la sua posizione <br/> menu <br/>comboPiatti <br/> idLocale <br/>nome<br/>foto<br/>indirizzo<br/>coordinate<br/>ListaCombo<br/>nome proprietario<br/>partita iva || Menù <br/> News <br/>Evento <br/> Valutazione  ||
 
 ||Utente||
 || Conosce la sua posizione || ||
 
 ||UtenteRegistrato||
-|| È un utente <br/> Conosce le sue caratteristiche <br/> Conosce le sue preferenze <br/> Conosce le sue valutazioni || Valutazione <br/> Locale <br/> Piatto <br/> CombinazionePiatti <br/> News ||
+|| È un utente <br/> Conosce le sue caratteristiche <br/> Conosce le sue preferenze <br/> Conosce le sue valutazioni<br/>idUtente<br/>nome<br/>età<br/>città<br/>idPreferenze || Valutazione <br/> Locale <br/> Piatto <br/> CombinazionePiatti <br/> News ||
 
-||Gestore||
-|| È un utente <br/> Conosce il suo locale <br/>  || Locale ||
+||Proprietario||
+|| deprecato, informazioni inglobate in Locale<br/>  || Locale ||
 
-||Evento || 
-|| Conosce le sue caratteristiche || Locale <br/> API collaborazione progetto aggregatore d'eventi ||
+||Evento ||(ha una data oltre la quale perde di validità, es "spaghettata di Natale") 
+|| Conosce le sue caratteristiche <br/>idEvento<br/>idLocale<br/>data inizio<br/>data fine<br/>descrizione<br/>|| Locale <br/> API collaborazione progetto aggregatore d'eventi ||
 
-||News||
-||Conosce le sue caratteristiche || Locale||
+||News||(informazioni che non predono di validità,es"nuovo cuoco")
+||Conosce le sue caratteristiche idNews<br/>idLocale<br/>data inizio<br/>descrizione<br/> || Locale||
 
 ||Valutazione||
-||Conosce il locale a cui si riferisce <br/> Conosce l'utente che l'ha creata <br/> Conosce i propri valori || Utente <br/> Locale ||
+||Conosce il locale a cui si riferisce <br/> Conosce l'utente che l'ha creata <br/> Conosce i propri valori<br/>pulizia<br/>qualità<br/>velocità<br/>affollamento<br/>quantità<br/>cortesia<br/>idLocale<br/>idUtente || Utente <br/> Locale ||
 
-||ControlloreGestore||
-|| Aggiungi/Elimina/Modifica piatto <br/> Aggiungi/Elimina/Modifica menù <br/> Aggiungi/Elimina/Modifica combinazionePiatto <br/> Aggiungi/Elimina/Modifica Evento <br/> Aggiungi/Elimina/Modifica News <br/>Controlla e modifica le caratteristiche del locale <br/> Creazione di un report mensile || Locale <br/> Gestore <br/> News <br/>Evento <br/> Menù <br/> Piatto <br/> CombinazionePiatto ||
+||ControlloreLocale||
+|| Aggiungi/Elimina/Modifica piatto <br/> Aggiungi/Elimina/Modifica menù <br/> Aggiungi/Elimina/Modifica combinazionePiatto <br/> Aggiungi/Elimina/Modifica Evento <br/> Aggiungi/Elimina/Modifica News <br/>Controlla e modifica le caratteristiche del locale <br/> Creazione di un report mensile || Locale <br/> News <br/>Evento <br/> Menù <br/> Piatto <br/> CombinazionePiatto ||
 
 ||ViewGestore||
 || Visualizza dati locale <br/> Crea grafici statistiche e valutazioni <br/> Crea i form per aggiungere/modificare piatti, piatti combinati, eventi, news, menù || Locale <br/> Gestore <br/> News <br/>Evento <br/> Menù <br/> Piatto <br/> CombinazionePiatto ||
 
 ||ControlloreUtenteRegistrato||
-|| Permette la registrazione <br/> Permette di modificare i dati utente <br/> Aggiunge/Elimina una preferenza <br/> Aggiunge/Elimina una valutazione || UtenteRegistrato <br/> Utente <br/>Valutazione ||
+|| Permette la registrazione <br/> Permette di modificare i dati utente <br/> Aggiunge/Elimina una preferenza <br/> Aggiunge/Modifica una valutazione || UtenteRegistrato <br/> Utente <br/>Valutazione ||
 
 ||ControlloreRicerche||
 || Consulta il database di piatti, combinazionePiatti, menù, locali, valutazioni <br/> Utilizza le API di Maps <br/> Filtra i risultati in base a parametri di ricerca  || Locale <br/> Gestore <br/> Menù <br/> Piatto <br/> CombinazionePiatto || 
