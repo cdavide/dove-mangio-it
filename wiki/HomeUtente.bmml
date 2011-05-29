@@ -1,0 +1,160 @@
+<mockup version="1.0" skin="sketch" measuredW="1259" measuredH="787" mockupW="1259" mockupH="787">
+  <controls>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="0" w="1259" h="787" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//</text>
+        <value>10</value>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::ButtonBar" x="6" y="143" w="922" h="32" measuredW="297" measuredH="29" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>0</selectedIndex>
+        <text>Home%2CRicerca%2CEvent%2CImpostazioni</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Button" x="973" y="145" w="69" h="28" measuredW="54" measuredH="28" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Login</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Button" x="1070" y="145" w="-1" h="-1" measuredW="74" measuredH="28" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Registra</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::Title" x="103" y="74" w="406" h="-1" measuredW="249" measuredH="56" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2848996</color>
+        <text>Lunch%20Around</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::BreadCrumbs" x="222" y="181" w="-1" h="-1" measuredW="158" measuredH="23" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Home%2C%20Pagina%20personale</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::SubTitle" x="41" y="226" w="-1" h="-1" measuredW="100" measuredH="37" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Preferiti</text>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::List" x="34" y="226" w="188" h="529" measuredW="100" measuredH="231" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%20%0A%20%0A%20%0A%09%09%09Birghiotto%0A%20%0A%20%0A%20%0A%09%09%09Self%20D.O.C.%0A%20%0A%20%0A%20%09%09%09Dal%20Vecio</text>
+      </controlProperties>
+    </control>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::SubTitle" x="981" y="236" w="-1" h="-1" measuredW="151" measuredH="37" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ultimi%20visitati</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::List" x="973" y="226" w="188" h="529" measuredW="100" measuredH="252" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%20%0A%20%0A%20%0A%09%09%09Birghiotto%0A%20%0A%20%0A%20%0A%09%09%09Self%20D.O.C.%0A%20%0A%20%0A%20%0A%09%09%09Dal%20Vecio</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::Icon" x="55" y="283" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>HomeMobileIcon%7Clarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="37" controlTypeID="com.balsamiq.mockups::Icon" x="55" y="348" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>HomeMobileIcon%7Clarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::Icon" x="55" y="417" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>HomeMobileIcon%7Clarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::Icon" x="1007" y="283" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>HomeMobileIcon%7Clarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Icon" x="1007" y="363" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>HomeMobileIcon%7Clarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::Icon" x="1007" y="446" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>HomeMobileIcon%7Clarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::HRule" x="278" y="411" w="630" h="-1" measuredW="100" measuredH="5" zOrder="18" locked="false" isInGroup="-1"/>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::List" x="278" y="426" w="643" h="323" measuredW="100" measuredH="210" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <text>%20%0A%20%0A%20%0A%20%0A%09%09Nuovo%20cuoco%20dal%20birghiotto%0A%20%0A%09%09%0A%20%0A%20%0A%09%09Piatti%20per%20celiachi%20al%20Self%20D.O.C</text>
+      </controlProperties>
+    </control>
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::Title" x="291" y="442" w="-1" h="-1" measuredW="117" measuredH="56" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>NEWS</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::Icon" x="605" y="610" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>EmoticonIcon%7Clarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::Icon" x="605" y="494" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>DollarIcon%7Clarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::Button" x="543" y="327" w="-1" h="-1" measuredW="58" measuredH="28" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cerca</text>
+      </controlProperties>
+    </control>
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::TextInput" x="364" y="296" w="164" h="-1" measuredW="159" measuredH="27" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Torino%2C%20via%20pessinetto%2022</text>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::Label" x="292" y="294" w="-1" h="-1" measuredW="57" measuredH="23" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Indirizzo</text>
+      </controlProperties>
+    </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::Button" x="364" y="327" w="-1" h="-1" measuredW="163" measuredH="28" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ottieni%20la%20mia%20posizione</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::FieldSet" x="240" y="221" w="717" h="166" measuredW="200" measuredH="170" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ricerca</text>
+      </controlProperties>
+    </control>
+    <control controlID="69" controlTypeID="com.balsamiq.mockups::SubTitle" x="255" y="246" w="-1" h="-1" measuredW="215" measuredH="37" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cerca%20per%20indirizzo</text>
+      </controlProperties>
+    </control>
+    <control controlID="71" controlTypeID="com.balsamiq.mockups::SearchBox" x="822" y="185" w="-1" h="-1" measuredW="123" measuredH="25" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cerca%20per%20locale</text>
+      </controlProperties>
+    </control>
+    <control controlID="72" controlTypeID="com.balsamiq.mockups::Link" x="498" y="356" w="-1" h="-1" measuredW="107" measuredH="23" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ricerca%20avanzata</text>
+      </controlProperties>
+    </control>
+    <control controlID="73" controlTypeID="com.balsamiq.mockups::FieldSet" x="627" y="235" w="141" h="137" measuredW="200" measuredH="170" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Categoria</text>
+      </controlProperties>
+    </control>
+    <control controlID="75" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="642" y="258" w="-1" h="-1" measuredW="100" measuredH="92" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%5Bx%5D%20Carne%0A%5Bx%5D%20Pesce%0A%5Bx%5D%20Vegetariano%0A%5Bx%5D%20Celiaco</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
