@@ -1,0 +1,20 @@
+\select@language {italian}
+\contentsline {section}{\numberline {1}Trasformata di Fourier}{2}
+\contentsline {subsection}{\numberline {1.1}Definizione}{2}
+\contentsline {subsection}{\numberline {1.2}Propriet\`a}{2}
+\contentsline {section}{\numberline {2}Convoluzione}{2}
+\contentsline {subsection}{\numberline {2.1}Definizione}{2}
+\contentsline {subsection}{\numberline {2.2}Propriet\`a}{2}
+\contentsline {subsection}{\numberline {2.3}Applicazioni}{2}
+\contentsline {section}{\numberline {3}Convoluzione e Teorema de l limite Centrale}{2}
+\contentsline {subsection}{\numberline {3.1}Introduzione}{2}
+\contentsline {subsection}{\numberline {3.2}Elementi di probabilit\`a}{2}
+\contentsline {subsubsection}{\numberline {3.2.1}Variabili casuali}{2}
+\contentsline {subsubsection}{\numberline {3.2.2}Distribuzioni di probabilit\`a e densit\`a d i probabilit\`a}{2}
+\contentsline {subsubsection}{\numberline {3.2.3}Media Varianza e deviazione standard}{2}
+\contentsline {subsubsection}{\numberline {3.2.4}Distribuzione normale}{2}
+\contentsline {subsubsection}{\numberline {3.2.5}Indipendenza}{2}
+\contentsline {subsubsection}{\numberline {3.2.6}Convoluzione: una spiegazione intuitiva}{2}
+\contentsline {subsubsection}{\numberline {3.2.7}Il teorema del limite centrale ...}{2}
+\contentsline {section}{\numberline {4}Applicazione Software}{3}
+\contentsline {subsection}{\numberline {4.1}bla}{3}
