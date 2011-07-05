@@ -6,6 +6,6 @@ package luncharoundpkg;
 
 /**
  *
- * @author lore0487
+ * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
  public enum Categoria{ANTIPASTO,PRIMO,SECONDO,CONTORNO,DOLCE,BEVANDA,PIZZA};
