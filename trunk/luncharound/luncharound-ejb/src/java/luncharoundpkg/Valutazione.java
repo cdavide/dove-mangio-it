@@ -28,14 +28,14 @@ public class Valutazione implements Serializable {
     private byte qualita;
     private byte velocita;
     private byte affollamento;
-    private byte quantità;
+    private byte quantita;
     private byte cortesia;
-    private byte description;
+    private byte descrizione;
 
     public Valutazione() {
     }
 
-    public Valutazione(int idLocale, Long idUtente, GregorianCalendar dataVal, byte pulizia, byte qualita, byte velocita, byte affollamento, byte quantità, byte cortesia, byte description) {
+    public Valutazione(int idLocale, Long idUtente, GregorianCalendar dataVal, byte pulizia, byte qualita, byte velocita, byte affollamento, byte quantita, byte cortesia, byte descrizione) {
         this.idLocale = idLocale;
         this.idUtente = idUtente;
         this.dataVal = dataVal;
@@ -43,9 +43,9 @@ public class Valutazione implements Serializable {
         this.qualita = qualita;
         this.velocita = velocita;
         this.affollamento = affollamento;
-        this.quantità = quantità;
+        this.quantita = quantita;
         this.cortesia = cortesia;
-        this.description = description;
+        this.descrizione = descrizione;
     }
 
     public byte getAffollamento() {
@@ -72,12 +72,12 @@ public class Valutazione implements Serializable {
         this.dataVal = dataVal;
     }
 
-    public byte getDescription() {
-        return description;
+    public byte getDescrizione() {
+        return descrizione;
     }
 
-    public void setDescription(byte description) {
-        this.description = description;
+    public void setDescrizione(byte descrizione) {
+        this.descrizione = descrizione;
     }
 
     public int getIdLocale() {
@@ -112,12 +112,12 @@ public class Valutazione implements Serializable {
         this.qualita = qualita;
     }
 
-    public byte getQuantità() {
-        return quantità;
+    public byte getQuantita() {
+        return quantita;
     }
 
-    public void setQuantità(byte quantità) {
-        this.quantità = quantità;
+    public void setQuantita(byte quantita) {
+        this.quantita = quantita;
     }
 
     public byte getVelocita() {
