@@ -35,15 +35,14 @@ public class Piatto implements Serializable {
     }
 
     
-    public Piatto(String nome, Categoria categoria, float prezzo, boolean corrente, byte flags) {
+    public Piatto(String nome, Categoria categoria, float prezzo, boolean corrente, byte flags,int idLocale) {
         this.nome = nome;
         this.categoria = categoria;
         this.prezzo = prezzo;
         this.corrente = corrente;
         this.flags = flags;
-    }
-    
-    
+        this.idLocale = idLocale; 
+    }    
     
     public Long getId() {
         return id;
@@ -117,5 +116,6 @@ public class Piatto implements Serializable {
     public void setPrezzo(float prezzo) {
         this.prezzo = prezzo;
     }
+    
     
 }
