@@ -55,9 +55,28 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         piattoFacade.create(pi);
     }
 
+    //cerca il menù del locale, crea oggetto con i parametri e id ottenuto dalla ricerca
+    //e lo inserisce nella lista. SUPPONGO VENGA SOSTITUITO QUELLO VECCHIO CON "edit"
+    //non si tiene la storia dei menù. nella lista ce ne sarà uno solo appartenente
+    //al locale, perciò devo eliminare quello precedente
     @Override
     public void editMenu(int idLocale, List<Piatto> listaPiatti, GregorianCalendar validita) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Menu me,temp;
+
+        me=menuDiLocale(idLocale);
+        if(me!=null){
+            
+            ordinaCat(listaPiatti);
+            temp=new Menu(me.getId(),idLocale,listaPiatti,validita);
+            menuFacade.edit(temp);
+        }
+        else{
+            temp=new Menu(idLocale,listaPiatti,validita);
+            menuFacade.create(temp);        
+        }
+        
+        
+    
     }
    
     //ASSICURARSI CHE LA RIMOZIONE SIA CORRETTA
@@ -74,6 +93,19 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         piattoFacade.remove(pi);
     }
     
+    //restituisce il menù di un dato locale, NULL se non esiste
+    public Menu menuDiLocale(int idLocale){
+        
+        List<Menu> lm;
+        lm=menuFacade.findAll();
+
+        for(int i=0; i<lm.size(); i++){
+             
+            if(idLocale == lm.get(i).getIdLocale()) return lm.get(i);
+        }
+        return null;
+    }
+    
     //metodo grezzo, adatto al test.Visualizza il menù del giorno
     //per un dato locale.Se non valido, la stringa ritornata inizierà 
     //con *
@@ -81,38 +113,55 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     public String mostraMenu(int idLocale) {
         
         String ret="";
-        List<Menu> lm;
+        Menu me;
         List<Piatto> lp;
         Piatto pi;
         GregorianCalendar now= new GregorianCalendar();
-        int oldcatnum=-1; //utile per la suparazione delle categorie
+        int oldcatnum=-1; //utile per la separazione delle categorie
         
-        lm=menuFacade.findAll();
-        //scorro tutti i menù
-        for(int i=0; i<lm.size(); i++){ 
-            //se trovo quello del locale che cerco
-            if(idLocale == lm.get(i).getIdLocale()){
-                //controllo che sia valido
-                if(lm.get(i).getValidita().compareTo(now)<=0) ret+="*** MENU' NON AGGIORNATO ***\n\n";
-                //ottengo e scorro la lista dei piatti del menù    
-                lp=lm.get(i).getListaPiatti();
-                for(int j=0; j<lp.size(); j++){
+        me=menuDiLocale(idLocale);
+        
+        if(me==null) return "*** NESSUN MENU' TROVATO ***";
+        
+        //controllo che sia valido
+        if(me.getValidita().compareTo(now)<=0) ret+="*** MENU' NON AGGIORNATO ***\n\n";
+        //ottengo e scorro la lista dei piatti del menù    
+        lp=me.getListaPiatti();
+        for(int j=0; j<lp.size(); j++){
                     
-                    pi=lp.get(j);
-                    //inserisco un separatore tra le categorie di piatti(GIA'ORDINATI!)
-                    if(pi.getCategoria().ordinal()>oldcatnum){
-                        ret+="---- "+pi.getCategoria()+" ----\n";
-                        oldcatnum=pi.getCategoria().ordinal();
-                    }
-                    
-                    ret+=pi.getNome()+"___€"+pi.getPrezzo()+"\n";
-                    
-                }
-                break;
+            pi=lp.get(j);
+            //inserisco un separatore tra le categorie di piatti(GIA'ORDINATI!)
+            if(pi.getCategoria().ordinal()>oldcatnum){
+                ret+="---- "+pi.getCategoria()+" ----\n";
+                oldcatnum=pi.getCategoria().ordinal();
             }
+                    
+            ret+=pi.getNome()+"___€"+pi.getPrezzo()+"\n";        
         }
-        if(ret.equals(""))return "*** NESSUN MENU' TROVATO ***";
         return ret;
+    }
+    
+    //ordinamento della lista di piatti secondo la propria categoria
+    //necessario per una corretta visualizzazione del menù.
+    //implementazione dell'insertion sort
+    //verificare se con "set" si ha comportamento simile ad array
+    private void ordinaCat(List<Piatto> lp){
+        
+        int j;
+        Piatto temp;
+    
+        for(int i=1;i<lp.size();i++){
+            
+            j=i;
+            temp=lp.get(i);
+            
+            while(j>0 && lp.get(j-1).getCategoria().ordinal()>temp.getCategoria().ordinal()){
+                lp.set(j,lp.get(j-1));
+                j--;
+            }
+            
+            lp.set(j, temp);
+        }
     }
     
     

@@ -33,9 +33,14 @@ public class Menu implements Serializable {
         this.listaPiatti = listaPiatti;
         this.validita = validita;
     }
-    
-    
 
+    public Menu(int id, int idLocale, List<Piatto> listaPiatti, GregorianCalendar validita) {
+        this.id = id;
+        this.idLocale = idLocale;
+        this.listaPiatti = listaPiatti;
+        this.validita = validita;
+    }
+    
     public int getId() {
         return id;
     }
