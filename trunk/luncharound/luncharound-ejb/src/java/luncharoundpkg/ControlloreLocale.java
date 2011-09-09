@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.BeanUtils;
-
 /**
  *
  * @author lore0487
@@ -34,38 +33,66 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     @Override
     public void addPiattoCombo(String descr, float prezzo, int idLocale) {
         
-        PiattoCombo pc = new PiattoCombo(descr,prezzo,idLocale);
+        PiattoCombo pc = new PiattoCombo();
+        pc.setDescr(descr);
+        pc.setPrezzo(prezzo);
+        pc.setIdLocale(idLocale);
         piattoComboFacade.create(pc);
     }
 
     @Override
     public void addEvento(int idLocale, GregorianCalendar dataInizio, GregorianCalendar dataFine, String descr) {
 
-        Evento ev = new Evento(idLocale,dataInizio,dataFine,descr);
+        Evento ev = new Evento();
+        ev.setDataFine(dataFine);
+        ev.setDataInizio(dataInizio);
+        ev.setDescr(descr);
+        ev.setIdLocale(idLocale);
+        
         eventoFacade.create(ev);
     }
 
     @Override
     public void addMenu(int idLocale, List<Piatto> listaPiatti, GregorianCalendar validita) {
-        Menu me = new Menu(idLocale,listaPiatti,validita);
+        Menu me = new Menu();
+        me.setIdLocale(idLocale);
+        me.setListaPiatti(listaPiatti);
+        me.setValidita(validita);
         menuFacade.create(me);
     }
 
     @Override
     public void addNews(int idLocale, GregorianCalendar dataInizio, String descr) {
-        News ne = new News(idLocale,dataInizio,descr);
+        News ne = new News();
+        ne.setDataInizio(dataInizio);
+        ne.setDescr(descr);
+        ne.setIdLocale(idLocale);
         newsFacade.create(ne);
     }
 
     //AGGIUSTARE QUESTIONE VALIDITA'!!!
     @Override
     public void addPiatto(String nome, Categoria categoria, float prezzo, byte flags, int idLocale) {
-        Piatto pi = new Piatto(nome,categoria,prezzo,true,flags,idLocale);
+        
+        Piatto pi = new Piatto();
+        pi.setCategoria(categoria);
+        pi.setCorrente(true);
+        pi.setFlags(flags);
+        pi.setNome(nome);
+        pi.setPrezzo(prezzo);
+        pi.setIdLocale(idLocale);
         piattoFacade.create(pi);
     }
     
     public void addLocale(String nome, String indirizzo, float longitudine, float latitudine, String proprietario, String pIVA){
-        Locale lo= new Locale(nome,indirizzo,longitudine,latitudine,proprietario,pIVA);
+        
+        Locale lo= new Locale();
+        lo.setIndirizzo(indirizzo);
+        lo.setLatitudine(latitudine);
+        lo.setLongitudine(longitudine);
+        lo.setNome(nome);
+        lo.setProprietario(proprietario);
+        lo.setpIVA(pIVA);
         localeFacade.create(lo);
     }
 
@@ -81,11 +108,18 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         if(me!=null){
             
             ordinaCat(listaPiatti);
-            temp=new Menu(me.getId(),idLocale,listaPiatti,validita);
+            temp=new Menu();
+            temp.setId(me.getId());
+            temp.setIdLocale(idLocale);
+            temp.setListaPiatti(listaPiatti);
+            temp.setValidita(validita);
             menuFacade.edit(temp);
         }
         else{
-            temp=new Menu(idLocale,listaPiatti,validita);
+            temp=new Menu();
+            temp.setIdLocale(idLocale);
+            temp.setListaPiatti(listaPiatti);
+            temp.setValidita(validita);
             menuFacade.create(temp);        
         }
         
@@ -214,14 +248,18 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
             String name= (String)names.nextElement();
             map.put(name,req.getParameterValues(name));
         }
+        System.err.println("prima del populate");
+        
         try {
-            org.apache.commons.beanutils.BeanUtils.populate(loc,map);
+            BeanUtils.populate(loc, map) ;
         } catch (IllegalAccessException ex) {
             Logger.getLogger(ControlloreLocale.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {
             Logger.getLogger(ControlloreLocale.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+        System.err.println("dopo il populate"
+                + " populate");
         localeFacade.create(loc);
     }
     

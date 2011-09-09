@@ -10,13 +10,12 @@
 		<form name=formlocale action="mainServlet" method="GET">
 			<br>nome locale:  <input type="text" name="nome">
 			<br>indirizzo:  <input type="text" name="indirizzo">
-			<br> latit:   <input type="text" name="latit">
-			<br> longit:   <input type="text" name="longit">
-			<br> proprietario   <input type="text" name="propriet">
-			<br> partita iva   <input type="text" name="piva">
+			<br> latit:   <input type="text" name="latitudine">
+			<br> longit:   <input type="text" name="longitudine">
+			<br> proprietario   <input type="text" name="proprietario">
+			<br> partita iva   <input type="text" name="pIVA">
 			<input type="hidden" name="metodo" value="aggiungiLocale">
 			<input type="submit" value="Aggiungi">
 		</form>
-		
     </body>
 </html>

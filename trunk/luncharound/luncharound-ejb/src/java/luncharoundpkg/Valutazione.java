@@ -37,19 +37,6 @@ public class Valutazione implements Serializable {
     public Valutazione() {
     }
 
-    public Valutazione(int idLocale, Long idUtente, GregorianCalendar dataVal, byte pulizia, byte qualita, byte velocita, byte affollamento, byte quantita, byte cortesia, byte descrizione) {
-        this.idLocale = idLocale;
-        this.idUtente = idUtente;
-        this.dataVal = dataVal;
-        this.pulizia = pulizia;
-        this.qualita = qualita;
-        this.velocita = velocita;
-        this.affollamento = affollamento;
-        this.quantita = quantita;
-        this.cortesia = cortesia;
-        this.descrizione = descrizione;
-    }
-
     public byte getAffollamento() {
         return affollamento;
     }

@@ -22,9 +22,9 @@ import luncharoundpkg.ControlloreLocaleLocal;
 @WebServlet(name = "aggvisloc", urlPatterns = {"/aggvisloc"})
 public class aggvisloc extends HttpServlet {
     @EJB
-    private ControlloreLocale controlloreLoc;
-    
+    private ControlloreLocaleLocal controlloreLocale;
 
+    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -38,7 +38,7 @@ public class aggvisloc extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         out.println("Sono qui");
-        controlloreLoc.localeDaReq(request);
+        controlloreLocale.localeDaReq(request);
         
         try {
             out.println("<html>");
@@ -46,7 +46,7 @@ public class aggvisloc extends HttpServlet {
             out.println("<title>Servlet aggvisloc</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet aggvisloc at " + controlloreLoc.locali() + "</h1>");
+            out.println("<h1>Servlet aggvisloc at " + controlloreLocale.locali() + "</h1>");
             out.println("</body>");
             out.println("</html>");
              

@@ -28,12 +28,6 @@ public class PiattoCombo implements Serializable {
     public PiattoCombo() {
     }
 
-    public PiattoCombo(String descr, float prezzo, int idLocale) {
-        this.descr = descr;
-        this.prezzo = prezzo;
-        this.idLocale = idLocale;
-    } 
-
     public String getDescr() {
         return descr;
     }

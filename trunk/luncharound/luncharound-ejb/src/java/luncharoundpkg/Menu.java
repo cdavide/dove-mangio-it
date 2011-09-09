@@ -29,19 +29,8 @@ public class Menu implements Serializable {
     private int idLocale;
     private List<Piatto> listaPiatti;
     private @Temporal(TemporalType.DATE) GregorianCalendar validita;
-    
 
-    public Menu(int idLocale, List<Piatto> listaPiatti, GregorianCalendar validita) {
-        this.idLocale = idLocale;
-        this.listaPiatti = listaPiatti;
-        this.validita = validita;
-    }
-
-    public Menu(int id, int idLocale, List<Piatto> listaPiatti, GregorianCalendar validita) {
-        this.id = id;
-        this.idLocale = idLocale;
-        this.listaPiatti = listaPiatti;
-        this.validita = validita;
+    public Menu() {
     }
     
     public int getId() {

@@ -1,0 +1,9 @@
+Aggiunte librerie aggiuntive al repository
+
+
+--Questa linea, e quelle sotto di essa, saranno ignorate--
+
+A    src/lib
+AM   src/lib/commons-beanutils-1.8.3.jar
+AM   src/lib/commons-beanutils-1.8.3-sources.jar
+AM   src/lib/commons-beanutils-1.8.3-javadoc.jar

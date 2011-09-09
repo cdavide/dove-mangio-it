@@ -30,12 +30,6 @@ public class News implements Serializable {
     public News() {
     }
 
-    public News(int idLocale, GregorianCalendar dataInizio, String descr) {
-        this.idLocale = idLocale;
-        this.dataInizio = dataInizio;
-        this.descr = descr;
-    }
-
     public GregorianCalendar getDataInizio() {
         return dataInizio;
     }

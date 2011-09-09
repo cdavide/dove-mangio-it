@@ -32,15 +32,6 @@ public class Locale implements Serializable {
     public Locale() {
     }
 
-    public Locale(String nome, String indirizzo, float longitudine, float latitudine, String proprietario, String pIVA) {
-        this.nome = nome;
-        this.indirizzo = indirizzo;
-        this.longitudine = longitudine;
-        this.latitudine = latitudine;
-        this.proprietario = proprietario;
-        this.pIVA = pIVA;
-    }
-
     public String getIndirizzo() {
         return indirizzo;
     }

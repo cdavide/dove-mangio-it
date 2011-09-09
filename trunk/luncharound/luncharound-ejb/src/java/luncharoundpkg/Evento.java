@@ -31,13 +31,6 @@ public class Evento implements Serializable {
     public Evento() {
     }
 
-    public Evento(int idLocale, GregorianCalendar dataInizio, GregorianCalendar dataFine, String descr) {
-        this.idLocale = idLocale;
-        this.dataInizio = dataInizio;
-        this.dataFine = dataFine;
-        this.descr = descr;
-    }
-
     public GregorianCalendar getDataFine() {
         return dataFine;
     }

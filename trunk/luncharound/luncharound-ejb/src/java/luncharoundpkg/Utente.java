@@ -29,11 +29,6 @@ public class Utente implements Serializable {
     public Utente() {
     }
 
-    public Utente(String username, int eta, String citta) {
-        this.username = username;
-        this.eta = eta;
-        this.citta = citta;
-    }
     
     public Long getId() {
         return id;
