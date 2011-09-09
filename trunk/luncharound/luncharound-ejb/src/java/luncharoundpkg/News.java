@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.GregorianCalendar;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -22,7 +24,7 @@ public class News implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int idLocale;
-    private GregorianCalendar dataInizio;
+    private @Temporal(TemporalType.DATE) GregorianCalendar dataInizio;
     private String descr;
 
     public News() {

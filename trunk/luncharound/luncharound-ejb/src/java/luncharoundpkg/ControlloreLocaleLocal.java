@@ -7,6 +7,7 @@ package luncharoundpkg;
 import javax.ejb.Local;
 import java.util.List;
 import java.util.GregorianCalendar;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -37,6 +38,11 @@ public interface ControlloreLocaleLocal {
     public String mostraCombo(int idLocale);
     
     public List<String> listaCat();
+    
+    public void localeDaReq(HttpServletRequest req);
+    
+    public String locali();
+
     
     
 }

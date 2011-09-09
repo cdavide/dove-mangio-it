@@ -12,6 +12,8 @@ import javax.persistence.Id;
 //necessarie
 import java.util.List;
 import java.util.GregorianCalendar;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -26,7 +28,8 @@ public class Menu implements Serializable {
     private int id;
     private int idLocale;
     private List<Piatto> listaPiatti;
-    private GregorianCalendar validita;
+    private @Temporal(TemporalType.DATE) GregorianCalendar validita;
+    
 
     public Menu(int idLocale, List<Piatto> listaPiatti, GregorianCalendar validita) {
         this.idLocale = idLocale;

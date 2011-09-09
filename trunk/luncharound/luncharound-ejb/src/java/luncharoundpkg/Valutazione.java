@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -23,7 +25,7 @@ public class Valutazione implements Serializable {
     private Long id;
     private int idLocale;
     private Long idUtente;
-    private GregorianCalendar dataVal;
+    private @Temporal(TemporalType.DATE) GregorianCalendar dataVal;
     private byte pulizia;
     private byte qualita;
     private byte velocita;
