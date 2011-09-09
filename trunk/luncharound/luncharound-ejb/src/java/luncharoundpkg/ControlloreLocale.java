@@ -7,6 +7,7 @@ package luncharoundpkg;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.lang.Math;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -270,6 +271,39 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         for(int i =0; i<ll.size();i++) ret+=ll.get(i).getNome()+"<br>";
         return ret;
     }
+    
+    public List<Locale> trovaLocali(double lat, double lon, double dist){
+
+        List<Locale> ll=localeFacade.findAll();
+        List<Locale> ret=new ArrayList<Locale>();
+
+        for(int i=0;i<ll.size();i++){
+            if(vicino(ll.get(i),lat,lon,dist)){
+                ret.add(ll.get(i));
+            }
+        }
+        
+        return ret;        
+    }
+    
+    private boolean vicino(Locale loc,double lat,double lon,double dist){
+        int R=6371;
+        double a,c,d;
+        double dlat = Math.toRadians(lat - loc.getLatitudine());
+        double dlon = Math.toRadians(lon - loc.getLongitudine());
+        lat = Math.toRadians(lat);
+        lon = Math.toRadians(lon);
+        a=Math.sin(dlat/2)*Math.sin(dlat/2)+
+                Math.sin(dlon/2)*Math.sin(dlon/2)*Math.cos(lat)*Math.cos(lon);
+        c=2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        d=(double)R*c;
+        
+        System.out.println("la distanza è: "+d);
+        
+        if(d<=dist) return true;
+        else return false;
+    }
+
 
     
     

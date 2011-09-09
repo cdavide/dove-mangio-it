@@ -42,6 +42,8 @@ public interface ControlloreLocaleLocal {
     public void localeDaReq(HttpServletRequest req);
     
     public String locali();
+    
+    public List<Locale> trovaLocali(double lat, double lon, double dist);
 
     
     
