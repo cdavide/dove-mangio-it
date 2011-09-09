@@ -6,18 +6,24 @@ package webpkg;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import luncharoundpkg.ControlloreLocale;
+import luncharoundpkg.ControlloreLocaleLocal;
 
 /**
  *
  * @author lore0487
  */
-public class mainServlet extends HttpServlet {
+@WebServlet(name = "aggvisloc", urlPatterns = {"/aggvisloc"})
+public class aggvisloc extends HttpServlet {
+    @EJB
+    private ControlloreLocale controlloreLoc;
+    
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -29,23 +35,21 @@ public class mainServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         PrintWriter out = response.getWriter();
-        String met= request.getParameter("metodo");
-                    out.println("eccolo qui1");
-
+        
+        out.println("Sono qui");
+        controlloreLoc.localeDaReq(request);
+        
         try {
-                        out.println("eccolo qui2");
-
-            if(met.equals("aggiungiLocale")){
-                ServletContext sc = getServletContext();
-                RequestDispatcher rd = sc.getRequestDispatcher("/aggvisloc");
-                rd.forward(request, response); 
-            
-            }
-            else{
-            out.println("eccolo qui");
-            }
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet aggvisloc</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet aggvisloc at " + controlloreLoc.locali() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+             
         } finally {            
             out.close();
         }
