@@ -4,6 +4,7 @@
  */
 package luncharoundpkg;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -18,6 +19,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     private PiattoFacadeLocal piattoFacade;
     private PiattoComboFacadeLocal piattoComboFacade;
     private MenuFacadeLocal menuFacade;
+    private LocaleFacadeLocal localeFacade;
     private EventoFacadeLocal eventoFacade;
     private NewsFacadeLocal newsFacade;
     
@@ -53,6 +55,11 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     public void addPiatto(String nome, Categoria categoria, float prezzo, byte flags, int idLocale) {
         Piatto pi = new Piatto(nome,categoria,prezzo,true,flags,idLocale);
         piattoFacade.create(pi);
+    }
+    
+    public void addLocale(String nome, String indirizzo, float longitudine, float latitudine, String proprietario, String pIVA){
+        Locale lo= new Locale(nome,indirizzo,longitudine,latitudine,proprietario,pIVA);
+        localeFacade.create(lo);
     }
 
     //cerca il menù del locale, crea oggetto con i parametri e id ottenuto dalla ricerca
@@ -141,6 +148,22 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         return ret;
     }
     
+    //dato un locale, restituisce una stringa con tutte le sue combo e i prezzi
+    public String mostraCombo(int idLocale){
+        String ret="";
+        List<PiattoCombo> pc =piattoComboFacade.findAll();
+        
+        for(int i=0; i<pc.size();i++){
+            if(pc.get(i).getIdLocale()==idLocale){
+               ret+=pc.get(i).getDescr()+"_______€"+pc.get(i).getPrezzo()+"\n"; 
+            }
+        }
+        
+        if(ret.equals("")) return "*** nessuna combonazione trovata ***";
+        return ret;
+    
+    }
+    
     //ordinamento della lista di piatti secondo la propria categoria
     //necessario per una corretta visualizzazione del menù.
     //implementazione dell'insertion sort
@@ -162,6 +185,17 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
             
             lp.set(j, temp);
         }
+    }
+    
+    public List<String> listaCat(){
+        
+        List<String> ret= new ArrayList<String>();
+        
+        for(Categoria cat : Categoria.values()){
+            ret.add(cat.toString());
+        }
+        return ret;
+    
     }
     
     

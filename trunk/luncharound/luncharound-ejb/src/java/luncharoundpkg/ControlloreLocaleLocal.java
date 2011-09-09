@@ -27,9 +27,16 @@ public interface ControlloreLocaleLocal {
     public void addNews(int idLocale, GregorianCalendar dataInizio, String descr);
     public void addEvento(int idLocale, GregorianCalendar dataInizio, GregorianCalendar dataFine, String descr);
     
-    public Menu menuDiLocale(int idLocale);
-    public String mostraMenu(int idLocale);
+    public void addLocale(String nome, String indirizzo, float longitudine, float latitudine, String proprietario, String pIVA);
     
+    //metodo di utilità
+    public Menu menuDiLocale(int idLocale);
+    
+    //metodi forse solo x test, necessario restituire le liste di oggetti?
+    public String mostraMenu(int idLocale);
+    public String mostraCombo(int idLocale);
+    
+    public List<String> listaCat();
     
     
 }
