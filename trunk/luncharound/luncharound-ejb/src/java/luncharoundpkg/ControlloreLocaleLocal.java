@@ -28,7 +28,7 @@ public interface ControlloreLocaleLocal {
     public void addNews(int idLocale, GregorianCalendar dataInizio, String descr);
     public void addEvento(int idLocale, GregorianCalendar dataInizio, GregorianCalendar dataFine, String descr);
     
-    public void addLocale(String nome, String indirizzo, float longitudine, float latitudine, String proprietario, String pIVA);
+    public void addLocale(String nome, String indirizzo, double longitudine, double latitudine, String proprietario, String pIVA);
     
     //metodo di utilità
     public Menu menuDiLocale(int idLocale);

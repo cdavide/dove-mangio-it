@@ -30,7 +30,8 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     private EventoFacadeLocal eventoFacade;
     private NewsFacadeLocal newsFacade;
     
-
+    private static int NUMFLAGS=6;
+        
     @Override
     public void addPiattoCombo(String descr, float prezzo, int idLocale) {
         
@@ -85,7 +86,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         piattoFacade.create(pi);
     }
     
-    public void addLocale(String nome, String indirizzo, float longitudine, float latitudine, String proprietario, String pIVA){
+    public void addLocale(String nome, String indirizzo, double longitudine, double latitudine, String proprietario, String pIVA){
         
         Locale lo= new Locale();
         lo.setIndirizzo(indirizzo);
@@ -302,6 +303,28 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         
         if(d<=dist) return true;
         else return false;
+    }
+    
+    //lista booleani in ordine corretto:CARNE,PESCE,VEGETARIANO,VEGANO,CELIACO,ALCOLICO
+    //FLAGS contrario: 0.0.ALCOLICO.CELIACO.VEGANO.VEGETARIANO.PESCE.CARNE
+    private byte generaFlags(boolean[] bools){
+        byte flags=0;
+        
+        for(int i=0;i<NUMFLAGS;i++){
+            if(bools[i]) flags= (byte) (flags|(1 << i));
+        }
+        return flags;
+    }
+    
+    
+    private boolean[] generaBool(byte flags){
+        boolean[] bools=new boolean[NUMFLAGS];
+        
+        for(int i=0;i<NUMFLAGS;i++){
+            if((flags & (1<<i))==(byte)Math.pow(2,i)) bools[i]=true;
+            else bools[i]=false;
+        }
+        return bools;
     }
 
 

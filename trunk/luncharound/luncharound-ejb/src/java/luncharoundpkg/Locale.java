@@ -23,8 +23,8 @@ public class Locale implements Serializable {
     private String nome;
     //private String foto;  Come salviamo la foto???
     private String indirizzo;
-    private float longitudine;
-    private float latitudine;
+    private double longitudine;
+    private double latitudine;
     private String proprietario;
     private String pIVA;
     //Menù e combo piatti non sono da mettere perchè si ricavano dagli ID
@@ -40,19 +40,19 @@ public class Locale implements Serializable {
         this.indirizzo = indirizzo;
     }
 
-    public float getLatitudine() {
+    public double getLatitudine() {
         return latitudine;
     }
 
-    public void setLatitudine(float latitudine) {
+    public void setLatitudine(double latitudine) {
         this.latitudine = latitudine;
     }
 
-    public float getLongitudine() {
+    public double getLongitudine() {
         return longitudine;
     }
 
-    public void setLongitudine(float longitudine) {
+    public void setLongitudine(double longitudine) {
         this.longitudine = longitudine;
     }
 
