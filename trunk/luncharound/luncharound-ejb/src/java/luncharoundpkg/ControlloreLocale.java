@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.BeanUtils;
@@ -22,12 +23,17 @@ import org.apache.commons.beanutils.BeanUtils;
  */
 @Stateless
 public class ControlloreLocale implements ControlloreLocaleLocal {
-    
+    @EJB
     private PiattoFacadeLocal piattoFacade;
+    @EJB
     private PiattoComboFacadeLocal piattoComboFacade;
+    @EJB
     private MenuFacadeLocal menuFacade;
+    @EJB
     private LocaleFacadeLocal localeFacade;
+    @EJB
     private EventoFacadeLocal eventoFacade;
+    @EJB
     private NewsFacadeLocal newsFacade;
     
     private static int NUMFLAGS=6;
@@ -242,7 +248,6 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     }
     
     public void localeDaReq(HttpServletRequest req){
-        
         Locale loc= new Locale();
         HashMap map = new HashMap();
         Enumeration names = req.getParameterNames();
@@ -250,8 +255,6 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
             String name= (String)names.nextElement();
             map.put(name,req.getParameterValues(name));
         }
-        System.err.println("prima del populate");
-        
         try {
             BeanUtils.populate(loc, map) ;
         } catch (IllegalAccessException ex) {
@@ -259,17 +262,14 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         } catch (InvocationTargetException ex) {
             Logger.getLogger(ControlloreLocale.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        System.err.println("dopo il populate"
-                + " populate");
         localeFacade.create(loc);
     }
     
     public String locali(){
         String ret="";
         List<Locale> ll=localeFacade.findAll();
-        
-        for(int i =0; i<ll.size();i++) ret+=ll.get(i).getNome()+"<br>";
+        System.err.println("ci sono: "+ll.size()+" elementi");
+        for(int i = 0; i<ll.size();i++) ret+=ll.get(i).getNome()+"<br>";
         return ret;
     }
     
