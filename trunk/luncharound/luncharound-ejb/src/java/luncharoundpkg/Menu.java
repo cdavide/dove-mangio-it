@@ -12,6 +12,7 @@ import javax.persistence.Id;
 //necessarie
 import java.util.List;
 import java.util.GregorianCalendar;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -27,6 +28,7 @@ public class Menu implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private int idLocale;
+    @OneToMany
     private List<Piatto> listaPiatti;
     private @Temporal(TemporalType.DATE) GregorianCalendar validita;
 
