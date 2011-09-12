@@ -24,5 +24,8 @@ public class LocaleFacade extends AbstractFacade<Locale> implements LocaleFacade
     public LocaleFacade() {
         super(Locale.class);
     }
+
+    
+    
     
 }

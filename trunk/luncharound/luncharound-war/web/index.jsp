@@ -14,8 +14,10 @@
 			<br> longit:   <input type="text" name="longitudine">
 			<br> proprietario   <input type="text" name="proprietario">
 			<br> partita iva   <input type="text" name="pIVA">
-			<input type="hidden" name="metodo" value="aggiungiLocale">
+			<input type="hidden" name="azione" value="aggiungi_locale">
 			<input type="submit" value="Aggiungi">
 		</form>
+                <br>
+                <a href="mainServlet?azione=mostra_tutti">Elenco di tutti i locali presenti su LunchAround</a>
     </body>
 </html>

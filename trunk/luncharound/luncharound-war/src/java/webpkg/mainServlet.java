@@ -31,24 +31,25 @@ public class mainServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         PrintWriter out = response.getWriter();
-        String met= request.getParameter("metodo");
-                    out.println("eccolo qui1");
+        String azione= request.getParameter("azione");
 
-        try {
-                        out.println("eccolo qui2");
-
-            if(met.equals("aggiungiLocale")){
-                ServletContext sc = getServletContext();
-                RequestDispatcher rd = sc.getRequestDispatcher("/aggvisloc");
-                rd.forward(request, response); 
+        if(azione.equals("aggiungi_locale")){
             
-            }
-            else{
-            out.println("eccolo qui");
-            }
-        } finally {            
-            out.close();
+            ServletContext sc = getServletContext();
+            RequestDispatcher rd = sc.getRequestDispatcher("/aggvisloc");
+            rd.forward(request, response); 
         }
+        else if(azione.equals("mostra_locale")||
+                azione.equals("mostra_tutti")){//si aggiungeranno altre azioni che rimandano a localiServlet
+            
+            ServletContext sc = getServletContext();
+            RequestDispatcher rd = sc.getRequestDispatcher("/localiServlet");
+            rd.forward(request, response);
+        }
+        else{
+        out.println("richiesta non valida!");
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

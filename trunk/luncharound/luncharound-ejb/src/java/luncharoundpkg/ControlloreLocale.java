@@ -198,6 +198,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     }
     
     //dato un locale, restituisce una stringa con tutte le sue combo e i prezzi
+    @Override
     public String mostraCombo(int idLocale){
         String ret="";
         List<PiattoCombo> pc =piattoComboFacade.findAll();
@@ -208,7 +209,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
             }
         }
         
-        if(ret.equals("")) return "*** nessuna combonazione trovata ***";
+        if(ret.equals("")) return "*** nessuna combinazione trovata ***";
         return ret;
     
     }
@@ -247,6 +248,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     
     }
     
+    @Override
     public void localeDaReq(HttpServletRequest req){
         Locale loc= new Locale();
         HashMap map = new HashMap();
@@ -268,7 +270,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     public String locali(){
         String ret="";
         List<Locale> ll=localeFacade.findAll();
-        System.err.println("ci sono: "+ll.size()+" elementi");
+        System.out.println("ci sono: "+ll.size()+" elementi");
         for(int i = 0; i<ll.size();i++) ret+=ll.get(i).getNome()+"<br>";
         return ret;
     }
