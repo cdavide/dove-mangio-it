@@ -7,7 +7,6 @@ package luncharoundpkg;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.lang.Math;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -198,7 +197,6 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     }
     
     //dato un locale, restituisce una stringa con tutte le sue combo e i prezzi
-    @Override
     public String mostraCombo(int idLocale){
         String ret="";
         List<PiattoCombo> pc =piattoComboFacade.findAll();
@@ -209,7 +207,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
             }
         }
         
-        if(ret.equals("")) return "*** nessuna combinazione trovata ***";
+        if(ret.equals("")) return "*** nessuna combonazione trovata ***";
         return ret;
     
     }
@@ -248,29 +246,16 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     
     }
     
-    @Override
     public void localeDaReq(HttpServletRequest req){
         Locale loc= new Locale();
-        HashMap map = new HashMap();
-        Enumeration names = req.getParameterNames();
-        while(names.hasMoreElements()){
-            String name= (String)names.nextElement();
-            map.put(name,req.getParameterValues(name));
-        }
-        try {
-            BeanUtils.populate(loc, map) ;
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ControlloreLocale.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(ControlloreLocale.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Util.riempi(req,loc);
         localeFacade.create(loc);
     }
     
     public String locali(){
         String ret="";
         List<Locale> ll=localeFacade.findAll();
-        System.out.println("ci sono: "+ll.size()+" elementi");
+        System.err.println("ci sono: "+ll.size()+" elementi");
         for(int i = 0; i<ll.size();i++) ret+=ll.get(i).getNome()+"<br>";
         return ret;
     }

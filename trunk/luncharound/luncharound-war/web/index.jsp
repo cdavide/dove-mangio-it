@@ -7,7 +7,7 @@
 	<body>
 		<h1>Welcome to LunchAround!</h1><br><br>
 		inserimento nuovo locale:
-		<form name=formlocale action="mainServlet" method="GET">
+		<form name=formlocale action="MainServlet" method="GET">
 			<br>nome locale:  <input type="text" name="nome">
 			<br>indirizzo:  <input type="text" name="indirizzo">
 			<br> latit:   <input type="text" name="latitudine">
@@ -18,6 +18,6 @@
 			<input type="submit" value="Aggiungi">
 		</form>
                 <br>
-                <a href="mainServlet?azione=mostra_tutti">Elenco di tutti i locali presenti su LunchAround</a>
+                <a href="MainServlet?azione=mostra_tutti">Elenco di tutti i locali presenti su LunchAround</a>
     </body>
 </html>
