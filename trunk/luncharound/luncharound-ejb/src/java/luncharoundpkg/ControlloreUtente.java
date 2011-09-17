@@ -90,13 +90,13 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
     }
     //anche qui manca md5!!
     @Override
-    public boolean verificaPassword(String mail, String password){
+    public Utente verificaPassword(String mail, String password){
         
         List<Utente> lu = utenteFacade.findAll();
         for(Utente ut : lu){
-            if(ut.getMail().equals(mail) && ut.getPassword().equals(password)) return true;
+            if(ut.getMail().equals(mail) && ut.getPassword().equals(password)) return ut;
         }
-        return false;
+        return null;
     
     }
     

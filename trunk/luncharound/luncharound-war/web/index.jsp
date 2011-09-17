@@ -5,6 +5,14 @@
 		<title>Homepage LunchAround</title>
 	</head>
 	<body>
+            
+            <% if(request.getAttribute("errore")!=null){ %>
+            
+        <font color="red"> <%= request.getAttribute("errore")%> </font>
+                
+            <% } %>
+            
+            
 		<h1>Welcome to LunchAround!</h1><br><br>
 		inserimento nuovo locale:
 		<form name=formlocale action="MainServlet" method="GET">
@@ -18,6 +26,11 @@
 			<input type="submit" value="Aggiungi">
 		</form>
                 <br>
+                <hr>
                 <a href="MainServlet?azione=mostra_tutti">Elenco di tutti i locali presenti su LunchAround</a>
-    </body>
+                
+                <hr>
+                <jsp:include page="login.jsp"/>
+                <hr>
+</body>
 </html>

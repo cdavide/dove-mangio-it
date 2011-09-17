@@ -6,11 +6,16 @@ package webpkg;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import luncharoundpkg.ControlloreUtenteLocal;
+import luncharoundpkg.Utente;
+import luncharoundpkg.UtenteFacadeLocal;
 
 /**
  *
@@ -18,6 +23,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "UtentiServlet", urlPatterns = {"/UtentiServlet"})
 public class UtentiServlet extends HttpServlet {
+    @EJB
+    private UtenteFacadeLocal utenteFacade;
+    @EJB
+    private ControlloreUtenteLocal controlloreUtente;
+    
+    
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -29,13 +40,54 @@ public class UtentiServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
        
         String azione = request.getParameter("azione");
         
-        if(azione.equals("aggiungi_utente")){
+        if(azione.equals("registra_utente")){
             
+            request.getRequestDispatcher("registrazioneUtente.jsp").forward(request, response);
             
+        }
+        else if(azione.equals("aggiungi_utente")){
+            
+            try{
+                controlloreUtente.addUtenteDaReq(request);
+            }
+            catch(Exception e){
+                request.setAttribute("errore", "Registrazione non effettuata. Email gia' in uso");
+            }
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+        else if(azione.equals("login")){
+        
+            Utente persona=controlloreUtente.verificaPassword(request.getParameter("mail"), request.getParameter("password"));
+        
+            if(persona==null){
+                request.setAttribute("errore", "Login fallito! credenziali non corrette!");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+            else{
+                session.setAttribute("nome_utente", persona.getUsername());
+                session.setAttribute("eventi", persona.isEventi());
+                session.setAttribute("news",persona.isNews());
+                session.setAttribute("home", persona.getHome());
+                
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+
+            }
+        }
+        else if(azione.equals("logout")){
+            
+            session.removeAttribute("nome_utente");
+            session.removeAttribute("eventi");
+            session.removeAttribute("news");
+            session.removeAttribute("home");
+            
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+
+        
         }
     }
 

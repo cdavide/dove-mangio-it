@@ -23,7 +23,7 @@ public interface ControlloreUtenteLocal {
     public void editNews(long idUtente,boolean opT);
     public void editPassword(long idUtente,String nuovaPwd);
     
-    public boolean verificaPassword(String mail, String password);
+    public Utente verificaPassword(String mail, String password);
 
     
 }
