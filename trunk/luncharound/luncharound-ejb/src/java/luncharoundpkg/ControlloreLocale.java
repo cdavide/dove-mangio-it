@@ -246,12 +246,14 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     
     }
     
+    @Override
     public void localeDaReq(HttpServletRequest req){
         Locale loc= new Locale();
         Util.riempi(req,loc);
         localeFacade.create(loc);
     }
     
+    @Override
     public String locali(){
         String ret="";
         List<Locale> ll=localeFacade.findAll();

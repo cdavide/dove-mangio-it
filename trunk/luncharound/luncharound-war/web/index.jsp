@@ -15,14 +15,16 @@
             
 		<h1>Welcome to LunchAround!</h1><br><br>
 		inserimento nuovo locale:
-		<form name=formlocale action="MainServlet" method="GET">
+		<form name=formlocale action="LocaliServlet" method="POST">
 			<br>nome locale:  <input type="text" name="nome">
-			<br>indirizzo:  <input type="text" name="indirizzo">
-			<br> latit:   <input type="text" name="latitudine">
-			<br> longit:   <input type="text" name="longitudine">
+			<br>Via e numero civico:  <input type="text" name="via">
+			<br> città:   <input type="text" name="citta">
 			<br> proprietario   <input type="text" name="proprietario">
 			<br> partita iva   <input type="text" name="pIVA">
 			<input type="hidden" name="azione" value="aggiungi_locale">
+                        <input type="hidden" name="indirizzo" value="">
+                        <input type="hidden" name="latitudine" value=0>
+                        <input type="hidden" name="longitudine" value=0>
 			<input type="submit" value="Aggiungi">
 		</form>
                 <br>

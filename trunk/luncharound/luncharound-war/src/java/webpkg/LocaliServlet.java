@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import luncharoundpkg.ControlloreLocaleLocal;
 import luncharoundpkg.Locale;
 import luncharoundpkg.LocaleFacadeLocal;
+import utility.Maps;
 
 /**
  *
@@ -43,7 +44,30 @@ public class LocaliServlet extends HttpServlet {
         
         String azione = request.getParameter("azione");
         
-        if(azione.equals("mostra_locale")){
+        if(azione.equals("aggiungi_locale")){
+            
+            double[] punto=new double[2];
+         
+            String ind=request.getParameter("via");
+            ind+=","+request.getParameter("citta");
+            request.setAttribute("indirizzo", ind);
+            
+            if(Maps.geolocalizza(ind,punto)){
+                
+                request.setAttribute("latitudine",punto[0]);
+                request.setAttribute("longitudine", punto[1]);
+                
+                controlloreLocale.localeDaReq(request);
+                //torno alla home, ma non voglio riportarmi dietro tutti i parametri
+                response.sendRedirect("index.jsp");
+            }
+            else{ //da modificare, torno alla pagina di inserimento! (attualmente la home)
+                request.setAttribute("errore", "indirizzo non valido!");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+            
+        }
+        else if(azione.equals("mostra_locale")){
             
             int idLocale = Integer.parseInt(request.getParameter("id"));
             
@@ -58,7 +82,9 @@ public class LocaliServlet extends HttpServlet {
             request.setAttribute("contenuto",temp);
             request.getRequestDispatcher("ricerca.jsp").forward(request, response);
         }
-        else{System.out.print("azione non valida!");
+        else{
+            request.setAttribute("errore","azione non valida!");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
         
     }
