@@ -56,7 +56,6 @@ public class LocaliServlet extends HttpServlet {
                 
                 request.setAttribute("latitudine",punto[0]);
                 request.setAttribute("longitudine", punto[1]);
-                
                 controlloreLocale.localeDaReq(request);
                 //torno alla home, ma non voglio riportarmi dietro tutti i parametri
                 response.sendRedirect("index.jsp");
