@@ -24,7 +24,7 @@ import luncharoundpkg.UtenteFacadeLocal;
 @WebServlet(name = "UtentiServlet", urlPatterns = {"/UtentiServlet"})
 public class UtentiServlet extends HttpServlet {
     @EJB
-    private UtenteFacadeLocal utenteFacade;
+    private static UtenteFacadeLocal utenteFacade;
     @EJB
     private ControlloreUtenteLocal controlloreUtente;
     
@@ -70,9 +70,11 @@ public class UtentiServlet extends HttpServlet {
             }
             else{
                 session.setAttribute("nome_utente", persona.getUsername());
+                session.setAttribute("id", persona.getId());
                 session.setAttribute("eventi", persona.isEventi());
                 session.setAttribute("news",persona.isNews());
                 session.setAttribute("home", persona.getHome());
+                session.setAttribute("tipo", persona.getTipo());
                 
                 request.getRequestDispatcher("index.jsp").forward(request, response);
 
@@ -84,11 +86,21 @@ public class UtentiServlet extends HttpServlet {
             session.removeAttribute("eventi");
             session.removeAttribute("news");
             session.removeAttribute("home");
+            session.removeAttribute("id");
+            session.removeAttribute("tipo");
+
             
             request.getRequestDispatcher("index.jsp").forward(request, response);
 
         
         }
+    }
+    
+    public static void cambiaHome(String indirizzo, HttpSession session){
+        Utente ut = utenteFacade.find(session.getAttribute("id"));
+        ut.setHome(indirizzo);
+        utenteFacade.edit(ut);
+        session.setAttribute("home", indirizzo);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -21,11 +21,19 @@ public class Util {
     public static void riempi(HttpServletRequest req, Object o){
 
         HashMap map = new HashMap();
+        
         Enumeration names = req.getParameterNames();
         while(names.hasMoreElements()){
             String name= (String)names.nextElement();
             map.put(name,req.getParameterValues(name));
         }
+        
+        names = req.getAttributeNames();
+        while(names.hasMoreElements()){
+            String name= (String)names.nextElement();
+            map.put(name,req.getAttribute(name));
+        }
+        
         try {
             BeanUtils.populate(o, map);
         } catch (IllegalAccessException ex) {

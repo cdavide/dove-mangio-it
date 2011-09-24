@@ -267,9 +267,9 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         List<Locale> ll=localeFacade.findAll();
         List<Locale> ret=new ArrayList<Locale>();
 
-        for(int i=0;i<ll.size();i++){
-            if(vicino(ll.get(i),lat,lon,dist)){
-                ret.add(ll.get(i));
+        for(Locale loc : ll){
+            if(vicino(loc,lat,lon,dist)){
+                ret.add(loc);
             }
         }
         
@@ -314,6 +314,19 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
             else bools[i]=false;
         }
         return bools;
+    }
+    
+    public boolean menuValido(int idLocale){
+    
+        List<Menu> lm= menuFacade.findAll();
+        GregorianCalendar now= new GregorianCalendar();
+        for(Menu menu : lm){
+            if(menu.getIdLocale()==idLocale){
+                if(menu.getValidita().compareTo(now)<=0) return false;
+                else return true;
+            }
+        }
+        return false;
     }
 
 

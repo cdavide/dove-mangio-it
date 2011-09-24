@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import luncharoundpkg.ControlloreLocaleLocal;
 import luncharoundpkg.Locale;
 import luncharoundpkg.LocaleFacadeLocal;
@@ -41,30 +42,14 @@ public class LocaliServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session=request.getSession();
         
         String azione = request.getParameter("azione");
         
         if(azione.equals("aggiungi_locale")){
-            
-            double[] punto=new double[2];
-         
-            String ind=request.getParameter("via");
-            ind+=","+request.getParameter("citta");
-            request.setAttribute("indirizzo", ind);
-            
-            if(Maps.geolocalizza(ind,punto)){
-                
-                request.setAttribute("latitudine",punto[0]);
-                request.setAttribute("longitudine", punto[1]);
-                controlloreLocale.localeDaReq(request);
-                //torno alla home, ma non voglio riportarmi dietro tutti i parametri
-                response.sendRedirect("index.jsp");
-            }
-            else{ //da modificare, torno alla pagina di inserimento! (attualmente la home)
-                request.setAttribute("errore", "indirizzo non valido!");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
-            
+
+            controlloreLocale.localeDaReq(request);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
         else if(azione.equals("mostra_locale")){
             
@@ -80,6 +65,26 @@ public class LocaliServlet extends HttpServlet {
             String temp= elencoLocali();
             request.setAttribute("contenuto",temp);
             request.getRequestDispatcher("ricerca.jsp").forward(request, response);
+        }
+        else if(azione.equals("ricerca_locali")){
+            
+            double lat=Double.parseDouble(request.getParameter("latitudine"));
+            double lon=Double.parseDouble(request.getParameter("longitudine"));
+            double dist=Double.parseDouble(request.getParameter("distanza"));
+
+            String[] risultati =ricerca(lat,lon,dist);
+            request.setAttribute("contenuto",risultati[0]);
+            request.setAttribute("script",risultati[1]);
+            //controllo se ha chiesto di memorizzare l'indirizzo e se è registrato
+           
+           // if(request.getParameter("salva").equals("true") && session.getAttribute("nome_utente")!=null){
+           //     UtentiServlet.cambiaHome(request.getParameter("indirizzo"),session);
+           // }
+            request.getRequestDispatcher("risultati.jsp").forward(request, response);
+        }
+        else if(azione.equals("vai_a_ricerca")){
+            //nella versione finale, forward a una pagina che include form_ricerca
+            request.getRequestDispatcher("form_ricerca.jsp").forward(request, response);
         }
         else{
             request.setAttribute("errore","azione non valida!");
@@ -97,7 +102,8 @@ public class LocaliServlet extends HttpServlet {
         ret+="<h4> di: "+loc.getProprietario()+"</h4><br><br>";
         ret+="partita iva:"+loc.getpIVA()+"<br>";
         ret+="Indirizzo:"+loc.getIndirizzo()+"<br>";
-        ret+="Dove si trova:<br>"+creaMappa(loc.getIndirizzo());
+        ret+="latitudine e longitudine: "+loc.getLatitudine()+","+loc.getLongitudine();
+        ret+="Dove si trova:<br>"+creaMappaStatica(loc.getIndirizzo());
         ret+="<hr>";
         ret+="<>MENU' DEL GIORNO:<br>"+controlloreLocale.mostraMenu(loc.getId());
         ret+="<hr>";
@@ -124,11 +130,14 @@ public class LocaliServlet extends HttpServlet {
     
     //metodo per creare un collegamento alla pagina di descrizione del locale
     private String creaLink(int idLocale, String nome){
-        return "<a href=\"MainServlet?azione=mostra_locale&id="+idLocale+"\">"+nome+"</a>";
+        return "<a href=\"LocaliServlet?azione=mostra_locale&id="+idLocale+"\">"+nome+"</a>";
+    }
+    private String creaLink2(int idLocale, String nome){
+        return "<a href=\\\"LocaliServlet?azione=mostra_locale&id="+idLocale+"\\\">"+nome+"</a>";
     }
     
     //metodo per creare una mappa statica come immagine. da rendere parametrica?
-    private String creaMappa(String indirizzo){ 
+    private String creaMappaStatica(String indirizzo){ 
           String zoom="15";
           String size="400x400";
           String ret="";
@@ -138,6 +147,78 @@ public class LocaliServlet extends HttpServlet {
           ret+="%7C"+indirizzo+"&sensor=false\"></a>";
           return ret;
     }
+    
+    //restituisce due stringhe: la prima contiene la lista dei risultati in html
+    //la seconda contiene lo script in js per generare la mappa dinamica
+    private String[] ricerca(double lat, double lon, double dist){
+            
+        String[] ret= new String[2];
+        String markers;
+        List<Locale> ll = controlloreLocale.trovaLocali(lat, lon, dist);
+        Locale loc;
+        boolean valido;
+        
+        markers="";
+        ret[0]="";
+        for(int i=0;i<ll.size();i++){
+            
+            loc=ll.get(i);
+            valido=controlloreLocale.menuValido(loc.getId());
+            
+            //creo la descrizione del locale per la lista
+            ret[0]+="<br><hr><br>";
+            ret[0]+="<h1>"+(i+1)+". "+creaLink(loc.getId(),loc.getNome())+"</h1><br>";
+            ret[0]+="indirizzo: "+loc.getIndirizzo()+"<br>";
+            ret[0]+= valido ? "Menu'aggiornato" : "Menu' non aggiornato";
+            //ora creo il marker, verde se aggiornato, rosso altrimenti
+            //con un numero corrispondente e un fumetto in caso di click
+            //è necessario quindi un listener x l'evento 'click'
+            markers+="var marker"+i+" = new google.maps.Marker({"
+                    + "position: new google.maps.LatLng("+loc.getLatitudine()+","
+                    + loc.getLongitudine()+"), map: map,"
+                    + "icon: \"https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow"
+                    + "&chld="+(i+1)+"|";
+            markers+= valido ? "00E304" : "F24657";
+            markers+= "|000000\"});"
+                    + " var infowindow"+i+" = new google.maps.InfoWindow"
+                    + "({content: \" "+creaLink2(loc.getId(),loc.getNome())+"\""
+                    + "});"
+                    + "google.maps.event.addListener(marker"+i+", 'click', function() {"
+                    + "infowindow"+i+".open(map,marker"+i+");});";
+        }
+        
+        //ora creo lo script 'initialize()' per intero, sfruttando i markers appena creati
+        ret[1]=generaScriptInitialize(markers,lat,lon,dist);
+        
+        return ret;
+    }
+    
+    private String generaScriptInitialize(String markers,double lat, double lon,double dist){
+        
+        String script;
+        String zoom;
+        switch((int)dist){
+            case 20: zoom="10";break;
+            case 15: zoom="11";break;
+            case 10: zoom="12";break;
+            case 5: zoom="13";break;
+            case 2: zoom="14";break;
+            case 1: zoom="15";break;
+            default: zoom="11";break;    
+        }
+        script="<script type=\"text/javascript\"> function initialize() {"
+                + " var latlng = new google.maps.LatLng("+lat+","+lon+");";
+        script+="var myOptions = {zoom: "+zoom+",";
+        script+="center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP};";
+        script+="var map = new google.maps.Map(document.getElementById(\"map_canvas\"),myOptions);";
+        script+=markers+"}</script>";
+        
+        return script;
+    }
+    
+
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

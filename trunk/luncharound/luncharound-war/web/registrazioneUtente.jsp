@@ -13,7 +13,7 @@
     </head>
     <body>
         <form name=formlocale action="UtentiServlet" method="GET">
-        <br>Nome: <input type="text" name="nome">
+        <br>Nome: <input type="text" name="username">
         <br>E-Mail: <input type="text" name="mail">
         <br>Home Location: <input type="text" name="home">
         <br>Password: <input type="text" name="password">
