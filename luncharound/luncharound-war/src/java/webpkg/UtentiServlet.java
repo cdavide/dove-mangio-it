@@ -23,8 +23,8 @@ import luncharoundpkg.UtenteFacadeLocal;
  */
 @WebServlet(name = "UtentiServlet", urlPatterns = {"/UtentiServlet"})
 public class UtentiServlet extends HttpServlet {
-    @EJB
-    private static UtenteFacadeLocal utenteFacade;
+    //@EJB
+    //private static UtenteFacadeLocal utenteFacade;
     @EJB
     private ControlloreUtenteLocal controlloreUtente;
     
@@ -96,13 +96,13 @@ public class UtentiServlet extends HttpServlet {
         }
     }
     
-    public static void cambiaHome(String indirizzo, HttpSession session){
+   /* public static void cambiaHome(String indirizzo, HttpSession session){
         Utente ut = utenteFacade.find(session.getAttribute("id"));
         ut.setHome(indirizzo);
         utenteFacade.edit(ut);
         session.setAttribute("home", indirizzo);
     }
-
+*/
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
