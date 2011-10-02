@@ -7,14 +7,12 @@
          <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="JSUtil.js"></script>
 	<body>
-            
+         
             <% if(request.getAttribute("errore")!=null){ %>
             
         <font color="red"> <%= request.getAttribute("errore")%> </font>
                 
             <% } %>
-            
-            
 		<h1>Welcome to LunchAround!</h1><br><br>
 		inserimento nuovo locale:
 		<form id="form" name=formlocale action="LocaliServlet" method="POST" >

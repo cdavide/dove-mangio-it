@@ -58,10 +58,10 @@
  </script>
 
         Cerca un posto dove pranzare!
-<form name="formricerca" id="form" action="LocaliServlet" method="POST" onSubmit="return controlla()" >
+<form name="formricerca" id="form" action="LocaliServlet" method="POST">
 
     <input type="radio" name="scelta" value="ind" onclick="seleziona(1)" checked="true"> ricerca per indirizzo...</input><br>
-    indirizzo:  <input type="text" size=40 name="indirizzo" id="indirizzo"
+    indirizzo:  <input type="text" size=40 name="indirizzo" id="ind"
                        value="<% if(session.getAttribute("home")!=null){ %><%=session.getAttribute("home")%><% } %>"><br>
     ...oppure <input type="radio" name="scelta" value="pos" onclick="seleziona(0)"> ottieni la mia posizione</input><br>
 
@@ -76,8 +76,8 @@
     </select><br>
 
     <input type="checkbox" name="salva" value="true">Imposta questo indirizzo come predefinito</input><br>
-    <input type="hidden" name="latitudine" value="">
-    <input type="hidden" name="longitudine" value="">
+    <input type="hidden" name="latitudine" id="lat" value="">
+    <input type="hidden" name="longitudine" id="lon" value="">
     <input type="hidden" name="azione" value="ricerca_locali">
-    <input type="submit" value="Ricerca" onClick="submitForm(1);">
+    <input type="button" value="Ricerca" onClick="controlla();submitForm(1);">
 </form>
