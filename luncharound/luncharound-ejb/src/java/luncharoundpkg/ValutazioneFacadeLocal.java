@@ -27,5 +27,11 @@ public interface ValutazioneFacadeLocal {
     List<Valutazione> findRange(int[] range);
 
     int count();
+
+    public List<Valutazione> findByUtente(long idUtente);
+
+    public List<Valutazione> findByLocale(long idLocale);
+
+    public Valutazione findValutazioneLocFromUtente(long idLocale, long idUtente);
     
 }

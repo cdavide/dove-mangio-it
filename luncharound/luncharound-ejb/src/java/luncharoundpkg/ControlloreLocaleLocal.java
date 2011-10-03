@@ -47,6 +47,8 @@ public interface ControlloreLocaleLocal {
     
     public boolean menuValido(int idLocale);
 
+    String mostraValutazioni(long idLocale, long idUtente);
+
     
     
 }

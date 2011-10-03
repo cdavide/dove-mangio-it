@@ -53,9 +53,8 @@ public class LocaliServlet extends HttpServlet {
         }
         else if(azione.equals("mostra_locale")){
             
-            int idLocale = Integer.parseInt(request.getParameter("id"));
-            
-            String temp= visualizzaLocale(idLocale);
+            int idLocale = Integer.parseInt(request.getParameter("id"));            
+            String temp= visualizzaLocale(idLocale,request);
             request.setAttribute("contenuto",temp);
             request.getRequestDispatcher("locale.jsp").forward(request, response);
         
@@ -94,10 +93,11 @@ public class LocaliServlet extends HttpServlet {
     }
     
     //crea codice html da visualizzare nella jsp
-    private String visualizzaLocale(int id){
-        
+    private String visualizzaLocale(int idLocale,HttpServletRequest request){
+        HttpSession session=request.getSession();
+        int idUtente = Integer.parseInt(request.getParameter("id"));
         String ret="";
-        Locale loc=localeFacade.find(id);
+        Locale loc=localeFacade.find(idLocale);
         ret+="<h2>"+loc.getNome()+"</h2><br>";
         ret+="<h4> di: "+loc.getProprietario()+"</h4><br><br>";
         ret+="partita iva:"+loc.getpIVA()+"<br>";
@@ -107,8 +107,9 @@ public class LocaliServlet extends HttpServlet {
         ret+="<hr>";
         ret+="<>MENU' DEL GIORNO:<br>"+controlloreLocale.mostraMenu(loc.getId());
         ret+="<hr>";
-        ret+="COMBINAZIONI ED OFFERTE DEL LOCALE:<br>"+controlloreLocale.mostraCombo(id);
+        ret+="COMBINAZIONI ED OFFERTE DEL LOCALE:<br>"+controlloreLocale.mostraCombo(idLocale);
         
+        ret+="VALUTAZIONI: </br>"+controlloreLocale.mostraValutazioni(idLocale,idUtente);
         return ret;
     }
             
