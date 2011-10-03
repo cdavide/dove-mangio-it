@@ -23,6 +23,8 @@ import org.apache.commons.beanutils.BeanUtils;
 @Stateless
 public class ControlloreLocale implements ControlloreLocaleLocal {
     @EJB
+    private ValutazioneFacadeLocal valutazioneFacade;
+    @EJB
     private PiattoFacadeLocal piattoFacade;
     @EJB
     private PiattoComboFacadeLocal piattoComboFacade;
@@ -235,6 +237,71 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         }
     }
     
+    /*Mostra valutazione locale
+     * @param id  l'identificativo unico del locale
+     * @return  una stringa contenente le valutazioni
+     */
+    
+    @Override
+    public String mostraValutazioni(long idLocale,long idUtente) {
+        long pulizia = 0;
+        long qualita = 0;
+        long velocita = 0;
+        long affollamento = 0;
+        long quantita = 0;
+        long cortesia = 0;
+        long myPulizia = 0;
+        long myQualita = 0;
+        long myVelocita = 0;
+        long myAffollamento = 0;
+        long myQuantita = 0;
+        long myCortesia = 0;
+        List<Valutazione>   vals =   valutazioneFacade.findByLocale(idLocale);
+        int numValutazioni = vals.size();
+        if(numValutazioni == 0) return "</br>Non ci sono valutazioni</br>";
+       
+        for(Valutazione val : vals){
+            pulizia+=(long) val.getAffollamento();
+            qualita+=(long) val.getQualita();
+            velocita+=(long) val.getVelocita();
+            affollamento+=(long) val.getAffollamento();
+            quantita+=(long) val.getQuantita();
+            cortesia+=(long) val.getCortesia();
+            if(val.getIdUtente() == idUtente){
+                myQualita = val.getQualita();
+                myVelocita = val.getVelocita();
+                myAffollamento = val.getAffollamento();
+                myQuantita = val.getQuantita();
+                myCortesia = val.getCortesia();
+            }
+        }
+        
+        pulizia=pulizia/numValutazioni;
+        qualita = qualita / numValutazioni;
+        velocita = velocita / numValutazioni;
+        affollamento = affollamento / numValutazioni;
+        quantita = quantita / numValutazioni;
+        cortesia = cortesia / numValutazioni;
+        return "Valutazioni: "
+             +"</br>pulizia: "+pulizia
+             +"</br>qualita: " + qualita
+             +"</br>velocita: "+velocita
+             +"</br>affollamento: "+affollamento
+             +"</br>quantita: "+quantita
+             +"</br>cortesia: "+ cortesia
+             +"</br>Le tue valutazioni:"
+             +"</br>pulizia: "+myPulizia
+             +"</br>qualita: " + myQualita
+             +"</br>velocita: "+myVelocita
+             +"</br>affollamento: "+myAffollamento
+             +"</br>quantita: "+myQuantita
+             +"</br>cortesia: "+ myCortesia  
+                ;
+    }
+    
+    
+    
+    
     public List<String> listaCat(){
         
         List<String> ret= new ArrayList<String>();
@@ -328,6 +395,8 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         }
         return false;
     }
+
+
 
 
     
