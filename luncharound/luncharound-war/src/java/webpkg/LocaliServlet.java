@@ -98,6 +98,15 @@ public class LocaliServlet extends HttpServlet {
         int idUtente = Integer.parseInt(request.getParameter("id"));
         String ret="";
         Locale loc=localeFacade.find(idLocale);
+        ret+="<script src=\'resources/jquery.js\' type=\"text/javascript\"></script>"
+            +"<script src=\'resources/documentation.js\' type=\"text/javascript\">"
+            + "</script>\"<link href=\'resources/documentation.css\' type=\"text/css\" rel=\"stylesheet\"/>"
+            //+ "<script type=\"text/javaScript\" src=\"http://www.fyneworks.com/jquery/project/chili/jquery.chili-2.0.js\"></script>"
+            //+"<script type=\"text/javascript\">try{ChiliBook.recipeFolder=\"/jquery/project/chili/\"}catch(e){}</script>"
+            +"<script src=\'resources/jquery.MetaData.js\' type=\"text/javascript\" language=\"javascript\"></script>"
+            +"<script src=\'resources/jquery.rating.js\' type=\"text/javascript\" language=\"javascript\"></script>"
+            +"<link href=\'resources/jquery.rating.css\' type=\"text/css\" rel=\"stylesheet\"/>";
+
         ret+="<h2>"+loc.getNome()+"</h2><br>";
         ret+="<h4> di: "+loc.getProprietario()+"</h4><br><br>";
         ret+="partita iva:"+loc.getpIVA()+"<br>";
@@ -109,7 +118,7 @@ public class LocaliServlet extends HttpServlet {
         ret+="<hr>";
         ret+="COMBINAZIONI ED OFFERTE DEL LOCALE:<br>"+controlloreLocale.mostraCombo(idLocale);
         
-        ret+="VALUTAZIONI: </br>"+controlloreLocale.mostraValutazioni(idLocale,idUtente);
+        ret+=controlloreLocale.mostraValutazioni(idLocale,idUtente);
         return ret;
     }
             

@@ -238,7 +238,8 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     }
     
     /*Mostra valutazione locale
-     * @param id  l'identificativo unico del locale
+     * @param idLocale  l'identificativo unico del locale
+     * @param idLocale  l'identificativo unico dell'utente
      * @return  una stringa contenente le valutazioni
      */
     
@@ -259,7 +260,6 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         List<Valutazione>   vals =   valutazioneFacade.findByLocale(idLocale);
         int numValutazioni = vals.size();
         if(numValutazioni == 0) return "</br>Non ci sono valutazioni</br>";
-       
         for(Valutazione val : vals){
             pulizia+=(long) val.getAffollamento();
             qualita+=(long) val.getQualita();
@@ -276,29 +276,52 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
             }
         }
         
-        pulizia=pulizia/numValutazioni;
+        pulizia= pulizia/numValutazioni;
         qualita = qualita / numValutazioni;
         velocita = velocita / numValutazioni;
         affollamento = affollamento / numValutazioni;
         quantita = quantita / numValutazioni;
         cortesia = cortesia / numValutazioni;
-        return "Valutazioni: "
-             +"</br>pulizia: "+pulizia
-             +"</br>qualita: " + qualita
-             +"</br>velocita: "+velocita
-             +"</br>affollamento: "+affollamento
-             +"</br>quantita: "+quantita
-             +"</br>cortesia: "+ cortesia
+        return "</br>Valutazioni:"
+                + "</br>"+createRatingStars("pulizia", pulizia,"disabled=\"disabled\"")+pulizia
+                + "</br>"+createRatingStars("qualita", qualita,"disabled=\"disabled\"")+qualita
+                + "</br>"+createRatingStars("velocita", velocita,"disabled=\"disabled\"")+velocita
+                + "</br>"+createRatingStars("affollamento", affollamento,"disabled=\"disabled\"")+affollamento
+                + "</br>"+createRatingStars("quantita", quantita,"disabled=\"disabled\"")+quantita
+                + "</br>"+createRatingStars("cortesia", cortesia,"disabled=\"disabled\"")+cortesia
              +"</br>Le tue valutazioni:"
-             +"</br>pulizia: "+myPulizia
-             +"</br>qualita: " + myQualita
-             +"</br>velocita: "+myVelocita
-             +"</br>affollamento: "+myAffollamento
-             +"</br>quantita: "+myQuantita
-             +"</br>cortesia: "+ myCortesia  
-                ;
+                + "</br>"+createRatingStars("mypulizia", myPulizia,"")+myPulizia
+                + "</br>"+createRatingStars("myqualita", myQualita,"")+myQualita
+                + "</br>"+createRatingStars("myvelocita", myVelocita,"")+myVelocita
+                + "</br>"+createRatingStars("myaffollamento", myAffollamento,"")+myAffollamento
+                + "</br>"+createRatingStars("myquantita", myQuantita,"")+myQuantita
+                + "</br>"+createRatingStars("mycortesia", myCortesia,"")+myCortesia;
     }
     
+    /* Metodi di appoggio che crea il form per visualizzare il rating
+     *  è possibile utilizzarlo anche per sottomettere una nuova votazione
+     *  usando ajax, appena riesco lo butto su e vediamo come procede
+     * @param par il parametro di cui si vuole ottenere il form del rating
+     * @param val il valore medio del rating  del parametro di valutazione
+     * @param opt opzioni varie disabled ecc, guardare help jquery rating plugin
+     * @comment non è molto bello ma funziona :-p
+     */
+    
+    public String createRatingStars(String par, long val,String opt){
+        String ret = "";
+        if (val == 0) {
+            for(int j=0;j<5;j++)
+            ret +="<input"+opt+" name=\""+par+"\" type=\"radio\" class=\"star\"/>";
+            return ret;
+        }
+        int i=1;
+        for(; i<val; i++)
+            ret +="<input "+opt+" name=\""+par+"\" type=\"radio\" class=\"star\"/>";
+        ret +="<input "+opt+" name=\""+par+"\" type=\"radio\" class=\"star\" checked=\"checked\"/>";
+        for(;i<5;i++)
+            ret +="<input " +opt+" name=\""+par+"\" type=\"radio\" class=\"star\"/>";
+        return ret;
+    }
     
     
     
@@ -394,14 +417,5 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
             }
         }
         return false;
-    }
-
-
-
-
-    
-    
-
-    
-    
+    } 
 }
