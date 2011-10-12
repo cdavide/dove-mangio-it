@@ -28,3 +28,13 @@ function submitForm(){
         }
     } );
 }
+
+/* crea valori, li sbatte dento i campi hidden e poi sottomette il form
+ */
+
+function submitValutazione(){
+    var velocita = 0;
+    
+    alert(document.getElementById("myvelocita").value);
+
+}
