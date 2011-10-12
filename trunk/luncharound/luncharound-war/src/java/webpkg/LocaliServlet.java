@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import luncharoundpkg.ControlloreLocaleLocal;
+import luncharoundpkg.ControlloreValutazioneLocal;
 import luncharoundpkg.Locale;
 import luncharoundpkg.LocaleFacadeLocal;
 import utility.Maps;
@@ -25,6 +26,8 @@ import utility.Maps;
  */
 @WebServlet(name = "LocaliServlet", urlPatterns = {"/LocaliServlet"})
 public class LocaliServlet extends HttpServlet {
+    @EJB
+    private ControlloreValutazioneLocal controlloreValutazione;
     @EJB
     private LocaleFacadeLocal localeFacade;
     @EJB
@@ -51,6 +54,10 @@ public class LocaliServlet extends HttpServlet {
             controlloreLocale.localeDaReq(request);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
+        else if (azione.equals("aggiungi_valutazione")){
+             controlloreValutazione.valutazioneDaReq(request);
+        }
+       
         else if(azione.equals("mostra_locale")){
             
             int idLocale = Integer.parseInt(request.getParameter("id"));            
@@ -96,13 +103,11 @@ public class LocaliServlet extends HttpServlet {
     private String visualizzaLocale(int idLocale,HttpServletRequest request){
         HttpSession session=request.getSession();
         int idUtente = Integer.parseInt(request.getParameter("id"));
-        String ret="";
+        String ret=" ";
         Locale loc=localeFacade.find(idLocale);
-        ret+="<script src=\'resources/jquery.js\' type=\"text/javascript\"></script>"
+        ret+="<script type=\"text/javascript\" src=\"JSUtil.js\"></script>"
+            +"<script src=\'resources/jquery.js\' type=\"text/javascript\"></script>"
             +"<script src=\'resources/documentation.js\' type=\"text/javascript\">"
-            + "</script>\"<link href=\'resources/documentation.css\' type=\"text/css\" rel=\"stylesheet\"/>"
-            //+ "<script type=\"text/javaScript\" src=\"http://www.fyneworks.com/jquery/project/chili/jquery.chili-2.0.js\"></script>"
-            //+"<script type=\"text/javascript\">try{ChiliBook.recipeFolder=\"/jquery/project/chili/\"}catch(e){}</script>"
             +"<script src=\'resources/jquery.MetaData.js\' type=\"text/javascript\" language=\"javascript\"></script>"
             +"<script src=\'resources/jquery.rating.js\' type=\"text/javascript\" language=\"javascript\"></script>"
             +"<link href=\'resources/jquery.rating.css\' type=\"text/css\" rel=\"stylesheet\"/>";
@@ -118,7 +123,7 @@ public class LocaliServlet extends HttpServlet {
         ret+="<hr>";
         ret+="COMBINAZIONI ED OFFERTE DEL LOCALE:<br>"+controlloreLocale.mostraCombo(idLocale);
         
-        ret+=controlloreLocale.mostraValutazioni(idLocale,idUtente);
+        ret+=controlloreValutazione.mostraValutazioni(idLocale,idUtente);
         return ret;
     }
             
