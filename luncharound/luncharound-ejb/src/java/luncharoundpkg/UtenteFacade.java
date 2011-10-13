@@ -4,9 +4,11 @@
  */
 package luncharoundpkg;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -23,6 +25,17 @@ public class UtenteFacade extends AbstractFacade<Utente> implements UtenteFacade
 
     public UtenteFacade() {
         super(Utente.class);
+    }
+    
+    @Override
+    public Utente findByEmail(String mail){
+        String selectQuery = "SELECT U FROM Utente U WHERE U.mail = ?1";
+	Query searchByMail = em.createQuery(selectQuery);
+	searchByMail.setParameter(1, mail);
+        try{
+            return (Utente)searchByMail.getSingleResult();
+        }
+        catch(Exception e){return null;}
     }
     
 }

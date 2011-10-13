@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import luncharoundpkg.ControlloreUtenteLocal;
 import luncharoundpkg.Utente;
-import luncharoundpkg.UtenteFacadeLocal;
 
 /**
  *
@@ -80,13 +79,45 @@ public class UtentiServlet extends HttpServlet {
 
             }
         }
+        else if(azione.equals("loginFB")){
+            
+            Utente persona=controlloreUtente.trovaDaEmail((String)request.getAttribute("mail"));
+            
+            if(persona!=null){ //utente esistente
+                
+                if(persona.getTipo()!=2){//ma appartenente al sito o altro social network
+                    
+                    request.setAttribute("errore", "Impossibile utilizzare l'account Facebook, email già utilizzata da un altro utente");
+                    request.getRequestDispatcher("index.jsp").forward(request, response);    
+                }
+            }
+            else{//non esiste nel database, lo memorizzo
+                controlloreUtente.addUtenteEsterno((String)request.getAttribute("nome"),
+                    (String)request.getAttribute("mail"), (String)request.getAttribute("home"),
+                    (String)request.getAttribute("foto"),2);
+                  
+                //riottengo i dati per memorizzarli nella sessione(non riscrivo tutte le assegnazioni)
+                persona=controlloreUtente.trovaDaEmail((String)request.getAttribute("mail"));
+            }
+
+            session.setAttribute("nome_utente", persona.getUsername());
+            session.setAttribute("id", persona.getId());
+            session.setAttribute("eventi", persona.isEventi());
+            session.setAttribute("news",persona.isNews());
+            session.setAttribute("home", persona.getHome());
+            session.setAttribute("foto", persona.getFoto());            
+            session.setAttribute("tipo", persona.getTipo());
+            request.getRequestDispatcher("index.jsp").forward(request, response);    
+
+        }
         else if(azione.equals("logout")){
             
             session.removeAttribute("nome_utente");
+            session.removeAttribute("id");
             session.removeAttribute("eventi");
             session.removeAttribute("news");
             session.removeAttribute("home");
-            session.removeAttribute("id");
+            session.removeAttribute("foto");
             session.removeAttribute("tipo");
 
             

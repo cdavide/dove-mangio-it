@@ -13,7 +13,11 @@
         <font color="red"> <%= request.getAttribute("errore")%> </font>
                 
             <% } %>
-		<h1>Welcome to LunchAround!</h1><br><br>
+		<h1>Welcome to LunchAround!</h1>
+                
+                <iframe src="//www.facebook.com/plugins/like.php?locale=it_IT&app_id=241460472572920&amp;href=www.facebook.com/luncharound&amp;send=false&amp;layout=standard&amp;width=600&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=100" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
+
+                <br>
 		inserimento nuovo locale:
 		<form id="form" name=formlocale action="LocaliServlet" method="POST" >
 			<br>nome locale:  <input type="text" name="nome">

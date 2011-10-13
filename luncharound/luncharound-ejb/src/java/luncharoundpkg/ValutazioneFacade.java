@@ -37,7 +37,7 @@ public class ValutazioneFacade extends AbstractFacade<Valutazione> implements Va
     }
     @Override
     public List<Valutazione> findByUtente(long idUtente){
-        String selectQuery = "SELECT A FROM Valutazione V WHERE V.idUtente = ?1";
+        String selectQuery = "SELECT V FROM Valutazione V WHERE V.idUtente = ?1";
 	Query searchById = em.createQuery(selectQuery);
 	searchById.setParameter(1, idUtente);
         return searchById.getResultList();
