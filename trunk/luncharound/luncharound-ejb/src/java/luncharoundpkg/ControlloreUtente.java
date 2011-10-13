@@ -31,6 +31,19 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
     }
     
     @Override
+    public void addUtenteEsterno(String username,String mail,String home,String foto, int tipo){
+        Utente ut= new Utente();
+        ut.setUsername(username);
+        ut.setMail(mail);
+        ut.setHome(home);
+        ut.setFoto(foto);
+        ut.setTipo(tipo);
+        ut.setEventi(false);
+        ut.setNews(false);
+        utenteFacade.create(ut);
+    }
+    
+    @Override
     public void addPosizione(long idUtente,String posizione){
     
         Utente ut=utenteFacade.find(idUtente);
@@ -80,6 +93,7 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
        utenteFacade.edit(ut);
        
     }
+    
     //eseguire md5 della password!!
     @Override
     public void editPassword(long idUtente,String nuovaPwd){
@@ -99,6 +113,12 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         return null;
     
     }
+    
+    @Override
+    public Utente trovaDaEmail(String mail){
+        return utenteFacade.findByEmail(mail);
+    }
+    
     
     
     }

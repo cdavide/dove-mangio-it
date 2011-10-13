@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface ControlloreUtenteLocal {
     
     public void addUtenteDaReq(HttpServletRequest req);
+    public void addUtenteEsterno(String username,String mail,String home,String foto,int tipo);
     public void addPosizione(long idUtente,String posizione);
     public void addFoto(long idUtente,String url);
     
@@ -24,6 +25,8 @@ public interface ControlloreUtenteLocal {
     public void editPassword(long idUtente,String nuovaPwd);
     
     public Utente verificaPassword(String mail, String password);
+
+    public Utente trovaDaEmail(String mail);
 
     
 }

@@ -25,7 +25,9 @@ public interface UtenteFacadeLocal {
     List<Utente> findAll();
 
     List<Utente> findRange(int[] range);
-
+    
+    Utente findByEmail(String mail);
+    
     int count();
     
 }

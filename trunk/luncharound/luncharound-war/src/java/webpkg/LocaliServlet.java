@@ -112,11 +112,11 @@ public class LocaliServlet extends HttpServlet {
             +"<script src=\'resources/jquery.rating.js\' type=\"text/javascript\" language=\"javascript\"></script>"
             +"<link href=\'resources/jquery.rating.css\' type=\"text/css\" rel=\"stylesheet\"/>";
 
-        ret+="<h2>"+loc.getNome()+"</h2><br>";
-        ret+="<h4> di: "+loc.getProprietario()+"</h4><br><br>";
+        ret+="<h2>"+loc.getNome()+"</h2>";
+        ret+="<h4> di: "+loc.getProprietario()+"</h4>";
         ret+="partita iva:"+loc.getpIVA()+"<br>";
         ret+="Indirizzo:"+loc.getIndirizzo()+"<br>";
-        ret+="latitudine e longitudine: "+loc.getLatitudine()+","+loc.getLongitudine();
+        ret+="<br>"+creaFbDialog(loc)+"<br>";
         ret+="Dove si trova:<br>"+creaMappaStatica(loc.getIndirizzo());
         ret+="<hr>";
         ret+="<>MENU' DEL GIORNO:<br>"+controlloreLocale.mostraMenu(loc.getId());
@@ -229,6 +229,30 @@ public class LocaliServlet extends HttpServlet {
         script+=markers+"}</script>";
         
         return script;
+    }
+    
+        private String creaFbDialog(Locale loc){
+    
+        String dialog;
+        String img_prova="http://www.ahfourthgrade.net/resources/Charles-C--Ebbets-Lunch-Atop-A-Skyscraper-1932-8619.jpg";
+        String url_prova="http://localhost:8080/luncharound-war/";
+        //url di prov       
+        dialog="<a href=\"";
+        dialog+="https://www.facebook.com/dialog/feed?";
+        dialog+="app_id=241460472572920&";
+        dialog+="link="+url_prova+"&";
+        //sostituire con loc.getfoto!!
+        dialog+="picture="+img_prova+"&";
+        dialog+="name=Io oggi vado a mangiare qui grazie a LunchAround!&";
+        dialog+="caption="+loc.getNome()+"&";
+        dialog+="description=Si trova in "+loc.getIndirizzo()+". "
+                + "   Clicca qui per visualizzare il loro menu' di oggi!&";
+        dialog+="redirect_uri=http://www.facebook.com\"";
+        dialog+=" target=\"_blank\">"
+                + "<img src=http://tuttoilweb.myblog.it/media/00/02/579068133.png"
+                + "  width=\"250\" height=\"30\"></a>";
+        
+        return dialog;
     }
     
 
