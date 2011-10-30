@@ -12,20 +12,19 @@
             document.formricerca.indirizzo.disabled = true;
             document.formricerca.salva.disabled=true;
             document.formricerca.indirizzo.style.backgroundColor = "silver";
+            document.formricerca.indirizzo.value="";
             
-            navigator.geolocation.getCurrentPosition(ottieniPosizione,errorePosizione);
         }
      }
-     
+     //controlla se è necessario chiamare la funzione x geoloc. l'indirizzo'
      function controlla(){
 
          if(document.formricerca.scelta[0].checked==true && document.formricerca.indirizzo.value==""){
              alert("inserisci un indirizzo!");
              return false;
          }
-         else  if(document.formricerca.scelta[1].checked==true && 
-                 (document.formricerca.latitudine.value=="" ||document.formricerca.longitudine.value=="")){
-             alert("devi farti localizzare!");
+         if(document.formricerca.scelta[1].checked==true){
+              navigator.geolocation.getCurrentPosition(ottieniPosizione,errorePosizione);
              return false;
          }
         
@@ -36,6 +35,7 @@
         
         document.formricerca.latitudine.value=pos.coords.latitude;
         document.formricerca.longitudine.value=pos.coords.longitude;
+        document.formricerca.submit();
     }
      
      function errorePosizione(err) {
@@ -79,5 +79,5 @@
     <input type="hidden" name="latitudine" id="lat" value="">
     <input type="hidden" name="longitudine" id="lon" value="">
     <input type="hidden" name="azione" value="ricerca_locali">
-    <input type="button" value="Ricerca" onClick="controlla();submitForm(1);">
+    <input type="button" value="Ricerca" onClick="if(controlla()){submitForm(1);}">
 </form>

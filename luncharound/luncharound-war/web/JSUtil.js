@@ -7,6 +7,7 @@ function submitForm(){
     var geocoder;
     var results;
     var address;
+
     if (document.getElementById("via") == null) {
         address = document.getElementById("ind").value;
     }

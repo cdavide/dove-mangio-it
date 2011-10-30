@@ -7,6 +7,9 @@
             <img src="<%= session.getAttribute("foto") %>"><br>
         <% } %>
         
+        
+        
+        
         <a href="UtentiServlet?azione=logout">Effettua il logout</a>
     
     <%} else { %>

@@ -102,6 +102,14 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
        utenteFacade.edit(ut);
     
     }
+    
+    @Override
+    public void editHome(long idUtente, String home) {
+       Utente ut=utenteFacade.find(idUtente);
+       ut.setHome(home);
+       utenteFacade.edit(ut);
+    }
+     
     //anche qui manca md5!!
     @Override
     public Utente verificaPassword(String mail, String password){
@@ -117,10 +125,7 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
     @Override
     public Utente trovaDaEmail(String mail){
         return utenteFacade.findByEmail(mail);
-    }
-    
-    
-    
+    }    
     }
     
    
