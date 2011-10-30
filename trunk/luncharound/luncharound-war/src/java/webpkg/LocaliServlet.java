@@ -15,17 +15,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import luncharoundpkg.ControlloreLocaleLocal;
+import luncharoundpkg.ControlloreUtenteLocal;
 import luncharoundpkg.ControlloreValutazioneLocal;
 import luncharoundpkg.Locale;
 import luncharoundpkg.LocaleFacadeLocal;
-import utility.Maps;
-
 /**
  *
  * @author lore0487
  */
 @WebServlet(name = "LocaliServlet", urlPatterns = {"/LocaliServlet"})
 public class LocaliServlet extends HttpServlet {
+    @EJB
+    private ControlloreUtenteLocal controlloreUtente;
     @EJB
     private ControlloreValutazioneLocal controlloreValutazione;
     @EJB
@@ -81,13 +82,15 @@ public class LocaliServlet extends HttpServlet {
             String[] risultati =ricerca(lat,lon,dist);
             request.setAttribute("contenuto",risultati[0]);
             request.setAttribute("script",risultati[1]);
+            
             //controllo se ha chiesto di memorizzare l'indirizzo e se è registrato
-           
-           // if(request.getParameter("salva").equals("true") && session.getAttribute("nome_utente")!=null){
-           //     UtentiServlet.cambiaHome(request.getParameter("indirizzo"),session);
-           // }
+           if(request.getParameter("salva")!=null && session.getAttribute("nome_utente")!=null){
+               controlloreUtente.editHome((Long)session.getAttribute("id"),request.getParameter("indirizzo"));
+               session.setAttribute("home", request.getParameter("indirizzo"));
+            }
             request.getRequestDispatcher("risultati.jsp").forward(request, response);
         }
+        
         else if(azione.equals("vai_a_ricerca")){
             //nella versione finale, forward a una pagina che include form_ricerca
             request.getRequestDispatcher("form_ricerca.jsp").forward(request, response);

@@ -23,10 +23,12 @@ public interface ControlloreUtenteLocal {
     public void editEventi(long idUtente,boolean opT);
     public void editNews(long idUtente,boolean opT);
     public void editPassword(long idUtente,String nuovaPwd);
+    public void editHome(long idUtente, String home);
     
     public Utente verificaPassword(String mail, String password);
 
     public Utente trovaDaEmail(String mail);
+
 
     
 }
