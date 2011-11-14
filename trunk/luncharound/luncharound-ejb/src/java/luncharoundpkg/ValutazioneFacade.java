@@ -7,6 +7,7 @@ package luncharoundpkg;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -45,11 +46,17 @@ public class ValutazioneFacade extends AbstractFacade<Valutazione> implements Va
     
     @Override
     public Valutazione findValutazioneLocFromUtente(long idLocale, long idUtente){
-         String selectQuery = "SELECT A FROM Valutazione V WHERE V.idUtente = ?1 AND V.idLocale = ?2";
+        Valutazione val;
+        String selectQuery = "SELECT V FROM Valutazione V WHERE V.idUtente = ?1 AND V.idLocale = ?2";
 	Query searchById = em.createQuery(selectQuery);
 	searchById.setParameter(1, idUtente);
-        searchById.setParameter(1, idLocale);
-        return (Valutazione) searchById.getSingleResult();
+        searchById.setParameter(2, idLocale);
+        try {
+            val = (Valutazione) searchById.getSingleResult();
+        }catch (NoResultException e){
+            val = null;
+        }
+        return val;
     }
     
     

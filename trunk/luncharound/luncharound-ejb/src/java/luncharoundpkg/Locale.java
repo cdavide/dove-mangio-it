@@ -9,17 +9,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
 @Entity
+
 public class Locale implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    private long idUtente; // l'id del proprietario del locale
     private String nome;
     //private String foto;  Come salviamo la foto???
     private String indirizzo;
@@ -32,6 +35,16 @@ public class Locale implements Serializable {
     public Locale() {
     }
 
+    
+    public void setIdUtente(long idUtente){
+        this.idUtente = idUtente;
+    }
+    
+    public long getIdUtente(){
+        return this.idUtente;
+    }
+    
+    
     public String getIndirizzo() {
         return indirizzo;
     }

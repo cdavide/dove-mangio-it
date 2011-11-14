@@ -5,6 +5,7 @@
 package luncharoundpkg;
 
 import javax.ejb.Local;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -13,7 +14,7 @@ import javax.ejb.Local;
 @Local
 public interface ControlloreValutazioneLocal {
     
-    String mostraValutazioni(long idLocale, long idUtente);
+    String mostraValutazioni(HttpServletRequest request);
 
     public void valutazioneDaReq(javax.servlet.http.HttpServletRequest req);
 

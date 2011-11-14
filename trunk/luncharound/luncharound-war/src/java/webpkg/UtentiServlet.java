@@ -69,7 +69,7 @@ public class UtentiServlet extends HttpServlet {
             }
             else{
                 session.setAttribute("nome_utente", persona.getUsername());
-                session.setAttribute("id", persona.getId());
+                session.setAttribute("idUtente", persona.getId());
                 session.setAttribute("eventi", persona.isEventi());
                 session.setAttribute("news",persona.isNews());
                 session.setAttribute("home", persona.getHome());
@@ -101,7 +101,7 @@ public class UtentiServlet extends HttpServlet {
             }
 
             session.setAttribute("nome_utente", persona.getUsername());
-            session.setAttribute("id", persona.getId());
+            session.setAttribute("idUtente", persona.getId());
             session.setAttribute("eventi", persona.isEventi());
             session.setAttribute("news",persona.isNews());
             session.setAttribute("home", persona.getHome());
@@ -113,7 +113,7 @@ public class UtentiServlet extends HttpServlet {
         else if(azione.equals("logout")){
             
             session.removeAttribute("nome_utente");
-            session.removeAttribute("id");
+            session.removeAttribute("idUtente");
             session.removeAttribute("eventi");
             session.removeAttribute("news");
             session.removeAttribute("home");

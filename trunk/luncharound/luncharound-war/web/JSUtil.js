@@ -35,7 +35,18 @@ function submitForm(){
 
 function submitValutazione(){
     var velocita = 0;
-    
-    alert(document.getElementById("myvelocita").value);
-
+    var cortesia=0;
+    var quantita=0;
+    var pulizia=0;
+    var qualita=0;
+    var affollamento=0;
+    for (i=0;i<5;i++){
+        if(document.getElementsByName("myvelocita")[i].checked) document.getElementById("velocita").value=i+1;
+        if(document.getElementsByName("mycortesia")[i].checked) document.getElementById("cortesia").value=i+1;
+        if(document.getElementsByName("myquantita")[i].checked) document.getElementById("quantita").value=i+1;
+        if(document.getElementsByName("mypulizia")[i].checked) document.getElementById("pulizia").value=i+1;
+        if(document.getElementsByName("myqualita")[i].checked) document.getElementById("qualita").value=i+1;
+        if(document.getElementsByName("myaffollamento")[i].checked) document.getElementById("affollamento").value=i+1;
+    }
+    document.getElementById("val").submit();
 }
