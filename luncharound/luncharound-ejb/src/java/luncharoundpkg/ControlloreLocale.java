@@ -93,11 +93,12 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         piattoFacade.create(pi);
     }
     
-    public void addLocale(String nome, String indirizzo, double longitudine, double latitudine, String proprietario, String pIVA){
+    public void addLocale(String nome, String indirizzo,long idUtente, double longitudine, double latitudine, String proprietario, String pIVA){
         
         Locale lo= new Locale();
         lo.setIndirizzo(indirizzo);
         lo.setLatitudine(latitudine);
+        lo.setIdUtente(idUtente);
         lo.setLongitudine(longitudine);
         lo.setNome(nome);
         lo.setProprietario(proprietario);

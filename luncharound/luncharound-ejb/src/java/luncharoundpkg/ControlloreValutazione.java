@@ -4,10 +4,15 @@
  */
 package luncharoundpkg;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -25,7 +30,18 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
      */
     
     @Override
-    public String mostraValutazioni(long idLocale,long idUtente) {
+    public String mostraValutazioni(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        int idLocale = (Integer) session.getAttribute("idlocale");
+        long idUtente;
+        try{
+         idUtente = (Long) session.getAttribute("idUtente");
+        }
+        catch(NullPointerException e){
+            System.err.println("Il parametro id utente è nullo!");
+            idUtente = -1;
+        }
+        
         long pulizia = 0;
         long qualita = 0;
         long velocita = 0;
@@ -38,17 +54,19 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         long myAffollamento = 0;
         long myQuantita = 0;
         long myCortesia = 0;
+        String ret="";
         List<Valutazione>   vals =   valutazioneFacade.findByLocale(idLocale);
         int numValutazioni = vals.size();
         //if(numValutazioni == 0) return "</br>Non ci sono valutazioni</br>";
         for(Valutazione val : vals){
-            pulizia+=(long) val.getAffollamento();
+            pulizia+=(long) val.getPulizia();
             qualita+=(long) val.getQualita();
             velocita+=(long) val.getVelocita();
             affollamento+=(long) val.getAffollamento();
             quantita+=(long) val.getQuantita();
             cortesia+=(long) val.getCortesia();
-            if(val.getIdUtente() == idUtente){
+            if((idUtente > 0 && val.getIdUtente() == idUtente)){
+                myPulizia = val.getPulizia();
                 myQualita = val.getQualita();
                 myVelocita = val.getVelocita();
                 myAffollamento = val.getAffollamento();
@@ -64,31 +82,35 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
             quantita = quantita / numValutazioni;
             cortesia = cortesia / numValutazioni;
         }
-        return "</br>Valutazioni:"
-                + "</br>"+createRatingStars("pulizia", pulizia,"disabled=\"disabled\"")+pulizia
-                + "</br>"+createRatingStars("qualita", qualita,"disabled=\"disabled\"")+qualita
-                + "</br>"+createRatingStars("velocita", velocita,"disabled=\"disabled\"")+velocita
-                + "</br>"+createRatingStars("affollamento", affollamento,"disabled=\"disabled\"")+affollamento
-                + "</br>"+createRatingStars("quantita", quantita,"disabled=\"disabled\"")+quantita
-                + "</br>"+createRatingStars("cortesia", cortesia,"disabled=\"disabled\"")+cortesia
-             +"</br>Le tue valutazioni: "
-                +"<form name=\"valForm\" id=\"val\" method=\"POST\">"
-                + "</br>"+createRatingStars("mypulizia", myPulizia,"")+myPulizia
-                + "</br>"+createRatingStars("myqualita", myQualita,"")+myQualita
-                + "</br>"+createRatingStars("myvelocita", myVelocita,"")+myVelocita
-                + "</br>"+createRatingStars("myaffollamento", myAffollamento,"")+myAffollamento
-                + "</br>"+createRatingStars("myquantita", myQuantita,"")+myQuantita
-                + "</br>"+createRatingStars("mycortesia", myCortesia,"")+myCortesia
+        ret += "</br>Media valutazioni ("+ numValutazioni+ "):"
+                + "</br>Pulizia: "+createRatingStars("pul", pulizia,"disabled=\"disabled\"")
+                + "</br>Qualita: " +createRatingStars("qual", qualita,"disabled=\"disabled\"")
+                + "</br>Velocita: "+createRatingStars("vel", velocita,"disabled=\"disabled\"")
+                + "</br>Affollamento: "+createRatingStars("aff", affollamento,"disabled=\"disabled\"")
+                + "</br>Quantita: "+createRatingStars("quant", quantita,"disabled=\"disabled\"")
+                + "</br>Cortesia: "+createRatingStars("cor", cortesia,"disabled=\"disabled\"");
                 
-                +"<input type=\"hidden\" id=\"azione\" name=\"azione \" value=\"aggiungi_valutazione\">"
-                +"<input type=\"hidden\" id=\"pul\" name=\"pul\">"
-                +"<input type=\"hidden\" id=\"qual\" name=\"qual\">"
-                +"<input type=\"hidden\" id=\"vel\" name=\"vel\">"
-                +"<input type=\"hidden\" id=\"aff\" name=\"aff\">"
-                +"<input type=\"hidden\" id=\"quant\" name=\"quant\">"
-                +"<input type=\"hidden\" id=\"cor\" name=\"cor\">"
+        if (idUtente > 0){
+            ret+="</br>Le tue valutazioni: "
+                +"<form name=\"valForm\" id=\"val\"action=\"LocaliServlet\" method=\"POST\">"
+                + "</br>Pulizia: "+createRatingStars("mypulizia", myPulizia,"")
+                + "</br>Qualita: "+createRatingStars("myqualita", myQualita,"")
+                + "</br>Velocita: "+createRatingStars("myvelocita", myVelocita,"")
+                + "</br>Affollamento: "+createRatingStars("myaffollamento", myAffollamento,"")
+                + "</br>Quantita: "+createRatingStars("myquantita", myQuantita,"")
+                + "</br>Cortesia: "+createRatingStars("mycortesia", myCortesia,"")
+                
+                +"<input type=\"hidden\" id=\"azione\" name=\"azione\" value=\"aggiungi_valutazione\">"
+                +"<input type=\"hidden\" id=\"pulizia\" name=\"pulizia\">"
+                +"<input type=\"hidden\" id=\"qualita\" name=\"qualita\">"
+                +"<input type=\"hidden\" id=\"velocita\" name=\"velocita\">"
+                +"<input type=\"hidden\" id=\"affollamento\" name=\"affollamento\">"
+                +"<input type=\"hidden\" id=\"quantita\" name=\"quantita\">"
+                +"<input type=\"hidden\" id=\"cortesia\" name=\"cortesia\">"
                 + "</br><input type=\"button\" value=\"Submit\" onClick=\"submitValutazione()\"/>"
                 +"</form>";
+        }
+        return ret;
     }
     
     /* Metodo di appoggio che crea il form per visualizzare il rating
@@ -100,26 +122,36 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
     
     @Override
     public String createRatingStars(String par, long val,String opt){
-        String ret = "";
+        String ret = ""; 
         if (val == 0) {
             for(int j=0;j<5;j++)
-            ret +="<input "+opt+" id=\""+par+"\" name=\""+par+"\" type=\"radio\" class=\"star\"/>";
+            ret +="<input "+opt+" name=\""+par+"\" type=\"radio\" class=\"star\"/>";
             return ret;
         }
         int i=1;
         for(; i<val; i++)
-            ret +="<input "+opt+" id=\""+par+"\" name=\""+par+"\" type=\"radio\" class=\"star\"/>";
-        ret +="<input "+opt+" id=\""+par+"\" name=\""+par+"\" type=\"radio\" class=\"star\" checked=\"checked\"/>";
+            ret +="<input "+opt+"  name=\""+par+"\" type=\"radio\" class=\"star\"/>";
+        ret +="<input "+opt+"  name=\""+par+"\" type=\"radio\" class=\"star\" checked=\"checked\"/>";
         for(;i<5;i++)
-            ret +="<input " +opt+" id=\""+par+"\" name=\""+par+"\" type=\"radio\" class=\"star\"/>";
+            ret +="<input " +opt+" name=\""+par+"\" type=\"radio\" class=\"star\"/>";
         return ret;
     }
         
     @Override
     public void valutazioneDaReq(HttpServletRequest req){
-        Valutazione val= new Valutazione();
+        /*get valutazione precedente
+         update valutazione */
+        HttpSession sessione = req.getSession();
+        Long idUtente = (Long) sessione.getAttribute("idUtente");
+        int idLocale = (Integer) sessione.getAttribute("idlocale");
+        Valutazione val= valutazioneFacade.findValutazioneLocFromUtente(idLocale, idUtente);
+        if(val == null) val = new Valutazione();
         Util.riempi(req,val);
+        val.setIdUtente(idUtente);
+        val.setIdLocale(idLocale);
+        val.setDataVal(new GregorianCalendar());
         valutazioneFacade.create(val);
+
     }
     
 }

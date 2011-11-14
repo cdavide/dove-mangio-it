@@ -18,20 +18,11 @@
                 <iframe src="//www.facebook.com/plugins/like.php?locale=it_IT&app_id=241460472572920&amp;href=www.facebook.com/luncharound&amp;send=false&amp;layout=standard&amp;width=600&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=100" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
 
                 <br>
-		inserimento nuovo locale:
-		<form id="form" name=formlocale action="LocaliServlet" method="POST" >
-			<br>nome locale:  <input type="text" name="nome">
-			<br>Via e numero civico:  <input id="via" type="text" name="via">
-			<br> città:   <input id="citta" type="text" name="citta">
-			<br> proprietario   <input type="text" name="proprietario">
-			<br> partita iva   <input type="text" name="pIVA">
-			<input type="hidden"  name="azione" value="aggiungi_locale">
-                        <input type="hidden" id="ind" name="indirizzo" value="">
-                        <input type="hidden" id="lat" name="latitudine" value=0>
-                        <input type="hidden" id="lon" name="longitudine" value=0>
-			<input type="button" value="Aggiungi" onClick="submitForm(0);">
-		</form>
-                <br>
+                
+		<% if(session.getAttribute("idUtente")!=null){ %>
+                <a href="LocaliServlet?azione=pag_ins_locale">Aggiungi il tuo locale su LunchAround</a>
+                <% } %>
+                
                 <hr>
                 <a href="LocaliServlet?azione=mostra_tutti">Elenco di tutti i locali presenti su LunchAround</a>
                 <hr>
