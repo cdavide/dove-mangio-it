@@ -6,6 +6,7 @@ package webpkg;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import luncharoundpkg.ControlloreLocaleLocal;
 import luncharoundpkg.ControlloreUtenteLocal;
+import luncharoundpkg.Locale;
 import luncharoundpkg.Utente;
 
 /**
@@ -22,6 +25,8 @@ import luncharoundpkg.Utente;
  */
 @WebServlet(name = "UtentiServlet", urlPatterns = {"/UtentiServlet"})
 public class UtentiServlet extends HttpServlet {
+    @EJB
+    private ControlloreLocaleLocal controlloreLocale;
     //@EJB
     //private static UtenteFacadeLocal utenteFacade;
     @EJB
@@ -74,7 +79,12 @@ public class UtentiServlet extends HttpServlet {
                 session.setAttribute("news",persona.isNews());
                 session.setAttribute("home", persona.getHome());
                 session.setAttribute("tipo", persona.getTipo());
-                
+                 try{
+                 session.setAttribute("localipersonali",controlloreLocale.getLocali(persona.getId()));
+            }
+            catch(NullPointerException e){
+                System.err.println("L'utente non ha associato nessun locale personale");
+            }
                 request.getRequestDispatcher("index.jsp").forward(request, response);
 
             }
@@ -99,7 +109,7 @@ public class UtentiServlet extends HttpServlet {
                 //riottengo i dati per memorizzarli nella sessione(non riscrivo tutte le assegnazioni)
                 persona=controlloreUtente.trovaDaEmail((String)request.getAttribute("mail"));
             }
-
+            
             session.setAttribute("nome_utente", persona.getUsername());
             session.setAttribute("idUtente", persona.getId());
             session.setAttribute("eventi", persona.isEventi());
@@ -107,6 +117,12 @@ public class UtentiServlet extends HttpServlet {
             session.setAttribute("home", persona.getHome());
             session.setAttribute("foto", persona.getFoto());            
             session.setAttribute("tipo", persona.getTipo());
+            try{
+                 session.setAttribute("localipersonali",controlloreLocale.getLocali(persona.getId()));
+            }
+            catch(NullPointerException e){
+                System.err.println("L'utente non ha associato nessun locale personale");
+            }
             request.getRequestDispatcher("index.jsp").forward(request, response);    
 
         }
@@ -119,7 +135,7 @@ public class UtentiServlet extends HttpServlet {
             session.removeAttribute("home");
             session.removeAttribute("foto");
             session.removeAttribute("tipo");
-
+            session.removeAttribute("localipersonali");
             
             request.getRequestDispatcher("index.jsp").forward(request, response);
 

@@ -33,5 +33,7 @@ public interface ValutazioneFacadeLocal {
     public List<Valutazione> findByLocale(long idLocale);
 
     public Valutazione findValutazioneLocFromUtente(long idLocale, long idUtente);
+
+    public List<Valutazione> findByLocaleWeek(long idLocale, int week);
     
 }

@@ -6,13 +6,17 @@ package luncharoundpkg;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.GregorianCalendar;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import luncharoundpkg.Locale;
+import luncharoundpkg.Valutazione;
 
 /**
  *
@@ -41,6 +45,7 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
             System.err.println("Il parametro id utente è nullo!");
             idUtente = -1;
         }
+        Boolean mioLocale = false;
         
         long pulizia = 0;
         long qualita = 0;
@@ -54,6 +59,13 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         long myAffollamento = 0;
         long myQuantita = 0;
         long myCortesia = 0;
+        List<Locale> ll = (List<Locale>) session.getAttribute("localipersonali");
+        Boolean valido = false;
+        if(ll != null){
+            for(Locale loc : ll){
+                if(loc.getId() == idLocale) mioLocale = true;
+            }
+        }
         String ret="";
         List<Valutazione>   vals =   valutazioneFacade.findByLocale(idLocale);
         int numValutazioni = vals.size();
@@ -90,7 +102,7 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
                 + "</br>Quantita: "+createRatingStars("quant", quantita,"disabled=\"disabled\"")
                 + "</br>Cortesia: "+createRatingStars("cor", cortesia,"disabled=\"disabled\"");
                 
-        if (idUtente > 0){
+        if (idUtente > 0 && !mioLocale){
             ret+="</br>Le tue valutazioni: "
                 +"<form name=\"valForm\" id=\"val\"action=\"LocaliServlet\" method=\"POST\">"
                 + "</br>Pulizia: "+createRatingStars("mypulizia", myPulizia,"")
@@ -109,6 +121,10 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
                 +"<input type=\"hidden\" id=\"cortesia\" name=\"cortesia\">"
                 + "</br><input type=\"button\" value=\"Submit\" onClick=\"submitValutazione()\"/>"
                 +"</form>";
+        }
+        if (mioLocale) {
+            ret+= "</br><a href=\"Statistiche\">Visualizza Statistiche locale</a>";
+            
         }
         return ret;
     }
@@ -148,10 +164,15 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         if(val == null) val = new Valutazione();
         Util.riempi(req,val);
         val.setIdUtente(idUtente);
-        val.setIdLocale(idLocale);
-        val.setDataVal(new GregorianCalendar());
+        val.setIdLocale(idLocale); 
+        val.setDataVal(new Date());
         valutazioneFacade.create(val);
 
     }
-    
+    @Override
+    public List<Valutazione> valutazioniSettimana(int idlocale, int week){
+        List<Valutazione> ll = valutazioneFacade.findByLocaleWeek(idlocale, week);
+        return ll;
+    }
+
 }

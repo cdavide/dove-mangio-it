@@ -4,12 +4,15 @@
  */
 package luncharoundpkg;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -59,5 +62,31 @@ public class ValutazioneFacade extends AbstractFacade<Valutazione> implements Va
         return val;
     }
     
+     @Override
+    public List<Valutazione> findByLocaleWeek(long idLocale, int week){
+        List<Valutazione> val;
+        String selectQuery = "SELECT V FROM Valutazione V WHERE (V.idLocale = ?1) AND V.dataVal  BETWEEN ?2 AND ?3";
+	Query searchById = em.createQuery(selectQuery);
+        // id locale
+	searchById.setParameter(1, idLocale);
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.set(GregorianCalendar.WEEK_OF_YEAR, week);
+        calendar.set(GregorianCalendar.DAY_OF_WEEK,GregorianCalendar.MONDAY);
+        int tmp = calendar.get(GregorianCalendar.DAY_OF_YEAR);
+        Date date = calendar.getTime();
+        //lowerbound
+        searchById.setParameter(2, date);
+        calendar.set(GregorianCalendar.DAY_OF_YEAR, tmp+6);
+        Date date2 = calendar.getTime();
+        //upperbound
+        searchById.setParameter(3, date2);
+        try {
+            val = (List<Valutazione>) searchById.getResultList();
+        }catch (NoResultException e){
+            val = null;
+        }
+        return val;
+    }
     
 }
+

@@ -4,9 +4,17 @@
         <servlet-name>MainServlet</servlet-name>
         <servlet-class>webpkg.MainServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Statistiche</servlet-name>
+        <servlet-class>webpkg.Statistiche</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
         <url-pattern>/MainServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Statistiche</servlet-name>
+        <url-pattern>/Statistiche</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
