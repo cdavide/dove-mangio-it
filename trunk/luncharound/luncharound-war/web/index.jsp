@@ -21,8 +21,13 @@
                 
 		<% if(session.getAttribute("idUtente")!=null){ %>
                 <a href="LocaliServlet?azione=pag_ins_locale">Aggiungi il tuo locale su LunchAround</a>
-                <% } %>
                 
+                <% } %>
+                <% if(session.getAttribute("localipersonali")!=null){ %>
+                
+                </br><a href="LocaliServlet?azione=visualizza_locali_personali">Visualizza i tuoi locali su LunchAround</a>
+                
+                <% } %>
                 <hr>
                 <a href="LocaliServlet?azione=mostra_tutti">Elenco di tutti i locali presenti su LunchAround</a>
                 <hr>

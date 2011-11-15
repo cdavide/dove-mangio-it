@@ -44,7 +44,8 @@ public interface ControlloreLocaleLocal {
     public String locali();
     
     public List<Locale> trovaLocali(double lat, double lon, double dist);
-    
     public boolean menuValido(int idLocale);
+
+    public List<Locale> getLocali(long idUtente);
 
 }

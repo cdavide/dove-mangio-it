@@ -14,11 +14,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.BeanUtils;
 /**
  *
- * @author lore0487
+ * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
 @Stateless
 public class ControlloreLocale implements ControlloreLocaleLocal {
@@ -36,6 +38,8 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     private EventoFacadeLocal eventoFacade;
     @EJB
     private NewsFacadeLocal newsFacade;
+    
+    private EntityManager em;
     
     private static int NUMFLAGS=6;
         
@@ -210,7 +214,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
             }
         }
         
-        if(ret.equals("")) return "*** nessuna combonazione trovata ***";
+        if(ret.equals("")) return "*** nessuna combinazione trovata ***";
         return ret;
     
     }
@@ -336,6 +340,13 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         }
         return false;
     }
+    
+        
+    @Override
+    public List<Locale> getLocali(long idUtente){
+        return localeFacade.findByUtente(idUtente);
+    }
+    
 
 
 }

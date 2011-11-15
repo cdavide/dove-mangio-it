@@ -5,6 +5,7 @@
 package luncharoundpkg;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class Valutazione implements Serializable {
     private Long id;
     private int idLocale;
     private Long idUtente;
-    private @Temporal(TemporalType.DATE) GregorianCalendar dataVal;
+    private @Temporal(TemporalType.DATE) Date dataVal;
     private byte pulizia;
     private byte qualita;
     private byte velocita;
@@ -53,11 +54,11 @@ public class Valutazione implements Serializable {
         this.cortesia = cortesia;
     }
 
-    public GregorianCalendar getDataVal() {
+    public Date getDataVal() {
         return dataVal;
     }
 
-    public void setDataVal(GregorianCalendar dataVal) {
+    public void setDataVal(Date dataVal) {
         this.dataVal = dataVal;
     }
 

@@ -9,7 +9,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author lore0487
+ * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
 @Local
 public interface LocaleFacadeLocal {
@@ -27,5 +27,9 @@ public interface LocaleFacadeLocal {
     List<Locale> findRange(int[] range);
 
     int count();
+    
+    public List<Locale> findByUtente(long idUtente);
+    
+
     
 }

@@ -4,6 +4,7 @@
  */
 package luncharoundpkg;
 
+import java.util.List;
 import javax.ejb.Local;
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,4 +20,6 @@ public interface ControlloreValutazioneLocal {
     public void valutazioneDaReq(javax.servlet.http.HttpServletRequest req);
 
     public String createRatingStars(java.lang.String par, long val, java.lang.String opt);
+
+    public List<Valutazione> valutazioniSettimana(int idlocale, int week);
 }

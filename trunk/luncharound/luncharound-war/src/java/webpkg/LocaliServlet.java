@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
 import java.util.*;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -66,6 +67,7 @@ public class LocaliServlet extends HttpServlet {
                
             int idLocale =  Integer.parseInt(request.getParameter("idlocale"));
             session.setAttribute("idlocale", idLocale);
+
             String temp = visualizzaLocale(request);
             request.setAttribute("contenuto", temp);
             request.getRequestDispatcher("locale.jsp").forward(request, response);
@@ -90,10 +92,24 @@ public class LocaliServlet extends HttpServlet {
                 session.setAttribute("home", request.getParameter("indirizzo"));
             }
             request.getRequestDispatcher("risultati.jsp").forward(request, response);
-        } else if (azione.equals("vai_a_ricerca")) {
-            //nella versione finale, forward a una pagina che include form_ricerca
+            
+        }
+
+        
+        else if (azione.equals("vai_a_ricerca")) {
+            //nella versione finale, forward a una pagina che include form_ricerca            
             request.getRequestDispatcher("form_ricerca.jsp").forward(request, response);
-        } else {
+        }else if (azione.equals("visualizza_locali_personali")) {
+            List<Locale> ll = (List<Locale>) session.getAttribute("localipersonali");
+            String temp = "<H1>Elenco locali personali</H1>";
+            for(Locale v: ll ){
+                temp+= creaLink(v.getId(), v.getNome()) + "<br>";
+            }
+           
+            request.setAttribute("contenuto", temp);
+            request.getRequestDispatcher("ricerca.jsp").forward(request, response);
+        }
+        else {
             request.setAttribute("errore", "azione non valida!");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
@@ -108,6 +124,17 @@ public class LocaliServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Long idUtente = (Long) session.getAttribute("idUtente");
         int idLocale = (Integer) session.getAttribute("idlocale");
+        List<Locale> ll = (List<Locale>) session.getAttribute("localipersonali");
+        Boolean valido = false;
+        if(ll != null){
+            for(Locale loc : ll){
+                if(loc.getId() == idLocale) valido = true;
+            }
+        }
+        if (valido) {
+            return modificaLocale(request);
+        }
+        
         String ret = " ";
         Locale loc = localeFacade.find(idLocale);
         ret += "<script type=\"text/javascript\" src=\"JSUtil.js\"></script>"
@@ -127,16 +154,75 @@ public class LocaliServlet extends HttpServlet {
         ret += "<>MENU' DEL GIORNO:<br>" + controlloreLocale.mostraMenu(loc.getId());
         ret += "<hr>";
         ret += "COMBINAZIONI ED OFFERTE DEL LOCALE:<br>" + controlloreLocale.mostraCombo(idLocale);
-
+        //se è il proprietario deve viaualizzare statistiche e altre cose
+        // non deve poter valutare
         ret += controlloreValutazione.mostraValutazioni(request);
         return ret;
     }
 
+    
+      //crea codice html da visualizzare nella jsp
+    private String modificaLocale(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long idUtente = (Long) session.getAttribute("idUtente");
+        int idLocale = (Integer) session.getAttribute("idlocale");
+        List<Locale> ll = (List<Locale>) session.getAttribute("localipersonali");
+        Boolean valido = false;
+        for(Locale loc : ll){
+            if(loc.getId() == idLocale) valido = true;
+        }
+        
+        if (!valido) {
+            return visualizzaLocale(request);
+        }
+        
+        String ret = "PAGINA DI MODIFICA LOCALE (DEVE FARLA FRA) ";
+        Locale loc = localeFacade.find(idLocale);
+        ret += "<script type=\"text/javascript\" src=\"JSUtil.js\"></script>"
+                + "<script src=\'resources/jquery.js\' type=\"text/javascript\"></script>"
+                + "<script src=\'resources/documentation.js\' type=\"text/javascript\">"
+                + "<script src=\'resources/jquery.MetaData.js\' type=\"text/javascript\" language=\"javascript\"></script>"
+                + "<script src=\'resources/jquery.rating.js\' type=\"text/javascript\" language=\"javascript\"></script>"
+                + "<link href=\'resources/jquery.rating.css\' type=\"text/css\" rel=\"stylesheet\"/>";
+
+        ret += "<h2>" + loc.getNome() + "</h2>";
+        ret += "<h4> di: " + loc.getProprietario() + "</h4>";
+        ret += "partita iva:" + loc.getpIVA() + "<br>";
+        ret += "Indirizzo:" + loc.getIndirizzo() + "<br>";
+        ret += "<br>" + creaFbDialog(loc) + "<br>";
+        ret += "Dove si trova:<br>" + creaMappaStatica(loc.getIndirizzo());
+        ret += "<hr>";
+        ret += "<>MENU' DEL GIORNO:<br>" + controlloreLocale.mostraMenu(loc.getId());
+        ret += "<hr>";
+        ret += "COMBINAZIONI ED OFFERTE DEL LOCALE:<br>" + controlloreLocale.mostraCombo(idLocale);
+        //se è il proprietario deve viaualizzare statistiche e altre cose
+        // non deve poter valutare
+        ret += controlloreValutazione.mostraValutazioni(request);
+        return ret;
+    }
+    
+    
     //crea codice html da visualizzare nella jsp
     private String elencoLocali() {
 
         String ret = "";
         List<Locale> ll = localeFacade.findAll();
+
+        ret += "Elenco locali presenti:<br>";
+
+        for (Locale loc : ll) {
+            ret += creaLink(loc.getId(), loc.getNome()) + "<br>";
+        }
+
+        return ret;
+    }
+    
+    
+     //crea codice html da visualizzare nella jsp
+    private String elencoLocaliUtente(long idUtente) {
+
+        String ret = "";
+        List<Locale> ll = localeFacade.findByUtente(idUtente);
 
         ret += "Elenco locali presenti:<br>";
 
