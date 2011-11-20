@@ -3,85 +3,40 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.prime.com.tr/ui"  >
-
-    
-    <ui:define name="left">
-        <h:form>
-        <p:menu>  
-            <p:submenu label="Ajax Menuitems">  
-                <p:menuitem value="Save" actionListener="#{buttonBean.save}" update="messages" icon="ui-icon ui-icon-disk"/>  
-                <p:menuitem value="Update" actionListener="#{buttonBean.update}" update="messages" icon="ui-icon ui-icon-arrowrefresh-1-w"/>  
-            </p:submenu>  
-            <p:submenu label="Non-Ajax Menuitem">  
-                <p:menuitem value="Delete" actionListener="#{buttonBean.delete}" update="messages" ajax="false" icon="ui-icon ui-icon-close"/>  
-            </p:submenu>  
-            <p:submenu label="Navigations">  
-                <p:menuitem value="Home" url="http://www.primefaces.org" icon="ui-icon ui-icon-home"/>  
-                <p:menuitem value="TouchFaces" url="#{request.contextPath}/touch" icon="ui-icon ui-icon-star"/>  
-            </p:submenu>  
-        </p:menu>  
-       
-           <h:commandLink  id="savelink1"  action="#{LocaliBean.locali}" value="Link1"> </h:commandLink><br/>
-           <h:commandLink  id="savelink2"  action="#{LocaliBean.locali}" value="Link2"> </h:commandLink><br/>
-           <h:commandLink  id="savelink3"  action="#{LocaliBean.locali}" value="Link3"> </h:commandLink><br/>
-           <h:commandLink  id="savelink4"  action="#{LocaliBean.locali}" value="Link4"> </h:commandLink><br/>
-        </h:form>
-    </ui:define>
-
     <ui:define name="right">
-       <h2>Migliori Locali</h2>
 
     </ui:define>
 
     <ui:define name="content">
-        <h:form id="myform">
-          <h:dataTable id="dt1" value="#{LocaliBean.locali}" var="loc">
-            <h:column>
-              <f:facet name="header">
-              <h:outputText value="id" />
-              </f:facet> 
-               <h:outputText value="#{loc.id}"></h:outputText>
-            </h:column>
-
-            <h:column>
-              <f:facet name="header">
-              <h:outputText value="Nome Locale"/>
-              </f:facet> 
-               <h:commandLink  id="savelink1"  action="#{LocaliBean.visualizzaLocale}">
-                   <f:param name="idLocale" value="#{loc.id}" />
-                    <h:outputText value="#{loc.nome}"></h:outputText>
-               </h:commandLink>
-                
-            </h:column>
-
-            <h:column>
-              <f:facet name="header">
-              <h:outputText value="Indirizzo"/>
-              </f:facet>
-               <h:outputText value="#{loc.indirizzo}"></h:outputText>
-            </h:column>
-
-          </h:dataTable><br></br>
-
-            Name: <h:inputText value="#{LocaliBean.nome}"/> <br/>
-
-            Indirizzo: <h:inputText value="#{LocaliBean.indirizzo}"/> <br/>
-
-           
-              <h:commandLink  id="savelink" style="display:none; visibility: hidden;" 
-    action="#{LocaliBean.save}" value="#">
-    </h:commandLink>
-
-           
-            <h:commandButton value="Save"  onclick="clickLink('myform:savelink');" /><hr/>
-            <h:commandButton id="backButton" value="Back" action="locali" />
-      
-      </h:form>
-         
-  
         
+            <h:form>
+            <p:dataTable id="dt1" value="#{LocaliBean.locali}" var="loc">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="id" />
+                    </f:facet> 
+                    <h:outputText value="#{loc.id}"></h:outputText>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nome Locale"/>
+                    </f:facet> 
+                    <h:commandLink  id="savelink1"  action="#{LocaliBean.visualizzaLocale}">
+                        <f:param name="idLocale" value="#{loc.id}" />
+                        <h:outputText value="#{loc.nome}"></h:outputText>
+                    </h:commandLink>
+
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Indirizzo"/>
+                    </f:facet>
+                    <h:outputText value="#{loc.indirizzo}"></h:outputText>
+                </p:column>
+            </p:dataTable>
+        </h:form>
     </ui:define>
-    
     <ui:define name="bottom">
         bottom
     </ui:define>

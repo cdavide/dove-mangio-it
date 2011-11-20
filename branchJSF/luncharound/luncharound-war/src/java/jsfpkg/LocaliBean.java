@@ -33,7 +33,7 @@ public class LocaliBean implements Serializable{
 
     @EJB
     private ControlloreLocaleLocal controlloreLocale;
-    
+    Locale nuovo = new Locale();
     List<Locale> locali;
     String nome;
     String indirizzo;
@@ -61,7 +61,18 @@ public class LocaliBean implements Serializable{
         return locali;
     }
 
+    public Locale getNuovo() {
+        return nuovo;
+    }
+
+    public void setNuovo(Locale nuovo) {
+        this.nuovo = nuovo;
+    }
+
     public void save(){
+        nuovo = new Locale();
+        nuovo.setIndirizzo(indirizzo);
+        nuovo.setNome(nome);
         System.out.println("[LocaliBean] Dentro save locale");
         controlloreLocale.addLocale(nome,indirizzo,(long)1,(double)12,(double)12,"io","asdfeafa");
         // ricarico la lista dei locali
@@ -89,6 +100,7 @@ public class LocaliBean implements Serializable{
     }
     
     public String visualizzaLocale(){
+        System.out.println("visualizza Locale");
         // prendo la sessione
         FacesContext context = FacesContext.getCurrentInstance();  
         HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();  
@@ -98,7 +110,9 @@ public class LocaliBean implements Serializable{
         Map<String,String> params = context.getExternalContext().getRequestParameterMap();
         int idlocale = Integer.parseInt(params.get("idLocale"));
         httpSession.setAttribute("idlocale",idlocale);
+        System.out.println("idlocale: "+idlocale);
         return "visualizzaLocale";
+       
         
     }
     

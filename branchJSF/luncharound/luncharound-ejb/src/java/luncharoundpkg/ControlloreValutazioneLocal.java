@@ -22,4 +22,13 @@ public interface ControlloreValutazioneLocal {
     public String createRatingStars(java.lang.String par, long val, java.lang.String opt);
 
     public List<Valutazione> valutazioniSettimana(int idlocale, int week);
+
+    public void saveValutazione(Valutazione userRate);
+
+    public Valutazione findValutazioneUtente(long idUtente, int idLocale);
+
+    public List<Valutazione> findValutazioni(int idLocale);
+
+    public Valutazione mediaValutazioni(List<Valutazione> ll);
+
 }

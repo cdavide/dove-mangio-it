@@ -27,30 +27,30 @@ public class Valutazione implements Serializable {
     private int idLocale;
     private Long idUtente;
     private @Temporal(TemporalType.DATE) Date dataVal;
-    private byte pulizia;
-    private byte qualita;
-    private byte velocita;
-    private byte affollamento;
-    private byte quantita;
-    private byte cortesia;
-    private byte descrizione;
+    private int pulizia;
+    private int qualita;
+    private int velocita;
+    private int affollamento;
+    private int quantita;
+    private int cortesia;
+    private int descrizione;
 
     public Valutazione() {
     }
 
-    public byte getAffollamento() {
+    public int getAffollamento() {
         return affollamento;
     }
 
-    public void setAffollamento(byte affollamento) {
+    public void setAffollamento(int affollamento) {
         this.affollamento = affollamento;
     }
 
-    public byte getCortesia() {
+    public int getCortesia() {
         return cortesia;
     }
 
-    public void setCortesia(byte cortesia) {
+    public void setCortesia(int cortesia) {
         this.cortesia = cortesia;
     }
 
@@ -62,12 +62,20 @@ public class Valutazione implements Serializable {
         this.dataVal = dataVal;
     }
 
-    public byte getDescrizione() {
+    public int getDescrizione() {
         return descrizione;
     }
 
-    public void setDescrizione(byte descrizione) {
+    public void setDescrizione(int descrizione) {
         this.descrizione = descrizione;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public int getIdLocale() {
@@ -86,45 +94,38 @@ public class Valutazione implements Serializable {
         this.idUtente = idUtente;
     }
 
-    public byte getPulizia() {
+    public int getPulizia() {
         return pulizia;
     }
 
-    public void setPulizia(byte pulizia) {
+    public void setPulizia(int pulizia) {
         this.pulizia = pulizia;
     }
 
-    public byte getQualita() {
+    public int getQualita() {
         return qualita;
     }
 
-    public void setQualita(byte qualita) {
+    public void setQualita(int qualita) {
         this.qualita = qualita;
     }
 
-    public byte getQuantita() {
+    public int getQuantita() {
         return quantita;
     }
 
-    public void setQuantita(byte quantita) {
+    public void setQuantita(int quantita) {
         this.quantita = quantita;
     }
 
-    public byte getVelocita() {
+    public int getVelocita() {
         return velocita;
     }
 
-    public void setVelocita(byte velocita) {
+    public void setVelocita(int velocita) {
         this.velocita = velocita;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public int hashCode() {

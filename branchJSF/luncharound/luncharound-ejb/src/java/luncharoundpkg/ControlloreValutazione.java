@@ -177,4 +177,24 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         return ll;
     }
 
+    @Override
+    public void saveValutazione(Valutazione userRate) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Valutazione findValutazioneUtente(long idUtente, int idLocale) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Valutazione> findValutazioni(int idLocale) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Valutazione mediaValutazioni(List<Valutazione> ll) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+   
 }
