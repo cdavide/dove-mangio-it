@@ -23,5 +23,5 @@
         oppure
         <a href="UtentiServlet?azione=registra_utente">Registrati come utente</a>
         <a href="https://www.facebook.com/dialog/oauth?client_id=241460472572920&redirect_uri=http://localhost:8080/luncharound-war/FacebookServlet&scope=email,user_location">Login con facebook!</a>
-        <a href=""><img src="resources/sign-in-with-twitter-l-sm.png"></img></a>
+        <a href="TwitterServlet?azione=login"><img src="resources/stwitter.png"></img></a>
     <% }%>

@@ -16,7 +16,8 @@
 		<h1>Welcome to LunchAround!</h1>
                 
                 <iframe src="//www.facebook.com/plugins/like.php?locale=it_IT&app_id=241460472572920&amp;href=www.facebook.com/luncharound&amp;send=false&amp;layout=standard&amp;width=600&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=100" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
-
+                <br/>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="www.luncharound.com" data-text="Ottimo pranzo!" data-count="horizontal" data-via="luncharound" data-lang="it">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
                 <br>
                 
 		<% if(session.getAttribute("idUtente")!=null){ %>
@@ -36,5 +37,9 @@
                 <hr>
                 <jsp:include page="login.jsp"/>
                 <hr>
+                <br/>
+        <br/>
+        <a href="https://twitter.com/luncharound" class="twitter-follow-button" data-lang="it">Segui @luncharound</a>
+<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 </body>
 </html>
