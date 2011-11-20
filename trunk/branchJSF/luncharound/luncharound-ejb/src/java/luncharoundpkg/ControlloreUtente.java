@@ -125,7 +125,12 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
     @Override
     public Utente trovaDaEmail(String mail){
         return utenteFacade.findByEmail(mail);
-    }    
+    }
+
+    @Override
+    public void addUtente(String username, String password, String indirizzo, String mail, String foto) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     }
     
    

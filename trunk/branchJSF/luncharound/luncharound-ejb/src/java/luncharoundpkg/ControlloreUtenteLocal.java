@@ -29,6 +29,7 @@ public interface ControlloreUtenteLocal {
 
     public Utente trovaDaEmail(String mail);
 
+    public void addUtente(String username, String password, String indirizzo, String mail, String foto);
 
     
 }

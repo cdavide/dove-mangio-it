@@ -17,6 +17,14 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>TwitterClient$OAuthLoginServlet</servlet-name>
+        <servlet-class>webpkg.TwitterClient$OAuthLoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TwitterClient$OAuthCallbackServlet</servlet-name>
+        <servlet-class>webpkg.TwitterClient$OAuthCallbackServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
         <url-pattern>/MainServlet</url-pattern>
@@ -29,17 +37,36 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TwitterClient$OAuthLoginServlet</servlet-name>
+        <url-pattern>/OAuthLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TwitterClient$OAuthCallbackServlet</servlet-name>
+        <url-pattern>/OAuthCallback</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/locali.xhtml</welcome-file>
-        
+        <welcome-file>faces/home.xhtml</welcome-file>
     </welcome-file-list>
-    <context-param>   
-  <param-name>primefaces.THEME</param-name>
-  <param-value>aristo</param-value> 
-</context-param>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>aristo</param-value>
+    </context-param>
+    <ejb-local-ref>
+        <ejb-ref-name>ControlloreValutazione</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>luncharoundpkg.ControlloreValutazioneLocal</local>
+        <ejb-link>luncharound-ejb.jar#ControlloreValutazione</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ControlloreValutazione1</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>luncharoundpkg.ControlloreValutazioneLocal</local>
+        <ejb-link>luncharound-ejb.jar#ControlloreValutazione</ejb-link>
+    </ejb-local-ref>
 </web-app>

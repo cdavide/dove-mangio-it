@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui">
+    <ui:define name="content">
+        <h:form id="myform">
+            <p:panel header="Crea un nuovo locale">  
+                <h:panelGrid columns="2" id="grid">  
+                    <h:outputLabel value="Nome Locale : *" for="txt_nome"></h:outputLabel>  
+                    <p:inputText id="txt_nome"   
+                                 value="#{LocaliBean.nome}" required="true"/>  
+
+                    <h:outputLabel value="Indirizzo : *" for="txt_indirizzo"></h:outputLabel>  
+                    <p:inputText id="txt_indirizzo" required="true"   
+                                 value="#{LocaliBean.indirizzo}" />  
+
+                    <p:commandButton value="Reset" type="reset"/>  
+                    <p:commandButton value="Add" update="books msgs @parent"  
+                                     onclick="clickLink('myform:savelink');" >  
+                        <p:collector value="#{LocaliBean.nuovo}"   
+                                     addTo="#{LocaliBean.locali}" />  
+                    </p:commandButton>  
+                </h:panelGrid>  
+                <h:commandLink  id="savelink" style="display:none; visibility: hidden;" 
+                                action="#{LocaliBean.save}" value="#">
+                </h:commandLink>
+            </p:panel>  
+            </h:form>
+    </ui:define>
+
+    <ui:define name="bottom">
+        bottom
+    </ui:define>
+
+</ui:composition>
