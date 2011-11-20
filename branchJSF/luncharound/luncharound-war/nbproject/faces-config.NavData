@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="All Faces Configurations" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="inserimentoLocale.jsp" x="150" y="300" zoom="true"/>
+        <Node id="registrazioneUtente.jsp" x="650" y="300" zoom="true"/>
+        <Node id="index.jsp" x="900" y="150" zoom="true"/>
+        <Node id="ricerca.jsp" x="400" y="300" zoom="true"/>
+        <Node id="locale.jsp" x="150" y="150" zoom="true"/>
+        <Node id="locali.xhtml" x="-42" y="149" zoom="false"/>
+        <Node id="login.jsp" x="400" y="150" zoom="true"/>
+        <Node id="risultati.jsp" x="650" y="150" zoom="true"/>
+        <Node id="form_ricerca.jsp" x="400" y="450" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations">
+        <Node id="locali.xhtml" x="75" y="124" zoom="true"/>
+        <Node id="visualizzaLocale.xhtml" x="405" y="22" zoom="true"/>
+    </Scope>
+</Scene>

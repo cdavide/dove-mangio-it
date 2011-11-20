@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:rd="http://www.realdolmen.com/mapface"
+                xmlns:p="http://primefaces.prime.com.tr/ui">
+    <ui:define name="left">
+        
+        <h:form>
+      <p:menu>  
+            <p:submenu label="Ajax Menuitems">  
+                <p:menuitem value="Save" actionListener="asd" update="messages" icon="ui-icon ui-icon-disk"/>  
+                <p:menuitem value="Update" actionListener="asd" update="messages" icon="ui-icon ui-icon-arrowrefresh-1-w"/>  
+            </p:submenu>  
+            <p:submenu label="Non-Ajax Menuitem">  
+                <p:menuitem value="Delete" actionListener="asd" update="messages" ajax="false" icon="ui-icon ui-icon-close"/>  
+            </p:submenu>  
+            <p:submenu label="Navigations">  
+                <p:menuitem value="Home" url="http://www.primefaces.org" icon="ui-icon ui-icon-home"/>  
+                <p:menuitem value="TouchFaces" url="touch" icon="ui-icon ui-icon-star"/>  
+            </p:submenu>  
+        </p:menu>  
+        </h:form>
+    </ui:define>
+
+    <ui:define name="right">
+        <h2>Valutazioni del locale</h2><hr/>
+        <h:outputText value="#{VisualizzaLocale.valutazioni}"  escape="false"/><hr/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            
+            <h1><h:outputText value="#{VisualizzaLocale.locale.nome}"/></h1>
+           
+            <rd:map mapId="map_canvas"  width="100%" height="400px" key="abcdefg" mapControl="largeMap3D" scrollWheelZoom="true" autoCenter="true" >
+                <rd:marker id="marker1" name="#{VisualizzaLocale.locale.nome}" address="#{VisualizzaLocale.locale.indirizzo}" iconLink=""/>     
+            </rd:map><br/>
+            <h:outputText value="#{VisualizzaLocale.locale.indirizzo}"/><hr/>
+           
+            <!--creo il dialogo facebook -->
+            
+            <h2>Menu del giorno</h2><hr/>
+            
+            <h:outputText value="#{VisualizzaLocale.menu}"/><hr/>
+            <h2>Combinazioni e offerte del locale</h2><hr/>
+            <h:outputText value="#{VisualizzaLocale.offerte}"/><hr/>
+            
+        </h:form>
+
+    </ui:define>
+    
+    <ui:define name="bottom">
+        bottom
+    </ui:define>
+
+</ui:composition>
