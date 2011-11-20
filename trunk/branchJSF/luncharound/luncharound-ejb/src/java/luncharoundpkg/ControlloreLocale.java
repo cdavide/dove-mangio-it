@@ -348,5 +348,19 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     }
     
 
+    @Override
+    public List<Locale> getTuttiLocali(){
+        List<Locale> loc = localeFacade.findAll();
+        System.err.println("[ControlloreLocale.java] la lista ha dimensioni : "+loc.size());
+        return loc;
+    }
+
+    public void addLocale(Locale locale){
+       localeFacade.create(locale);
+    }
+    public Locale findById(int idLocale){
+        return localeFacade.find(idLocale);
+    }
+
 
 }

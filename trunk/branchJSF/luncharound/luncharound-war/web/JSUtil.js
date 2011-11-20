@@ -50,3 +50,24 @@ function submitValutazione(){
     }
     document.getElementById("val").submit();
 }
+
+/*Questa funzione serve per sfruttare le funzioni Javascript con le JSF
+ *Per farla funzionare è necessario aggiungere un link nascosto nella pagina
+ *e come action mettere l'azione sul managed bean
+ *lo script simula un click sul link
+ **/
+
+function clickLink(linkId)
+{
+  var fireOnThis = document.getElementById(linkId)
+  if (document.createEvent)
+  {
+    var evObj = document.createEvent('MouseEvents')
+    evObj.initEvent( 'click', true, false )
+    fireOnThis.dispatchEvent(evObj)
+  }
+  else if (document.createEventObject)
+  {
+    fireOnThis.fireEvent('onclick')
+  }
+}

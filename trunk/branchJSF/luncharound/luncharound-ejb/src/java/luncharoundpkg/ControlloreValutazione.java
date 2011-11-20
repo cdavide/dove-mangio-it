@@ -95,22 +95,24 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
             cortesia = cortesia / numValutazioni;
         }
         ret += "</br>Media valutazioni ("+ numValutazioni+ "):"
-                + "</br>Pulizia: "+createRatingStars("pul", pulizia,"disabled=\"disabled\"")
-                + "</br>Qualita: " +createRatingStars("qual", qualita,"disabled=\"disabled\"")
-                + "</br>Velocita: "+createRatingStars("vel", velocita,"disabled=\"disabled\"")
-                + "</br>Affollamento: "+createRatingStars("aff", affollamento,"disabled=\"disabled\"")
-                + "</br>Quantita: "+createRatingStars("quant", quantita,"disabled=\"disabled\"")
-                + "</br>Cortesia: "+createRatingStars("cor", cortesia,"disabled=\"disabled\"");
+                + "<br/>Pulizia: </br>"+createRatingStars("pul", pulizia,"disabled=\"disabled\"")
+                + "<br/>Qualita: </br>" +createRatingStars("qual", qualita,"disabled=\"disabled\"")
+                + "<br/>Velocita: </br>"+createRatingStars("vel", velocita,"disabled=\"disabled\"")
+                + "<br/>Affollamento: </br>"+createRatingStars("aff", affollamento,"disabled=\"disabled\"")
+                + "<br/>Quantita: </br>"+createRatingStars("quant", quantita,"disabled=\"disabled\"")
+                + "<br/>Cortesia: </br>"+createRatingStars("cor", cortesia,"disabled=\"disabled\"");
                 
+        
+        
         if (idUtente > 0 && !mioLocale){
             ret+="</br>Le tue valutazioni: "
                 +"<form name=\"valForm\" id=\"val\"action=\"LocaliServlet\" method=\"POST\">"
-                + "</br>Pulizia: "+createRatingStars("mypulizia", myPulizia,"")
-                + "</br>Qualita: "+createRatingStars("myqualita", myQualita,"")
-                + "</br>Velocita: "+createRatingStars("myvelocita", myVelocita,"")
-                + "</br>Affollamento: "+createRatingStars("myaffollamento", myAffollamento,"")
-                + "</br>Quantita: "+createRatingStars("myquantita", myQuantita,"")
-                + "</br>Cortesia: "+createRatingStars("mycortesia", myCortesia,"")
+                + "<br/>Pulizia: </br>"+createRatingStars("mypulizia", myPulizia,"")
+                + "<br/>Qualita: </br>"+createRatingStars("myqualita", myQualita,"")
+                + "<br/>Velocita: </br>"+createRatingStars("myvelocita", myVelocita,"")
+                + "<br/>Affollamento: </br>"+createRatingStars("myaffollamento", myAffollamento,"")
+                + "<br/>Quantita: </br>"+createRatingStars("myquantita", myQuantita,"")
+                + "<br/>Cortesia: </br>"+createRatingStars("mycortesia", myCortesia,"")
                 
                 +"<input type=\"hidden\" id=\"azione\" name=\"azione\" value=\"aggiungi_valutazione\">"
                 +"<input type=\"hidden\" id=\"pulizia\" name=\"pulizia\">"
@@ -123,7 +125,7 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
                 +"</form>";
         }
         if (mioLocale) {
-            ret+= "</br><a href=\"Statistiche\">Visualizza Statistiche locale</a>";
+            ret+= "<br/><a href=\"Statistiche\">Visualizza Statistiche locale</a>";
             
         }
         return ret;

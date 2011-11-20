@@ -136,7 +136,7 @@ public class LocaliServlet extends HttpServlet {
         }
         
         String ret = " ";
-        Locale loc = localeFacade.find(idLocale);
+        Locale loc = controlloreLocale.findById(idLocale);
         ret += "<script type=\"text/javascript\" src=\"JSUtil.js\"></script>"
                 + "<script src=\'resources/jquery.js\' type=\"text/javascript\"></script>"
                 + "<script src=\'resources/documentation.js\' type=\"text/javascript\">"
@@ -177,7 +177,7 @@ public class LocaliServlet extends HttpServlet {
         }
         
         String ret = "PAGINA DI MODIFICA LOCALE (DEVE FARLA FRA) ";
-        Locale loc = localeFacade.find(idLocale);
+        Locale loc = controlloreLocale.findById(idLocale);
         ret += "<script type=\"text/javascript\" src=\"JSUtil.js\"></script>"
                 + "<script src=\'resources/jquery.js\' type=\"text/javascript\"></script>"
                 + "<script src=\'resources/documentation.js\' type=\"text/javascript\">"
@@ -203,10 +203,12 @@ public class LocaliServlet extends HttpServlet {
     
     
     //crea codice html da visualizzare nella jsp
+    // PERCHè CHIAMO LA FACADE QUANDO C'è IL CONTROLLORE ????
+    // FIX FIX FIX FIX FIX FIX
     private String elencoLocali() {
 
         String ret = "";
-        List<Locale> ll = localeFacade.findAll();
+        List<Locale> ll = controlloreLocale.getTuttiLocali();
 
         ret += "Elenco locali presenti:<br>";
 
@@ -220,7 +222,7 @@ public class LocaliServlet extends HttpServlet {
     
      //crea codice html da visualizzare nella jsp
     private String elencoLocaliUtente(long idUtente) {
-
+//FIXME FIXME FIXME
         String ret = "";
         List<Locale> ll = localeFacade.findByUtente(idUtente);
 

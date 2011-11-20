@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author lore0487
+ * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
 @Local
 public interface ControlloreLocaleLocal {
@@ -30,6 +30,7 @@ public interface ControlloreLocaleLocal {
     
     public void addLocale(String nome, String indirizzo,long idUtente, double longitudine, double latitudine, String proprietario, String pIVA);
     
+    public void addLocale(Locale locale);
     //metodo di utilità
     public Menu menuDiLocale(int idLocale);
     
@@ -47,5 +48,9 @@ public interface ControlloreLocaleLocal {
     public boolean menuValido(int idLocale);
 
     public List<Locale> getLocali(long idUtente);
+    
+    public List<Locale> getTuttiLocali();
 
+    public Locale findById(int idLocale);
+    
 }
