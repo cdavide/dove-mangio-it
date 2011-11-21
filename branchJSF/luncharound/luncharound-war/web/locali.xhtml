@@ -10,7 +10,7 @@
     <ui:define name="content">
         
             <h:form>
-            <p:dataTable id="dt1" value="#{LocaliBean.locali}" var="loc">
+            <p:dataTable paginator="true" rows="15" id="dt1" value="#{LocaliBean.locali}" var="loc">
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="id" />
@@ -33,6 +33,11 @@
                         <h:outputText value="Indirizzo"/>
                     </f:facet>
                     <h:outputText value="#{loc.indirizzo}"></h:outputText>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Preferito" />
+                    </f:facet> 
                 </p:column>
             </p:dataTable>
         </h:form>

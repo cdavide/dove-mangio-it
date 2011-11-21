@@ -34,7 +34,7 @@ public class LoginBean {
     private String indirizzo;
     private String mail;
     private String foto;
-
+    private boolean loggedIn;
     // empty constructor
     public LoginBean() {
     }
@@ -42,7 +42,7 @@ public class LoginBean {
     public void login(ActionEvent actionEvent) {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
-        boolean loggedIn = false;
+        loggedIn = false;
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession httpSession = request.getSession();
 
@@ -67,7 +67,6 @@ public class LoginBean {
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bentornato su LunchAround", username);
             // cercare sulle news e sugli eventi a cui l-utente e` abbonato e aggiungere i popup 
             // per avvisarlo
-
         }
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("loggedIn", loggedIn);
@@ -76,7 +75,6 @@ public class LoginBean {
     }
 
     public void register(ActionEvent actionEvent) {
-        System.err.println("Entra in register");
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         boolean loggedIn = false;
@@ -95,6 +93,14 @@ public class LoginBean {
 
     }
     //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
 
     
     public String getFoto() {

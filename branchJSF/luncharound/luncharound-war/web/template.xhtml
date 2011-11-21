@@ -5,11 +5,13 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.prime.com.tr/ui"
 
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <script src="https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=true" type="text/javascript"></script>
         <script src="./JSUtil.js"   type="text/javascript" />
         <title>Welcome to LunchAround!</title>
     </h:head>
@@ -23,7 +25,11 @@
                 <ui:insert name="left">
 
                     <p:growl id="growl" showDetail="true" life="3000" />
-
+                    <c:if test="#{LoginBean.loggedIn}">
+                             <p:graphicImage value="./resources/user.png" /><br/>
+                             <h:outputText value="Bentornato: #{LoginBean.username}"/>
+                    </c:if>
+                    
                     <p:dialog id="dialog" header="Login"  modal="true" widgetVar="dlg">
                         <h:form>
                             <h:panelGrid columns="2" cellpadding="5">
@@ -53,7 +59,8 @@
                                 <h:outputLabel for="password" value="Password: * " />
                                 <h:inputSecret value="#{LoginBean.password}" 
                                                id="password" required="true" label="password" />
-
+                                <h:outputLabel for="citta" value="Citta: * " />
+                                <h:inputText id="citta" required="true" label="citta" />
                                 <h:outputLabel for="indirizzo" value="Indirizzo: * " />
                                 <h:inputText value="#{LoginBean.indirizzo}" 
                                              id="indirizzo" required="true" label="indirizzo" />
@@ -63,9 +70,9 @@
                                 <h:outputLabel for="foto" value="foto: * " />
                                 <h:inputText value="#{LoginBean.foto}" 
                                              id="foto" required="true" label="foto" />
-                                <p:commandButton value="Registrati" update="growl"  onclick="submitRegForm();"/>
+                                <p:commandButton value="Registrati" update="growl"  onclick="submitRegForm();handleRegisterRequest(xhr, status, args)"/>
                             </h:panelGrid>
-                            <h:commandLink id="act" value="provo"  actionListener="#{LoginBean.register}"/>
+                            <h:commandLink id="act" value="provo" style="display:none; visibility: hidden;" actionListener="#{LoginBean.register}" />
                             <h:inputHidden id="lat" value="userPreference" />
                             <h:inputHidden id="lon" value="userPreference" />
                         </h:form>
@@ -81,6 +88,7 @@
                             </p:submenu>  
                             <p:submenu label="Menu Utente">  
                                 <p:menuitem value="Effettua login" id="loginLink" onclick="dlg.show()" actionListener="asd" icon="ui-icon ui-icon-person"/>  
+                                <p:menuitem value="Effettua logout" id="logoutLink"  icon="ui-icon ui-icon-close"/>  
                                 <p:menuitem value="Registrati" id="registerLink" onclick="regDlg.show()" actionListener="asd" icon="ui-icon ui-icon-disk"/>  
                             </p:submenu>  
                             <p:submenu label="Menu Ristoranti">  

@@ -177,24 +177,72 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         return ll;
     }
 
-    @Override
-    public void saveValutazione(Valutazione userRate) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    
+    public Valutazione mediaValutazioni(List<Valutazione> vals){
+        System.err.println("[Controllore Valutazione ] media");
+        long pulizia = 0;
+        long qualita = 0;
+        long velocita = 0;
+        long affollamento = 0;
+        long quantita = 0;
+        long cortesia = 0;
+        long myPulizia = 0;
+        long myQualita = 0;
+        long myVelocita = 0;
+        long myAffollamento = 0;
+        long myQuantita = 0;
+        long myCortesia = 0;
+      
+        int numValutazioni = vals.size();
+        //if(numValutazioni == 0) return "</br>Non ci sono valutazioni</br>";
+        for(Valutazione val : vals){
+            pulizia+=(int) val.getPulizia();
+            qualita+=(int) val.getQualita();
+            velocita+=(int) val.getVelocita();
+            affollamento+=(int) val.getAffollamento();
+            quantita+=(int) val.getQuantita();
+            cortesia+=(int) val.getCortesia();
+        }
+        if(numValutazioni > 0){
+            pulizia= pulizia/numValutazioni;
+            qualita = qualita / numValutazioni;
+            velocita = velocita / numValutazioni;
+            affollamento = affollamento / numValutazioni;
+            quantita = quantita / numValutazioni;
+            cortesia = cortesia / numValutazioni;
+        }
+        /*fare ritornare un oggetto valutazione*/
+        System.out.println("prima della nuova valutazione");
+        Valutazione ret = new Valutazione();
+        ret.setPulizia((int) pulizia);
+        ret.setQualita((int)qualita);
+        ret.setVelocita((int)velocita);
+        ret.setAffollamento((int)affollamento);
+        ret.setQuantita((int)qualita);
+        ret.setCortesia((int)cortesia);
+        System.err.println("[ControlloreValutazione] prima del return");
+        return ret;
     }
 
     @Override
-    public Valutazione findValutazioneUtente(long idUtente, int idLocale) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public List<Valutazione> findValutazioni(int idlocale) {
+         return valutazioneFacade.findByLocale(idlocale);
+         
     }
 
     @Override
-    public List<Valutazione> findValutazioni(int idLocale) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Valutazione findValutazioneUtente(long idutente, int idlocale) {
+        return valutazioneFacade.findValutazioneLocFromUtente(idutente, idutente);
     }
-
+    
     @Override
-    public Valutazione mediaValutazioni(List<Valutazione> ll) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void saveValutazione(Valutazione userRate){
+        try{
+            valutazioneFacade.edit(userRate);
+        }
+        catch(Exception e){
+            valutazioneFacade.edit(userRate);
+        }
     }
    
 }
