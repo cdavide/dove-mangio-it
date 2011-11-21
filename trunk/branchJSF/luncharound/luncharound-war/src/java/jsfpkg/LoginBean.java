@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
@@ -35,10 +36,13 @@ public class LoginBean {
     private String mail;
     private String foto;
     private boolean loggedIn;
+    private boolean reg;
     // empty constructor
     public LoginBean() {
     }
 
+    
+    
     public void login(ActionEvent actionEvent) {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
@@ -52,6 +56,7 @@ public class LoginBean {
             loggedIn = false;
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");
         } else {
+
             loggedIn = true;
             httpSession.setAttribute("nome_utente", persona.getUsername());
             httpSession.setAttribute("idUtente", persona.getId());
@@ -70,28 +75,52 @@ public class LoginBean {
         }
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("loggedIn", loggedIn);
-
-
     }
 
     public void register(ActionEvent actionEvent) {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
-        boolean loggedIn = false;
-        boolean reg = false;
-
+        reg = false;
         controlloreUtente.addUtente(username, password, indirizzo, mail, foto);
-        
         msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrazione effettuata con successo su LunchAround","");
-            // cercare sulle news e sugli eventi a cui l-utente e` abbonato e aggiungere i popup 
-            // per avvisarlo
-
         FacesContext.getCurrentInstance().addMessage(null, msg);
         reg = true;
-        context.addCallbackParam("reg", reg);
-
+        try{
+            context.addCallbackParam("reg", reg);    
+        }
+        catch(Exception e){
+            System.out.println("Errore, impossibile inserire parametri nella callback");
+        }
+        
+        
 
     }
+    
+    /* Metodo per invalidare la sessione utente
+     * l
+     */
+    
+    public void logout(){
+        System.out.println("[Login Bean ] logout");
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext ec = context.getExternalContext();
+        final HttpServletRequest request = (HttpServletRequest)ec.getRequest();
+        request.getSession( false ).invalidate();
+        FacesMessage msg = null;
+        msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Logout effettuato con successo","");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+    }
+
+    public boolean isReg() {
+        return reg;
+    }
+
+    public void setReg(boolean reg) {
+        this.reg = reg;
+    }
+    
+    
     //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
 
     public boolean isLoggedIn() {

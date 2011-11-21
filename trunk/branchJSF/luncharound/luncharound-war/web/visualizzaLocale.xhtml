@@ -7,8 +7,9 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:s="http://jboss.com/products/seam/taglib"
                 xmlns:p="http://primefaces.prime.com.tr/ui">
+
     <ui:define name="content">
-         <f:view contentType="text/html">
+         
         <h:form>
             <h1>
             <h:outputText value="#{VisualizzaLocale.locale.nome}"/>
@@ -16,12 +17,10 @@
            
             <p:accordionPanel activeIndex="1" autoHeight="true" >
                 <p:tab   title="Dove siamo">
-                    
                     <p:gmap center="#{MapBean.centerLat},#{MapBean.centerLong}" draggable="true" zoom="16" type="HYBRID" 
                         style="width:600px;height:400px"
                         model="#{mapBean.simpleModel}"  />
                     <h:outputText value="#{VisualizzaLocale.locale.indirizzo}"/>
-                    
                 </p:tab>
 
                 <p:tab title="Menu del Giorno">  
@@ -74,7 +73,6 @@
             </p:accordionPanel>
              
         </h:form>
-                </f:view>
     </ui:define>
 
     <ui:define name="bottom">

@@ -62,6 +62,7 @@ function submitValutazione(){
 function clickLink(linkId)
 {
     var fireOnThis = document.getElementById(linkId)
+    alert("Dentro il clicklink")
     if (document.createEvent)
     {
         var evObj = document.createEvent('MouseEvents')
@@ -74,26 +75,37 @@ function clickLink(linkId)
     }
 }
 
+
+
 function handleLoginRequest(xhr, status, args) {
+    alert("dentro handle login")
     if(args.validationFailed || !args.loggedIn) {
+        alert("failed")
         jQuery('#dialog').parent().effect("shake", {
             times:3
         }, 100);
     } else {
+        alert("ok")
         dlg.hide();
         jQuery('#loginLink').fadeOut();
     }
 }
         
-function handleRegisterRequest(xhr, status, args) {
+
+function handleRegRequest(xhr, status, args) {
+    alert("inregreq");
     if(args.validationFailed || !args.reg) {
+        alert("fail");
         jQuery('#Registrati').parent().effect("shake", {
             times:3
         }, 100);
     } else {
+        alert("ok1");
         regDlg.hide();
+        alert("ok2");
         jQuery('#registerLink').fadeOut();
-        
+        alert("ok3");
+                
     }
 }
         
@@ -104,8 +116,8 @@ function submitRegForm(){
     var results;
     var address;
     
-    address = document.getElementById("regForm:indirizzo").value +", " 
-        document.getElementById("regForm:citta").value;
+    address = document.getElementById("regForm:indirizzo").value +", " +
+    document.getElementById("regForm:citta").value;
     
     if (address == null) {
         alert("Attenzione, per continuare e` necessario inserire un indirizzo!");
@@ -119,6 +131,7 @@ function submitRegForm(){
             'address': address
         }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
+               
                 document.getElementById("regForm:lat").value = results[0].geometry.location.lat().valueOf();
                 document.getElementById("regForm:lon").value = results[0].geometry.location.lng().valueOf();
                 document.getElementById("regForm:indirizzo").value= results[0].formatted_address.valueOf();
