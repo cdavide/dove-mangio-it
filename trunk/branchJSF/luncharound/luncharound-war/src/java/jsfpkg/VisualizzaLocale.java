@@ -5,7 +5,10 @@
 package jsfpkg;
 
 
+import java.awt.Color;
 import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -28,6 +31,22 @@ import luncharoundpkg.ControlloreUtenteLocal;
 import luncharoundpkg.ControlloreValutazioneLocal;
 import luncharoundpkg.Locale;
 import luncharoundpkg.LocaleFacadeLocal;
+import luncharoundpkg.Valutazione;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.PieDataset;
+import org.jfree.data.xy.XYSeries;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -43,7 +62,7 @@ public class VisualizzaLocale implements Serializable{
     private ControlloreValutazioneLocal controlloreValutazione;
     
     Locale locale;
-
+    private StreamedContent chart;  
     String mappa;
     String facebook;
     String menu;
@@ -115,11 +134,77 @@ public class VisualizzaLocale implements Serializable{
         // non deve poter valutare
         
         valutazioni = controlloreValutazione.mostraValutazioni(request);
+        
+        // statistiche
+        try {
+                CategoryDataset dataset = createDataset(request,4);
+                JFreeChart mychart = createChart(dataset);   
+                File chartFile = new File("dynamichart");
+                ChartUtilities.saveChartAsPNG(chartFile, mychart, 375, 300);
+                chart = new DefaultStreamedContent(new FileInputStream(chartFile), "image/png");
+        } catch (Exception e) {
+                
+        }
+        
     }
     
     
+    private CategoryDataset  createDataset(HttpServletRequest request, int weeks) {
+            
+            // Colonne
+            String serie = "Settimana ";
+
+            // righe
+            final String cortesia = "Cortesia";
+            final String velocita = "Velocità";
+            final String qualita = "Qualità";
+            final String quantita = "Quantità";
+            final String affollamento = "Affollamento";
+            final String pulizia = "pulizia";
+            
+            // create the dataset...
+            final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+            // crea report ultime 4 settimane
+            final XYSeries series = new XYSeries("Serie di dati");
+            GregorianCalendar calendar = new GregorianCalendar();
+            int currentweek = calendar.get(GregorianCalendar.WEEK_OF_YEAR);
+            
+            Valutazione currentVal;
+            for( int i= weeks-1; i>= 0; i--){
+                currentVal = mediaSettimana(request, currentweek-i);
+                dataset.addValue(currentVal.getAffollamento(),affollamento,serie+i);
+                dataset.addValue(currentVal.getVelocita(),velocita,serie+i);
+                dataset.addValue(currentVal.getCortesia(),cortesia,serie+i);
+                dataset.addValue(currentVal.getQualita(),qualita,serie+i);
+                dataset.addValue(currentVal.getPulizia(),pulizia,serie+i);
+                dataset.addValue(currentVal.getQuantita(),quantita,serie+i);
+            }
+            return dataset;
+        }
+    
+            public Valutazione mediaSettimana(HttpServletRequest request, int week){
+            HttpSession session = request.getSession();
+            int idlocale;
+            try {
+                idlocale = (Integer) session.getAttribute("idlocale");
+            }catch(NullPointerException e){
+                System.out.println("Errore attributo locale non inserito nella sessione");
+                return null;
+            }
+            return mediaValutazioni(controlloreValutazione.valutazioniSettimana(idlocale, week));   
+        }
+    
     public Locale getLocale(){
         return locale;
+    }
+
+    public StreamedContent getChart() {
+        return chart;
+    }
+
+    public void setChart(StreamedContent chart) {
+        this.chart = chart;
     }
 
     public void setLocale(Locale locale){
@@ -134,17 +219,7 @@ public class VisualizzaLocale implements Serializable{
             this.mappa = url;
      }
 
-   //metodo per creare una mappa statica come immagine. da rendere parametrica?
-    private String creaMappaStatica(String indirizzo) {
-        String zoom = "15";
-        String size = "400x400";
-        String ret = "";
-        ret += "<a href=\"http://maps.google.com?q=" + indirizzo + "\" ><img src=\"http://maps.googleapis.com/maps/api/staticmap?zoom=" + zoom;
-        ret += "&size=" + size;
-        ret += "&markers=icon:http://chart.apis.google.com/chart?chst=d_map_pin_icon%26chld=restaurant%257CFF6600";
-        ret += "%7C" + indirizzo + "&sensor=false\"></a>";
-        return ret;
-    }
+
     
     private String creaFbDialog(Locale loc) {
 
@@ -169,6 +244,78 @@ public class VisualizzaLocale implements Serializable{
 
         return dialog;
     }
+ private JFreeChart createChart(CategoryDataset dataset) {
+            final JFreeChart chart = ChartFactory.createBarChart(
+                "Valutazioni ultime 4 settimane",
+                "Settimana", 
+                "Voto medio settimana", 
+                dataset,
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
+            );
+            // NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
 
-    
+        // set the background color for the chart...
+        chart.setBackgroundPaint(Color.white);
+
+        // get a reference to the plot for further customisation...
+        final CategoryPlot plot = chart.getCategoryPlot();
+        plot.setBackgroundPaint(Color.lightGray);
+        plot.setDomainGridlinePaint(Color.white);
+        plot.setRangeGridlinePaint(Color.white);
+
+        // set the range axis to display integers only...
+        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+
+        // disable bar outlines...
+        final BarRenderer renderer = (BarRenderer) plot.getRenderer();
+        renderer.setDrawBarOutline(false);
+       
+        final CategoryAxis domainAxis = plot.getDomainAxis();
+        domainAxis.setCategoryLabelPositions(
+            CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 6.0)
+        );
+        // OPTIONAL CUSTOMISATION COMPLETED.
+            return chart;    
+        }
+ 
+ 
+ /*Metodo pubblico per calcolare la media di una lista di valutazioni
+         */
+        
+        public Valutazione mediaValutazioni(List<Valutazione> val){
+            if(val == null || val.isEmpty()){
+                System.err.println("[Statistiche.java ]Non sono  state trovate valutazioni per il locale");
+                return new Valutazione();
+            }
+            int cortesia =0;
+            int velocita =0;
+            int quantita =0;
+            int pulizia =0;
+            int affollamento=0;
+            int qualita = 0;
+            int numValutazioni =0;
+            for(Valutazione v : val){
+                numValutazioni++;
+                affollamento += v.getAffollamento();
+                cortesia += v.getCortesia();
+                velocita += v.getVelocita();
+                quantita += v.getQuantita();
+                qualita += v.getQuantita();
+                pulizia += v.getPulizia();        
+            }
+
+            Valutazione media = new Valutazione();
+            media.setAffollamento((byte) (affollamento / numValutazioni));
+            media.setCortesia((byte) (cortesia / numValutazioni));
+            media.setVelocita((byte) (velocita / numValutazioni));
+            media.setQuantita((byte) (quantita / numValutazioni));
+            media.setQualita((byte) (qualita / numValutazioni));
+            media.setPulizia((byte) (pulizia / numValutazioni));
+            return media;
+        }
+        
 }

@@ -15,24 +15,23 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Stateless
 public class ControlloreUtente implements ControlloreUtenteLocal {
+
     @EJB
     private LocaleFacadeLocal localeFacade;
-    
     @EJB
     private UtenteFacadeLocal utenteFacade;
-    
-    
+
     @Override
-    public void addUtenteDaReq(HttpServletRequest req){
-        
-        Utente ut= new Utente();
+    public void addUtenteDaReq(HttpServletRequest req) {
+
+        Utente ut = new Utente();
         Util.riempi(req, ut);
         utenteFacade.create(ut);
     }
-    
+
     @Override
-    public void addUtenteEsterno(String username,String mail,String home,String foto, int tipo){
-        Utente ut= new Utente();
+    public void addUtenteEsterno(String username, String mail, String home, String foto, int tipo) {
+        Utente ut = new Utente();
         ut.setUsername(username);
         ut.setMail(mail);
         ut.setHome(home);
@@ -42,95 +41,105 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         ut.setNews(false);
         utenteFacade.create(ut);
     }
-    
+
     @Override
-    public void addPosizione(long idUtente,String posizione){
-    
-        Utente ut=utenteFacade.find(idUtente);
+    public void addPosizione(long idUtente, String posizione) {
+
+        Utente ut = utenteFacade.find(idUtente);
         ut.setHome(posizione);
         utenteFacade.edit(ut);
     }
-    
+
     @Override
-    public void addFoto(long idUtente, String url){
-        
-        Utente ut=utenteFacade.find(idUtente);
+    public void addFoto(long idUtente, String url) {
+
+        Utente ut = utenteFacade.find(idUtente);
         ut.setHome(url);
         utenteFacade.edit(ut);
     }
     //opT true=aggiungere un locale
-    @Override
-    public void editPreferenze(long idUtente,int idLocale,boolean opT){
-    
-        Utente ut=utenteFacade.find(idUtente);
-        List<Locale> locali = ut.getPreferiti();
-        Locale lo=localeFacade.find(idLocale);
 
-        if(opT){
+    @Override
+    public void editPreferenze(long idUtente, int idLocale, boolean opT) {
+
+        Utente ut = utenteFacade.find(idUtente);
+        List<Locale> locali = ut.getPreferiti();
+        Locale lo = localeFacade.find(idLocale);
+
+        if (opT) {
             locali.add(lo);
-        }
-        else{
+        } else {
             locali.remove(lo);
         }
         ut.setPreferiti(locali);
         utenteFacade.edit(ut);
     }
-    
+
     @Override
-    public void editEventi(long idUtente,boolean opT){
-    
-       Utente ut=utenteFacade.find(idUtente);
-       ut.setEventi(opT);
-       utenteFacade.edit(ut);
-           
+    public void editEventi(long idUtente, boolean opT) {
+
+        Utente ut = utenteFacade.find(idUtente);
+        ut.setEventi(opT);
+        utenteFacade.edit(ut);
+
     }
-    
+
     @Override
-    public void editNews(long idUtente,boolean opT){
-       
-       Utente ut=utenteFacade.find(idUtente);
-       ut.setEventi(opT);
-       utenteFacade.edit(ut);
-       
+    public void editNews(long idUtente, boolean opT) {
+
+        Utente ut = utenteFacade.find(idUtente);
+        ut.setEventi(opT);
+        utenteFacade.edit(ut);
+
     }
-    
+
     //eseguire md5 della password!!
     @Override
-    public void editPassword(long idUtente,String nuovaPwd){
-       Utente ut=utenteFacade.find(idUtente);
-       ut.setPassword(nuovaPwd);
-       utenteFacade.edit(ut);
-    
+    public void editPassword(long idUtente, String nuovaPwd) {
+        Utente ut = utenteFacade.find(idUtente);
+        ut.setPassword(nuovaPwd);
+        utenteFacade.edit(ut);
+
     }
-    
+
     @Override
     public void editHome(long idUtente, String home) {
-       Utente ut=utenteFacade.find(idUtente);
-       ut.setHome(home);
-       utenteFacade.edit(ut);
+        Utente ut = utenteFacade.find(idUtente);
+        ut.setHome(home);
+        utenteFacade.edit(ut);
     }
-     
+
     //anche qui manca md5!!
     @Override
-    public Utente verificaPassword(String mail, String password){
-        
+    public Utente verificaPassword(String mail, String password) {
+
         List<Utente> lu = utenteFacade.findAll();
-        for(Utente ut : lu){
-            if(ut.getMail().equals(mail) && ut.getPassword().equals(password)) return ut;
+        for (Utente ut : lu) {
+            if (ut.getMail().equals(mail) && ut.getPassword().equals(password)) {
+                return ut;
+            }else if (ut.getUsername().equals(mail) && ut.getPassword().equals(password)) {
+                return ut;
+            }
         }
         return null;
-    
+
     }
-    
+
     @Override
-    public Utente trovaDaEmail(String mail){
+    public Utente trovaDaEmail(String mail) {
         return utenteFacade.findByEmail(mail);
     }
 
     @Override
     public void addUtente(String username, String password, String indirizzo, String mail, String foto) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Utente ut = new Utente();
+        ut.setUsername(username);
+        ut.setPassword(password);
+        ut.setMail(mail);
+        ut.setHome(indirizzo);
+        ut.setFoto(foto);
+        ut.setEventi(false);
+        ut.setNews(false);
+        utenteFacade.create(ut);
     }
-    }
-    
-   
+}

@@ -88,7 +88,12 @@ public class RatingController {
         
         List<Valutazione> ll = controlloreValutazione.findValutazioni(idLocale);
         media = controlloreValutazione.mediaValutazioni(ll);
-        
+        pul = (double)media.getPulizia();
+        qual = (double) media.getQualita();
+        vel = (double) media.getVelocita();
+        aff = (double) media.getAffollamento();
+        quan = (double) media.getQuantita();
+        cort = (double) media.getCortesia();
         System.out.println("[RatingController ] dopo calcolo media");
         // ricarico la lista dei locali
         try{
