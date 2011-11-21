@@ -117,8 +117,6 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         for (Utente ut : lu) {
             if (ut.getMail().equals(mail) && ut.getPassword().equals(password)) {
                 return ut;
-            }else if (ut.getUsername().equals(mail) && ut.getPassword().equals(password)) {
-                return ut;
             }
         }
         return null;
@@ -130,8 +128,10 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         return utenteFacade.findByEmail(mail);
     }
 
+    
     @Override
     public void addUtente(String username, String password, String indirizzo, String mail, String foto) {
+        System.err.println("[ControlloreUtente] dentro ");
         Utente ut = new Utente();
         ut.setUsername(username);
         ut.setPassword(password);

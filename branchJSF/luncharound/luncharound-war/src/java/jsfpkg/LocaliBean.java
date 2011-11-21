@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import java.util.*;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -37,7 +38,8 @@ public class LocaliBean implements Serializable{
     List<Locale> locali;
     String nome;
     String indirizzo;
-           
+    String citta;
+    
     
     /** Creates a new instance of LocaliBean */
     public LocaliBean() {
@@ -73,15 +75,30 @@ public class LocaliBean implements Serializable{
         nuovo = new Locale();
         nuovo.setIndirizzo(indirizzo);
         nuovo.setNome(nome);
+        FacesMessage msg = null;
         System.out.println("[LocaliBean] Dentro save locale");
         controlloreLocale.addLocale(nome,indirizzo,(long)1,(double)12,(double)12,"io","asdfeafa");
+         msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Locale aggiunto corettamente");
+         FacesContext.getCurrentInstance().addMessage(null, msg);
+         clearForm();
         // ricarico la lista dei locali
         try{
            locali =  controlloreLocale.getTuttiLocali();
+           
         }catch(NullPointerException e){
             System.err.println("[LocaliBean.java] Non ci sono locali nel DB. Lista grande: "+ controlloreLocale.locali());
         }
     }
+   
+    public void clearForm(){
+        Locale nuovo = new Locale();
+        locali = null;
+        nome = "";
+        indirizzo = "";
+           
+    }
+            
+    
     
     public void setNome(String nome){
         this.nome = nome;

@@ -3,8 +3,7 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./template.xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.prime.com.tr/ui"
-                 xmlns:rd="http://www.realdolmen.com/mapface">
+                xmlns:p="http://primefaces.prime.com.tr/ui">
 
     <ui:define name="top">
         top
@@ -12,14 +11,10 @@
     <ui:define name="content">
         
         <h:form>
-            
-         <rd:map mapId="map_canvas"  width="400px" height="400px" key="abcdefg" mapControl="largeMap3D" scrollWheelZoom="true" autoCenter="true" >
-                <rd:marker id="marker1" name="Locale 1" address="Torino, via sant'ottavio 12" iconLink=""/>      
-                <rd:marker id="marker1" name="Locale 3" address="Torino, via madama cristina 11" iconLink=""/>     
-                <rd:marker id="marker1" name="Locale 4" address="Torino, via garibaldi 4" iconLink=""/>     
-                <rd:marker id="marker1" name="Locale 5" address="Torino, via po 13" iconLink=""/>     
-                <rd:marker id="marker1" name="Locale 6" address="Torino, via nizza 123" iconLink=""/>     
-            </rd:map><br/>
+             <p:gmap center="#{HomeBean.centerLat},#{HomeBean.centerLong}" draggable="true" zoom="16" type="HYBRID" 
+                style="width:600px;height:400px"
+                model="#{HomeBean.simpleModel}"  />
+        
        </h:form>
     </ui:define>
 
