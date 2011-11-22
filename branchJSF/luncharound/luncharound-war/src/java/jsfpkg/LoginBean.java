@@ -64,6 +64,7 @@ public class LoginBean {
             httpSession.setAttribute("news", persona.isNews());
             httpSession.setAttribute("home", persona.getHome());
             httpSession.setAttribute("tipo", persona.getTipo());
+            
             try {
                 httpSession.setAttribute("localipersonali", controlloreLocale.getLocali(persona.getId()));
             } catch (NullPointerException e) {

@@ -4,10 +4,12 @@
  */
 package jsfpkg;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.RequestScoped;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -40,15 +42,27 @@ public class HomeBean {
     public void init(){
         simpleModel = new DefaultMapModel();
         List<Locale> current = controlloreLocale.getTuttiLocali();
+        List<Marker> ml = new ArrayList<Marker>();
+        List<LatLng> cl = new ArrayList<LatLng>();
+        int i=0;
         for(Locale ll: current){
-        centerLat= ll.getLatitudine();
-        centerLong= ll.getLongitudine();
-
-        //Basic marker
-        simpleModel.addOverlay(new Marker(new LatLng(ll.getLatitudine(),ll.getLongitudine()), ll.getNome()));
-        
+            centerLat= ll.getLatitudine();
+            centerLong= ll.getLongitudine();
+            //Basic marker
+            cl.add(i,new LatLng(ll.getLatitudine(),ll.getLongitudine()));
+            ml.add(i, new Marker(cl.get(i), ll.getNome()));
+            
+            simpleModel.addOverlay(ml.get(i));
+            i++;
+            
         }
     }
+    
+    
+    public String backHome(){
+        return "home";
+    }
+    
     //<editor-fold defaultstate="collapsed" desc="Getters and setters">
     public double getCenterLat() {
         return centerLat;

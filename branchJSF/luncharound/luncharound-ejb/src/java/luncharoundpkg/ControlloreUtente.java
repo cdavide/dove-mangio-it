@@ -131,7 +131,7 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
     
     @Override
     public void addUtente(String username, String password, String indirizzo, String mail, String foto) {
-        System.err.println("[ControlloreUtente] dentro ");
+        System.err.println("[ControlloreUtente] aggiungendo utente ");
         Utente ut = new Utente();
         ut.setUsername(username);
         ut.setPassword(password);
@@ -140,6 +140,14 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         ut.setFoto(foto);
         ut.setEventi(false);
         ut.setNews(false);
-        utenteFacade.create(ut);
+        try{
+            utenteFacade.create(ut);   
+        }catch(Exception e){
+           System.out.println("[ControloloreUtente] attenzione errore inserimento!!");
+           //FIX
+           //TODO 
+           // far tornare un booleano per poter mostrare feedback per errori nel frontend
+        }
+        
     }
 }

@@ -97,9 +97,11 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         piattoFacade.create(pi);
     }
     
-    public void addLocale(String nome, String indirizzo,long idUtente, double longitudine, double latitudine, String proprietario, String pIVA){
+    @Override
+    public void addLocale(String nome, String indirizzo,long idUtente, double longitudine, double latitudine, String proprietario, String pIVA, String descrizione){
         
         Locale lo= new Locale();
+        lo.setDescrizione(descrizione);
         lo.setIndirizzo(indirizzo);
         lo.setLatitudine(latitudine);
         lo.setIdUtente(idUtente);

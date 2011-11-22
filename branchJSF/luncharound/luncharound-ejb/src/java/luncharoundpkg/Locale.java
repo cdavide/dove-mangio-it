@@ -29,10 +29,19 @@ public class Locale implements Serializable {
     private double longitudine;
     private double latitudine;
     private String proprietario;
+    private String descrizione;
     private String pIVA;
     //Menù e combo piatti non sono da mettere perchè si ricavano dagli ID
 
     public Locale() {
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 
     

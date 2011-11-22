@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <f:view contentType="text/html">
+    
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
@@ -17,6 +17,7 @@
     </h:head>
 
     <h:body>
+        <f:view contentType="text/html">
         <div id="top">
             <ui:insert name="top">Top</ui:insert>
         </div>
@@ -70,7 +71,7 @@
                                 <h:outputLabel for="foto" value="foto: * " />
                                 <h:inputText value="#{LoginBean.foto}" 
                                              id="foto" required="true" label="foto" />
-                                <p:commandButton value="Registrati" update="growl"  onclick="submitRegForm()" />
+                                <p:commandButton value="Registrati" update="growl"  onclick="submitRegForm('regForm:act', 'regForm')" />
                             </h:panelGrid>
                             <p:commandButton  id="act" value="register" update="growl"  
                                               style="display:none; visibility: hidden;" 
@@ -87,7 +88,7 @@
                         <p:menu>  
 
                             <p:submenu label="Navigazione">  
-                                <p:menuitem value="Home" url="home" icon="ui-icon ui-icon-home"/>  
+                                <p:menuitem value="Home" action="#{HomeBean.backHome}" ajax="false"  icon="ui-icon ui-icon-home"  />  
                                 <p:menuitem value="Locali" url="#" icon="ui-icon ui-icon-home"/>  
                             </p:submenu>  
                             <p:submenu label="Menu Utente">  
@@ -120,7 +121,7 @@
         <div id="bottom">
             <ui:insert name="bottom">Bottom</ui:insert>
         </div>
-
-    </h:body>
 </f:view>
+    </h:body>
+
 </html>
