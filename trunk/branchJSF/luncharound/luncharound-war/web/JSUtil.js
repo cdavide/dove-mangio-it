@@ -59,33 +59,22 @@ function submitValutazione(){
  *lo script simula un click sul link
  **/
 
-function clickLink(linkId)
-{
+function clickLink(linkId){
     var fireOnThis = document.getElementById(linkId)
-    alert("Dentro il clicklink")
-    if (document.createEvent)
-    {
-        var evObj = document.createEvent('MouseEvents')
-        evObj.initEvent( 'click', true, false )
-        fireOnThis.dispatchEvent(evObj)
-    }
-    else if (document.createEventObject)
-    {
-        fireOnThis.fireEvent('onclick')
-    }
+    fireOnThis.click();
 }
 
 
 
 function handleLoginRequest(xhr, status, args) {
-    alert("dentro handle login")
+
     if(args.validationFailed || !args.loggedIn) {
         alert("failed")
         jQuery('#dialog').parent().effect("shake", {
             times:3
         }, 100);
     } else {
-        alert("ok")
+
         dlg.hide();
         jQuery('#loginLink').fadeOut();
     }
@@ -93,36 +82,38 @@ function handleLoginRequest(xhr, status, args) {
         
 
 function handleRegRequest(xhr, status, args) {
-    alert("inregreq");
+
     if(args.validationFailed || !args.reg) {
         alert("fail");
         jQuery('#Registrati').parent().effect("shake", {
             times:3
         }, 100);
     } else {
-        alert("ok1");
+
         regDlg.hide();
-        alert("ok2");
+
         jQuery('#registerLink').fadeOut();
-        alert("ok3");
+
                 
     }
 }
         
         
         
-function submitRegForm(){
+function submitRegForm( nextLink, formId){
     var geoc = null;
     var results;
     var address;
-    
-    address = document.getElementById("regForm:indirizzo").value +", " +
-    document.getElementById("regForm:citta").value;
-    
+    var gInd = formId+":indirizzo";
+    var gCit= formId+":citta";
+    var gLat= formId+":lat";
+    var gLon= formId+":lon";
+    address = document.getElementById(gInd).value +", " +
+    document.getElementById(gCit).value;
+
     if (address == null) {
         alert("Attenzione, per continuare e` necessario inserire un indirizzo!");
     }
-    alert(address);
     while (geoc == null){
         geoc = new google.maps.Geocoder();
     }
@@ -131,11 +122,10 @@ function submitRegForm(){
             'address': address
         }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-               
-                document.getElementById("regForm:lat").value = results[0].geometry.location.lat().valueOf();
-                document.getElementById("regForm:lon").value = results[0].geometry.location.lng().valueOf();
-                document.getElementById("regForm:indirizzo").value= results[0].formatted_address.valueOf();
-                clickLink("regForm:act");
+                document.getElementById(gLat).value = results[0].geometry.location.lat().valueOf();
+                document.getElementById(gLon).value = results[0].geometry.location.lng().valueOf();
+                document.getElementById(gInd).value= results[0].formatted_address.valueOf();
+                clickLink(nextLink);
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
                 return false;

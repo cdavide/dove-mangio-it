@@ -11,9 +11,9 @@
     <ui:define name="content">
         
         <h:form>
-             <p:gmap center="#{HomeBean.centerLat},#{HomeBean.centerLong}" draggable="true" zoom="16" type="HYBRID" 
+             <p:gmap center="#{HomeBean.centerLat},#{HomeBean.centerLong}" draggable="true" zoom="13" type="HYBRID" 
                 style="width:600px;height:400px"
-                model="#{HomeBean.simpleModel}"  />
+                model="#{HomeBean.simpleModel}" id="mymap" />
         
        </h:form>
     </ui:define>

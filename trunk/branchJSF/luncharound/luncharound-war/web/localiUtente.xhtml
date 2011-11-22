@@ -5,31 +5,44 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.prime.com.tr/ui">
     <ui:define name="content">
-        <h:form id="myform">
+        <h:form id="myForm">
             <p:panel header="Crea un nuovo locale">  
                 <h:panelGrid columns="2" id="grid">  
                     <h:outputLabel value="Nome Locale : *" for="txt_nome"></h:outputLabel>  
                     <p:inputText id="txt_nome"   
                                  value="#{LocaliBean.nome}" required="true"/>  
-                    <h:outputLabel value="Citta : *" for="txt_citta"></h:outputLabel>  
-                    <p:inputText id="txt_citta" required="true"   
+                    <h:outputLabel value="Citta : *" for="citta"></h:outputLabel>  
+                    <p:inputText id="citta" required="true"   
                                  value="#{LocaliBean.citta}" />  
-                    <h:outputLabel value="Indirizzo : *" for="txt_indirizzo"></h:outputLabel>  
-                    <p:inputText id="txt_indirizzo" required="true"   
+                    <h:outputLabel value="Indirizzo : *" for="indirizzo"></h:outputLabel>  
+                    <p:inputText id="indirizzo" required="true"   
                                  value="#{LocaliBean.indirizzo}" />  
-
-                    <p:commandButton value="Reset" type="reset"/>  
-                    <p:commandButton value="Add" update="books msgs @parent"  
-                                     onclick="clickLink('myform:savelink');" >  
+                    <h:outputLabel value="Descrizione : *" for="descrizione"></h:outputLabel>  
+                    <p:editor value="#{LocaliBean.descrizione}"  width="600" id="descrizione"/>
+                    <h:outputLabel value="Aggiungi Fotografie : " for="foto"></h:outputLabel>  
+                    <p:fileUpload id="foto" fileUploadListener="#{fileUploader.handleFileUpload}"
+                                  mode="advanced"
+                                  update="messages" 
+                                  multiple="true"
+                                  sizeLimit="100000" 
+                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                    <h:outputLabel value="Aggiungi Locale : " for="add"></h:outputLabel>  
+                    <p:commandButton id="add" value="Aggiungi" update="locali msgs @parent"  
+                                     onclick="submitRegForm('myForm:savelink','myForm')" > 
                         <p:collector value="#{LocaliBean.nuovo}"   
                                      addTo="#{LocaliBean.locali}" />  
+
                     </p:commandButton>  
                 </h:panelGrid>  
-                <h:commandLink  id="savelink" style="display:none; visibility: hidden;" 
-                                action="#{LocaliBean.save}" value="#">
-                </h:commandLink>
+                <p:commandButton  id="savelink" style="display:none; visibility: hidden;" 
+                                  action="#{LocaliBean.save}" update="messages" value="#"/>
+                
+                
+                <h:inputHidden id="lat" value="#{LocaliBean.lat}" />
+                <h:inputHidden id="lon" value="#{LocaliBean.lon}" />
             </p:panel>  
-            </h:form>
+            <p:growl id="messages" showDetail="true"/> 
+        </h:form>
     </ui:define>
 
     <ui:define name="bottom">

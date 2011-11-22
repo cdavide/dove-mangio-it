@@ -9,17 +9,19 @@
                 xmlns:p="http://primefaces.prime.com.tr/ui">
 
     <ui:define name="content">
-         
+        <f:view contentType="text/html">
+
         <h:form>
             <h1>
-            <h:outputText value="#{VisualizzaLocale.locale.nome}"/>
+                <h:outputText value="#{VisualizzaLocale.locale.nome}"/>
             </h1>
-           
-            <p:accordionPanel activeIndex="1" autoHeight="true" >
-                <p:tab   title="Dove siamo">
-                    <p:gmap center="#{MapBean.centerLat},#{MapBean.centerLong}" draggable="true" zoom="16" type="HYBRID" 
-                        style="width:600px;height:400px"
-                        model="#{mapBean.simpleModel}"  />
+            <p:accordionPanel tabChangeListener="mymap.checkResize()" activeIndex="1" autoHeight="true" >
+                <p:tab   title="Dove siamo" >
+                    <f:view contentType="text/html">
+                    <p:gmap center="#{MapBean.centerLat},#{MapBean.centerLong}"  draggable="true" zoom="16" type="HYBRID" 
+                            style="width:600px;height:400px"
+                            model="#{MapBean.simpleModel}"  widgetVar="mymap"/>
+                        </f:view>
                     <h:outputText value="#{VisualizzaLocale.locale.indirizzo}"/>
                 </p:tab>
 
@@ -71,8 +73,9 @@
                     <p:graphicImage value="#{VisualizzaLocale.chart}" />
                 </p:tab>
             </p:accordionPanel>
-             
+
         </h:form>
+         </f:view>
     </ui:define>
 
     <ui:define name="bottom">
