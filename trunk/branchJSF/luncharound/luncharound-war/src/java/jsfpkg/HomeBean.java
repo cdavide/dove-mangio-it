@@ -34,6 +34,7 @@ public class HomeBean {
     private MapModel simpleModel;   
     double centerLat;
     double centerLong;
+    String FBLike;
     /** Creates a new instance of HomeBean */
     public HomeBean() {
     }
@@ -56,11 +57,37 @@ public class HomeBean {
             i++;
             
         }
+        FBLike="<iframe src=\"//www.facebook.com/plugins/like.php?locale=it_IT&"
+                + "app_id=241460472572920&amp;"
+                + "href=www.facebook.com/luncharound&amp;"
+                + "send=false&amp;"
+                + "layout=standard&amp;"
+                + "width=600&amp;"
+                + "show_faces=true&amp;"
+                + "action=like&amp;"
+                + "colorscheme=light&amp;"
+                + "font&amp;height=100\" "
+                + "scrolling=\"no\" "
+                + "frameborder=\"0\" "
+                + "style=\"border:none; "
+                + "overflow:hidden; "
+                + "width:450px; "
+                + "height:80px;\" "
+                + "allowTransparency=\"true\">"
+                + "</iframe>";
     }
     
     
     public String backHome(){
         return "home";
+    }
+
+    public String getFBLike() {
+        return FBLike;
+    }
+
+    public void setFBLike(String FBLike) {
+        this.FBLike = FBLike;
     }
     
     //<editor-fold defaultstate="collapsed" desc="Getters and setters">

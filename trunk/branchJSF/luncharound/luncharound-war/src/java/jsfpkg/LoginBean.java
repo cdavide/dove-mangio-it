@@ -37,6 +37,7 @@ public class LoginBean {
     private String foto;
     private boolean loggedIn;
     private boolean reg;
+    private String fburl;
     // empty constructor
     public LoginBean() {
     }
@@ -92,10 +93,38 @@ public class LoginBean {
         catch(Exception e){
             System.out.println("Errore, impossibile inserire parametri nella callback");
         }
+    }
+    
+    //metodo per controllare se è stato tentato un login
+    public void checkLogin(){
+        RequestContext context = RequestContext.getCurrentInstance();
+        FacesMessage msg = null;
+        loggedIn = false;
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpSession httpSession = request.getSession();
+        boolean newLogin=(Boolean)httpSession.getAttribute("newLogin");
         
-        
+        if(newLogin){ //c'è stato un tentativo di login recente
+            
+            httpSession.setAttribute("newLogin",false); //pulisco
+            
+            if(httpSession.getAttribute("errore")!=null){
+                msg = new FacesMessage(FacesMessage.SEVERITY_WARN,(String)httpSession.getAttribute("errore"),"");
+                httpSession.removeAttribute("errore"); //pulisco
+
+            }
+            else{//non ci sono errori
+                loggedIn=true; //tutti i dati dell'utente sono già in sessione!
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Ciao "+(String)httpSession.getAttribute("nome_utente"),"");
+            }
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        }  
+        context.addCallbackParam("newLogin", newLogin);    
 
     }
+    
+    
     
     /* Metodo per invalidare la sessione utente
      * l
@@ -120,6 +149,22 @@ public class LoginBean {
     public void setReg(boolean reg) {
         this.reg = reg;
     }
+
+    public String getFburl() {
+        String url="<a href=\"https://www.facebook.com/dialog/oauth?"
+                + "client_id=241460472572920&"
+                + "redirect_uri=http://localhost:8080/luncharound-war/FacebookServlet&"
+                + "scope=email,user_location\">"
+                + "<img src=\"https://meetin.gs/images/meetings/facebook_login_button.png\" heigh=\"40\" width=\"280\">"
+                + "</a>";
+
+        return url;
+    }
+
+    public void setFburl(String fburl) {
+        this.fburl = fburl;
+    }
+    
     
     
     //<editor-fold defaultstate="collapsed" desc="Getters and Setters">

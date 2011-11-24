@@ -11,9 +11,14 @@
     <ui:define name="content">
         
         <h:form>
-             <p:gmap center="#{HomeBean.centerLat},#{HomeBean.centerLong}" draggable="true" zoom="13" type="HYBRID" 
+            
+    
+    <p:gmap center="#{HomeBean.centerLat},#{HomeBean.centerLong}" draggable="true" zoom="13" type="HYBRID" 
                 style="width:600px;height:400px"
                 model="#{HomeBean.simpleModel}" id="mymap" />
+    <br></br>
+    <h:outputText escape="false" value="#{HomeBean.FBLike}"/>
+
         
        </h:form>
     </ui:define>

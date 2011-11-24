@@ -72,6 +72,19 @@
                 <p:tab title="Statistiche gradimento">
                     <p:graphicImage value="#{VisualizzaLocale.chart}" />
                 </p:tab>
+                <p:tab title="Condividi questo locale">
+                    <p:lightBox iframe="true" width="60%" height="60%">  
+                        <h:outputLink value="#{VisualizzaLocale.facebook}" title="Condividi su Facebook!">  
+                            <h:graphicImage value="http://www.marismith.com/wp-content/uploads/2011/01/share-on-facebook-button.gif"/>                        
+                        </h:outputLink>  
+                </p:lightBox>  
+
+                    <br/>
+                      
+                    <h:outputText  escape="false" value="#{VisualizzaLocale.facebook2}"/>
+                    
+                </p:tab>
+                
             </p:accordionPanel>
 
         </h:form>
