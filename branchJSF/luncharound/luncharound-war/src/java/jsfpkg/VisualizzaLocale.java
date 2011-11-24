@@ -65,6 +65,7 @@ public class VisualizzaLocale implements Serializable{
     private StreamedContent chart;  
     String mappa;
     String facebook;
+    String facebook2;
     String menu;
     String offerte;
     String valutazioni;
@@ -76,6 +77,15 @@ public class VisualizzaLocale implements Serializable{
     public void setFacebook(String facebook) {
         this.facebook = facebook;
     }
+
+    public String getFacebook2() {
+        return facebook2;
+    }
+
+    public void setFacebook2(String facebook2) {
+        this.facebook2 = facebook2;
+    }
+    
 
     public String getMenu() {
         return menu;
@@ -127,6 +137,8 @@ public class VisualizzaLocale implements Serializable{
         
         System.out.println("mappa: "+mappa);
         facebook = creaFbDialog(locale);
+        facebook2 = creaFbDialog2(locale);
+
         menu = controlloreLocale.mostraMenu(idLocale);
         offerte = controlloreLocale.mostraCombo(idLocale);
         
@@ -221,7 +233,7 @@ public class VisualizzaLocale implements Serializable{
 
 
     
-    private String creaFbDialog(Locale loc) {
+    private String creaFbDialog2(Locale loc) {
 
         String dialog;
         String img_prova = "http://www.ahfourthgrade.net/resources/Charles-C--Ebbets-Lunch-Atop-A-Skyscraper-1932-8619.jpg";
@@ -241,6 +253,26 @@ public class VisualizzaLocale implements Serializable{
         dialog += " target=\"_blank\">"
                 + "<img src=http://tuttoilweb.myblog.it/media/00/02/579068133.png"
                 + "  width=\"250\" height=\"30\"></a>";
+
+        return dialog;
+    }
+     private String creaFbDialog(Locale loc) {
+
+        String dialog;
+        String img_prova = "http://www.ahfourthgrade.net/resources/Charles-C--Ebbets-Lunch-Atop-A-Skyscraper-1932-8619.jpg";
+        String url_prova = "http://localhost:8080/luncharound-war/";
+        //url di prov       
+        dialog = "";
+        dialog += "https://www.facebook.com/dialog/feed?";
+        dialog += "app_id=241460472572920&";
+        dialog += "link=" + url_prova + "&";
+        //sostituire con loc.getfoto!!
+        dialog += "picture=" + img_prova + "&";
+        dialog += "name=Io oggi vado a mangiare qui grazie a LunchAround!&";
+        dialog += "caption=" + loc.getNome() + "&";
+        dialog += "description=Si trova in " + loc.getIndirizzo() + ". "
+                + "   Clicca qui per visualizzare il loro menu' di oggi!&";
+        dialog += "redirect_uri=http://www.facebook.com";
 
         return dialog;
     }

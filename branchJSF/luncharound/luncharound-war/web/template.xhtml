@@ -16,7 +16,7 @@
         <title>Welcome to LunchAround!</title>
     </h:head>
 
-    <h:body>
+    <h:body onload="clickLink('fb:check')">
         <f:view contentType="text/html">
         <div id="top">
             <ui:insert name="top">Top</ui:insert>
@@ -45,9 +45,11 @@
 
                                 <p:commandButton value="Login" update="growl" 
                                                  actionListener="#{LoginBean.login}" 
-                                                 oncomplete="handleLoginRequest(xhr, status, args)"/>
+                                                 oncomplete="handleLoginRequest(xhr, status, args)"/>   
+                                <b>OR</b><br/>                                 
                             </h:panelGrid>
                         </h:form>
+                        <h:outputText  escape="false" value="#{LoginBean.fburl}"/>
                     </p:dialog>
 
                     <p:dialog id="Registrati" header="Registrati"  modal="true" widgetVar="regDlg">
@@ -113,9 +115,15 @@
                     </h:form>
 
                 </ui:insert>
+                
             </div>
             <div id="content" class="left_content">
                 <ui:insert name="content">Content</ui:insert>
+                <h:form id="fb">
+                    <p:commandButton  id="check"  update="growl"  
+                    style="display:none; visibility: hidden;" 
+                    actionListener="#{LoginBean.checkLogin}"/>
+                </h:form>
             </div>
         </div>
         <div id="bottom">

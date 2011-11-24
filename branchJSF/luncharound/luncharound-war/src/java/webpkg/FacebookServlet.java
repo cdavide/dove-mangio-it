@@ -12,11 +12,16 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import luncharoundpkg.ControlloreLocaleLocal;
+import luncharoundpkg.ControlloreUtenteLocal;
+import luncharoundpkg.Utente;
 import utility.JSONObject;
 import utility.JSONReader;
 
@@ -26,7 +31,12 @@ import utility.JSONReader;
  */
 @WebServlet(name = "FacebookServlet", urlPatterns = {"/FacebookServlet"})
 public class FacebookServlet extends HttpServlet {
-
+    
+    @EJB
+    private ControlloreUtenteLocal controlloreUtente;
+    @EJB
+    private ControlloreLocaleLocal controlloreLocale;
+    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -37,7 +47,14 @@ public class FacebookServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession httpSession = request.getSession();
         PrintWriter out = response.getWriter();
+        
+        String nome="";
+        String email="";
+        String foto="";
+        String home="";
+        
         try {
 
             String codice=(String)request.getParameter("code");
@@ -55,31 +72,65 @@ public class FacebookServlet extends HttpServlet {
                 
                 try{//provo a leggere dal graph di FB i dati dell'utente
                     JSONObject dati= JSONReader.readJsonFromUrl(url2);
-                    request.setAttribute("nome",dati.getString("name"));
-                    request.setAttribute("mail",dati.getString("email"));
-                    String foto="https://graph.facebook.com/"+dati.getString("id")+"/picture";
-                    request.setAttribute("foto", foto);
-                    request.setAttribute("home",dati.getJSONObject("location").getString("name"));
+                    
+                    nome=dati.getString("name");
+                    email=dati.getString("email");
+                    foto="https://graph.facebook.com/"+dati.getString("id")+"/picture";
+                    home=dati.getJSONObject("location").getString("name");
                     
                 }
                 catch(Exception e){
                     
                     if(e.getMessage().equalsIgnoreCase("JSONObject[\"location\"] not found.")){
                     //se tutto ok ma l'utente non ha una location,non genero errori ma metto campo vuoto
-                        request.setAttribute("home","");
+                        home="";
                     }
                     else{
                     //problemi di lettura oggetto json
-                        request.setAttribute("errore","impossibile effettuare il login da facebook");
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                        httpSession.setAttribute("errore","impossibile effettuare il login da facebook");
+                        httpSession.setAttribute("newLogin",true);
+                        request.getRequestDispatcher("faces/home.xhtml").forward(request, response);
+                    }
+                }//fine lettura dati json
+                 
+                Utente persona=controlloreUtente.trovaDaEmail(email);
+            
+                if(persona!=null){ //utente esistente
+                
+                    if(persona.getTipo()!=2){//ma appartenente al sito o altro social network
+                    
+                        httpSession.setAttribute("errore", "Impossibile utilizzare l'account Facebook, email già utilizzata da un altro utente");
+                        httpSession.setAttribute("newLogin",true);
+                        request.getRequestDispatcher("faces/home.xhtml").forward(request, response);    
                     }
                 }
-                
-                request.getRequestDispatcher("/UtentiServlet?azione=loginFB").forward(request, response);   
+                else{//non esiste nel database, lo memorizzo
+                    controlloreUtente.addUtenteEsterno(nome,email,home,foto,2);
+                    //riottengo i dati per memorizzarli nella sessione(non riscrivo tutte le assegnazioni)
+                    persona=controlloreUtente.trovaDaEmail(email);
+                }
+            
+                httpSession.setAttribute("nome_utente", persona.getUsername());
+                httpSession.setAttribute("idUtente", persona.getId());
+                httpSession.setAttribute("eventi", persona.isEventi());
+                httpSession.setAttribute("news",persona.isNews());
+                httpSession.setAttribute("home", persona.getHome());
+                httpSession.setAttribute("foto", persona.getFoto());            
+                httpSession.setAttribute("tipo", persona.getTipo());
+                try{
+                     httpSession.setAttribute("localipersonali",controlloreLocale.getLocali(persona.getId()));
+                }
+                catch(NullPointerException e){
+                    System.err.println("L'utente non ha associato nessun locale personale");
+                }
+                httpSession.setAttribute("newLogin",true);
+                request.getRequestDispatcher("faces/home.xhtml").forward(request, response);    
+
             }
-            else{
-                request.setAttribute("errore","impossibile effettuare il login da facebook");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+            else{//errore nell'interazione iniziale (non ottengo un token per il graph)
+                httpSession.setAttribute("errore","impossibile effettuare il login da facebook");
+                httpSession.setAttribute("newLogin",true);
+                request.getRequestDispatcher("faces/home.xhtml").forward(request, response);
             }
        
         } finally {            
@@ -107,8 +158,6 @@ public class FacebookServlet extends HttpServlet {
       is.close();
     }
   }
-
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
