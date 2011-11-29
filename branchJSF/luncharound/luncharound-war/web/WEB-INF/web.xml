@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-
     <servlet>
         <servlet-name>MainServlet</servlet-name>
         <servlet-class>webpkg.MainServlet</servlet-class>
@@ -22,6 +21,10 @@
         <servlet-name>TwitterClient$OAuthCallbackServlet</servlet-name>
         <servlet-class>webpkg.TwitterClient$OAuthCallbackServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TwitterServlet</servlet-name>
+        <servlet-class>webpkg.TwitterServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
         <url-pattern>/MainServlet</url-pattern>
@@ -41,6 +44,18 @@
     <servlet-mapping>
         <servlet-name>TwitterClient$OAuthCallbackServlet</servlet-name>
         <url-pattern>/OAuthCallback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TwitterClient$OAuthLoginServlet</servlet-name>
+        <url-pattern>/OAuthLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TwitterClient$OAuthCallbackServlet</servlet-name>
+        <url-pattern>/OAuthCallback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TwitterServlet</servlet-name>
+        <url-pattern>/TwitterServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

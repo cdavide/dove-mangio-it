@@ -43,13 +43,19 @@
                                                id="password" required="true" label="password" />
 
 
-                                <p:commandButton value="Login" update="growl" 
+                                <p:commandButton value="Login" update="growl"
                                                  actionListener="#{LoginBean.login}" 
                                                  oncomplete="handleLoginRequest(xhr, status, args)"/>   
                                 <b>OR</b><br/>                                 
                             </h:panelGrid>
                         </h:form>
                         <h:outputText  escape="false" value="#{LoginBean.fburl}"/>
+                        <b>OR</b><br/>
+                        <h:form id="logTwit">
+                            <p:commandButton  id="act" update="growl"
+                                              image="./resources/stwitter.png"
+                                              action="/TwitterServlet"/>
+                        </h:form>
                     </p:dialog>
 
                     <p:dialog id="Registrati" header="Registrati"  modal="true" widgetVar="regDlg">

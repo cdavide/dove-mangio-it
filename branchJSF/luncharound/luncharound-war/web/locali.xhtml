@@ -19,6 +19,7 @@
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Nome Locale"/>
+                        <h:outputText escape="false" value="#{LocaliBean.TwitLocale}"/>
                     </f:facet> 
                     <h:commandLink  id="savelink1"  action="#{LocaliBean.visualizzaLocale}">
                         <f:param name="idLocale" value="#{loc.id}" />
