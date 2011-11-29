@@ -42,7 +42,7 @@ public class LocaliBean implements Serializable {
     double lon;
     double lat;
     String piva = "";
-
+    String TwitLocale = "";
     /** Creates a new instance of LocaliBean */
     public LocaliBean() {
         // non fa nulla
@@ -59,6 +59,17 @@ public class LocaliBean implements Serializable {
             System.err.println("[LocaliBean.java] Non ci sono locali nel DB. Lista grande: " + controlloreLocale.locali());
         }
         System.out.println("Locali presenti: " + controlloreLocale.locali());
+        TwitLocale = "<a href='https://twitter.com/share'"
+                + "class='twitter-share-button' "
+                + "data-text='I love to eat at "
+                + nome + " ' "
+                + "data-count='none' "
+                + "data-via='luncharound'>"
+                + "Tweet"
+                + "</a>"
+                + "<script type='text/javascript' "
+                + "src='//platform.twitter.com/widgets.js'>"
+                + "</script>";
     }
     
 
@@ -134,6 +145,14 @@ public class LocaliBean implements Serializable {
         return "visualizzaLocale";
     }
     //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
+
+    public String getTwitLocale() {
+        return TwitLocale;
+    }
+
+    public void setTwitLocale(String TwitLocale) {
+        this.TwitLocale = TwitLocale;
+    }
     
     public List<Locale> getLocali() {
         return locali;

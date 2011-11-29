@@ -123,9 +123,7 @@ public class LoginBean {
         context.addCallbackParam("newLogin", newLogin);    
 
     }
-    
-    
-    
+     
     /* Metodo per invalidare la sessione utente
      * l
      */

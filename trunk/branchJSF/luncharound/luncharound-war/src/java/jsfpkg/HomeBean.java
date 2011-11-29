@@ -35,6 +35,8 @@ public class HomeBean {
     double centerLat;
     double centerLong;
     String FBLike;
+    String TwitPage;
+    String FollowLA;
     /** Creates a new instance of HomeBean */
     public HomeBean() {
     }
@@ -75,8 +77,44 @@ public class HomeBean {
                 + "height:80px;\" "
                 + "allowTransparency=\"true\">"
                 + "</iframe>";
+        
+        TwitPage = "<a href='https://twitter.com/share'"
+                + "class='twitter-share-button' "
+                + "data-text='I love this website!' "
+                + "data-count='horizontal' "
+                + "data-via='luncharound'>"
+                + "Tweet"
+                + "</a>"
+                + "<script type='text/javascript' "
+                + "src='//platform.twitter.com/widgets.js'>"
+                + "</script>";
+        
+        FollowLA = "<a href='https://twitter.com/luncharound' "
+                + "class='twitter-follow-button' "
+                + "data-show-count='false'>"
+                + "Follow @luncharound"
+                + "</a>"
+                + "<script src='//platform.twitter.com/widgets.js' "
+                + "type='text/javascript'>"
+                + "</script>";
+        
     }
-    
+
+    public String getFollowLA() {
+        return FollowLA;
+    }
+
+    public void setFollowLA(String FollowLA) {
+        this.FollowLA = FollowLA;
+    }
+
+    public String getTwitPage() {
+        return TwitPage;
+    }
+
+    public void setTwitPage(String TwitPage) {
+        this.TwitPage = TwitPage;
+    }
     
     public String backHome(){
         return "home";
