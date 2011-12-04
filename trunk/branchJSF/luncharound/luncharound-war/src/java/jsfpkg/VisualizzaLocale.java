@@ -69,6 +69,7 @@ public class VisualizzaLocale implements Serializable{
     String menu;
     String offerte;
     String valutazioni;
+    private String TwitLocale;
 
     public String getFacebook() {
         return facebook;
@@ -76,6 +77,25 @@ public class VisualizzaLocale implements Serializable{
 
     public void setFacebook(String facebook) {
         this.facebook = facebook;
+    }
+    
+    
+    /**
+     * Get the value of TwitLocale
+     *
+     * @return the value of TwitLocale
+     */
+    public String getTwitLocale() {
+        return TwitLocale;
+    }
+
+    /**
+     * Set the value of TwitLocale
+     *
+     * @param TwitLocale new value of TwitLocale
+     */
+    public void setTwitLocale(String TwitLocale) {
+        this.TwitLocale = TwitLocale;
     }
 
     public String getFacebook2() {
@@ -158,6 +178,17 @@ public class VisualizzaLocale implements Serializable{
                 
         }
         
+        TwitLocale = "<a href='https://twitter.com/share'"
+                + "class='twitter-share-button' "
+                + "data-text='I love to eat at "
+                + locale.getNome() + " ' "
+                + "data-count='none' "
+                + "data-via='luncharound'>"
+                + "Tweet"
+                + "</a>"
+                + "<script type='text/javascript' "
+                + "src='//platform.twitter.com/widgets.js'>"
+                + "</script>";
     }
     
     

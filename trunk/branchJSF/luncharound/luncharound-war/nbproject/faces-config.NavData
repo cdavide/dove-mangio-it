@@ -13,7 +13,7 @@
         <Node id="form_ricerca.jsp" x="400" y="450" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations">
+        <Node id="locali.xhtml" x="75" y="124" zoom="false"/>
         <Node id="visualizzaLocale.xhtml" x="405" y="22" zoom="true"/>
-        <Node id="locali.xhtml" x="75" y="124" zoom="true"/>
     </Scope>
 </Scene>
