@@ -31,12 +31,13 @@ import org.primefaces.model.map.Marker;
 public class HomeBean {
     @EJB
     ControlloreLocaleLocal controlloreLocale;
+    String TwitPage;
+    String FollowLA;
     private MapModel simpleModel;   
     double centerLat;
     double centerLong;
     String FBLike;
-    String TwitPage;
-    String FollowLA;
+    
     /** Creates a new instance of HomeBean */
     public HomeBean() {
     }
@@ -99,7 +100,7 @@ public class HomeBean {
                 + "</script>";
         
     }
-
+    
     public String getFollowLA() {
         return FollowLA;
     }

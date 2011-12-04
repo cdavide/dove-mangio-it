@@ -19,7 +19,7 @@
     <h:body onload="clickLink('fb:check')">
         <f:view contentType="text/html">
         <div id="top">
-            <ui:insert name="top">Top</ui:insert>
+            <p:graphicImage value="./resources/header.png" />
         </div>
         <div>
             <div id="left">
@@ -46,15 +46,16 @@
                                 <p:commandButton value="Login" update="growl"
                                                  actionListener="#{LoginBean.login}" 
                                                  oncomplete="handleLoginRequest(xhr, status, args)"/>   
-                                <b>OR</b><br/>                                 
+                                <b>OR</b><br/><br/>                               
                             </h:panelGrid>
                         </h:form>
                         <h:outputText  escape="false" value="#{LoginBean.fburl}"/>
-                        <b>OR</b><br/>
+                        <br/><br/><b>OR</b><br/><br/>
                         <h:form id="logTwit">
-                            <p:commandButton  id="act" update="growl"
-                                              image="./resources/stwitter.png"
-                                              action="/TwitterServlet"/>
+                            <h:commandButton id="act"
+                                             image="./resources/stwitter.png"
+                                             value="login"
+                                             action="#{LoginBean.twitLogin}"/>
                         </h:form>
                     </p:dialog>
 

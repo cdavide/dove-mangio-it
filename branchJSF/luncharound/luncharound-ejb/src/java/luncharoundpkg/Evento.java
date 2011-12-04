@@ -97,3 +97,16 @@ public class Evento implements Serializable {
     }
     
 }
+
+
+
+
+/*Cose da fare e come farle(più o meno uguale per le news):
+ *  -creare il controlloreEvento
+ *  -Fare la selezione di tutti gli eventi ordinati dal più vicino in poi(per le new ordinate dalla più nuova indietro)
+ *  -Fare la selezione degli eventi di un locale ordinati dal più vicino(per le new ordinate dalla più nuova indietro)
+ *  -Fare l'eventoBean per le jsf.
+ *  -Capire come fare per prendere tutti quelli dei preferiti e ordinarli dal più vicino(news dal più nuovo)
+ *  -Soluzione per la riga di sopra: fare una query con la lista degli id dei locali e li si ordina veloce.
+ *  -Lista degli eventi è mostrata. quando si clicca sopra si apre un pop up con la descrizione dell'evento(uguale per la news)
+ */

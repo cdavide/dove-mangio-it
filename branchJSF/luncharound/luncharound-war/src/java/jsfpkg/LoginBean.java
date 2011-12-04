@@ -158,7 +158,20 @@ public class LoginBean {
 
         return url;
     }
-
+    
+    public void twitLogin() {
+        String url = "/TwitterServlet?metodo=login";  
+        FacesContext context = FacesContext.getCurrentInstance();  
+        try {  
+            context.getExternalContext().dispatch(url);  
+        }catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+        finally{  
+            context.responseComplete();  
+        }
+    }
+    
     public void setFburl(String fburl) {
         this.fburl = fburl;
     }

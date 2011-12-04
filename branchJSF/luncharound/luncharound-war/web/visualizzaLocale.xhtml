@@ -14,6 +14,7 @@
         <h:form>
             <h1>
                 <h:outputText value="#{VisualizzaLocale.locale.nome}"/>
+                <h:outputText escape="false" value="#{VisualizzaLocale.twitLocale}"/>
             </h1>
             <p:accordionPanel tabChangeListener="mymap.checkResize()" activeIndex="1" autoHeight="true" >
                 <p:tab   title="Dove siamo" >
@@ -72,6 +73,12 @@
                 <p:tab title="Statistiche gradimento">
                     <p:graphicImage value="#{VisualizzaLocale.chart}" />
                 </p:tab>
+                <p:tab title="Prossimi eventi">
+                    <p:graphicImage value="prova" />
+                </p:tab>
+                <p:tab title="Ultime news">
+                    <p:graphicImage value="prova" />
+                </p:tab>
                 <p:tab title="Condividi questo locale">
                     <p:lightBox iframe="true" width="60%" height="60%">  
                         <h:outputLink value="#{VisualizzaLocale.facebook}" title="Condividi su Facebook!">  
@@ -82,6 +89,8 @@
                     <br/>
                       
                     <h:outputText  escape="false" value="#{VisualizzaLocale.facebook2}"/>
+                    <br/><br/>
+                    <h:outputText escape="false" value="#{LocaliBean.twitLocale}"/>
                     
                 </p:tab>
                 

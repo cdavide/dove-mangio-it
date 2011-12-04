@@ -145,7 +145,8 @@ public class TwitterClient {
     }
 
     public static class OAuthLoginServlet extends HttpServlet {
-
+        
+        @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             java.io.PrintWriter out = response.getWriter();
@@ -160,19 +161,11 @@ public class TwitterClient {
                 } catch (UniformInterfaceException ex) {
                     uiEx = ex;
                 }
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>OAuth Login Servlet</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>OAuth Login Servlet at " + request.getContextPath() + "</h1>");
                 if (uiEx == null) {
-                    out.println("<a href='" + "http://twitter.com/oauth/authorize?oauth_token=" + requestTokenResponse.getFirst("oauth_token") + "'>Click at this link to authorize the application to access your data</a>");
+                    response.sendRedirect("http://twitter.com/oauth/authorize?oauth_token=" + requestTokenResponse.getFirst("oauth_token"));
                 } else {
                     out.println("Problem to get request token: " + uiEx.getResponse() + ": " + uiEx.getResponse().getEntity(String.class));
                 }
-                out.println("</body>");
-                out.println("</html>");
             } finally {
                 out.close();
             }
@@ -180,7 +173,8 @@ public class TwitterClient {
     }
 
     public static class OAuthCallbackServlet extends HttpServlet {
-
+        
+        @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             java.io.PrintWriter out = response.getWriter();
@@ -197,8 +191,7 @@ public class TwitterClient {
                     uiEx = ex;
                 }
                 if (uiEx == null) {
-                    request.setAttribute("metodo","logged");
-                    response.sendRedirect("TwitterServlet");
+                    request.getRequestDispatcher("/TwitterServlet").forward(request, response);
                 } else {
                     out.println("Problem to get access token: " + uiEx.getResponse() + ": " + uiEx.getResponse().getEntity(String.class));
                 }

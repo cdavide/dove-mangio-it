@@ -46,7 +46,7 @@ public class TwitterServlet extends HttpServlet {
         String formAction = request.getParameter("metodo");
         HttpSession httpSession = request.getSession();
         try {
-            if (formAction.equals("login")) {
+            if (formAction == null){
                 TwitterClient twitter = new TwitterClient("xml");
                 twitter.initOAuth(request, response);
                 twitter.makeOAuthRequestUnique();
@@ -95,15 +95,12 @@ public class TwitterServlet extends HttpServlet {
                 
                 } catch (UniformInterfaceException ex) {
                     httpSession.setAttribute("oauth_token",null);
-                    twitter.initOAuth(request, response);
+                    httpSession.setAttribute("errore","impossibile effettuare il login da Twitter");
+                    httpSession.setAttribute("newLogin",true);
+                    request.getRequestDispatcher("faces/home.xhtml").forward(request, response);
                 }
-                //else {
-                //httpSession.setAttribute("errore","impossibile effettuare il login da facebook");
-                //httpSession.setAttribute("newLogin",true);
-                //request.getRequestDispatcher("faces/home.xhtml").forward(request, response);
-                //}
             }
-            else if(formAction.equals("logged")){
+            if (formAction.equals("login")) {
                 TwitterClient twitter = new TwitterClient("xml");
                 twitter.initOAuth(request, response);
                 twitter.makeOAuthRequestUnique();
