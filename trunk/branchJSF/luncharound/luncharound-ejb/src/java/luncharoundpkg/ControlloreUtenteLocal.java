@@ -6,6 +6,7 @@ package luncharoundpkg;
 
 import javax.ejb.Local;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  *
@@ -31,5 +32,5 @@ public interface ControlloreUtenteLocal {
 
     public void addUtente(String username, String password, String indirizzo, String mail, String foto);
 
-    
+    //public List<Evento> getEventi(String email);
 }

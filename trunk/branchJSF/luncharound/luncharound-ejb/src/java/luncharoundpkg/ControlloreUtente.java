@@ -20,6 +20,8 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
     private LocaleFacadeLocal localeFacade;
     @EJB
     private UtenteFacadeLocal utenteFacade;
+    @EJB
+    private EventoFacadeLocal eventoFacade;
 
     @Override
     public void addUtenteDaReq(HttpServletRequest req) {
@@ -150,4 +152,13 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         }
         
     }
+    
+    //@Override
+    //public List<Evento> getEventi(String email){
+     //   //Devo recuperare una lista di idLocali
+     //   Utente utente = this.trovaDaEmail(email);
+    //    List<Locale> locali = utente.getPreferiti();
+        
+    //    return eventoFacade.findByLocali(idLocali);
+    //}
 }

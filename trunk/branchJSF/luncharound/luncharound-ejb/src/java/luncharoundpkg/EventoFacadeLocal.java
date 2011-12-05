@@ -28,4 +28,10 @@ public interface EventoFacadeLocal {
 
     int count();
     
+    public void deleteOld();
+    
+    public List<Evento> findByLocale(long idLocale );
+    
+    public List<Evento> findByLocali(List<Long> idLocali );
+    
 }
