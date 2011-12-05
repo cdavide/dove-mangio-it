@@ -29,11 +29,19 @@ public class LocaleFacade extends AbstractFacade<Locale> implements LocaleFacade
     }
 
     @Override
-    public List<Locale> findByUtente(long idUtente ){
+    public Locale findByUtente(long idUtente ){
+        Locale ll;
         String selectQuery = "SELECT V FROM Locale V WHERE V.idUtente = ?1";
 	Query searchById = em.createQuery(selectQuery);
 	searchById.setParameter(1, idUtente);
-        return searchById.getResultList();
+        try{
+            ll = (Locale) searchById.getSingleResult();
+        }
+        catch (Exception e){
+            System.out.println("[LocaleFacade.java]: nessun locale associato all'utente!");
+            ll = null;
+        }
+        return ll;
     }
     
 }

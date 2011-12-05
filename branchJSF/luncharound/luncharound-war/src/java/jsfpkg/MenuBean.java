@@ -4,16 +4,29 @@
  */
 package jsfpkg;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.primefaces.component.menuitem.MenuItem;
 import org.primefaces.component.submenu.Submenu;
+import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.MenuModel;
 
+@ManagedBean(name="menuBean")
+@SessionScoped
 public class MenuBean {
 
+   
 	private MenuModel model;
+        private boolean loggedIn;
+        private boolean gestore;
+        private String username;
 
 	public MenuBean() {
 		model = new DefaultMenuModel();
@@ -46,8 +59,64 @@ public class MenuBean {
 		model.addSubmenu(submenu);
 	}
 	
+        
+        @PostConstruct
+        public void init(){
+            RequestContext context = RequestContext.getCurrentInstance();
+            FacesMessage msg = null;
+            loggedIn = false;
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            HttpSession httpSession = request.getSession();
+            int idLocale;
+            long idUtente;
+            try{
+            idLocale = (Integer) httpSession.getAttribute("idLocale");
+            gestore = true;
+            }catch(Exception e){
+                gestore = false;
+            }
+            try{
+                idUtente = (Long) httpSession.getAttribute("idUtente");
+                loggedIn = true;
+            }catch(Exception e){
+                loggedIn = false;
+            }
+            try{
+                username = (String) httpSession.getAttribute("nome_utente");
+            }catch (Exception e){
+                System.out.println("[MenuBean]: nessun nome utente");           
+            }
+        }
+        
+        
 	public MenuModel getModel() {
 		return model;
-	}	
+	}
+
+    public boolean isGestore() {
+        return gestore;
+    }
+
+    public void setGestore(boolean gestore) {
+        this.gestore = gestore;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+        
+        
 }
 			

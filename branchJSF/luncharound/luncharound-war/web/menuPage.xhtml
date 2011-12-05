@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui" 
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+    <ui:define name="content">
+        <h:form id="form">
+
+            <p:growl id="msgs" />
+
+            <p:panel header="Crea un nuovo menu">
+                <h:panelGrid columns="6" id="grid">
+                    <h:outputLabel value="Nome Piatto : *" for="nome"></h:outputLabel>
+                    <p:autoComplete id="nome"  value="#{addMenuBean.newOne.nome}" 
+                                    completeMethod="#{addMenuBean.complete}"  required="true"/>
+
+                    <h:outputLabel value="Categoria :" for="dd" />  
+                    <h:selectOneMenu id="dd" value="#{buttonBean.number}">  
+                        <f:selectItem itemLabel="Select One" itemValue="" />  
+                        <f:selectItem itemLabel="Option 1" itemValue="1" />  
+                        <f:selectItem itemLabel="Option 2" itemValue="2" />  
+                        <f:selectItem itemLabel="Option 3" itemValue="3" />  
+                    </h:selectOneMenu>  
+
+                    <h:outputLabel value="Prezzo : *" for="prezzo"></h:outputLabel>
+                    <p:autoComplete id="prezzo" required="true" 
+                                    value="#{addMenuBean.newOne.prezzo}"/>
+
+                    <p:commandButton value="Reset" type="reset"/>
+
+                    <p:commandButton value="Add" update="books msgs @parent"
+                                     action="#{addMenuBean.save}" >
+                        <p:collector value="#{addMenuBean.newListPiatti}" 
+                                     addTo="#{addMenuBean.newListPiatti}" />
+                    </p:commandButton>
+                </h:panelGrid>
+            </p:panel>
+
+
+            <p:outputPanel id="piatti">
+                <p:dataTable value="#{addMenuBean.newListPiatti}" var="piatto">
+
+                    <p:column headerText="Nome">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{piatto.nome}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{piatto.nome}" style="width:100%"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Categoria">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{piatto.categoria}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu id="dd" value="#{piatto.categoria}">  
+                                    <f:selectItem itemLabel="Antipasto" itemValue="" />  
+                                    <f:selectItem itemLabel="Primo" itemValue="1" />  
+                                    <f:selectItem itemLabel="Secondo" itemValue="2" />  
+                                    <f:selectItem itemLabel="Dolce" itemValue="3" />  
+                                    <f:selectItem itemLabel="Bevanda" itemValue="4" />  
+                                </h:selectOneMenu>  
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText ="Prezzo">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{piatto.prezzo}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{newOne.prezzo}" style="width:100%"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Options">
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable>
+            </p:outputPanel>
+
+        </h:form>
+
+    </ui:define>
+
+
+</ui:composition>

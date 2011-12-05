@@ -219,21 +219,7 @@ public class LocaliServlet extends HttpServlet {
         return ret;
     }
     
-    
-     //crea codice html da visualizzare nella jsp
-    private String elencoLocaliUtente(long idUtente) {
-//FIXME FIXME FIXME
-        String ret = "";
-        List<Locale> ll = localeFacade.findByUtente(idUtente);
 
-        ret += "Elenco locali presenti:<br>";
-
-        for (Locale loc : ll) {
-            ret += creaLink(loc.getId(), loc.getNome()) + "<br>";
-        }
-
-        return ret;
-    }
 
     //metodo per creare un collegamento alla pagina di descrizione del locale
     private String creaLink(int idLocale, String nome) {

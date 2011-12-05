@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package jsfpkg;
 
 import java.io.IOException;
@@ -28,7 +29,7 @@ import luncharoundpkg.LocaleFacadeLocal;
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
-@ManagedBean(name = "LocaliBean")
+@ManagedBean(name = "localiBean")
 @RequestScoped
 public class LocaliBean implements Serializable {
     @EJB
@@ -46,6 +47,7 @@ public class LocaliBean implements Serializable {
     /** Creates a new instance of LocaliBean */
     public LocaliBean() {
         // non fa nulla
+        System.err.println("Inizializzazione bean [LocaliBean.java]");
     }
 
     //questo viene chiamato dopo il costruttore, 
@@ -56,7 +58,8 @@ public class LocaliBean implements Serializable {
         try {
             locali = controlloreLocale.getTuttiLocali();
         } catch (NullPointerException e) {
-            System.err.println("[LocaliBean.java] Non ci sono locali nel DB. Lista grande: " + controlloreLocale.locali());
+            System.err.println("[LocaliBean.java] Non ci sono locali nel DB. Lista: " + controlloreLocale.locali());
+            locali = new ArrayList<Locale>();
         }
         System.out.println("Locali presenti: " + controlloreLocale.locali());
         TwitLocale = "<a href='https://twitter.com/share'"
@@ -81,10 +84,10 @@ public class LocaliBean implements Serializable {
         HttpSession httpSession = request.getSession();
 
         //controllare id utente altrimenti non si puo procedere, oppure che la sessione sia valida
-        if ((Long) httpSession.getAttribute("idUtente") == null || !request.isRequestedSessionIdValid()) {
-
-            System.out.println("[LocaliBean] utente non loggato!!!");
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Errore!", "Devi effettuare il login per registrare un nuovo locale.");
+        if ((Long) httpSession.getAttribute("idUtente") == null || 
+                !request.isRequestedSessionIdValid() || 
+                httpSession.getAttribute("mioLocale") != null) {
+            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Errore!", "Errore registrazione locale.Controlla: login, session,un solo locale per username");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             
             return;
@@ -92,24 +95,27 @@ public class LocaliBean implements Serializable {
 
        
         try{
-        long idUtente =  (Long) httpSession.getAttribute("idUtente");
-        String username =  (String) httpSession.getAttribute("nome_utente");
-        controlloreLocale.addLocale(nome,
+            long idUtente =  (Long) httpSession.getAttribute("idUtente");
+            String username =  (String) httpSession.getAttribute("nome_utente");
+            controlloreLocale.addLocale(nome,
                 indirizzo,
                 idUtente,
                 lon,
                 lat,
                 username,
                 piva, descrizione);
+            httpSession.setAttribute("mioLocale", controlloreLocale.getLocali(idUtente).getId());
+            httpSession.setAttribute("idLocale", controlloreLocale.getLocali(idUtente).getId());
         }
         catch(Exception e){
             System.out.println("[LocaliBean] eccezione su inserimento in DB"+e.getLocalizedMessage().toString());
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Locale aggiunto corettamente");
+            msg = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Failure!", "Locale non aggiunto");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             clearForm();
             return;
         }
         msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Locale aggiunto corettamente");
+        
         FacesContext.getCurrentInstance().addMessage(null, msg);
         clearForm();
         // ricarico la lista dei locali
@@ -140,8 +146,8 @@ public class LocaliBean implements Serializable {
         // prendo il parametro passato dalla jsf
         Map<String, String> params = context.getExternalContext().getRequestParameterMap();
         int idlocale = Integer.parseInt(params.get("idLocale"));
-        httpSession.setAttribute("idlocale", idlocale);
-        System.out.println("idlocale: " + idlocale);
+        httpSession.setAttribute("idLocale", idlocale);
+        System.out.println("idLocale: " + idlocale);
         return "visualizzaLocale";
     }
     //<editor-fold defaultstate="collapsed" desc="Getters and Setters">

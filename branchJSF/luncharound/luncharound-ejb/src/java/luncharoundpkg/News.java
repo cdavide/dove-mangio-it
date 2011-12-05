@@ -5,6 +5,7 @@
 package luncharoundpkg;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,17 +25,17 @@ public class News implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int idLocale;
-    private @Temporal(TemporalType.DATE) GregorianCalendar dataInizio;
+    private @Temporal(TemporalType.DATE) Date dataInizio;
     private String descr;
 
     public News() {
     }
 
-    public GregorianCalendar getDataInizio() {
+    public Date getDataInizio() {
         return dataInizio;
     }
 
-    public void setDataInizio(GregorianCalendar dataInizio) {
+    public void setDataInizio(Date dataInizio) {
         this.dataInizio = dataInizio;
     }
 

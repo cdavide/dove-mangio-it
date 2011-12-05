@@ -5,6 +5,7 @@
 package luncharoundpkg;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,13 +15,14 @@ import java.util.List;
 import java.util.GregorianCalendar;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 /**
  *
- * @author lore0487
+ * @author Bovio Lerenzo, Bronzino Francesco, Concas Davide
  */
+
+
 @Entity
 public class Menu implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -30,7 +32,8 @@ public class Menu implements Serializable {
     private int idLocale;
     @OneToMany
     private List<Piatto> listaPiatti;
-    private @Temporal(TemporalType.DATE) GregorianCalendar validita;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private  Date validita;
 
     public Menu() {
     }
@@ -59,11 +62,11 @@ public class Menu implements Serializable {
         this.listaPiatti = listaPiatti;
     }
 
-    public GregorianCalendar getValidita() {
+    public Date getValidita() {
         return validita;
     }
 
-    public void setValidita(GregorianCalendar validita) {
+    public void setValidita(Date validita) {
         this.validita = validita;
     }
 

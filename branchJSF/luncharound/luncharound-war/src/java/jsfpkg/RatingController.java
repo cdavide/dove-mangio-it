@@ -24,7 +24,7 @@ import luncharoundpkg.ControlloreValutazioneLocal;
 import luncharoundpkg.Valutazione;
 
 
-@ManagedBean(name="RatingController")
+@ManagedBean(name="ratingController")
 @SessionScoped
 public class RatingController {
     
@@ -78,7 +78,8 @@ public class RatingController {
         HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();  
         HttpSession httpSession = request.getSession(); 
         
-        idLocale = (Integer) httpSession.getAttribute("idlocale");
+        idLocale = (Integer) httpSession.getAttribute("idLocale");
+        
         try{
             idUtente = (Long) httpSession.getAttribute("idUtente");
             userRate = controlloreValutazione.findValutazioneUtente(idUtente, idLocale);

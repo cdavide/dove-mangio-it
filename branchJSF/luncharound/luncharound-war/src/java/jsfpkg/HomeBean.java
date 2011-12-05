@@ -26,7 +26,7 @@ import org.primefaces.model.map.Marker;
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
 
-@ManagedBean(name="HomeBean")
+@ManagedBean(name="homeBean")
 @RequestScoped
 public class HomeBean {
     @EJB

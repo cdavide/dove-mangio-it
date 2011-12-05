@@ -4,9 +4,9 @@
  */
 package luncharoundpkg;
 
+import java.util.Date;
 import javax.ejb.Local;
 import java.util.List;
-import java.util.GregorianCalendar;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -22,11 +22,11 @@ public interface ControlloreLocaleLocal {
     public void addPiattoCombo(String descr, float prezzo, int idLocale);
     public void remPiattoCombo(long id);
     
-    public void addMenu(int idLocale, List<Piatto> listaPiatti, GregorianCalendar validita);
-    public void editMenu(int idLocale, List<Piatto> listaPiatti, GregorianCalendar validita);
+    public void addMenu(int idLocale, List<Piatto> listaPiatti, Date validita);
+    public void editMenu(int idLocale, List<Piatto> listaPiatti, Date validita);
     
-    public void addNews(int idLocale, GregorianCalendar dataInizio, String descr);
-    public void addEvento(int idLocale, GregorianCalendar dataInizio, GregorianCalendar dataFine, String descr);
+    public void addNews(int idLocale, Date dataInizio, String descr);
+    public void addEvento(int idLocale, Date dataInizio, Date dataFine, String descr);
     
     public void addLocale(String nome, String indirizzo,long idUtente, double longitudine, double latitudine, String proprietario, String pIVA,String descrizione);
     
@@ -47,12 +47,15 @@ public interface ControlloreLocaleLocal {
     public List<Locale> trovaLocali(double lat, double lon, double dist);
     public boolean menuValido(int idLocale);
 
-    public List<Locale> getLocali(long idUtente);
+    public Locale getLocali(long idUtente);
     
     public List<Locale> getTuttiLocali();
 
     public Locale findById(int idLocale);
-    
+
+    public java.util.List<luncharoundpkg.Menu> allMenu();
+
+    public java.util.List<luncharoundpkg.Piatto> allPiatti();
     public List<Evento> getEventi(int idLocale);
     
 }

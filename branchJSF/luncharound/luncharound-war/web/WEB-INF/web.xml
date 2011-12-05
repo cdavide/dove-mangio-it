@@ -62,13 +62,13 @@
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>faces/home.xhtml</welcome-file>
-    </welcome-file-list>
     <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>aristo</param-value>
     </context-param>
+    <welcome-file-list>
+        <welcome-file>faces/home.xhtml</welcome-file>
+    </welcome-file-list>
     <ejb-local-ref>
         <ejb-ref-name>ControlloreValutazione</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>

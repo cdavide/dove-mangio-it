@@ -27,5 +27,7 @@ public interface MenuFacadeLocal {
     List<Menu> findRange(int[] range);
 
     int count();
+
+    public Menu findByLocale(int idLocale);
     
 }
