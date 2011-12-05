@@ -364,5 +364,8 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         return localeFacade.find(idLocale);
     }
 
-
+    @Override
+    public List<Evento> getEventi(int idLocale){
+        return eventoFacade.findByLocale(idLocale);
+    }
 }

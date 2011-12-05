@@ -53,4 +53,6 @@ public interface ControlloreLocaleLocal {
 
     public Locale findById(int idLocale);
     
+    public List<Evento> getEventi(int idLocale);
+    
 }

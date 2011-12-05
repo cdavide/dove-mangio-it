@@ -70,6 +70,7 @@ public class VisualizzaLocale implements Serializable{
     String offerte;
     String valutazioni;
     private String TwitLocale;
+    //List<Evento> eventi;
 
     public String getFacebook() {
         return facebook;
@@ -189,6 +190,12 @@ public class VisualizzaLocale implements Serializable{
                 + "<script type='text/javascript' "
                 + "src='//platform.twitter.com/widgets.js'>"
                 + "</script>";
+        //try {
+        //    eventi = findByLocale(idLocale);
+            
+        //} catch (Exception e) {
+                
+        //}
     }
     
     
