@@ -28,7 +28,7 @@ public interface LocaleFacadeLocal {
 
     int count();
     
-    public List<Locale> findByUtente(long idUtente);
+    public Locale findByUtente(long idUtente);
     
 
     

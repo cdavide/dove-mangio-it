@@ -10,15 +10,15 @@
                 <h:panelGrid columns="2" id="grid">  
                     <h:outputLabel value="Nome Locale : *" for="txt_nome"></h:outputLabel> 
                     <p:inputText id="txt_nome"   
-                                 value="#{LocaliBean.nome}" required="true"/>  
+                                 value="#{localiBean.nome}" required="true"/>  
                     <h:outputLabel value="Citta : *" for="citta"></h:outputLabel>  
                     <p:inputText id="citta" required="true"   
-                                 value="#{LocaliBean.citta}" />  
+                                 value="#{localiBean.citta}" />  
                     <h:outputLabel value="Indirizzo : *" for="indirizzo"></h:outputLabel>  
                     <p:inputText id="indirizzo" required="true"   
-                                 value="#{LocaliBean.indirizzo}" />  
+                                 value="#{localiBean.indirizzo}" />  
                     <h:outputLabel value="Descrizione : *" for="descrizione"></h:outputLabel>  
-                    <p:editor value="#{LocaliBean.descrizione}"  width="600" id="descrizione"/>
+                    <p:editor value="#{localiBean.descrizione}"  width="600" id="descrizione"/>
                     <h:outputLabel value="Aggiungi Fotografie : " for="foto"></h:outputLabel>  
                     <p:fileUpload id="foto" fileUploadListener="#{fileUploader.handleFileUpload}"
                                   mode="advanced"
@@ -29,24 +29,19 @@
                     <h:outputLabel value="Aggiungi Locale : " for="add"></h:outputLabel>  
                     <p:commandButton id="add" value="Aggiungi" update="locali msgs @parent"  
                                      onclick="submitRegForm('myForm:savelink','myForm')" > 
-                        <p:collector value="#{LocaliBean.nuovo}"   
-                                     addTo="#{LocaliBean.locali}" />  
+                        <p:collector value="#{localiBean.nuovo}"   
+                                     addTo="#{localiBean.locali}" />  
 
                     </p:commandButton>  
                 </h:panelGrid>  
                 <p:commandButton  id="savelink" style="display:none; visibility: hidden;" 
-                                  action="#{LocaliBean.save}" update="messages" value="#"/>
+                                  action="#{localiBean.save}" update="messages" value="#"/>
                 
                 
-                <h:inputHidden id="lat" value="#{LocaliBean.lat}" />
-                <h:inputHidden id="lon" value="#{LocaliBean.lon}" />
+                <h:inputHidden id="lat" value="#{localiBean.lat}" />
+                <h:inputHidden id="lon" value="#{localiBean.lon}" />
             </p:panel>  
             <p:growl id="messages" showDetail="true"/> 
         </h:form>
     </ui:define>
-
-    <ui:define name="bottom">
-        bottom
-    </ui:define>
-
 </ui:composition>

@@ -4,24 +4,21 @@
  */
 package luncharoundpkg;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.beanutils.BeanUtils;
+
 /**
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
+
+
 @Stateless
 public class ControlloreLocale implements ControlloreLocaleLocal {
     @EJB
@@ -54,7 +51,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     }
 
     @Override
-    public void addEvento(int idLocale, GregorianCalendar dataInizio, GregorianCalendar dataFine, String descr) {
+    public void addEvento(int idLocale, Date dataInizio, Date dataFine, String descr) {
 
         Evento ev = new Evento();
         ev.setDataFine(dataFine);
@@ -66,7 +63,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     }
 
     @Override
-    public void addMenu(int idLocale, List<Piatto> listaPiatti, GregorianCalendar validita) {
+    public void addMenu(int idLocale, List<Piatto> listaPiatti, Date validita) {
         Menu me = new Menu();
         me.setIdLocale(idLocale);
         me.setListaPiatti(listaPiatti);
@@ -75,7 +72,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     }
 
     @Override
-    public void addNews(int idLocale, GregorianCalendar dataInizio, String descr) {
+    public void addNews(int idLocale, Date dataInizio, String descr) {
         News ne = new News();
         ne.setDataInizio(dataInizio);
         ne.setDescr(descr);
@@ -117,7 +114,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     //non si tiene la storia dei menù. nella lista ce ne sarà uno solo appartenente
     //al locale, perciò devo eliminare quello precedente
     @Override
-    public void editMenu(int idLocale, List<Piatto> listaPiatti, GregorianCalendar validita) {
+    public void editMenu(int idLocale, List<Piatto> listaPiatti, Date validita) {
         Menu me,temp;
 
         me=menuDiLocale(idLocale);
@@ -143,6 +140,14 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     
     }
    
+    public List<Menu> allMenu(){
+        return menuFacade.findAll();
+    }
+    
+    public List<Piatto> allPiatti(){
+     return piattoFacade.findAll();   
+    }
+    
     //ASSICURARSI CHE LA RIMOZIONE SIA CORRETTA
     @Override
     public void remPiattoCombo(long id) {
@@ -158,16 +163,9 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     }
     
     //restituisce il menù di un dato locale, NULL se non esiste
+    @Override
     public Menu menuDiLocale(int idLocale){
-        
-        List<Menu> lm;
-        lm=menuFacade.findAll();
-
-        for(int i=0; i<lm.size(); i++){
-             
-            if(idLocale == lm.get(i).getIdLocale()) return lm.get(i);
-        }
-        return null;
+        return menuFacade.findByLocale(idLocale);
     }
     
     //metodo grezzo, adatto al test.Visualizza il menù del giorno
@@ -188,7 +186,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         if(me==null) return "*** NESSUN MENU' TROVATO ***";
         
         //controllo che sia valido
-        if(me.getValidita().compareTo(now)<=0) ret+="*** MENU' NON AGGIORNATO ***\n\n";
+        if(me.getValidita().compareTo(now.getTime())<=0) ret+="*** MENU' NON AGGIORNATO ***\n\n";
         //ottengo e scorro la lista dei piatti del menù    
         lp=me.getListaPiatti();
         for(int j=0; j<lp.size(); j++){
@@ -336,7 +334,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         GregorianCalendar now= new GregorianCalendar();
         for(Menu menu : lm){
             if(menu.getIdLocale()==idLocale){
-                if(menu.getValidita().compareTo(now)<=0) return false;
+                if(menu.getValidita().compareTo(now.getTime())<=0) return false;
                 else return true;
             }
         }
@@ -345,7 +343,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     
         
     @Override
-    public List<Locale> getLocali(long idUtente){
+    public Locale getLocali(long idUtente){
         return localeFacade.findByUtente(idUtente);
     }
     
@@ -357,9 +355,11 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         return loc;
     }
 
+    @Override
     public void addLocale(Locale locale){
        localeFacade.create(locale);
     }
+    @Override
     public Locale findById(int idLocale){
         return localeFacade.find(idLocale);
     }

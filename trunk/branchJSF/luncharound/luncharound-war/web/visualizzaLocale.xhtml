@@ -6,102 +6,95 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:s="http://jboss.com/products/seam/taglib"
-                xmlns:p="http://primefaces.prime.com.tr/ui">
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:define name="content">
         <f:view contentType="text/html">
 
-        <h:form>
-            <h1>
-                <h:outputText value="#{VisualizzaLocale.locale.nome}"/>
-                <h:outputText escape="false" value="#{VisualizzaLocale.twitLocale}"/>
-            </h1>
-            <p:accordionPanel tabChangeListener="mymap.checkResize()" activeIndex="1" autoHeight="true" >
-                <p:tab   title="Dove siamo" >
-                    <f:view contentType="text/html">
-                    <p:gmap center="#{MapBean.centerLat},#{MapBean.centerLong}"  draggable="true" zoom="16" type="HYBRID" 
-                            style="width:600px;height:400px"
-                            model="#{MapBean.simpleModel}"  widgetVar="mymap"/>
+            <h:form>
+                <h1>
+                    <h:outputText value="#{visualizzaLocale.locale.nome}"/>
+                    <h:outputText escape="false" value="#{visualizzaLocale.twitLocale}"/>
+                </h1>
+                <p:accordionPanel tabChangeListener="mymap.checkResize()" activeIndex="1" autoHeight="true" >
+                    <p:tab   title="Dove siamo" >
+                        <f:view contentType="text/html">
+                            <p:gmap center="#{mapBean.centerLat},#{mapBean.centerLong}"  draggable="true" zoom="16" type="HYBRID" 
+                                    style="width:600px;height:400px"
+                                    model="#{mapBean.simpleModel}"  widgetVar="mymap"/>
                         </f:view>
-                    <h:outputText value="#{VisualizzaLocale.locale.indirizzo}"/>
-                </p:tab>
+                        <h:outputText value="#{visualizzaLocale.locale.indirizzo}"/>
+                    </p:tab>
 
-                <p:tab title="Menu del Giorno">  
-                    <h:outputText value="#{VisualizzaLocale.menu}"/>
-                </p:tab>
+                    <p:tab title="Menu del Giorno">  
+                        <h:outputText value="#{visualizzaLocale.menu}"/>
+                    </p:tab>
 
-                <p:tab title="Combinazioni e Offerte de locale">  
-                    <h:outputText value="#{VisualizzaLocale.offerte}"/>
-                </p:tab>
+                    <p:tab title="Combinazioni e Offerte de locale">  
+                        <h:outputText value="#{visualizzaLocale.offerte}"/>
+                    </p:tab>
 
-                <p:tab title="Valutazione Utenti">  
-                    <h:panelGrid id="displayRatings" columns="2" cellpadding="5">
-                        <h:outputText value="Velocità:" /><br/>
-                        <p:rating value="#{RatingController.vel}" stars="5" disabled="true"/><br/>
-                        <h:outputText value="Cortesia:" /><br/>
-                        <p:rating value="#{RatingController.cort}" disabled="true" stars="5"/><br/>
-                        <h:outputText value="Affollamento:" /><br/>
-                        <p:rating value="#{RatingController.aff}" disabled="true" stars="5"/><br/>
-                        <h:outputText value="Qualità" /><br/>
-                        <p:rating value="#{RatingController.qual}" disabled="true" stars="5"/><br/>
-                        <h:outputText value="Quantità" /><br/>
-                        <p:rating value="#{RatingController.quan}" disabled="true" stars="5"/><br/>
-                        <h:outputText value="Pulizia" /><br/>
-                        <p:rating  value="#{RatingController.pul}" disabled="true" stars="5"/><br/>
-                    </h:panelGrid>
-                </p:tab>
-                <p:tab title="Valuta locale">  
-                    <h:panelGrid columns="2" cellpadding="5">
-                        <h:outputText value="Velocità:" /><br/>
-                        <p:rating value="#{RatingController.velocita}" /><br/>
-                        <h:outputText value="Cortesia:" /><br/>
-                        <p:rating value="#{RatingController.cortesia}" stars="5"/><br/>
-                        <h:outputText value="Affollamento:" /><br/>
-                        <p:rating value="#{RatingController.affollamento}" stars="5"/><br/>
-                        <h:outputText value="Qualità" /><br/>
-                        <p:rating value="#{RatingController.qualita}" stars="5"/><br/>
-                        <h:outputText value="Quantità" /><br/>
-                        <p:rating value="#{RatingController.quantita}" stars="5"/><br/>
-                        <h:outputText value="Pulizia" /><br/>
-                        <p:rating value="#{RatingController.pulizia}" stars="5"/><br/>
-                    </h:panelGrid>
+                    <p:tab title="Valutazione Utenti">  
+                        <h:panelGrid id="displayRatings" columns="2" cellpadding="5">
+                            <h:outputText value="Velocità:" /><br/>
+                            <p:rating value="#{ratingController.vel}" stars="5" disabled="true"/><br/>
+                            <h:outputText value="Cortesia:" /><br/>
+                            <p:rating value="#{ratingController.cort}" disabled="true" stars="5"/><br/>
+                            <h:outputText value="Affollamento:" /><br/>
+                            <p:rating value="#{ratingController.aff}" disabled="true" stars="5"/><br/>
+                            <h:outputText value="Qualità" /><br/>
+                            <p:rating value="#{ratingController.qual}" disabled="true" stars="5"/><br/>
+                            <h:outputText value="Quantità" /><br/>
+                            <p:rating value="#{ratingController.quan}" disabled="true" stars="5"/><br/>
+                            <h:outputText value="Pulizia" /><br/>
+                            <p:rating  value="#{ratingController.pul}" disabled="true" stars="5"/><br/>
+                        </h:panelGrid>
+                    </p:tab>
+                    <c:if test="#{!visualizzaLocale.gestore &amp;&amp; visualizzaLocale.loggedIn}">
+                        <p:tab title="Valuta locale">  
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Velocità:" /><br/>
+                                <p:rating value="#{ratingController.velocita}" /><br/>
+                                <h:outputText value="Cortesia:" /><br/>
+                                <p:rating value="#{ratingController.cortesia}" stars="5"/><br/>
+                                <h:outputText value="Affollamento:" /><br/>
+                                <p:rating value="#{ratingController.affollamento}" stars="5"/><br/>
+                                <h:outputText value="Qualità" /><br/>
+                                <p:rating value="#{ratingController.qualita}" stars="5"/><br/>
+                                <h:outputText value="Quantità" /><br/>
+                                <p:rating value="#{ratingController.quantita}" stars="5"/><br/>
+                                <h:outputText value="Pulizia" /><br/>
+                                <p:rating value="#{ratingController.pulizia}" stars="5"/><br/>
+                            </h:panelGrid>
 
-                    <p:commandButton value="Vota" update="displayRatings" style="margin:5px"/>
-                    <!--               <p:growl id="messages" showDetail="true"/> mostra gli errori e gli warning come delle bolle in alto a destra-->
+                            <p:commandButton value="Vota" update="displayRatings" style="margin:5px"/>
+                            <!-- <p:growl id="messages" showDetail="true"/> mostra gli errori e gli warning come delle bolle in alto a destra-->
 
-                </p:tab>
-                <p:tab title="Statistiche gradimento">
-                    <p:graphicImage value="#{VisualizzaLocale.chart}" />
-                </p:tab>
-                <p:tab title="Prossimi eventi">
-                    <p:graphicImage value="prova" />
-                </p:tab>
-                <p:tab title="Ultime news">
-                    <p:graphicImage value="prova" />
-                </p:tab>
-                <p:tab title="Condividi questo locale">
-                    <p:lightBox iframe="true" width="60%" height="60%">  
-                        <h:outputLink value="#{VisualizzaLocale.facebook}" title="Condividi su Facebook!">  
-                            <h:graphicImage value="http://www.marismith.com/wp-content/uploads/2011/01/share-on-facebook-button.gif"/>                        
-                        </h:outputLink>  
-                </p:lightBox>  
+                        </p:tab>
+                    </c:if>
+                    <c:if test="#{visualizzaLocale.gestore}">
+                        <p:tab title="Statistiche gradimento">
+                            <p:graphicImage value="#{visualizzaLocale.chart}" />
+                        </p:tab>
+                    </c:if>
+                    <p:tab title="Condividi questo locale">
+                        <p:lightBox iframe="true" width="60%" height="60%">  
+                            <h:outputLink value="#{visualizzaLocale.facebook}" title="Condividi su Facebook!">  
+                                <h:graphicImage value="http://www.marismith.com/wp-content/uploads/2011/01/share-on-facebook-button.gif"/>                        
+                            </h:outputLink>  
+                        </p:lightBox>  
 
-                    <br/>
-                      
-                    <h:outputText  escape="false" value="#{VisualizzaLocale.facebook2}"/>
-                    <br/><br/>
-                    <h:outputText escape="false" value="#{LocaliBean.twitLocale}"/>
-                    
-                </p:tab>
-                
-            </p:accordionPanel>
+                        <br/>
 
-        </h:form>
-         </f:view>
+                        <h:outputText  escape="false" value="#{visualizzaLocale.facebook2}"/>
+                        <br/><br/>
+                        <h:outputText escape="false" value="#{localiBean.twitLocale}"/>
+
+                    </p:tab>
+
+                </p:accordionPanel>
+            </h:form>
+        </f:view>
     </ui:define>
-
-    <ui:define name="bottom">
-        bottom
-    </ui:define>
-
 </ui:composition>

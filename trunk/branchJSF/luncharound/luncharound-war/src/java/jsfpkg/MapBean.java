@@ -26,7 +26,7 @@ import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
-@ManagedBean(name="MapBean")
+@ManagedBean(name="mapBean")
 @RequestScoped
 public class MapBean implements Serializable {
     @EJB
@@ -48,7 +48,7 @@ public class MapBean implements Serializable {
         HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();  
         HttpSession httpSession = request.getSession(); 
         
-        int idLocale = (Integer) httpSession.getAttribute("idlocale");
+        int idLocale = (Integer) httpSession.getAttribute("idLocale");
         Locale current = controlloreLocale.findById(idLocale);
         
         //Shared coordinates

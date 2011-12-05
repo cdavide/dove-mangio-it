@@ -69,7 +69,6 @@ function clickLink(linkId){
 function handleLoginRequest(xhr, status, args) {
 
     if(args.validationFailed || !args.loggedIn) {
-        alert("failed")
         jQuery('#dialog').parent().effect("shake", {
             times:3
         }, 100);
@@ -84,14 +83,12 @@ function handleLoginRequest(xhr, status, args) {
 function handleRegRequest(xhr, status, args) {
 
     if(args.validationFailed || !args.reg) {
-        alert("fail");
         jQuery('#Registrati').parent().effect("shake", {
             times:3
         }, 100);
     } else {
 
         regDlg.hide();
-
         jQuery('#registerLink').fadeOut();
 
                 
@@ -137,5 +134,3 @@ function submitRegForm( nextLink, formId){
     }
         
 }
-    
-    

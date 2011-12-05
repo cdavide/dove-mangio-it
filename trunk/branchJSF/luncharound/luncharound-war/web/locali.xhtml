@@ -8,7 +8,7 @@
     <ui:define name="content">
         
             <h:form>
-            <p:dataTable paginator="true" rows="15" id="dt1" value="#{LocaliBean.locali}" var="loc">
+            <p:dataTable paginator="true" rows="15" id="dt1" value="#{localiBean.locali}" var="loc">
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="id" />
@@ -19,8 +19,9 @@
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Nome Locale"/>
+                        
                     </f:facet> 
-                    <h:commandLink  id="savelink1"  action="#{LocaliBean.visualizzaLocale}">
+                    <h:commandLink  id="savelink1"  action="#{localiBean.visualizzaLocale}">
                         <f:param name="idLocale" value="#{loc.id}" />
                         <h:outputText value="#{loc.nome}"></h:outputText>
                     </h:commandLink>
@@ -38,6 +39,7 @@
                     </f:facet> 
                 </p:column>
             </p:dataTable>
+                <h:outputText escape="false" value="#{localiBean.TwitLocale}"/>
         </h:form>
     </ui:define>
     <ui:define name="bottom">

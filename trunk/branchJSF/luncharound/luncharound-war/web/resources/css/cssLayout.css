@@ -2,7 +2,12 @@
 #top {
     position: relative;
     background-color: #036fab;
-    color: white;
+    background-image:url("../header1.png"); 
+    background-size: auto 110px;
+    background-repeat:no-repeat;
+    background-position:center;
+    color: black;
+    height:100px;
     padding: 5px;
     margin: 0px 0px 10px 0px;
 }

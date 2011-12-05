@@ -18,7 +18,7 @@ import org.primefaces.model.UploadedFile;
  */
 
 
-@ManagedBean(name="FileUploader")
+@ManagedBean(name="fileUploader")
 @RequestScoped
 public class FileUploader {
 
