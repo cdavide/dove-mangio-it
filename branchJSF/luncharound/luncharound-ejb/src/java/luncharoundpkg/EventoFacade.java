@@ -44,7 +44,7 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
     }
     
     @Override
-    public List<Evento> findByLocali(List<Long> idLocali ){
+    public List<Evento> findByLocali(List<Integer> idLocali ){
         String selectQuery = "SELECT V FROM Evento V ORDER BY V.dataInizio, V.dataFine WHERE V.idLocale IN ?1";
 	Query searchById = em.createQuery(selectQuery);
 	searchById.setParameter(1, idLocali);

@@ -51,13 +51,14 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     }
 
     @Override
-    public void addEvento(int idLocale, Date dataInizio, Date dataFine, String descr) {
+    public void addEvento(int idLocale, Date dataInizio, Date dataFine, String titolo, String descr) {
 
         Evento ev = new Evento();
         ev.setDataFine(dataFine);
         ev.setDataInizio(dataInizio);
         ev.setDescr(descr);
         ev.setIdLocale(idLocale);
+        ev.setTitolo(titolo);
         
         eventoFacade.create(ev);
     }

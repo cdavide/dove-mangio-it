@@ -5,6 +5,7 @@
 package luncharoundpkg;
 
 import java.util.List;
+import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
@@ -153,12 +154,14 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         
     }
     
-    //@Override
-    //public List<Evento> getEventi(String email){
-     //   //Devo recuperare una lista di idLocali
-     //   Utente utente = this.trovaDaEmail(email);
-    //    List<Locale> locali = utente.getPreferiti();
-        
-    //    return eventoFacade.findByLocali(idLocali);
-    //}
+    @Override
+    public List<Evento> getEventi(Long idUtente){
+        Utente utente = utenteFacade.find(idUtente);
+        List<Locale> locali = utente.getPreferiti();
+        ArrayList<Integer> idLocali = new ArrayList();;
+        for (Locale ut : locali) {
+            idLocali.add(ut.getId());
+        }
+        return eventoFacade.findByLocali(idLocali);
+    }
 }

@@ -26,9 +26,18 @@ public class Evento implements Serializable {
     private int idLocale;
     private @Temporal(TemporalType.DATE) Date dataInizio;
     private @Temporal(TemporalType.DATE) Date dataFine;
+    private String titolo;
     private String descr;
 
     public Evento() {
+    }
+
+    public String getTitolo() {
+        return titolo;
+    }
+
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
     }
 
     public Date getDataFine() {

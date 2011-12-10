@@ -26,7 +26,7 @@ public interface ControlloreLocaleLocal {
     public void editMenu(int idLocale, List<Piatto> listaPiatti, Date validita);
     
     public void addNews(int idLocale, Date dataInizio, String descr);
-    public void addEvento(int idLocale, Date dataInizio, Date dataFine, String descr);
+    public void addEvento(int idLocale, Date dataInizio, Date dataFine, String titolo, String descr);
     
     public void addLocale(String nome, String indirizzo,long idUtente, double longitudine, double latitudine, String proprietario, String pIVA,String descrizione);
     

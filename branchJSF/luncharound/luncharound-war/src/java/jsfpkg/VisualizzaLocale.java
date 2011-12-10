@@ -59,7 +59,7 @@ public class VisualizzaLocale implements Serializable {
     boolean gestore; // per c:if nella jsf
     boolean loggedIn;
     private String TwitLocale;
-    //List<Evento> eventi;
+    
 
 
 
@@ -133,12 +133,6 @@ public class VisualizzaLocale implements Serializable {
                 + "<script type='text/javascript' "
                 + "src='//platform.twitter.com/widgets.js'>"
                 + "</script>";
-        //try {
-        //    eventi = findByLocale(idLocale);
-            
-        //} catch (Exception e) {
-                
-        //}
     }
 
     private CategoryDataset createDataset(HttpServletRequest request, int weeks) {
