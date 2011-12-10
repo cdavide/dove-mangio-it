@@ -32,6 +32,6 @@ public interface EventoFacadeLocal {
     
     public List<Evento> findByLocale(long idLocale );
     
-    public List<Evento> findByLocali(List<Long> idLocali );
+    public List<Evento> findByLocali(List<Integer> idLocali );
     
 }

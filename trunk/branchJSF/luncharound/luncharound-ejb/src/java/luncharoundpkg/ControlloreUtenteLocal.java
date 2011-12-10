@@ -32,5 +32,5 @@ public interface ControlloreUtenteLocal {
 
     public void addUtente(String username, String password, String indirizzo, String mail, String foto);
 
-    //public List<Evento> getEventi(String email);
+    public List<Evento> getEventi(Long idUtente);
 }
