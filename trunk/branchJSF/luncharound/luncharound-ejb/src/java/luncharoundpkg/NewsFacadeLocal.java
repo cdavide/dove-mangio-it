@@ -28,4 +28,12 @@ public interface NewsFacadeLocal {
 
     int count();
     
+    public void deleteOld();
+    
+    public List<News> findByLocale(int idLocale);
+    
+    public List<News> findByLocali(List<Integer> idLocali);
+    
+    public List<News> findNext();
+    
 }

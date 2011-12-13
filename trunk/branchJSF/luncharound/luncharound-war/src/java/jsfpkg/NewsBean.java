@@ -15,35 +15,36 @@ import luncharoundpkg.ControlloreUtenteLocal;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import luncharoundpkg.Locale;
-import luncharoundpkg.Evento;
-import luncharoundpkg.ControlloreEventiLocal;
+import luncharoundpkg.News;
+import luncharoundpkg.ControlloreNewsLocal;
 
 /**
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
-@ManagedBean(name = "eventBean")
+
+@ManagedBean(name = "newsBean")
 @RequestScoped
-public class EventBean {
+public class NewsBean {
+    
     @EJB
     private ControlloreLocaleLocal controlloreLocale;
     @EJB
     private ControlloreUtenteLocal controlloreUtente;
     @EJB
-    private ControlloreEventiLocal controlloreEventi;
-    private List<Evento> eventi;
-    private Evento selectedEvent;
+    private ControlloreNewsLocal controlloreNews;
+    private List<News> news;
+    private News selectedNews;
     boolean gestore; // per c:if nella jsf
     boolean loggedIn;
     Locale locale;
     Date dataInizio;
-    Date dataFine;
     String descr;
     String titolo;
-    String tuttiEventi;
+    String tutteNews;
     
-    /** Creates a new instance of EventBean */
-    public EventBean() {
+    /** Creates a new instance of NewsBean */
+    public NewsBean() {
     }
     
     public void init(){
@@ -81,43 +82,43 @@ public class EventBean {
             else {
                 gestore = false;
             }
-            eventi = controlloreLocale.getEventi(idLocale);
-            tuttiEventi = eventi.toString();
-            tuttiEventi = tuttiEventi+"gestore";
+            news = controlloreLocale.getNews(idLocale);
+            tutteNews = news.toString();
+            tutteNews = tutteNews+"gestore";
         }
         //Non sto visualizzando un locale ma sono loggato
         else if (loggedIn & idUtente >= 0){
-            eventi = controlloreUtente.getEventi(idUtente);
-            eventi.addAll(controlloreEventi.getEventi());
-            tuttiEventi = eventi.toString();
-            tuttiEventi = tuttiEventi+"utente";
+            news = controlloreUtente.getNews(idUtente);
+            news.addAll(controlloreNews.getNews());
+            tutteNews = news.toString();
+            tutteNews = tutteNews+"utente";
         }
         else
-            eventi = controlloreEventi.getEventi();
+            news = controlloreNews.getNews();
     }
     
-    public void addEvento(){
+    public void addNews(){
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         HttpSession httpSession = request.getSession();
         int idLocale = (Integer) httpSession.getAttribute("idLocale");
-        controlloreLocale.addEvento(idLocale, dataInizio, dataFine, titolo, descr);
-    }
-    
-    public Evento getSelectedEvent() {
-        return selectedEvent;
+        controlloreLocale.addNews(idLocale, dataInizio, titolo, descr);
     }
 
-    public void setSelectedEvent(Evento selectedEvent) {
-        this.selectedEvent = selectedEvent;
+    public Date getDataInizio() {
+        return dataInizio;
     }
 
-    public List<Evento> getEventi() {
-        return eventi;
+    public void setDataInizio(Date dataInizio) {
+        this.dataInizio = dataInizio;
     }
 
-    public void setEventi(List<Evento> eventi) {
-        this.eventi = eventi;
+    public String getDescr() {
+        return descr;
+    }
+
+    public void setDescr(String descr) {
+        this.descr = descr;
     }
 
     public boolean isGestore() {
@@ -144,28 +145,20 @@ public class EventBean {
         this.loggedIn = loggedIn;
     }
 
-    public Date getDataFine() {
-        return dataFine;
+    public List<News> getNews() {
+        return news;
     }
 
-    public void setDataFine(Date dataFine) {
-        this.dataFine = dataFine;
+    public void setNews(List<News> news) {
+        this.news = news;
     }
 
-    public Date getDataInizio() {
-        return dataInizio;
+    public News getSelectedNews() {
+        return selectedNews;
     }
 
-    public void setDataInizio(Date dataInizio) {
-        this.dataInizio = dataInizio;
-    }
-
-    public String getDescr() {
-        return descr;
-    }
-
-    public void setDescr(String descr) {
-        this.descr = descr;
+    public void setSelectedNews(News selectedNews) {
+        this.selectedNews = selectedNews;
     }
 
     public String getTitolo() {
@@ -176,11 +169,13 @@ public class EventBean {
         this.titolo = titolo;
     }
 
-    public String getTuttiEventi() {
-        return tuttiEventi;
+    public String getTutteNews() {
+        return tutteNews;
     }
 
-    public void setTuttiEventi(String tuttiEventi) {
-        this.tuttiEventi = tuttiEventi;
+    public void setTutteNews(String tutteNews) {
+        this.tutteNews = tutteNews;
     }
+    
+    
 }

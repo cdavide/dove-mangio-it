@@ -27,8 +27,17 @@ public class News implements Serializable {
     private int idLocale;
     private @Temporal(TemporalType.DATE) Date dataInizio;
     private String descr;
+    private String titolo;
 
     public News() {
+    }
+
+    public String getTitolo() {
+        return titolo;
+    }
+
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
     }
 
     public Date getDataInizio() {

@@ -23,6 +23,8 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
     private UtenteFacadeLocal utenteFacade;
     @EJB
     private EventoFacadeLocal eventoFacade;
+    @EJB
+    private NewsFacadeLocal newsFacade;
 
     @Override
     public void addUtenteDaReq(HttpServletRequest req) {
@@ -163,5 +165,16 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
             idLocali.add(ut.getId());
         }
         return eventoFacade.findByLocali(idLocali);
+    }
+    
+    @Override
+    public List<News> getNews(Long idUtente){
+        Utente utente = utenteFacade.find(idUtente);
+        List<Locale> locali = utente.getPreferiti();
+        ArrayList<Integer> idLocali = new ArrayList();;
+        for (Locale ut : locali) {
+            idLocali.add(ut.getId());
+        }
+        return newsFacade.findByLocali(idLocali);
     }
 }

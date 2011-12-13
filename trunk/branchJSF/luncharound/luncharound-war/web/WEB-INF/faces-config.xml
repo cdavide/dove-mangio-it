@@ -27,4 +27,9 @@
             <to-view-id>/visualizzaLocale.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <managed-bean>
+        <managed-bean-name>newsBean</managed-bean-name>
+        <managed-bean-class>jsfpkg.NewsBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

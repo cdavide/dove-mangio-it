@@ -30,8 +30,10 @@ public interface EventoFacadeLocal {
     
     public void deleteOld();
     
-    public List<Evento> findByLocale(long idLocale );
+    public List<Evento> findByLocale(int idLocale );
     
     public List<Evento> findByLocali(List<Integer> idLocali );
+    
+    public List<Evento> findNext();
     
 }

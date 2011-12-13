@@ -103,16 +103,39 @@
                             <h:form id="eventoForm">
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <h:outputLabel for="titolo" value="Titolo *" />
-                                    <p:inputText value="#{eventoBean.titolo}" 
+                                    <p:inputText value="#{eventBean.titolo}" 
                                                  id="titolo" required="true" label="titolo" />
-                                    <h:outputLabel for="Descr" value="Descrizione * " />
-                                    <p:inputTextarea style="width:300px;height:100px;" effectDuration="400" id="descrizione" />
+                                    <h:outputLabel for="descr" value="Descrizione * " />
+                                    <p:inputTextarea style="width:300px;height:100px;" effectDuration="400" id="descrizione" value="#{eventBean.descr}"/>
                                     <h:outputLabel for="dataInizio" value="Data inizio: * " />
-                                    <p:calendar value="#{eventoBean.dataInizio}" id="dataIn"/>
+                                    <p:calendar value="#{eventBean.dataInizio}" id="dataIn"/>
                                     <h:outputLabel for="dataFine" value="Data fine * " />
-                                    <p:calendar value="#{eventoBean.dataFine}" id="dataFin"/>
-                                        <p:commandButton value="Aggiungi" update="growl" actionListener="#{eventoBean.addEvento}"/>
+                                    <p:calendar value="#{eventBean.dataFine}" id="dataFin"/>
+                                    <p:commandButton value="Aggiungi" update="growl"  onclick="return true" />
                                 </h:panelGrid>
+                                <p:commandButton  id="act" value="addEv" update="eventForm"  
+                                                  style="display:none; visibility: hidden;" 
+                                                  actionListener="#{eventBean.addEvento}" 
+                                                  oncomplete="return true"/>
+                            </h:form>
+                        </p:dialog>
+                        
+                        <p:dialog id="addNews" header="Aggiunti news"  modal="true" widgetVar=" newsDlg" width ="550">
+                            <h:form id="newsForm">
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputLabel for="titolo" value="Titolo *" />
+                                    <p:inputText value="#{newsBean.titolo}" 
+                                                 id="titolo" required="true" label="titolo" />
+                                    <h:outputLabel for="descr" value="Descrizione * " />
+                                    <p:inputTextarea style="width:300px;height:100px;" effectDuration="400" id="descrizione" value="#{newsBean.descr}"/>
+                                    <h:outputLabel for="dataInizio" value="Data inizio: * " />
+                                    <p:calendar value="#{newsBean.dataInizio}" id="dataIn"/>
+                                    <p:commandButton value="Aggiungi" update="growl"  onclick="return true" />
+                                </h:panelGrid>
+                                <p:commandButton  id="act" value="addEv" update="eventForm"  
+                                                  style="display:none; visibility: hidden;" 
+                                                  actionListener="#{newsBean.addNews}" 
+                                                  oncomplete="return true"/>
                             </h:form>
                         </p:dialog>
 
@@ -132,14 +155,14 @@
                                 <p:submenu label="Menu Ristoranti">  
                                     <p:menuitem value="Tutti i locali" url="locali.xhtml" icon="ui-icon ui-icon-home" onclick="jQuery('#content').fadeOut(800);jQuery('#left').fadeOut(800);"/>  
                                     <p:menuitem value="Ricerca" actionListener="asd" update="messages" ajax="false" icon="ui-icon ui-icon-close"/>  
-                                    <p:menuitem value="Sfoglia le News" actionListener="asd" update="messages" ajax="false" icon="ui-icon ui-icon-close"/>  
-                                    <p:menuitem value="Visualizza eventi" actionListener="asd" update="messages" ajax="false" icon="ui-icon ui-icon-close"/>  
+                                    <p:menuitem value="Sfoglia le News" url="newsPage.xhtml" icon="ui-icon ui-icon-home" onclick="jQuery('#content').fadeOut(800);jQuery('#left').fadeOut(800);"/>    
+                                    <p:menuitem value="Visualizza eventi"  url="eventiPage.xhtml" icon="ui-icon ui-icon-home" onclick="jQuery('#content').fadeOut(800);jQuery('#left').fadeOut(800);"/>    
                                 </p:submenu> 
                                 <p:submenu  id="submenu" label="Menu Gestore"  rendered="#{loginBean.gestore}">
                                     <p:menuitem value="Il tuo locale" url="visualizzaLocale.xhtml" icon="ui-icon ui-icon-home" onclick="jQuery('#content').fadeOut(1000);jQuery('#left').fadeOut(1000);"/>  
                                     <p:menuitem value="Aggiungi Menu" url="menuPage.xhtml" icon="ui-icon ui-icon-document" onclick="jQuery('#content').fadeOut(1000);jQuery('#left').fadeOut(1000);"/>  
                                     <p:menuitem value="Aggiungi nuovo" url="localiUtente.xhtml" icon="ui-icon ui-icon-plusthick"/>  
-                                    <p:menuitem value="Aggiungi news"  update="messages" ajax="false" icon="ui-icon ui-icon-close"/>  
+                                    <p:menuitem value="Aggiungi news"  id="addNewsLink" onclick="newsDlg.show()" actionListener="asd" icon="ui-icon ui-icon-disk"/>/>  
                                     <p:menuitem value="Aggiungi evento"  id="addEventoLink" onclick="evDlg.show()" actionListener="asd" icon="ui-icon ui-icon-disk"/>  
                                     <p:menuitem value="Statistiche" update="messages" ajax="false" icon="ui-icon ui-icon-close"/>  
                                 </p:submenu>
