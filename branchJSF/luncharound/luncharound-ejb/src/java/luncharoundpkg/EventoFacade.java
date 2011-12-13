@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import javax.persistence.Query;
+import java.util.Date;
 
 /**
  *
@@ -29,14 +30,16 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
     
     @Override
     public void deleteOld(){
-        //Impostare che cancelli le vecchie
-        String deleteQuery = "DELETE V FROM Evento V WHERE V.dataFine = ?1";
-	Query searchById = em.createQuery(deleteQuery);
-        searchById.executeUpdate();
+        Date oggi = new Date();
+        String deleteQuery = "DELETE V FROM Evento V WHERE V.dataFine < ?1";
+	Query deleteOldEvents = em.createQuery(deleteQuery);
+        deleteOldEvents.setParameter(1, oggi);
+        deleteOldEvents.executeUpdate();
     }
     
     @Override
-    public List<Evento> findByLocale(long idLocale ){
+    public List<Evento> findByLocale(int idLocale){
+        //deleteOld();
         String selectQuery = "SELECT V FROM Evento V ORDER BY V.dataInizio, V.dataFine WHERE V.idLocale = ?1";
 	Query searchById = em.createQuery(selectQuery);
 	searchById.setParameter(1, idLocale);
@@ -44,11 +47,20 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
     }
     
     @Override
-    public List<Evento> findByLocali(List<Integer> idLocali ){
+    public List<Evento> findByLocali(List<Integer> idLocali){
+        //deleteOld();
         String selectQuery = "SELECT V FROM Evento V ORDER BY V.dataInizio, V.dataFine WHERE V.idLocale IN ?1";
 	Query searchById = em.createQuery(selectQuery);
 	searchById.setParameter(1, idLocali);
         return searchById.getResultList();
     }
     
+    @Override
+    public List<Evento> findNext(){
+        //deleteOld();
+        //La query mi deve restituire un subset degli eventi nel sistema ordinati e più vicini nel tempo
+        String selectQuery = "SELECT V FROM Evento V ORDER BY V.dataInizio, V.dataFine WHERE V.idLocale IN ?1";
+	Query searchById = em.createQuery(selectQuery);
+        return searchById.getResultList();
+    }
 }

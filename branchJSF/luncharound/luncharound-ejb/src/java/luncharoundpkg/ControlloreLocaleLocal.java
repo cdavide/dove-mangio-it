@@ -25,7 +25,7 @@ public interface ControlloreLocaleLocal {
     public void addMenu(int idLocale, List<Piatto> listaPiatti, Date validita);
     public void editMenu(int idLocale, List<Piatto> listaPiatti, Date validita);
     
-    public void addNews(int idLocale, Date dataInizio, String descr);
+    public void addNews(int idLocale, Date dataInizio, String titolo, String descr);
     public void addEvento(int idLocale, Date dataInizio, Date dataFine, String titolo, String descr);
     
     public void addLocale(String nome, String indirizzo,long idUtente, double longitudine, double latitudine, String proprietario, String pIVA,String descrizione);
@@ -56,6 +56,9 @@ public interface ControlloreLocaleLocal {
     public java.util.List<luncharoundpkg.Menu> allMenu();
 
     public java.util.List<luncharoundpkg.Piatto> allPiatti();
+    
     public List<Evento> getEventi(int idLocale);
+    
+    public List<News> getNews(int idLocale);
     
 }

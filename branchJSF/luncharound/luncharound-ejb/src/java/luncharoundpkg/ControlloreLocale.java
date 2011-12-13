@@ -73,11 +73,12 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     }
 
     @Override
-    public void addNews(int idLocale, Date dataInizio, String descr) {
+    public void addNews(int idLocale, Date dataInizio, String titolo, String descr) {
         News ne = new News();
         ne.setDataInizio(dataInizio);
         ne.setDescr(descr);
         ne.setIdLocale(idLocale);
+        ne.setTitolo(titolo);
         newsFacade.create(ne);
     }
 
@@ -368,5 +369,10 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     @Override
     public List<Evento> getEventi(int idLocale){
         return eventoFacade.findByLocale(idLocale);
+    }
+    
+    @Override
+    public List<News> getNews(int idLocale){
+        return newsFacade.findByLocale(idLocale);
     }
 }

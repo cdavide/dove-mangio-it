@@ -33,4 +33,6 @@ public interface ControlloreUtenteLocal {
     public void addUtente(String username, String password, String indirizzo, String mail, String foto);
 
     public List<Evento> getEventi(Long idUtente);
+    
+    public List<News> getNews(Long idUtente);
 }

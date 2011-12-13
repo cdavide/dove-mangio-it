@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+                         <h:form prependId="false">
+                            <p:dataList value="#{newsBean.news}" var="news"
+                                    paginator="true" rows="5" effectSpeed="fast"
+                                    paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+                                    rowsPerPageTemplate="5,10,15">
+
+                                    <p:column>
+                                            <p:commandLink update="newsDetail" oncomplete="newsDialog.show()" title="View Detail">
+                                            <p:graphicImage value="/images/search.png"/> 
+                                            <f:setPropertyActionListener value="#{news}" target="#{newsBean.selectedNews}" />
+                                    </p:commandLink>
+
+                                    <h:outputText value="#{news.dataInizio}, #{news.titolo}" style="margin-left:10px" />
+
+                                    </p:column>
+                            </p:dataList>
+
+                            <p:dialog header="News Detail" widgetVar="newsDialog" width="200" height="175" modal="true">
+                                    <p:outputPanel id="newsDetail" style="text-align:center;" layout="block">
+
+                                            <p:graphicImage value="/resources/ic1.png"/>
+
+                                            <h:panelGrid  columns="2" cellpadding="5">
+                                                    <h:outputLabel for="titolo" value="Titolo: " />
+                                                    <h:outputText id="titoloNews" value="#{newsBean.selectedNews.titolo}" />
+                                                
+                                                    <h:outputLabel for="dataInizio" value="Data inizio: " />
+                                                    <h:outputText id="dataInNews" value="#{newsBean.selectedNews.dataInizio}" />
+
+                                                    <h:outputLabel for="descrizione" value="Descrizione: " />
+                                                    <h:outputText id="descrNews" value="#{newsBean.selectedNews.descr}"/>
+                                            </h:panelGrid>
+                                    </p:outputPanel>
+                            </p:dialog>
+
+                        </h:form>
+        
+        
+    </ui:define>
+
+
+</ui:composition>
