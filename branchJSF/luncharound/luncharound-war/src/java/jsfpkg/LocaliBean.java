@@ -43,11 +43,12 @@ public class LocaliBean implements Serializable {
     double lon;
     double lat;
     String piva = "";
-    String TwitLocale = "";
+    String twitLocale;
     /** Creates a new instance of LocaliBean */
     public LocaliBean() {
         // non fa nulla
         System.err.println("Inizializzazione bean [LocaliBean.java]");
+        twitLocale= "";
     }
 
     //questo viene chiamato dopo il costruttore, 
@@ -62,7 +63,7 @@ public class LocaliBean implements Serializable {
             locali = new ArrayList<Locale>();
         }
         System.out.println("Locali presenti: " + controlloreLocale.locali());
-        TwitLocale = "<a href='https://twitter.com/share'"
+        twitLocale = "<a href='https://twitter.com/share'"
                 + "class='twitter-share-button' "
                 + "data-text='I love to eat at "
                 + nome + " ' "
@@ -153,16 +154,19 @@ public class LocaliBean implements Serializable {
     //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
 
     public String getTwitLocale() {
-        return TwitLocale;
+        return twitLocale;
     }
 
-    public void setTwitLocale(String TwitLocale) {
-        this.TwitLocale = TwitLocale;
+  
+    
+    public void setTwitLocale(String twitLocale) {
+        this.twitLocale = twitLocale;
     }
     
     public List<Locale> getLocali() {
         return locali;
     }
+    
 
     public Locale getNuovo() {
         return nuovo;

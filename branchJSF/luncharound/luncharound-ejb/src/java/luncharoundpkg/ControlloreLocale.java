@@ -83,13 +83,19 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     }
 
     //AGGIUSTARE QUESTIONE VALIDITA'!!!
+    // CARNE,PESCE,VEGETARIANO,VEGANO,CELIACO,ALCOLICO
     @Override
-    public void addPiatto(String nome, Categoria categoria, float prezzo, byte flags, int idLocale) {
+    public void addPiatto(String nome, Categoria categoria, float prezzo, int idLocale, boolean[] flags) {
         
         Piatto pi = new Piatto();
         pi.setCategoria(categoria);
         pi.setCorrente(true);
-        pi.setFlags(flags);
+        pi.setCarne(flags[0]);
+        pi.setPesce(flags[1]);
+        pi.setVegetariano(flags[2]);
+        pi.setVegano(flags[3]);
+        pi.setCeliaco(flags[4]);
+        pi.setAlcolico(flags[5]);
         pi.setNome(nome);
         pi.setPrezzo(prezzo);
         pi.setIdLocale(idLocale);

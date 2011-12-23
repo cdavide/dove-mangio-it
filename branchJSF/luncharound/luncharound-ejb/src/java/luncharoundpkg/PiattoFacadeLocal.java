@@ -27,5 +27,9 @@ public interface PiattoFacadeLocal {
     List<Piatto> findRange(int[] range);
 
     int count();
+
+    public Menu findByLocale(int idLocale);
+    public java.util.List<luncharoundpkg.Piatto> getCategoriaLocale(int idLocale, luncharoundpkg.Categoria cat);
+    
     
 }

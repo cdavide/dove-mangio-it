@@ -66,6 +66,7 @@ public class VisualizzaLocale implements Serializable {
 
     /** Creates a new instance of LocaliBean */
     public VisualizzaLocale() {
+        System.err.println("[VisualizzaLocale.java] inizializzazione bean");
         // non fa nulla
     }
 
@@ -85,6 +86,7 @@ public class VisualizzaLocale implements Serializable {
         } catch (NullPointerException e) {
             idLocale = (Integer) httpSession.getAttribute("mioLocale");
         }
+        if ((Integer)idLocale == null) System.out.println("[Visualizza locale] idLocale è nullo !!!");
         locale = controlloreLocale.findById(idLocale);
         try {
             loggedIn = (Boolean) httpSession.getAttribute("loggedIn");

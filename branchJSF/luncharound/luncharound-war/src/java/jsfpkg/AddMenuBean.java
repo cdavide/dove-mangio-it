@@ -23,7 +23,7 @@ import luncharoundpkg.Piatto;
 
 /**
  *
- * @author Bovio Loernzo, Bronzino Francesco, Concas Davide
+ * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
 @ManagedBean(name = "addMenuBean")
 @SessionScoped
@@ -40,15 +40,33 @@ public class AddMenuBean {
     private Integer idLocale ;
     private Long idUtente;
     
+    private List<Piatto> primi;
+    private List<Piatto> secondi;
+    private List<Piatto> contorni;
+    private List<Piatto> dolci;
+    private List<Piatto> bevande;
+    private List<Piatto> antipasti;
+    private Piatto nuovoPrimo;
+    private Piatto nuovoAntipasto;
+    private Piatto nuovoSecondo;
+    private Piatto nuovoDolce;
+    private Piatto nuovaBevanda;
+    private Piatto nuovoContorno;
+    // serve per eliminare i piatti dal menu
+    // direttamente dalla datatable
+    private Piatto currentPiatto;
+            
     
     // il piatto nuovo viene reinizializzato
     //
+    
     public String reinit() {
         newOne = new Piatto();
         return null;
     }
 
     public void AddMenuBean() {
+        System.err.println("Costruttore inizio [addmenuBean]!");
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         HttpSession session = request.getSession();
@@ -59,6 +77,8 @@ public class AddMenuBean {
             // devo impedire la visualizzazione del menu del locale
             //
         }
+
+        
     }
 
     
@@ -79,11 +99,60 @@ public class AddMenuBean {
         }catch (Exception e) {
             // non son opresenti piatti nel DB
         }
+        /*divisione in tab in base alla categoria*/
+        nuovoAntipasto= new Piatto();
+        nuovaBevanda= new Piatto();
+        nuovoDolce = new Piatto();
+        nuovoSecondo = new Piatto();
+        nuovoPrimo = new Piatto();
+        nuovoContorno = new Piatto();
+        try{
+            primi = controllorePiatto.getCategoriaLocale(idLocale, Categoria.PRIMI);
+            secondi = controllorePiatto.getCategoriaLocale(idLocale, Categoria.SECONDI);
+            contorni = controllorePiatto.getCategoriaLocale(idLocale, Categoria.CONTORNI);
+            antipasti = controllorePiatto.getCategoriaLocale(idLocale, Categoria.ANTIPASTI);
+            bevande = controllorePiatto.getCategoriaLocale(idLocale, Categoria.BEVANDE);
+        }
+        catch (Exception e){
+
+            primi = new ArrayList<Piatto> ();
+            secondi = new ArrayList<Piatto> ();
+            contorni = new ArrayList<Piatto> ();
+            antipasti = new ArrayList<Piatto> ();
+            bevande = new ArrayList<Piatto> ();
+            dolci =new ArrayList<Piatto>(); 
+        }
+        
+        /*Piatti vuoti per aggiunta nel menu*/
+        primi.add(nuovoPrimo);
+        primi.add(new Piatto());
+        primi.add(new Piatto());
+        primi.add(new Piatto());
+        primi.add(new Piatto());
+        primi.add(new Piatto());
+        primi.add(new Piatto());
+        primi.add(new Piatto());
+        primi.add(new Piatto());
+        primi.add(new Piatto());
+        primi.add(new Piatto());
+        
+        secondi.add(nuovoSecondo);
+        antipasti.add(nuovoAntipasto);
+        contorni.add(nuovoContorno);
+        bevande.add(nuovaBevanda);
+        dolci.add(nuovoDolce);
         newOne= new Piatto();
+        System.err.println("Post constructor OK!");
     }
 
     
+public void add (){
     
+}
+    
+public void remove(){
+    
+}
     
 public List<String> complete(String query) {  
         List<String> results = new ArrayList<String>();  
@@ -173,6 +242,8 @@ public List<String> complete(String query) {
         reinit();
     }
     
+    
+    
     /* Funzione richiamata quando viene aggiornata una entry della tabella dei piatti
      * 
      */
@@ -185,6 +256,56 @@ public List<String> complete(String query) {
     public List<Piatto> getAllPiattoNames() {
         return allPiattoNames;
     }
+
+    public Piatto getNuovaBevanda() {
+        return nuovaBevanda;
+    }
+
+    public void setNuovaBevanda(Piatto nuovaBevanda) {
+        this.nuovaBevanda = nuovaBevanda;
+    }
+
+    public Piatto getNuovoAntipasto() {
+        return nuovoAntipasto;
+    }
+
+    public void setNuovoAntipasto(Piatto nuovoAntipasto) {
+        this.nuovoAntipasto = nuovoAntipasto;
+    }
+
+    public Piatto getNuovoContorno() {
+        return nuovoContorno;
+    }
+
+    public void setNuovoContorno(Piatto nuovoContorno) {
+        this.nuovoContorno = nuovoContorno;
+    }
+
+    public Piatto getNuovoDolce() {
+        return nuovoDolce;
+    }
+
+    public void setNuovoDolce(Piatto nuovoDolce) {
+        this.nuovoDolce = nuovoDolce;
+    }
+
+    public Piatto getNuovoPrimo() {
+        return nuovoPrimo;
+    }
+
+    public void setNuovoPrimo(Piatto nuovoPrimo) {
+        this.nuovoPrimo = nuovoPrimo;
+    }
+
+    public Piatto getNuovoSecondo() {
+        return nuovoSecondo;
+    }
+
+    public void setNuovoSecondo(Piatto nuovoSecondo) {
+        this.nuovoSecondo = nuovoSecondo;
+    }
+    
+    
     
     public void setAllPiattoNames(List<Piatto> allPiattoNames) {
         this.allPiattoNames = allPiattoNames;
@@ -197,6 +318,57 @@ public List<String> complete(String query) {
     public void setIdLocale(Integer idLocale) {
         this.idLocale = idLocale;
     }
+
+    public List<Piatto> getAntipasti() {
+        return antipasti;
+    }
+
+    public void setAntipasti(List<Piatto> antipasti) {
+        this.antipasti = antipasti;
+    }
+
+    public List<Piatto> getBevande() {
+        return bevande;
+    }
+
+    public void setBevande(List<Piatto> bevande) {
+        this.bevande = bevande;
+    }
+
+    public List<Piatto> getContorni() {
+        return contorni;
+    }
+
+    public void setContorni(List<Piatto> contorni) {
+        this.contorni = contorni;
+    }
+
+    public List<Piatto> getDolci() {
+        return dolci;
+    }
+
+    public void setDolci(List<Piatto> dolci) {
+        this.dolci = dolci;
+    }
+
+    public List<Piatto> getPrimi() {
+        return primi;
+    }
+
+    public void setPrimi(List<Piatto> primi) {
+        this.primi = primi;
+    }
+
+    public List<Piatto> getSecondi() {
+        return secondi;
+    }
+
+    public void setSecondi(List<Piatto> secondi) {
+        this.secondi = secondi;
+    }
+    
+    
+    
     
     public Long getIdUtente() {
         return idUtente;

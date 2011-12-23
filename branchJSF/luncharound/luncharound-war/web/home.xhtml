@@ -5,23 +5,19 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.prime.com.tr/ui">
     <ui:define name="content">
-
         <h:form>
 
 
             <p:gmap center="#{homeBean.centerLat},#{homeBean.centerLong}" draggable="true" zoom="13" type="HYBRID" 
-                    style="width:600px;height:400px"
+                    style="width:100%;height:400px"
                     model="#{homeBean.simpleModel}" id="mymap" />
             <br></br>
-            <h:outputText escape="false" value="#{homeBean.FBLike}"/>
-            <h:outputText escape="false" value="#{homeBean.twitPage}"/>
-            <h:outputText escape="false" value="#{homeBean.followLA}"/>
+
             <!--<h:outputText escape="false" value=""/>
             <h:outputText escape="false" value=""/>-->
 
 
         </h:form>
     </ui:define>
-
-
+    
 </ui:composition>

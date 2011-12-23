@@ -25,8 +25,14 @@ public class ControllorePiatti implements ControllorePiattiLocal {
         }
         
     }
+    @Override
     public void addPiatto(Piatto p){
         piattoFacade.create(p);
+    }
+    
+    @Override
+    public List<Piatto> getCategoriaLocale(int idLocale, Categoria cat){
+        return piattoFacade.getCategoriaLocale(idLocale,cat);
     }
     
 }

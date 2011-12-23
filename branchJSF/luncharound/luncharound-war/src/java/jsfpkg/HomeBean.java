@@ -74,8 +74,7 @@ public class HomeBean {
                 + "frameborder=\"0\" "
                 + "style=\"border:none; "
                 + "overflow:hidden; "
-                + "width:450px; "
-                + "height:80px;\" "
+                + "height:28px;\" "
                 + "allowTransparency=\"true\">"
                 + "</iframe>";
         

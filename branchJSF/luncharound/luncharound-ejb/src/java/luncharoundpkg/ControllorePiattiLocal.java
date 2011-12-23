@@ -18,5 +18,7 @@ public interface ControllorePiattiLocal {
     void addPersistency(List<Piatto> lista);
 
     public void addPiatto(luncharoundpkg.Piatto p);
+
+    public java.util.List<luncharoundpkg.Piatto> getCategoriaLocale(int idLocale, luncharoundpkg.Categoria cat);
     
 }

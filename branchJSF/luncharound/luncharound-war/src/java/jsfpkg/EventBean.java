@@ -49,7 +49,7 @@ public class EventBean {
     public void init(){
         int idLocale;
         long idUtente;
-        System.out.println("[VisualizzaLocale] Inizializzazione bean");
+        System.out.println("[EventBean] Inizializzazione bean");
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         HttpSession httpSession = request.getSession();
