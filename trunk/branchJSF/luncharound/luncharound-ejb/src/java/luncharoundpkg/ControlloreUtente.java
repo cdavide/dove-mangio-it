@@ -57,7 +57,6 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
 
     @Override
     public void addFoto(long idUtente, String url) {
-
         Utente ut = utenteFacade.find(idUtente);
         ut.setHome(url);
         utenteFacade.edit(ut);

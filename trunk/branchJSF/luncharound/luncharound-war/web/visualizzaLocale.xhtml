@@ -17,7 +17,7 @@
                     <h:outputText value="#{visualizzaLocale.locale.nome}"/>
                     <h:outputText escape="false" value="#{visualizzaLocale.twitLocale}"/>
                 </h1>
-                <p:accordionPanel tabChangeListener="mymap.checkResize()" activeIndex="1" autoHeight="true" >
+                <p:accordionPanel tabChangeListener="mymap.checkResize()" activeIndex="1"  >
                     <p:tab   title="Dove siamo" >
                         <f:view contentType="text/html">
                             <p:gmap center="#{mapBean.centerLat},#{mapBean.centerLong}"  draggable="true" zoom="16" type="HYBRID" 
@@ -36,41 +36,41 @@
                     </p:tab>
 
                     <p:tab title="Valutazione Utenti">  
-                        <h:panelGrid id="displayRatings" columns="2" cellpadding="5">
-                            <h:outputText value="Velocità:" /><br/>
-                            <p:rating value="#{ratingController.vel}" stars="5" disabled="true"/><br/>
-                            <h:outputText value="Cortesia:" /><br/>
-                            <p:rating value="#{ratingController.cort}" disabled="true" stars="5"/><br/>
-                            <h:outputText value="Affollamento:" /><br/>
-                            <p:rating value="#{ratingController.aff}" disabled="true" stars="5"/><br/>
-                            <h:outputText value="Qualità" /><br/>
-                            <p:rating value="#{ratingController.qual}" disabled="true" stars="5"/><br/>
-                            <h:outputText value="Quantità" /><br/>
-                            <p:rating value="#{ratingController.quan}" disabled="true" stars="5"/><br/>
-                            <h:outputText value="Pulizia" /><br/>
-                            <p:rating  value="#{ratingController.pul}" disabled="true" stars="5"/><br/>
+                        <h:panelGrid id="displayRatings"  columns="12" cellpadding="5">
+                            <h:outputLabel for="v" value="Velocità:" /><br/>
+                            <p:rating id="v" value="#{ratingController.vel}" stars="5" disabled="true"/><br/>
+                            <h:outputLabel for="cc" value="Cortesia:" /><br/>
+                            <p:rating id ="cc" value="#{ratingController.cort}" disabled="true" stars="5"/><br/>
+                            <h:outputLabel for="af" value="Affollamento:" /><br/>
+                            <p:rating id="af" value="#{ratingController.aff}" disabled="true" stars="5"/><br/>
+                            <h:outputLabel for="co" value="Qualità" /><br/>
+                            <p:rating id="co" value="#{ratingController.qual}" disabled="true" stars="5"/><br/>
+                            <h:outputLabel for="qq" value="Quantità" /><br/>
+                            <p:rating id="qq" value="#{ratingController.quan}" disabled="true" stars="5"/><br/>
+                            <h:outputLabel for="pp" value="Pulizia" /><br/>
+                            <p:rating id="pp" value="#{ratingController.pul}" disabled="true" stars="5"/><br/>
                         </h:panelGrid>
                     </p:tab>
                     <c:if test="#{!visualizzaLocale.gestore &amp;&amp; visualizzaLocale.loggedIn}">
                         <p:tab title="Valuta locale">  
-                            <h:panelGrid columns="2" cellpadding="5">
-                                <h:outputText value="Velocità:" /><br/>
-                                <p:rating value="#{ratingController.velocita}" /><br/>
-                                <h:outputText value="Cortesia:" /><br/>
-                                <p:rating value="#{ratingController.cortesia}" stars="5"/><br/>
-                                <h:outputText value="Affollamento:" /><br/>
-                                <p:rating value="#{ratingController.affollamento}" stars="5"/><br/>
-                                <h:outputText value="Qualità" /><br/>
-                                <p:rating value="#{ratingController.qualita}" stars="5"/><br/>
-                                <h:outputText value="Quantità" /><br/>
-                                <p:rating value="#{ratingController.quantita}" stars="5"/><br/>
-                                <h:outputText value="Pulizia" /><br/>
-                                <p:rating value="#{ratingController.pulizia}" stars="5"/><br/>
+                            <h:panelGrid columns="6" cellpadding="5" border="10" >
+                                <h:outputLabel value="Velocità:" for="vel"/><br/>
+                                <p:rating id="vel" value="#{ratingController.velocita}" /><br/>
+                                <h:outputLabel for="cor" value="Cortesia:" /><br/>
+                                <p:rating id="cor" value="#{ratingController.cortesia}" stars="5"/><br/>
+                                <h:outputLabel for="aff" value="Affollamento:" /><br/>
+                                <p:rating id="aff" value="#{ratingController.affollamento}" stars="5"/><br/>
+                                <h:outputLabel for="qual" value="Qualità" /><br/>
+                                <p:rating id="qual" value="#{ratingController.qualita}" stars="5"/><br/>
+                                <h:outputLabel for="quant" value="Quantità" /><br/>
+                                <p:rating id="quant" value="#{ratingController.quantita}" stars="5"/><br/>
+                                <h:outputLabel for="pul" value="Pulizia" /><br/>
+                                <p:rating id="pul" value="#{ratingController.pulizia}" stars="5"/><br/>
                             </h:panelGrid>
 
-                            <p:commandButton value="Vota" update="displayRatings" style="margin:5px"/>
+                            <p:commandButton value="Vota" update="displayRatings" style="margin:5px" 
+                                             action="#{ratingController.submitRating()}"/>
                             <!-- <p:growl id="messages" showDetail="true"/> mostra gli errori e gli warning come delle bolle in alto a destra-->
-
                         </p:tab>
                     </c:if>
                     <c:if test="#{visualizzaLocale.gestore}">

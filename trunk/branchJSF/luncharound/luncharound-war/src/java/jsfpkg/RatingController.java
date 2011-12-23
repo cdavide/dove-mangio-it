@@ -32,7 +32,7 @@ public class RatingController {
     private ControlloreValutazioneLocal controlloreValutazione;
     
     Valutazione media;
-    Valutazione userRate = new Valutazione();
+    Valutazione userRate ;
     int idLocale;
     long idUtente;
     double pulizia = 0;
@@ -55,6 +55,7 @@ public class RatingController {
     /* Questo metodo deve sottomettere la votazione e ricaricare le medie.
      */
     public void submitRating(){
+        if(userRate  == null) System.err.println("Nullo!!!");
         userRate.setDataVal(new Date());
         userRate.setIdLocale(idLocale);
         userRate.setIdUtente(idUtente);
@@ -67,10 +68,17 @@ public class RatingController {
         System.err.println("[RatingController ] prima del save");
         controlloreValutazione.saveValutazione(userRate);
     }
+   
+    /* Empty constructor
+     */
+    public RatingController() {
+    }
+    
     
     /* Questo metodo inizializza tutte le variabili con le medie di tutti e 
      * la votazione di un particolare utente
      */
+   
     
     @PostConstruct
     public void init(){
@@ -82,12 +90,15 @@ public class RatingController {
         
         try{
             idUtente = (Long) httpSession.getAttribute("idUtente");
-            userRate = controlloreValutazione.findValutazioneUtente(idUtente, idLocale);
+           
         }catch(NullPointerException e){
             System.out.println("Utente non loggato!");
+           
         }
-        
+        userRate = controlloreValutazione.findValutazioneUtente(idUtente, idLocale);
+        if(userRate == null) userRate = new Valutazione();
         List<Valutazione> ll = controlloreValutazione.findValutazioni(idLocale);
+        
         media = controlloreValutazione.mediaValutazioni(ll);
         pul = (double)media.getPulizia();
         qual = (double) media.getQualita();
@@ -235,7 +246,6 @@ public class RatingController {
     }
     
     
-    public RatingController() {
-    }
+
     //</editor-fold>
 }

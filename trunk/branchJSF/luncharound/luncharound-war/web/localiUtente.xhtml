@@ -18,16 +18,17 @@
                     <p:inputText id="indirizzo" required="true"   
                                  value="#{localiBean.indirizzo}" />  
                     <h:outputLabel value="Descrizione : *" for="descrizione"></h:outputLabel>  
-                    <p:editor value="#{localiBean.descrizione}"  width="600" id="descrizione"/>
-                    <h:outputLabel value="Aggiungi Fotografie : " for="foto"></h:outputLabel>  
-                    <p:fileUpload id="foto" fileUploadListener="#{fileUploader.handleFileUpload}"
+                    <p:editor value="#{localiBean.descrizione}" id="descrizione"/>
+                   <!-- <h:outputLabel value="Aggiungi Fotografie : " for="foto"></h:outputLabel>  -->
+                   <!--  <p:fileUpload id="foto" fileUploadListener=""
                                   mode="advanced"
                                   update="messages" 
                                   multiple="true"
                                   sizeLimit="100000" 
-                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>-->
+                   
                     <h:outputLabel value="Aggiungi Locale : " for="add"></h:outputLabel>  
-                    <p:commandButton id="add" value="Aggiungi" update="locali msgs @parent"  
+                    <p:commandButton id="add" value="Aggiungi" update="left locali msgs"  
                                      onclick="submitRegForm('myForm:savelink','myForm')" > 
                         <p:collector value="#{localiBean.nuovo}"   
                                      addTo="#{localiBean.locali}" />  
@@ -35,7 +36,7 @@
                     </p:commandButton>  
                 </h:panelGrid>  
                 <p:commandButton  id="savelink" style="display:none; visibility: hidden;" 
-                                  action="#{localiBean.save}" update="messages" value="#"/>
+                                  action="#{localiBean.save}" update="messages fr1 left" value="#"/>
                 
                 
                 <h:inputHidden id="lat" value="#{localiBean.lat}" />

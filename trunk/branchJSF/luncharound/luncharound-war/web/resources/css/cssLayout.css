@@ -1,57 +1,57 @@
 
 #top {
     position: relative;
-    background-color: #036fab;
     background-image:url("../header1.png"); 
     background-size: auto 110px;
     background-repeat:no-repeat;
     background-position:center;
+    background-color: #ff8b40;
     color: black;
     height:100px;
     padding: 5px;
-    margin: 0px 0px 10px 0px;
 }
+
 
 #bottom {
-    position: relative;
-    background-color: #c2dfef;
-    padding: 5px;
-    margin: 10px 0px 0px 0px;
+    background-color: #5ed1ba;
+    margin-top:10px;
+    text-align: center;
+    float:right;
+    padding: 10px;
+    width:100%;
 }
-
+    
 #left {
-    float: left;
-    background-color: #ece3a5;
-    padding: 5px;
-    width: 160px;
+    float:left;
+    padding: 10px;
+    margin: 10px;
+    margin-left:15%;
 }
 
 #right {
-    float: right;
-    background-color: #ece3a5;
+    position:relative;
+    margin: 10px;
     text-align: left;
-    padding: 5px;
-    width: 160px;
+    width: 768px;
 }
 
-.center_content {
-    position: relative;
-    background-color: #dddddd;
-    padding: 5px;
+#content {
+    margin-top:20px;
+    margin-right:20%;
+    position:relative;
+    float:right;
+    width:50%;
 }
+
 
 .left_content {
-    background-color: #dddddd;
-    padding: 5px;
-    margin-left: 180px;
+    float:left;
+    width:20%;
+    padding: 10px;
+    margin-left:20%;
+    margin: 10px;
 }
 
-.right_content {
-    text-align: left;
-    background-color: #dddddd;
-    padding: 5px;
-    margin: 0px 180px 0px 180px;
-}
 
 #top a:link, #top a:visited {
   color: white;

@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="content" >       
+
+            <h:form id="formric">
+                <p:fieldset legend="Ricerca" toggleable="true" style="width:500px;"   >
+                    <h:selectOneRadio id="scelta" onclick="seleziona('formric')" value="#{ricercaBean.tipo}" >
+                        <f:selectItem id="a" itemValue="1" itemLabel="ricerca per indirizzo"  /> 
+                        indirizzo:  <h:inputText id="ind" value="#{ricercaBean.indirizzo}"/><br/>
+                        <f:selectItem itemValue="2" itemLabel="ottieni la mia posizione" />        
+                    </h:selectOneRadio>
+
+                    con distanza massima
+                    <h:selectOneMenu id="distanza" value="#{ricercaBean.distanza}">
+                        <f:selectItem itemValue="1" itemLabel="1 km"/>
+                        <f:selectItem itemValue="2" itemLabel="2 km"/>
+                        <f:selectItem itemValue="5" itemLabel="5 km"/>
+                        <f:selectItem itemValue="10" itemLabel="10 km"/>
+                        <f:selectItem itemValue="15" itemLabel="15 km"/>
+                        <f:selectItem itemValue="20" itemLabel="20 km"/>
+                    </h:selectOneMenu><br/>
+
+                    <h:selectBooleanCheckbox  id="salva"  value="#{ricercaBean.salva}" >
+                    </h:selectBooleanCheckbox>
+                    <h:outputText   value="Imposta questo indirizzo come predefinito"/><br/>
+
+                    <p:commandButton  value="Ricerca"  onclick="if(needGeoByAddr()){geoByAddr();}"/>
+
+                    <h:inputHidden   id="lat" value="#{ricercaBean.latitudine}"/>
+                    <h:inputHidden id="lon" value="#{ricercaBean.longitudine}"/>
+                    <p:commandButton id="sub" update="risultati"  
+                                     style="display:none; visibility: hidden;" 
+                                     actionListener="#{ricercaBean.submit}">
+                    </p:commandButton>
+
+                </p:fieldset>
+            </h:form>
+
+            <br></br>
+
+          
+                <h:form id="risultati" > 
+
+                    <p:gmap  id="mymap" rendered="#{ricercaBean.noSearch=='false'}"
+                             center="#{ricercaBean.latitudine},#{ricercaBean.longitudine}" 
+                             draggable="true" zoom="#{ricercaBean.zoom}" 
+                             type="HYBRID" 
+                             style="width:700px;height:400px;"
+                             model="#{ricercaBean.advancedModel}" 
+                             overlaySelectListener="#{ricercaBean.onMarkerSelect()}">
+
+                        <p:gmapInfoWindow>  
+                            <p:outputPanel style="text-align:center;display:block;margin:auto">   
+                                <h:outputText value="#{ricercaBean.marker.title}" />                 
+                            </p:outputPanel>   
+                        </p:gmapInfoWindow>  
+                    </p:gmap>
+                
+
+                <br></br>        
+                <h:outputText rendered="#{ricercaBean.noSearch=='false' and ricercaBean.zeroResults}"
+                              value="Spiacente, nessun locale trovato" />
+
+                
+                    <p:dataTable var="loc" value="#{ricercaBean.lista}" rows="10"  paginator="true"   
+                                 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink}" >
+
+                        <p:column style="width:20%">
+                            <h:outputText value="#{ricercaBean.lista.indexOf(loc)+1}"  />
+                        </p:column>
+
+                        <p:column style="width:20%">
+                            <p:graphicImage width="120px" height="120px" value="/resources/default_loc.jpg"/>   
+                        </p:column>
+
+                        <p:column style="width:20%">
+                            <h:outputText  value="#{loc.nome}" /> 
+                            <br></br> 
+                            <h:outputText value="#{loc.indirizzo}" /> 
+                        </p:column>
+
+                        <p:column style="width:20%">
+
+                            <!--
+                         <p:rating value="1" stars="4" /><br/>
+                         <p:rating value="2" stars="4" /><br/>
+                         <p:rating value="3" stars="4" /><br/>
+                         <p:rating value="4" stars="4" /><br/> 
+                             
+                            -->
+
+                        </p:column>
+
+                        <p:column style="width:20%;margin-left:auto;margin-right:auto" >
+                            
+                            <p:commandButton id="savelink2"  
+                                             action="#{ricercaBean.visualizzaLocale()}"  
+                                             value="Visualizza il menu' e i dettagli del locale" 
+                                             ajax="false" >
+                                <f:param name="idLocale" value="#{loc.id}" />
+
+                            </p:commandButton>
+                        </p:column>
+
+
+                    </p:dataTable>
+                
+                    <h:commandLink id="savelink3"  action="#{ricercaBean.visualizzaLocale()}"  >
+                        <f:param name="idLocale" value="3" />
+                        <h:outputText value="Visualizza il menu' e i dettagli del locale"></h:outputText>
+                    </h:commandLink>
+                </h:form>
+    
+
+    </ui:define>
+
+</ui:composition>

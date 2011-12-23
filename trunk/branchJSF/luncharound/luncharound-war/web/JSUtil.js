@@ -137,3 +137,79 @@ function submitRegForm( nextLink, formId){
     }
         
 }
+
+     function seleziona(form){
+        
+        
+        if (document.getElementById(form+":scelta:0").checked==true) {
+            document.getElementById(form+":salva").disabled = false;
+            document.getElementById(form+":ind").disabled=false;
+            document.getElementById(form+":ind").style.backgroundColor = "white";
+        }
+        else{
+            document.getElementById(form+":ind").disabled = true;
+            document.getElementById(form+":salva").disabled=true;
+            document.getElementById(form+":ind").style.backgroundColor = "silver";
+            document.getElementById(form+":ind").value="";
+            
+        }
+     }
+     
+     function needGeoByAddr(){
+
+        if(document.getElementById("formric:scelta:1").checked){
+              navigator.geolocation.getCurrentPosition(ottieniPosizione,errorePosizione);
+             return false;
+         }
+        if(document.getElementById("formric:scelta:0").checked && document.getElementById("formric:ind").value==""){
+             alert("inserisci un indirizzo!");
+             return false;
+         }
+         
+        return true;
+     }
+    function ottieniPosizione(pos) {
+        
+        document.getElementById("formric:lat").value=pos.coords.latitude;
+        document.getElementById("formric:lon").value=pos.coords.longitude;
+        clickLink("formric:sub");
+    }
+     
+     function errorePosizione(err) {
+     
+        if(err.code == 1) {
+            alert("L'utente non ha autorizzato la geolocalizzazione");
+        } else if(err.code == 2) {
+            alert("Posizione non disponibile");
+        } else if(err.code == 3) {
+            alert("Timeout");
+        } else {
+            alert("ERRORE:" + err.message);
+        }
+        document.getElementById("formric:scelta:0").checked=true;
+        seleziona("formric")
+      }
+
+
+function geoByAddr(){
+    var geocoder;
+    var address;
+    address = document.getElementById("formric:ind").value;
+    
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode( {
+        'address': address
+    } , callback);
+}
+//funzione sempre richiamata da geoByAddr
+function callback(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+        document.getElementById("formric:lat").value = results[0].geometry.location.lat().valueOf();
+        document.getElementById("formric:lon").value = results[0].geometry.location.lng().valueOf();
+        document.getElementById("formric:ind").value= results[0].formatted_address.valueOf();
+        clickLink("formric:sub");
+    } else {
+        alert("Geocode was not successful for the following reason: " + status);
+        return false;
+    }
+}

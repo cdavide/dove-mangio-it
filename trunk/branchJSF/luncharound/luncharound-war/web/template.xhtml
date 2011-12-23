@@ -13,15 +13,15 @@
         <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <script src="https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=true" type="text/javascript"/>
         <script src="./JSUtil.js"   type="text/javascript" />
-
-        <script type="text/javascript">
-            $ = jQuery;
-            $(document).ready(function(){	
-                    $('#left').fadeIn(800);
-                    
-            });
-        </script>
-
+        <!--
+                <script type="text/javascript">
+                    $ = jQuery;
+                    $(document).ready(function(){	
+                            $('#left').slideDown('slow',null);
+                            
+                    });
+                </script>
+        -->
         <title>Welcome to LunchAround!</title>
     </h:head>
     <h:body  onload="clickLink('fb:check')">
@@ -29,15 +29,15 @@
             <div id="top">
                 <ui:insert name="top">
                     <h:panelGroup id="comment">
-                        <p:graphicImage id="img"  alt="64px" height="64px" value="./resources/user.png" rendered="#{loginBean.loggedIn}"/>
+                        <p:graphicImage id="img"  alt="64px" height="64px" value="#{loginBean.foto}" rendered="#{loginBean.loggedIn}"/>
                         <br/>
                         <h:outputText id="name" rendered="#{loginBean.loggedIn}" value="Bentornato: #{menuBean.username}"/>
                     </h:panelGroup>
                 </ui:insert>
             </div>
             <div>
-                <div id="left" style="display:none;">
-                    <ui:insert name="left">
+                <div id="left">
+                    <ui:insert name="left" >
                         <p:growl  id="growl"  showDetail="true" life="3000" />
 
 
@@ -52,7 +52,7 @@
                                     <h:outputLabel for="password" value="Password: * " />
                                     <h:inputSecret value="#{loginBean.password}" 
                                                    id="password" required="true" label="password" />
-                                    <p:commandButton value="Login" update="fr1 left growl left comment"
+                                    <p:commandButton value="Login" update="fr1 left growl comment"
                                                      actionListener="#{loginBean.login}" 
                                                      oncomplete="handleLoginRequest(xhr, status, args)"/>   
                                     <b>OR</b><br/><br/>                               
@@ -61,9 +61,8 @@
                             <h:outputText  escape="false" value="#{loginBean.fburl}"/>
                             <br/><br/><b>OR</b><br/><br/>
                             <h:form id="logTwit">
-                                <h:commandButton id="act"
-                                                 image="./resources/stwitter.png"
-                                                 value="login"
+                                <h:commandButton id="act" 
+                                                 image="./resources/stwitter.png"  title="Login"
                                                  action="#{loginBean.twitLogin}"/>
                             </h:form>
                         </p:dialog>
@@ -87,7 +86,7 @@
                                                  id="mail" required="true" label="mail" />
                                     <h:outputLabel for="foto" value="foto: * " />
                                     <h:inputText value="#{loginBean.foto}" 
-                                                 id="foto" required="true" label="foto" />
+                                                 id="foto" required="false" label="foto" />
                                     <p:commandButton value="Registrati" update="growl"  onclick="submitRegForm('regForm:act', 'regForm')" />
                                 </h:panelGrid>
                                 <p:commandButton  id="act" value="register" update="fr1 growl top"  
@@ -98,7 +97,7 @@
                                 <h:inputHidden id="lon" value="userPreference" />
                             </h:form>
                         </p:dialog>
-                        
+
                         <p:dialog id="addEvento" header="Aggiunti evento"  modal="true" widgetVar="evDlg" width ="550">
                             <h:form id="eventoForm">
                                 <h:panelGrid columns="2" cellpadding="5">
@@ -119,7 +118,7 @@
                                                   oncomplete="return true"/>
                             </h:form>
                         </p:dialog>
-                        
+
                         <p:dialog id="addNews" header="Aggiunti news"  modal="true" widgetVar=" newsDlg" width ="550">
                             <h:form id="newsForm">
                                 <h:panelGrid columns="2" cellpadding="5">
@@ -144,23 +143,24 @@
 
                             <p:menu >
                                 <p:submenu label="Navigazione">  
-                                    <p:menuitem value="Home" onclick="jQuery('#content').fadeOut(800);jQuery('#left').fadeOut(800);" action="#{homeBean.backHome}" ajax="false"  icon="ui-icon ui-icon-home"  />  
-                                    <p:menuitem value="Locali" url="#" icon="ui-icon ui-icon-home"/>  
+                                    <p:menuitem value="Home" action="#{loginBean.doNavigation}" ajax="false"  icon="ui-icon ui-icon-home"  />  
                                 </p:submenu>  
                                 <p:submenu label="Menu Utente">  
                                     <p:menuitem rendered="#{!loginBean.loggedIn}" value="Effettua login" id="loginLink" onclick="dlg.show()" update="mn" actionListener="asd" icon="ui-icon ui-icon-person"/>  
-                                    <p:menuitem rendered="#{loginBean.loggedIn}" value="Effettua logout" update="fr1 comment growl" id="logoutLink"  action="#{loginBean.logout}" icon="ui-icon ui-icon-close"/>  
+                                    <p:menuitem rendered="#{loginBean.loggedIn}" value="Effettua logout" 
+                                                update="fr1 comment growl" id="logoutLink"  ajax="false"
+                                                action="#{loginBean.logout}"  icon="ui-icon ui-icon-close"/>  
                                     <p:menuitem value="Registrati" id="registerLink" onclick="regDlg.show()" actionListener="asd" icon="ui-icon ui-icon-disk"/>  
                                 </p:submenu> 
                                 <p:submenu label="Menu Ristoranti">  
-                                    <p:menuitem value="Tutti i locali" url="locali.xhtml" icon="ui-icon ui-icon-home" onclick="jQuery('#content').fadeOut(800);jQuery('#left').fadeOut(800);"/>  
-                                    <p:menuitem value="Ricerca" actionListener="asd" update="messages" ajax="false" icon="ui-icon ui-icon-close"/>  
+                                    <p:menuitem value="Tutti i locali" url="locali.xhtml" ajax="false" icon="ui-icon ui-icon-home"/>  
+                                    <p:menuitem value="Ricerca" url="ricerca.xhtml" ajax="false" icon="ui-icon ui-icon-search"/>  
                                     <p:menuitem value="Sfoglia le News" url="newsPage.xhtml" icon="ui-icon ui-icon-home" onclick="jQuery('#content').fadeOut(800);jQuery('#left').fadeOut(800);"/>    
                                     <p:menuitem value="Visualizza eventi"  url="eventiPage.xhtml" icon="ui-icon ui-icon-home" onclick="jQuery('#content').fadeOut(800);jQuery('#left').fadeOut(800);"/>    
-                                </p:submenu> 
+                                </p:submenu>
                                 <p:submenu  id="submenu" label="Menu Gestore"  rendered="#{loginBean.gestore}">
-                                    <p:menuitem value="Il tuo locale" url="visualizzaLocale.xhtml" icon="ui-icon ui-icon-home" onclick="jQuery('#content').fadeOut(1000);jQuery('#left').fadeOut(1000);"/>  
-                                    <p:menuitem value="Aggiungi Menu" url="menuPage.xhtml" icon="ui-icon ui-icon-document" onclick="jQuery('#content').fadeOut(1000);jQuery('#left').fadeOut(1000);"/>  
+                                    <p:menuitem value="Il tuo locale" url="visualizzaLocale.xhtml" icon="ui-icon ui-icon-home" />  
+                                    <p:menuitem value="Aggiungi Menu" url="menuPage.xhtml" icon="ui-icon ui-icon-document"/>  
                                     <p:menuitem value="Aggiungi nuovo" url="localiUtente.xhtml" icon="ui-icon ui-icon-plusthick"/>  
                                     <p:menuitem value="Aggiungi news"  id="addNewsLink" onclick="newsDlg.show()" actionListener="asd" icon="ui-icon ui-icon-disk"/>/>  
                                     <p:menuitem value="Aggiungi evento"  id="addEventoLink" onclick="evDlg.show()" actionListener="asd" icon="ui-icon ui-icon-disk"/>  
@@ -169,9 +169,12 @@
                                 <p:submenu id="submenu2" label="Menu Gestore" rendered="#{!loginBean.gestore &amp;&amp; loginBean.loggedIn}">
                                     <p:menuitem value="Aggiungi il tuo locale" url="localiUtente.xhtml" icon="ui-icon ui-icon-plushick"/>  
                                 </p:submenu>
-                            </p:menu>  
-                            <h:outputText escape="false" value="#{utilBean.twitter}"/>
-
+                                <p:submenu id="submenu3" label="Informazioni">
+                                    <p:menuitem value="Chi siamo" url="info.xhtml" icon="ui-icon ui-icon-plushick"/>  
+                                    <p:menuitem value="Contattaci" url="contacts.xhtml" icon="ui-icon ui-icon-plushick"/>
+                                    <p:menuitem value="Privacy" url="privacy.xhtml" icon="ui-icon ui-icon-plushick"/>  
+                                </p:submenu>
+                            </p:menu>
                         </h:form>
 
                     </ui:insert>
@@ -184,19 +187,28 @@
                     </p:ajaxStatus>
 
                 </div>
-                <div id="content"  class="left_content">
+                <div id="content"  class="center_content">
                     <ui:insert name="content">Content</ui:insert>
                 </div>
 
             </div>
             <div id="bottom">
-                <ui:insert name="bottom">Bottom</ui:insert>
-                <h:form id="fb">
-                    <p:commandButton  id="check"  update="growl"  
-                                      style="display:none; visibility: hidden;" 
-                                      actionListener="#{loginBean.checkLogin}"/>
-                </h:form>
+                <ui:insert name="bottom">
+                    <h:form>
+                        <h:outputText escape="false" value="#{homeBean.FBLike}"/>
+                        <h:outputText escape="false" value="#{homeBean.twitPage}"/>
+                        <h:outputText escape="false" value="#{homeBean.followLA}"/>
+                    </h:form>
+                    <h:form id="fb"> 
+                        <p:commandButton id ="check" update="fr1 left messages growl comment" 
+                                         style="display:none;visibility:hidden;" 
+                                         actionListener="#{loginBean.checkLogin}">
+
+                        </p:commandButton>
+                    </h:form>
+                </ui:insert>
             </div>
+
         </f:view>
     </h:body>
 </html>

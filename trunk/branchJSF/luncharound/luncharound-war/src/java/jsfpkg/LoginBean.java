@@ -40,32 +40,35 @@ public class LoginBean {
     private String indirizzo;
     private String mail;
     private String foto;
+    private boolean hasPhoto;
+
     private boolean loggedIn;
     private boolean reg;
     private String fburl;
     private boolean gestore; // indica se l'utente è un gestore oppure no
     //serve per il menu laterale
-    
+  
     // empty constructor
     public LoginBean() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession httpSession = request.getSession();
         try{
-        setGestore((Boolean)httpSession.getAttribute("gestore"));
-        setLoggedIn((Boolean)httpSession.getAttribute("loggedIn"));
-        setUsername((String) httpSession.getAttribute("nome_utente"));
-        setIndirizzo((String) httpSession.getAttribute("home"));
+            setGestore((Boolean)httpSession.getAttribute("gestore"));
+            setLoggedIn((Boolean)httpSession.getAttribute("loggedIn"));
+            setUsername((String) httpSession.getAttribute("nome_utente"));
+            setIndirizzo((String) httpSession.getAttribute("home"));
+            setFoto((String) httpSession.getAttribute("foto"));
         }
         catch(Exception e){
             System.out.println("LoginBean.java fresh session");
         }
-        System.err.println("Inizializzazione bean [LoginBean.java]");
-        
+
+        System.err.println("Inizializzazione bean [LoginBean.java]");        
     }
 
     
     
-    public void login(ActionEvent actionEvent) {
+    public String login(ActionEvent actionEvent) {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         loggedIn = false;
@@ -88,6 +91,8 @@ public class LoginBean {
             httpSession.setAttribute("tipo", persona.getTipo());
             httpSession.setAttribute("loggedIn", loggedIn);
             httpSession.setAttribute("gestore", gestore);
+            if (persona.getFoto().equals("")) foto = "resources/user.png";
+            httpSession.setAttribute("foto", persona.getFoto());
             System.err.println("Utente Loggato");
             try { 
                 Locale loc = controlloreLocale.getLocali(persona.getId());
@@ -111,7 +116,7 @@ public class LoginBean {
         context.addCallbackParam("gestore", gestore);
         httpSession.setAttribute("loggedIn", loggedIn);
         httpSession.setAttribute("gestore", gestore);
-        return;
+        return "home";
     }
 
     public void register(ActionEvent actionEvent) {
@@ -135,15 +140,22 @@ public class LoginBean {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         boolean newLogin;
-        setLoggedIn(false);
+        
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession httpSession = request.getSession();
+
+        try{
+            setLoggedIn((Boolean)httpSession.getAttribute("loggedIn"));
+        }catch(Exception e){
+            setLoggedIn(false);
+        }
         try{
             newLogin=(Boolean)httpSession.getAttribute("newLogin");
+        
         }
         catch (Exception e){
-            System.err.println("[LoginBean.java]: Lore risolvi questo problema, ogni volta "
-                    + "che si prova a entrare nella pagina restituisce una eccezione e si schianta.");
+            //System.err.println("[LoginBean.java]: Lore risolvi questo problema, ogni volta "
+              //      + "che si prova a entrare nella pagina restituisce una eccezione e si schianta.");
             newLogin = false;
         }
         if(newLogin){ //c'è stato un tentativo di login recente
@@ -156,6 +168,7 @@ public class LoginBean {
             }
             else{//non ci sono errori
                 loggedIn=true; //tutti i dati dell'utente sono già in sessione!
+                httpSession.setAttribute("loggedIn",true);
                 msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Ciao "+(String)httpSession.getAttribute("nome_utente"),"");
             }
             FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -166,29 +179,40 @@ public class LoginBean {
     }
      
     /* Metodo per invalidare la sessione utente
-     * l
+     * 
      */
     
     public String logout(){
         System.out.println("[Login Bean ] logout");
-        FacesContext context = FacesContext.getCurrentInstance();
-        
-        ExternalContext ec = context.getExternalContext();
-        final HttpServletRequest request = (HttpServletRequest)ec.getRequest();
-        request.getSession( false ).invalidate();
-        setGestore(false);
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpSession httpSession = request.getSession();
         setLoggedIn(false);
+        setGestore(false);
+        httpSession.setAttribute("loggedIn", false);
+        httpSession.setAttribute("gestore", false);
+        httpSession.setAttribute("nome_utente", "");
+        httpSession.setAttribute("idUtente",null );
+        httpSession.setAttribute("eventi",false);
+        httpSession.setAttribute("news",false);
+        httpSession.setAttribute("home","");
+        httpSession.setAttribute("tipo","");
+        httpSession.setAttribute("foto","");
+        httpSession.setAttribute("mioLocale",null);
+        
         FacesMessage msg = null;
         msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Logout effettuato con successo","");
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        /*Invalido la sessione*/
-        request.getSession().invalidate();
         /*rimando l'utente alla home per evitare
          che le jsf si rompano*/
-        
+        System.err.println("Sessione invalidata, rimando alla homepage");
         return "home";
     }
 
+    public String doNavigation(){
+        return "home";
+    }
+    
+    
     
     public void twitLogin() {
         String url = "/TwitterServlet?metodo=login";  
@@ -253,6 +277,15 @@ public class LoginBean {
         this.username = username;
     }
 
+    public boolean isHasPhoto() {
+        return hasPhoto;
+    }
+
+    public void setHasPhoto(boolean hasPhoto) {
+        this.hasPhoto = hasPhoto;
+    }
+
+    
     public String getPassword() {
         return password;
     }

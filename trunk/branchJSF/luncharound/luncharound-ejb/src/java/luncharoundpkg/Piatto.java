@@ -28,7 +28,12 @@ public class Piatto implements Serializable {
     private Categoria categoria;
     private float prezzo;
     private boolean corrente;
-    private byte flags; //maschera di bit,CARNE,PESCE,VEGETARIANO,VEGANO,CELIACO,ALCOLICO
+    private boolean carne;
+    private boolean pesce;
+    private boolean vegetariano;
+    private boolean vegano;
+    private boolean celiaco;
+    private boolean alcolico;
     private int idLocale; 
     
     public Piatto() {
@@ -88,13 +93,55 @@ public class Piatto implements Serializable {
         this.corrente = corrente;
     }
 
-    public byte getFlags() {
-        return flags;
+    public boolean isAlcolico() {
+        return alcolico;
     }
 
-    public void setFlags(byte flags) {
-        this.flags = flags;
+    public void setAlcolico(boolean alcolico) {
+        this.alcolico = alcolico;
     }
+
+    public boolean isCarne() {
+        return carne;
+    }
+
+    public void setCarne(boolean carne) {
+        this.carne = carne;
+    }
+
+    public boolean isCeliaco() {
+        return celiaco;
+    }
+
+    public void setCeliaco(boolean celiaco) {
+        this.celiaco = celiaco;
+    }
+
+    public boolean isPesce() {
+        return pesce;
+    }
+
+    public void setPesce(boolean pesce) {
+        this.pesce = pesce;
+    }
+
+    public boolean isVegano() {
+        return vegano;
+    }
+
+    public void setVegano(boolean vegano) {
+        this.vegano = vegano;
+    }
+
+    public boolean isVegetariano() {
+        return vegetariano;
+    }
+
+    public void setVegetariano(boolean vegetariano) {
+        this.vegetariano = vegetariano;
+    }
+
+
 
     public String getNome() {
         return nome;

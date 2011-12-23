@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 @Local
 public interface ControlloreLocaleLocal {
     
-    public void addPiatto(String nome, Categoria categoria, float prezzo, byte flags,int idLocale);
+    public void addPiatto(String nome, Categoria categoria, float prezzo,int idLocale, boolean [] flags);
     public void remPiatto(long id);
     
     public void addPiattoCombo(String descr, float prezzo, int idLocale);
