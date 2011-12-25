@@ -198,7 +198,14 @@ public class LoginBean {
         httpSession.setAttribute("tipo","");
         httpSession.setAttribute("foto","");
         httpSession.setAttribute("mioLocale",null);
-        
+        httpSession.setAttribute("oauth_token",null);
+        httpSession.setAttribute("oauth_token_secret", null);
+        //try{
+        //    httpSession.removeAttribute(mail);
+        //}
+        //catch(Exception e) {
+        //    System.out.println("Non ero loggato via twitter");
+        //}
         FacesMessage msg = null;
         msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Logout effettuato con successo","");
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -216,14 +223,21 @@ public class LoginBean {
     
     public void twitLogin() {
         String url = "/TwitterServlet?metodo=login";  
-        FacesContext context = FacesContext.getCurrentInstance();  
+        RequestContext context = RequestContext.getCurrentInstance();
+        FacesContext context2 = FacesContext.getCurrentInstance(); 
+        loggedIn = false;
+        gestore = false;
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpSession httpSession = request.getSession();
+        httpSession.setAttribute("loggedIn", loggedIn);
+        httpSession.setAttribute("gestore", gestore);
         try {  
-            context.getExternalContext().dispatch(url);  
+            context2.getExternalContext().dispatch(url);  
         }catch (Exception e) {  
             e.printStackTrace();  
         }  
         finally{  
-            context.responseComplete();  
+            context2.responseComplete();  
         }
     }
     

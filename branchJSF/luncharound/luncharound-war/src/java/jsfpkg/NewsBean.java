@@ -14,6 +14,7 @@ import luncharoundpkg.ControlloreLocaleLocal;
 import luncharoundpkg.ControlloreUtenteLocal;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.annotation.PostConstruct;
 import luncharoundpkg.Locale;
 import luncharoundpkg.News;
 import luncharoundpkg.ControlloreNewsLocal;
@@ -47,6 +48,7 @@ public class NewsBean {
     public NewsBean() {
     }
     
+    @PostConstruct
     public void init(){
         int idLocale;
         long idUtente;
@@ -95,6 +97,7 @@ public class NewsBean {
         }
         else
             news = controlloreNews.getNews();
+        tutteNews = news.toString();
     }
     
     public void addNews(){

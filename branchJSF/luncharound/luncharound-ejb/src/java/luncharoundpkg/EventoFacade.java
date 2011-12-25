@@ -40,7 +40,7 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
     @Override
     public List<Evento> findByLocale(int idLocale){
         //deleteOld();
-        String selectQuery = "SELECT V FROM Evento V ORDER BY V.dataInizio, V.dataFine WHERE V.idLocale = ?1";
+        String selectQuery = "SELECT DISTINCT OBJECT(V) FROM Evento V WHERE V.idLocale = ?1 ORDER BY V.dataInizio, V.dataFine";
 	Query searchById = em.createQuery(selectQuery);
 	searchById.setParameter(1, idLocale);
         return searchById.getResultList();
@@ -49,9 +49,10 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
     @Override
     public List<Evento> findByLocali(List<Integer> idLocali){
         //deleteOld();
-        String selectQuery = "SELECT V FROM Evento V ORDER BY V.dataInizio, V.dataFine WHERE V.idLocale IN ?1";
+        //String selectQuery = "SELECT V FROM Evento V WHERE V.idLocale IN ?1 ORDER BY V.dataInizio, V.dataFine";
+        String selectQuery = "SELECT OBJECT(V) FROM Evento V ORDER BY V.dataInizio, V.dataFine";
 	Query searchById = em.createQuery(selectQuery);
-	searchById.setParameter(1, idLocali);
+	//searchById.setParameter(1, idLocali);
         return searchById.getResultList();
     }
     
@@ -59,7 +60,7 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
     public List<Evento> findNext(){
         //deleteOld();
         //La query mi deve restituire un subset degli eventi nel sistema ordinati e più vicini nel tempo
-        String selectQuery = "SELECT V FROM Evento V ORDER BY V.dataInizio, V.dataFine WHERE V.idLocale IN ?1";
+        String selectQuery = "SELECT OBJECT(V) FROM Evento V ORDER BY V.dataInizio, V.dataFine";
 	Query searchById = em.createQuery(selectQuery);
         return searchById.getResultList();
     }

@@ -81,17 +81,16 @@
                     <p:tab title="News Locale" id="newsForm">  
                         <h:form prependId="false">
                             <p:dataList value="#{newsBean.news}" var="news"
-                                    paginator="true" rows="5" effectSpeed="fast"
-                                    paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
-                                    rowsPerPageTemplate="5,10,15">
+                                    paginator="true" rows="10" effectSpeed="fast"
+                                    paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}">
 
                                     <p:column>
                                             <p:commandLink update="newsDetail" oncomplete="newsDialog.show()" title="View Detail">
-                                            <p:graphicImage value="/images/search.png"/> 
+                                            <p:graphicImage value="/resources/news_logo.png"/> 
                                             <f:setPropertyActionListener value="#{news}" target="#{newsBean.selectedNews}" />
                                     </p:commandLink>
 
-                                    <h:outputText value="#{news.dataInizio}, #{news.titolo}" style="margin-left:10px" />
+                                    <h:outputText value="#{news.titolo}, #{news.dataInizio}" style="margin-left:10px" />
 
                                     </p:column>
                             </p:dataList>
@@ -99,7 +98,7 @@
                             <p:dialog header="News Detail" widgetVar="newsDialog" width="200" height="175" modal="true">
                                     <p:outputPanel id="newsDetail" style="text-align:center;" layout="block">
 
-                                            <p:graphicImage value="/resources/ic1.png"/>
+                                            <p:graphicImage value="/resources/ic2.png"/>
 
                                             <h:panelGrid  columns="2" cellpadding="5">
                                                     <h:outputLabel for="titolo" value="Titolo: " />
@@ -115,22 +114,20 @@
                             </p:dialog>
 
                         </h:form>
-                        <h:outputText value="#{newsBean.tutteNews}"/>
                     </p:tab>
                     <p:tab title="Eventi Locale" id="eventForm">  
                         <h:form prependId="false">
-                            <p:dataList value="#{eventBean.eventi}" var="eventi"
-                                    paginator="true" rows="5" effectSpeed="fast"
-                                    paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
-                                    rowsPerPageTemplate="5,10,15">
+                            <p:dataList value="#{eventBean.eventi}" var="evento"
+                                    paginator="true" rows="10" effectSpeed="fast"
+                                    paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}">
 
                                     <p:column>
                                             <p:commandLink update="eventDetail" oncomplete="eventDialog.show()" title="View Detail">
-                                            <p:graphicImage value="/images/search.png"/> 
-                                            <f:setPropertyActionListener value="#{event}" target="#{eventBean.selectedEvent}" />
+                                            <p:graphicImage value="/resources/calendar.jpg"/> 
+                                            <f:setPropertyActionListener value="#{evento}" target="#{eventBean.selectedEvent}" />
                                     </p:commandLink>
 
-                                    <h:outputText value="#{event.dataInizio}, #{event.titolo}" style="margin-left:10px" />
+                                    <h:outputText value="#{evento.titolo}, #{evento.dataInizio}" style="margin-left:10px" />
 
                                     </p:column>
                             </p:dataList>
@@ -138,7 +135,7 @@
                             <p:dialog header="Event Detail" widgetVar="eventDialog" width="200" height="175" modal="true">
                                     <p:outputPanel id="eventDetail" style="text-align:center;" layout="block">
 
-                                            <p:graphicImage value="/resources/ic1.png"/>
+                                            <p:graphicImage value="/resources/ic2.png"/>
 
                                             <h:panelGrid  columns="2" cellpadding="5">
                                                     <h:outputLabel for="titolo" value="Titolo: " />
@@ -157,7 +154,6 @@
                             </p:dialog>
 
                         </h:form>
-                        <h:outputText value="#{eventBean.titolo}"/>
                     </p:tab>
                     <p:tab title="Condividi questo locale">
                         <p:lightBox iframe="true" width="60%" height="60%">  

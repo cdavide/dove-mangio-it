@@ -10,26 +10,25 @@
     <ui:define name="content">
 
                          <h:form prependId="false">
-                            <p:dataList value="#{eventBean.eventi}" var="eventi"
-                                    paginator="true" rows="5" effectSpeed="fast"
-                                    paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
-                                    rowsPerPageTemplate="5,10,15">
+                            <p:dataList value="#{eventBean.eventi}" var="evento"
+                                    paginator="true" rows="10" effectSpeed="fast"
+                                    paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}">
 
                                     <p:column>
-                                            <p:commandLink update="eventDetail" oncomplete="eventDialog.show()" title="View Detail">
-                                            <p:graphicImage value="/images/search.png"/> 
-                                            <f:setPropertyActionListener value="#{event}" target="#{eventBean.selectedEvent}" />
-                                    </p:commandLink>
+                                        <p:commandLink update="eventDetail" oncomplete="eventDialog.show()" title="View Detail">
+                                            <p:graphicImage value="/resources/calendar.jpg"/> 
+                                            <f:setPropertyActionListener value="#{evento}" target="#{eventBean.selectedEvent}" />
+                                        </p:commandLink>
 
-                                    <h:outputText value="#{event.dataInizio}, #{event.titolo}" style="margin-left:10px" />
+                                        <h:outputText value="#{evento.titolo}, #{evento.dataInizio}" style="margin-left:10px" />
 
                                     </p:column>
                             </p:dataList>
 
-                            <p:dialog header="Event Detail" widgetVar="eventDialog" width="200" height="175" modal="true">
+                            <p:dialog header="Event Detail" widgetVar="eventDialog" width="300" height="400" modal="true">
                                     <p:outputPanel id="eventDetail" style="text-align:center;" layout="block">
 
-                                            <p:graphicImage value="/resources/ic1.png"/>
+                                            <p:graphicImage value="/resources/ic2.png"/>
 
                                             <h:panelGrid  columns="2" cellpadding="5">
                                                     <h:outputLabel for="titolo" value="Titolo: " />
@@ -43,6 +42,7 @@
 
                                                     <h:outputLabel for="descrizione" value="Descrizione: " />
                                                     <h:outputText id="descr" value="#{eventBean.selectedEvent.descr}"/>
+                                                  
                                             </h:panelGrid>
                                     </p:outputPanel>
                             </p:dialog>

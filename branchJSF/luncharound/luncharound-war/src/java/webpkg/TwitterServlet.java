@@ -19,6 +19,7 @@ import com.sun.jersey.api.client.UniformInterfaceException;
 import luncharoundpkg.ControlloreLocaleLocal;
 import luncharoundpkg.ControlloreUtenteLocal;
 import luncharoundpkg.Utente;
+import luncharoundpkg.Locale;
 
 /**
  *
@@ -85,12 +86,17 @@ public class TwitterServlet extends HttpServlet {
                     httpSession.setAttribute("foto", persona.getFoto());            
                     httpSession.setAttribute("tipo", persona.getTipo());
                     try{
-                        httpSession.setAttribute("localipersonali",controlloreLocale.getLocali(persona.getId()));
+                        Locale loc = controlloreLocale.getLocali(persona.getId());
+                        httpSession.setAttribute("localipersonali", loc);
+                        httpSession.setAttribute("mioLocale",loc.getId());
+                        httpSession.setAttribute("idLocale",loc.getId());
+                        httpSession.setAttribute("gestore", true); 
                     }
                     catch(NullPointerException e){
                         System.err.println("L'utente non ha associato nessun locale personale");
                     }
                     httpSession.setAttribute("newLogin",true);
+                    httpSession.setAttribute("loggedIn",true);
                     request.getRequestDispatcher("faces/home.xhtml").forward(request, response); 
                 
                 } catch (UniformInterfaceException ex) {
@@ -139,12 +145,17 @@ public class TwitterServlet extends HttpServlet {
                     httpSession.setAttribute("foto", persona.getFoto());            
                     httpSession.setAttribute("tipo", persona.getTipo());
                     try{
-                        httpSession.setAttribute("localipersonali",controlloreLocale.getLocali(persona.getId()));
+                        Locale loc = controlloreLocale.getLocali(persona.getId());
+                        httpSession.setAttribute("localipersonali", loc);
+                        httpSession.setAttribute("gestore", true); 
+                        httpSession.setAttribute("mioLocale",loc.getId());
+                        httpSession.setAttribute("idLocale",loc.getId());
                     }
                     catch(NullPointerException e){
                         System.err.println("L'utente non ha associato nessun locale personale");
                     }
                     httpSession.setAttribute("newLogin",true);
+                    //httpSession.setAttribute("loggedIn",true);
                     request.getRequestDispatcher("faces/home.xhtml").forward(request, response); 
                 
                 } catch (UniformInterfaceException ex) {
