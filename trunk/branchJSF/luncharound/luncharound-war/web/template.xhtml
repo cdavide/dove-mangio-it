@@ -103,19 +103,20 @@
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <h:outputLabel for="titolo" value="Titolo *" />
                                     <p:inputText value="#{eventBean.titolo}" 
-                                                 id="titolo" required="true" label="titolo" />
+                                                 id="titoloEv" required="true" label="titolo" />
                                     <h:outputLabel for="descr" value="Descrizione * " />
-                                    <p:inputTextarea style="width:300px;height:100px;" effectDuration="400" id="descrizione" value="#{eventBean.descr}"/>
+                                    <p:inputTextarea style="width:300px;height:100px;" effectDuration="400" id="descrizioneEv" value="#{eventBean.descr}"/>
                                     <h:outputLabel for="dataInizio" value="Data inizio: * " />
-                                    <p:calendar value="#{eventBean.dataInizio}" id="dataIn"/>
+                                    <p:calendar value="#{eventBean.dataInizio}" id="dataInEv"/>
                                     <h:outputLabel for="dataFine" value="Data fine * " />
-                                    <p:calendar value="#{eventBean.dataFine}" id="dataFin"/>
-                                    <p:commandButton value="Aggiungi" update="growl"  onclick="return true" />
+                                    <p:calendar value="#{eventBean.dataFine}" id="dataFinEv"/>
+                                    <p:commandButton id="aggEv"
+                                              value="Aggiungi" onclick="submitEvForm('eventoForm:eventSave','eventoForm')">
+                                    </p:commandButton> 
                                 </h:panelGrid>
-                                <p:commandButton  id="act" value="addEv" update="eventForm"  
+                                <p:commandButton  id="eventSave" value="#"
                                                   style="display:none; visibility: hidden;" 
-                                                  actionListener="#{eventBean.addEvento}" 
-                                                  oncomplete="return true"/>
+                                                  actionListener="#{eventBean.addEvento}"/>
                             </h:form>
                         </p:dialog>
 
@@ -124,17 +125,18 @@
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <h:outputLabel for="titolo" value="Titolo *" />
                                     <p:inputText value="#{newsBean.titolo}" 
-                                                 id="titolo" required="true" label="titolo" />
+                                                 id="titoloNews" required="true" label="titolo" />
                                     <h:outputLabel for="descr" value="Descrizione * " />
-                                    <p:inputTextarea style="width:300px;height:100px;" effectDuration="400" id="descrizione" value="#{newsBean.descr}"/>
+                                    <p:inputTextarea style="width:300px;height:100px;" effectDuration="400" id="descrizioneNews" value="#{newsBean.descr}"/>
                                     <h:outputLabel for="dataInizio" value="Data inizio: * " />
-                                    <p:calendar value="#{newsBean.dataInizio}" id="dataIn"/>
-                                    <p:commandButton value="Aggiungi" update="growl"  onclick="return true" />
+                                    <p:calendar value="#{newsBean.dataInizio}" id="dataInNews"/>
+                                    <p:commandButton id="aggNews"
+                                              value="Aggiungi" onclick="submitNewsForm('newsForm:newsSave','newsForm')">
+                                    </p:commandButton>
                                 </h:panelGrid>
-                                <p:commandButton  id="act" value="addEv" update="eventForm"  
+                                <p:commandButton  id="newsSave" value="#"
                                                   style="display:none; visibility: hidden;" 
-                                                  actionListener="#{newsBean.addNews}" 
-                                                  oncomplete="return true"/>
+                                                  actionListener="#{newsBean.addNews}"/>
                             </h:form>
                         </p:dialog>
 

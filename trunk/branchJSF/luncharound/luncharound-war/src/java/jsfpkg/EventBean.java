@@ -14,6 +14,7 @@ import luncharoundpkg.ControlloreLocaleLocal;
 import luncharoundpkg.ControlloreUtenteLocal;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.annotation.PostConstruct;
 import luncharoundpkg.Locale;
 import luncharoundpkg.Evento;
 import luncharoundpkg.ControlloreEventiLocal;
@@ -44,8 +45,10 @@ public class EventBean {
     
     /** Creates a new instance of EventBean */
     public EventBean() {
+        
     }
     
+    @PostConstruct
     public void init(){
         int idLocale;
         long idUtente;
@@ -94,6 +97,7 @@ public class EventBean {
         }
         else
             eventi = controlloreEventi.getEventi();
+            tuttiEventi = eventi.toString();
     }
     
     public void addEvento(){

@@ -95,10 +95,15 @@ function handleRegRequest(xhr, status, args) {
     }
 }
         
-function handleEvRequest() {
-
+function submitEvForm(nextLink, formId) {
     evDlg.hide();
-}        
+    clickLink(nextLink);
+}
+
+function submitNewsForm(nextLink, formId) {
+    newsDlg.hide();
+    clickLink(nextLink);
+}
         
 function submitRegForm( nextLink, formId){
     var geoc = null;
