@@ -152,7 +152,7 @@
                                     <p:menuitem rendered="#{loginBean.loggedIn}" value="Effettua logout" 
                                                 update="fr1 comment growl" id="logoutLink"  ajax="false"
                                                 action="#{loginBean.logout}"  icon="ui-icon ui-icon-close"/>  
-                                    <p:menuitem value="Registrati" id="registerLink" onclick="regDlg.show()" actionListener="asd" icon="ui-icon ui-icon-disk"/>  
+                                    <p:menuitem value="Registrati" rendered="#{!loginBean.loggedIn}"  id="registerLink" onclick="regDlg.show()" actionListener="asd" icon="ui-icon ui-icon-disk"/>  
                                 </p:submenu> 
                                 <p:submenu label="Menu Ristoranti">  
                                     <p:menuitem value="Tutti i locali" url="locali.xhtml" ajax="false" icon="ui-icon ui-icon-home"/>  
@@ -163,10 +163,10 @@
                                 <p:submenu  id="submenu" label="Menu Gestore"  rendered="#{loginBean.gestore}">
                                     <p:menuitem value="Il tuo locale" url="visualizzaLocale.xhtml" icon="ui-icon ui-icon-home" />  
                                     <p:menuitem value="Aggiungi Menu" url="menuPage.xhtml" icon="ui-icon ui-icon-document"/>  
-                                    <p:menuitem value="Aggiungi nuovo" url="localiUtente.xhtml" icon="ui-icon ui-icon-plusthick"/>  
+                                    <!--<p:menuitem value="Aggiungi nuovo" url="localiUtente.xhtml" icon="ui-icon ui-icon-plusthick"/>  -->
                                     <p:menuitem value="Aggiungi news"  id="addNewsLink" onclick="newsDlg.show()" actionListener="asd" icon="ui-icon ui-icon-disk"/>/>  
                                     <p:menuitem value="Aggiungi evento"  id="addEventoLink" onclick="evDlg.show()" actionListener="asd" icon="ui-icon ui-icon-disk"/>  
-                                    <p:menuitem value="Statistiche" update="messages" ajax="false" icon="ui-icon ui-icon-close"/>  
+                                    
                                 </p:submenu>
                                 <p:submenu id="submenu2" label="Menu Gestore" rendered="#{!loginBean.gestore &amp;&amp; loginBean.loggedIn}">
                                     <p:menuitem value="Aggiungi il tuo locale" url="localiUtente.xhtml" icon="ui-icon ui-icon-plushick"/>  

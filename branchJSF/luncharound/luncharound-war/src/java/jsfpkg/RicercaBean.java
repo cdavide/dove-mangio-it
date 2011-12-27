@@ -174,7 +174,7 @@ public class RicercaBean{
     } 
     
     //metodo per nuvoletta sulla mappa
-        public void onMarkerSelect(OverlaySelectEvent event) { 
+    public void onMarkerSelect(OverlaySelectEvent event) { 
         System.err.println("dentro!");
         marker = (Marker) event.getOverlay();  
     } 
