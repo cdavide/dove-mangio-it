@@ -10,6 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -28,7 +29,7 @@ import org.primefaces.context.RequestContext;
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
 @ManagedBean(name = "loginBean")
-@SessionScoped
+@ViewScoped
 public class LoginBean {
     
     @EJB
@@ -83,6 +84,7 @@ public class LoginBean {
         } else {
 
             loggedIn = true;
+           
             httpSession.setAttribute("nome_utente", persona.getUsername());
             httpSession.setAttribute("idUtente", persona.getId());
             httpSession.setAttribute("eventi", persona.isEventi());
@@ -91,8 +93,11 @@ public class LoginBean {
             httpSession.setAttribute("tipo", persona.getTipo());
             httpSession.setAttribute("loggedIn", loggedIn);
             httpSession.setAttribute("gestore", gestore);
-            if (persona.getFoto().equals("")) foto = "resources/user.png";
-            httpSession.setAttribute("foto", persona.getFoto());
+            if (null == persona.getFoto() || persona.getFoto().equals("")) {
+                foto = "resources/user.png";
+            }
+            else foto= persona.getFoto();
+            httpSession.setAttribute("foto", foto);
             System.err.println("Utente Loggato");
             try { 
                 Locale loc = controlloreLocale.getLocali(persona.getId());

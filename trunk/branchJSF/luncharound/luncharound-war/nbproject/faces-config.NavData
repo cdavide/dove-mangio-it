@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Scene Scope="Project" version="2">
-    <Scope Scope="Faces Configuration Only"/>
+<Scene Scope="All Faces Configurations" version="2">
+    <Scope Scope="Faces Configuration Only">
+        <Node id="localiUtente.xhtml" x="-483" y="299" zoom="true"/>
+        <Node id="info.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="locali.xhtml" x="-166" y="250" zoom="true"/>
+        <Node id="visualizzaLocale.xhtml" x="-370" y="54" zoom="true"/>
+        <Node id="home.xhtml" x="-638" y="128" zoom="true"/>
+    </Scope>
     <Scope Scope="Project">
         <Node id="ricerca.xhtml" x="400" y="150" zoom="true"/>
         <Node id="registrazioneUtente.jsp" x="-572" y="397" zoom="true"/>
-        <Node id="info.xhtml" x="150" y="300" zoom="true"/>
         <Node id="localiUtente.xhtml" x="-483" y="299" zoom="true"/>
+        <Node id="info.xhtml" x="150" y="300" zoom="true"/>
         <Node id="index.jsp" x="-650" y="522" zoom="true"/>
         <Node id="ricerca.jsp" x="-465" y="472" zoom="true"/>
-        <Node id="template.xhtml" x="150" y="450" zoom="true"/>
         <Node id="locale.jsp" x="-568" y="370" zoom="true"/>
+        <Node id="template.xhtml" x="150" y="450" zoom="true"/>
         <Node id="newsPage.xhtml" x="213" y="260" zoom="true"/>
         <Node id="menuPage.xhtml" x="127" y="320" zoom="true"/>
         <Node id="form_ricerca.jsp" x="-540" y="492" zoom="true"/>
@@ -22,7 +28,10 @@
         <Node id="home.xhtml" x="-638" y="128" zoom="false"/>
     </Scope>
     <Scope Scope="All Faces Configurations">
-        <Node id="locali.xhtml" x="75" y="124" zoom="true"/>
+        <Node id="info.xhtml" x="-366" y="74" zoom="true"/>
+        <Node id="localiUtente.xhtml" x="-483" y="299" zoom="true"/>
+        <Node id="locali.xhtml" x="-368" y="137" zoom="true"/>
         <Node id="visualizzaLocale.xhtml" x="405" y="22" zoom="true"/>
+        <Node id="home.xhtml" x="-638" y="128" zoom="true"/>
     </Scope>
 </Scene>

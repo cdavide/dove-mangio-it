@@ -20,5 +20,13 @@ public interface ControllorePiattiLocal {
     public void addPiatto(luncharoundpkg.Piatto p);
 
     public java.util.List<luncharoundpkg.Piatto> getCategoriaLocale(int idLocale, luncharoundpkg.Categoria cat);
+
+    public void removePiatto(luncharoundpkg.Piatto p);
+
+    public luncharoundpkg.Piatto findById(long idPiatto);
+
+    public void editListaPiatti(java.util.List<luncharoundpkg.Piatto> lista);
+
+    public luncharoundpkg.Piatto createTemplatePiatto(luncharoundpkg.Categoria cat, int idLocale);
     
 }

@@ -77,7 +77,7 @@ public class LocaliBean implements Serializable {
     }
     
 
-    public void save() {
+    public String save() {
         FacesMessage msg = null;
         // prendo la sessione
         FacesContext context = FacesContext.getCurrentInstance();
@@ -91,7 +91,7 @@ public class LocaliBean implements Serializable {
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Errore!", "Errore registrazione locale.Controlla: login, session,un solo locale per username");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             
-            return;
+            return null;
         }
 
        
@@ -113,12 +113,13 @@ public class LocaliBean implements Serializable {
             msg = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Failure!", "Locale non aggiunto");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             clearForm();
-            return;
+            return null;
         }
         msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Locale aggiunto corettamente");
         
         FacesContext.getCurrentInstance().addMessage(null, msg);
         clearForm();
+        
         // ricarico la lista dei locali
         try {
             locali = controlloreLocale.getTuttiLocali();
@@ -126,15 +127,17 @@ public class LocaliBean implements Serializable {
         } catch (NullPointerException e) {
             System.err.println("[LocaliBean.java] Non ci sono locali nel DB. Lista : " + controlloreLocale.locali());
         }
+        return null;
     }
 
-    public void clearForm() {
+    public String clearForm() {
         Locale nuovo = new Locale();
         locali = null;
         setNome("");
         setIndirizzo("");
         setCitta("");
         setDescrizione("");
+        return null;
     }
 
     public String visualizzaLocale() {

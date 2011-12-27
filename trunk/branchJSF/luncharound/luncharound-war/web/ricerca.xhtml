@@ -53,7 +53,7 @@
                              type="HYBRID" 
                              style="width:700px;height:400px;"
                              model="#{ricercaBean.advancedModel}" 
-                             overlaySelectListener="#{ricercaBean.onMarkerSelect()}">
+                             overlaySelectListener="#{ricercaBean.onMarkerSelect}">
 
                         <p:gmapInfoWindow>  
                             <p:outputPanel style="text-align:center;display:block;margin:auto">   
@@ -110,11 +110,6 @@
 
 
                     </p:dataTable>
-                
-                    <h:commandLink id="savelink3"  action="#{ricercaBean.visualizzaLocale()}"  >
-                        <f:param name="idLocale" value="3" />
-                        <h:outputText value="Visualizza il menu' e i dettagli del locale"></h:outputText>
-                    </h:commandLink>
                 </h:form>
     
 
