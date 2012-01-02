@@ -52,7 +52,6 @@ public class VisualizzaLocale implements Serializable {
     private StreamedContent chart;
     String mappa;
     String facebook;
-    String facebook2;
     String menu;
     String offerte;
     String valutazioni;
@@ -106,8 +105,7 @@ public class VisualizzaLocale implements Serializable {
         //creaMappaStatica(locale.getIndirizzo());
 
         System.out.println("mappa: " + mappa);
-        facebook = creaFbDialog(locale);
-        facebook2 = creaFbDialog2(locale);
+        facebook = creaFbDialog2(locale);
 
         menu = controlloreLocale.mostraMenu(idLocale);
         offerte = controlloreLocale.mostraCombo(idLocale);
@@ -207,7 +205,8 @@ public class VisualizzaLocale implements Serializable {
         return dialog;
     }
 
-    private String creaFbDialog(Locale loc) {
+    /* DEPRECATED
+     * private String creaFbDialog(Locale loc) {
 
         String dialog;
         String img_prova = "http://www.ahfourthgrade.net/resources/Charles-C--Ebbets-Lunch-Atop-A-Skyscraper-1932-8619.jpg";
@@ -226,7 +225,7 @@ public class VisualizzaLocale implements Serializable {
         dialog += "redirect_uri=http://www.facebook.com&output=embed";
 
         return dialog;
-    }
+    }*/
 
     private JFreeChart createChart(CategoryDataset dataset) {
         final JFreeChart chart = ChartFactory.createBarChart(
@@ -361,16 +360,7 @@ public class VisualizzaLocale implements Serializable {
     public void setTwitLocale(String TwitLocale) {
         this.TwitLocale = TwitLocale;
     }
-
-    public String getFacebook2() {
-        return facebook2;
-    }
-
-    public void setFacebook2(String facebook2) {
-        this.facebook2 = facebook2;
-    }
     
-
     public String getMenu() {
         return menu;
     }

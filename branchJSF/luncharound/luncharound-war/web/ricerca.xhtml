@@ -7,7 +7,7 @@
                 xmlns:p="http://primefaces.prime.com.tr/ui"
                 xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="content" >       
-
+        <center>
             <h:form id="formric">
                 <p:fieldset legend="Ricerca" toggleable="true" style="width:500px;"   >
                     <h:selectOneRadio id="scelta" onclick="seleziona('formric')" value="#{ricercaBean.tipo}" >
@@ -44,74 +44,83 @@
 
             <br></br>
 
-          
-                <h:form id="risultati" > 
 
-                    <p:gmap  id="mymap" rendered="#{ricercaBean.noSearch=='false'}"
-                             center="#{ricercaBean.latitudine},#{ricercaBean.longitudine}" 
-                             draggable="true" zoom="#{ricercaBean.zoom}" 
-                             type="HYBRID" 
-                             style="width:700px;height:400px;"
-                             model="#{ricercaBean.advancedModel}" 
-                             overlaySelectListener="#{ricercaBean.onMarkerSelect}">
+            <h:form id="risultati" > 
 
-                        <p:gmapInfoWindow>  
-                            <p:outputPanel style="text-align:center;display:block;margin:auto">   
-                                <h:outputText value="#{ricercaBean.marker.title}" />                 
-                            </p:outputPanel>   
-                        </p:gmapInfoWindow>  
-                    </p:gmap>
-                
+                <p:gmap  id="mymap" rendered="#{ricercaBean.noSearch=='false'}"
+                         center="#{ricercaBean.latitudine},#{ricercaBean.longitudine}" 
+                         draggable="true" zoom="#{ricercaBean.zoom}" 
+                         type="HYBRID" 
+                         style="width:700px;height:400px;"
+                         model="#{ricercaBean.advancedModel}" 
+                         overlaySelectListener="#{ricercaBean.onMarkerSelect}">
+
+                    <p:gmapInfoWindow>  
+                        <p:outputPanel style="text-align:center;display:block;margin:auto">   
+                            <h:outputText value="#{ricercaBean.marker.title}" />
+                            <br></br><br></br>
+                            <h:outputText value="#{ricercaBean.marker.data}" />
+
+
+                        </p:outputPanel>   
+                    </p:gmapInfoWindow> 
+
+                </p:gmap>
+
 
                 <br></br>        
                 <h:outputText rendered="#{ricercaBean.noSearch=='false' and ricercaBean.zeroResults}"
-                              value="Spiacente, nessun locale trovato" />
-
-                
-                    <p:dataTable var="loc" value="#{ricercaBean.lista}" rows="10"  paginator="true"   
-                                 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink}" >
-
-                        <p:column style="width:20%">
-                            <h:outputText value="#{ricercaBean.lista.indexOf(loc)+1}"  />
-                        </p:column>
-
-                        <p:column style="width:20%">
-                            <p:graphicImage width="120px" height="120px" value="/resources/default_loc.jpg"/>   
-                        </p:column>
-
-                        <p:column style="width:20%">
-                            <h:outputText  value="#{loc.nome}" /> 
-                            <br></br> 
-                            <h:outputText value="#{loc.indirizzo}" /> 
-                        </p:column>
-
-                        <p:column style="width:20%">
-
-                            <!--
-                         <p:rating value="1" stars="4" /><br/>
-                         <p:rating value="2" stars="4" /><br/>
-                         <p:rating value="3" stars="4" /><br/>
-                         <p:rating value="4" stars="4" /><br/> 
-                             
-                            -->
-
-                        </p:column>
-
-                        <p:column style="width:20%;margin-left:auto;margin-right:auto" >
-                            
-                            <p:commandButton id="savelink2"  
-                                             action="#{ricercaBean.visualizzaLocale()}"  
-                                             value="Visualizza il menu' e i dettagli del locale" 
-                                             ajax="false" >
-                                <f:param name="idLocale" value="#{loc.id}" />
-
-                            </p:commandButton>
-                        </p:column>
+                              value="Spiacente, non conosco nessun locale a questa distanza dal punto ricercato"
+                              style="font-style:inherit"  />
 
 
-                    </p:dataTable>
-                </h:form>
-    
+                <p:dataTable rendered="#{ricercaBean.noSearch=='false' and ricercaBean.zeroResults=='false'}"
+                             var="ris" value="#{ricercaBean.lista}" rows="2"  style="border:0" rowStyleClass="dtrow"  paginator="true"   
+                             paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink}" >
+
+                    <p:column style="width:5%; border: 0">
+                        <h:outputText value="#{ris.posizione}"  />
+                    </p:column> 
+
+                    <p:column style="width:20%;border: 0">
+                        <p:graphicImage width="120px" height="120px" value="/resources/default_loc2.jpg"/>   
+                    </p:column>
+
+                    <p:column style="width:20%;border: 0">
+                        <h:outputText  value="#{ris.loc.nome}" /> 
+                        <br></br><br></br> 
+                        <h:outputText value="#{ris.loc.indirizzo}" /> 
+                    </p:column>
+
+                    <p:column  style="width:40%;border:0;" >
+                        <!--<h:panelGrid columns="2" cellpadding="0" border="0" >-->
+                            <h:outputText value="affollamento"/>
+                            <p:rating  value="#{ris.aff}" stars="5" disabled="true"/><br></br>
+                            <h:outputText value="velocità"/>
+                            <p:rating value="#{ris.vel}" stars="5" disabled="true"/><br></br>
+                            <h:outputText value="cortesia"/>
+                            <p:rating value="#{ris.cor}" stars="5" disabled="true"/><br></br>
+                            <h:outputText value="qualità"/>
+                            <p:rating  value="#{ris.qual}" stars="5" disabled="true"/><br></br>
+                            <h:outputText value="quantità"/>
+                            <p:rating value="#{ris.quan}" stars="5" disabled="true"/><br></br>
+                            <h:outputText value="pulizia"/>
+                            <p:rating  value="#{ris.pul}" stars="5" disabled="true"/><br></br>
+                        <!--</h:panelGrid>-->
+                    </p:column>
+
+                    <p:column style="width:20%;border: 0; text-align: center " >
+                        <h:commandLink id="kinglink"   action="#{ricercaBean.visualizzaLocale}" >
+                            <f:param name="idLocale" value="#{ris.loc.id}" />
+                            <p:graphicImage  value="/resources/menu.gif"/>   
+                            <br></br>
+                            <h:outputText value="Visualizza il menu' e i dettagli del locale"></h:outputText>
+                        </h:commandLink>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </center>
 
     </ui:define>
 
