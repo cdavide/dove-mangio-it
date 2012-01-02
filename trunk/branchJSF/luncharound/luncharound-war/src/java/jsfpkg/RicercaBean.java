@@ -4,12 +4,17 @@
  */
 package jsfpkg;
 
-import javax.ejb.EJB;
-import java.util.*;
+import java.io.Serializable;  
+
+
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -17,20 +22,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import luncharoundpkg.ControlloreLocaleLocal;
 import luncharoundpkg.ControlloreUtenteLocal;
+import luncharoundpkg.ControlloreValutazioneLocal;
 import luncharoundpkg.Locale;
+import luncharoundpkg.Valutazione;
 import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
+
 /**
  *
  * @author Bovio Lorenzo, Bronzino Francesco e Concas Davide
  */
 @ManagedBean(name="ricercaBean")
+@SessionScoped
 @ViewScoped
 public class RicercaBean{
+    @EJB
+    private ControlloreValutazioneLocal controlloreValutazione;
     @EJB
     ControlloreLocaleLocal controlloreLocale;
     @EJB
@@ -49,7 +60,8 @@ public class RicercaBean{
     private MapModel advancedModel;
     private Marker marker;
     int zoom;
-    List<Locale> lista;
+    List<Risultato> lista;
+    List<Locale> ll; 
 
     /** Creates a new instance of RicercaBean */
     public RicercaBean() {
@@ -74,6 +86,9 @@ public class RicercaBean{
         zoom=15;
         tipo=1;
         
+        lista=new ArrayList<Risultato>();
+
+        
     }
     
     public void submit(){
@@ -87,6 +102,7 @@ public class RicercaBean{
         int i;
         String pushPin;
         String color;
+        String name;
         String description;
         LatLng tempPoint;    
         advancedModel = new DefaultMapModel();
@@ -96,16 +112,18 @@ public class RicercaBean{
         pushPin="https://chart.googleapis.com/chart?chst=d_map_pin_icon&chld=glyphish_target%7C00AAFF";
         advancedModel.addOverlay(new Marker(tempPoint,"La tua posizione","",pushPin));
         
-        lista=controlloreLocale.trovaLocali(latitudine, longitudine, distanza);
+        ll=controlloreLocale.trovaLocali(latitudine, longitudine, distanza);
         
-        if(lista.size()==0){
+        if(ll.size()==0){
             zeroResults=true;
             return;
         }
         
+        
         zeroResults=false;               
         i=0;
-        for(Locale loc : lista){
+        lista.clear();
+        for(Locale loc : ll){
             i++;
             tempPoint = new LatLng(loc.getLatitudine(),loc.getLongitudine());
 
@@ -117,9 +135,16 @@ public class RicercaBean{
                         + "chld=restaurant%7C"
                         + "bb%7C"+i+"%7C"+color+"%7C000000";
             
-            description=loc.getNome()+"</br>"+loc.getIndirizzo();
+            name=loc.getNome();
+            description=loc.getIndirizzo();
             
-            advancedModel.addOverlay(new Marker(tempPoint,description,"manca locale.getfoto!!!",pushPin));
+            advancedModel.addOverlay(new Marker(tempPoint,name,description,pushPin));
+            
+            List<Valutazione> lv = controlloreValutazione.findValutazioni(loc.getId());
+            Valutazione media=controlloreValutazione.mediaValutazioni(lv);
+            lista.add(new Risultato(i,loc,media));
+            
+    
         }
     }
         
@@ -154,7 +179,7 @@ public class RicercaBean{
     }
 
     public String visualizzaLocale() {
-        System.err.println("visualizza Locale");
+        System.err.println("sono in visualizza Locale");
         // prendo la sessione
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
@@ -170,6 +195,7 @@ public class RicercaBean{
     }
     
     public String go(){
+        System.err.println("sono in go");
         return "visualizzaLocale";
     } 
     
@@ -211,13 +237,23 @@ public class RicercaBean{
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
-    public List<Locale> getLista() {
+
+    public List<Risultato> getLista() {
         return lista;
     }
 
-    public void setLista(List<Locale> lista) {
+    public void setLista(List<Risultato> lista) {
         this.lista = lista;
     }
+
+    public List<Locale> getLl() {
+        return ll;
+    }
+
+    public void setLl(List<Locale> ll) {
+        this.ll = ll;
+    }
+
     
     
     public int getZoom() {

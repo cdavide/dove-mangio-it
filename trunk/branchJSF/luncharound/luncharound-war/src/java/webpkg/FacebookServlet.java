@@ -121,7 +121,7 @@ public class FacebookServlet extends HttpServlet {
                      httpSession.setAttribute("localipersonali",controlloreLocale.getLocali(persona.getId()));
                 }
                 catch(NullPointerException e){
-                    System.err.println("L'utente non ha associato nessun locale personale");
+                    System.err.println("[fb]L'utente non ha associato nessun locale personale");
                 }
                 httpSession.setAttribute("newLogin",true);
                 request.getRequestDispatcher("faces/home.xhtml").forward(request, response);    

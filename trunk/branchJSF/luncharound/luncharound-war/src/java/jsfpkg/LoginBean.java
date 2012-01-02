@@ -4,7 +4,6 @@
  */
 package jsfpkg;
 
-
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -22,8 +21,6 @@ import luncharoundpkg.Locale;
 import luncharoundpkg.Utente;
 import org.primefaces.context.RequestContext;
 
-
-
 /**
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
@@ -31,7 +28,7 @@ import org.primefaces.context.RequestContext;
 @ManagedBean(name = "loginBean")
 @ViewScoped
 public class LoginBean {
-    
+
     @EJB
     private ControlloreUtenteLocal controlloreUtente;
     @EJB
@@ -42,33 +39,29 @@ public class LoginBean {
     private String mail;
     private String foto;
     private boolean hasPhoto;
-
     private boolean loggedIn;
     private boolean reg;
     private String fburl;
     private boolean gestore; // indica se l'utente è un gestore oppure no
     //serve per il menu laterale
-  
+
     // empty constructor
     public LoginBean() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession httpSession = request.getSession();
-        try{
-            setGestore((Boolean)httpSession.getAttribute("gestore"));
-            setLoggedIn((Boolean)httpSession.getAttribute("loggedIn"));
+        try {
+            setGestore((Boolean) httpSession.getAttribute("gestore"));
+            setLoggedIn((Boolean) httpSession.getAttribute("loggedIn"));
             setUsername((String) httpSession.getAttribute("nome_utente"));
             setIndirizzo((String) httpSession.getAttribute("home"));
             setFoto((String) httpSession.getAttribute("foto"));
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println("LoginBean.java fresh session");
         }
 
-        System.err.println("Inizializzazione bean [LoginBean.java]");        
+        System.err.println("Inizializzazione bean [LoginBean.java]");
     }
 
-    
-    
     public String login(ActionEvent actionEvent) {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
@@ -77,14 +70,14 @@ public class LoginBean {
         HttpSession httpSession = request.getSession();
 
         Utente persona = controlloreUtente.verificaPassword(username, password);
-        
+
         if (persona == null) {
             loggedIn = false;
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");
         } else {
 
             loggedIn = true;
-           
+
             httpSession.setAttribute("nome_utente", persona.getUsername());
             httpSession.setAttribute("idUtente", persona.getId());
             httpSession.setAttribute("eventi", persona.isEventi());
@@ -95,27 +88,28 @@ public class LoginBean {
             httpSession.setAttribute("gestore", gestore);
             if (null == persona.getFoto() || persona.getFoto().equals("")) {
                 foto = "resources/user.png";
+            } else {
+                foto = persona.getFoto();
             }
-            else foto= persona.getFoto();
             httpSession.setAttribute("foto", foto);
             System.err.println("Utente Loggato");
-            try { 
+            try {
                 Locale loc = controlloreLocale.getLocali(persona.getId());
-                System.err.println("l'utnte è il gestore del locale: "+loc.getNome());
-                httpSession.setAttribute("mioLocale",loc.getId()); // aggiunta variabile per locale personale
-                httpSession.setAttribute("idLocale",loc.getId()); // aggiunta variabile per locale da visualizzare
+                System.err.println("l'utnte è il gestore del locale: " + loc.getNome());
+                httpSession.setAttribute("mioLocale", loc.getId()); // aggiunta variabile per locale personale
+                httpSession.setAttribute("idLocale", loc.getId()); // aggiunta variabile per locale da visualizzare
                 setGestore(true);
-                System.err.println("gest: "+gestore);
+                System.err.println("gest: " + gestore);
             } catch (NullPointerException e) {
                 System.err.println("L'utente non ha associato nessun locale personale");
-                httpSession.setAttribute("emptyLocal", true ); // serve per visualizzare un link di aggiunta locale
+                httpSession.setAttribute("emptyLocal", true); // serve per visualizzare un link di aggiunta locale
                 // se l'utente non ha ancora aggiunto alcun locale
             }
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bentornato su LunchAround", username);
             // cercare sulle news e sugli eventi a cui l-utente e` abbonato e aggiungere i popup 
             // per avvisarlo
         }
-        
+
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("loggedIn", loggedIn);
         context.addCallbackParam("gestore", gestore);
@@ -129,65 +123,76 @@ public class LoginBean {
         FacesMessage msg = null;
         reg = false;
         controlloreUtente.addUtente(username, password, indirizzo, mail, foto);
-        msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrazione effettuata con successo su LunchAround","");
+        msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrazione effettuata con successo su LunchAround", "");
         FacesContext.getCurrentInstance().addMessage(null, msg);
         reg = true;
-        try{
-            context.addCallbackParam("reg", reg);    
-        }
-        catch(Exception e){
+        try {
+            context.addCallbackParam("reg", reg);
+        } catch (Exception e) {
             System.out.println("Errore, impossibile inserire parametri nella callback");
         }
     }
-    
+
     //metodo per controllare se è stato tentato un login
-    public void checkLogin(){
+    public void checkLogin() {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         boolean newLogin;
-        
+
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession httpSession = request.getSession();
 
-        try{
-            setLoggedIn((Boolean)httpSession.getAttribute("loggedIn"));
-        }catch(Exception e){
+        try {
+            setLoggedIn((Boolean) httpSession.getAttribute("loggedIn"));
+        } catch (Exception e) {
             setLoggedIn(false);
         }
-        try{
-            newLogin=(Boolean)httpSession.getAttribute("newLogin");
-        
-        }
-        catch (Exception e){
-            //System.err.println("[LoginBean.java]: Lore risolvi questo problema, ogni volta "
-              //      + "che si prova a entrare nella pagina restituisce una eccezione e si schianta.");
+        try {
+            newLogin = (Boolean) httpSession.getAttribute("newLogin");
+
+        } catch (Exception e) {
+
             newLogin = false;
         }
-        if(newLogin){ //c'è stato un tentativo di login recente
-            
-            httpSession.setAttribute("newLogin",false); //pulisco
-            if(httpSession.getAttribute("errore")!=null){
-                msg = new FacesMessage(FacesMessage.SEVERITY_WARN,(String)httpSession.getAttribute("errore"),"");
+        if (newLogin) { //c'è stato un tentativo di login recente
+
+            httpSession.setAttribute("newLogin", false); //pulisco
+            if (httpSession.getAttribute("errore") != null) {
+                msg = new FacesMessage(FacesMessage.SEVERITY_WARN, (String) httpSession.getAttribute("errore"), "");
                 httpSession.removeAttribute("errore"); //pulisco
 
-            }
-            else{//non ci sono errori
-                loggedIn=true; //tutti i dati dell'utente sono già in sessione!
-                httpSession.setAttribute("loggedIn",true);
-                msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Ciao "+(String)httpSession.getAttribute("nome_utente"),"");
+            } else {//non ci sono errori
+                loggedIn = true; //tutti i dati dell'utente sono già in sessione!
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ciao " + (String) httpSession.getAttribute("nome_utente"), "");
+                foto = (String) httpSession.getAttribute("foto");
+                try {
+                    Locale loc = controlloreLocale.getLocali((Long) httpSession.getAttribute("idUtente"));
+                    System.err.println("l'utnte è il gestore del locale: " + loc.getNome());
+                    httpSession.setAttribute("mioLocale", loc.getId()); // aggiunta variabile per locale personale
+                    httpSession.setAttribute("idLocale", loc.getId()); // aggiunta variabile per locale da visualizzare
+                    setGestore(true);
+                    System.err.println("gest: " + gestore);
+                } catch (NullPointerException e) {
+                    System.err.println("L'utente non ha associato nessun locale personale");
+                    httpSession.setAttribute("emptyLocal", true); // serve per visualizzare un link di aggiunta locale
+                    // se l'utente non ha ancora aggiunto alcun locale
+                }
+                context.addCallbackParam("loggedIn", loggedIn);
+                context.addCallbackParam("gestore", gestore);
+                httpSession.setAttribute("loggedIn", loggedIn);
+                httpSession.setAttribute("gestore", gestore);
             }
             FacesContext.getCurrentInstance().addMessage(null, msg);
 
-        }  
-        context.addCallbackParam("newLogin", newLogin);    
+        }
+        context.addCallbackParam("newLogin", newLogin);
 
     }
-     
+
     /* Metodo per invalidare la sessione utente
      * 
      */
-    
-    public String logout(){
+    public String logout() {
         System.out.println("[Login Bean ] logout");
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession httpSession = request.getSession();
@@ -196,14 +201,14 @@ public class LoginBean {
         httpSession.setAttribute("loggedIn", false);
         httpSession.setAttribute("gestore", false);
         httpSession.setAttribute("nome_utente", "");
-        httpSession.setAttribute("idUtente",null );
-        httpSession.setAttribute("eventi",false);
-        httpSession.setAttribute("news",false);
-        httpSession.setAttribute("home","");
-        httpSession.setAttribute("tipo","");
-        httpSession.setAttribute("foto","");
-        httpSession.setAttribute("mioLocale",null);
-        httpSession.setAttribute("oauth_token",null);
+        httpSession.setAttribute("idUtente", null);
+        httpSession.setAttribute("eventi", false);
+        httpSession.setAttribute("news", false);
+        httpSession.setAttribute("home", "");
+        httpSession.setAttribute("tipo", "");
+        httpSession.setAttribute("foto", "");
+        httpSession.setAttribute("mioLocale", null);
+        httpSession.setAttribute("oauth_token", null);
         httpSession.setAttribute("oauth_token_secret", null);
         //try{
         //    httpSession.removeAttribute(mail);
@@ -212,42 +217,38 @@ public class LoginBean {
         //    System.out.println("Non ero loggato via twitter");
         //}
         FacesMessage msg = null;
-        msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Logout effettuato con successo","");
+        msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Logout effettuato con successo", "");
         FacesContext.getCurrentInstance().addMessage(null, msg);
         /*rimando l'utente alla home per evitare
-         che le jsf si rompano*/
+        che le jsf si rompano*/
         System.err.println("Sessione invalidata, rimando alla homepage");
         return "home";
     }
 
-    public String doNavigation(){
+    public String doNavigation() {
         return "home";
     }
-    
-    
-    
+
     public void twitLogin() {
-        String url = "/TwitterServlet?metodo=login";  
+        String url = "/TwitterServlet?metodo=login";
         RequestContext context = RequestContext.getCurrentInstance();
-        FacesContext context2 = FacesContext.getCurrentInstance(); 
+        FacesContext context2 = FacesContext.getCurrentInstance();
         loggedIn = false;
         gestore = false;
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute("loggedIn", loggedIn);
         httpSession.setAttribute("gestore", gestore);
-        try {  
-            context2.getExternalContext().dispatch(url);  
-        }catch (Exception e) {  
-            e.printStackTrace();  
-        }  
-        finally{  
-            context2.responseComplete();  
+        try {
+            context2.getExternalContext().dispatch(url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            context2.responseComplete();
         }
     }
-    
-    //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
 
+    //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
     public boolean isLoggedIn() {
         return loggedIn;
     }
@@ -259,11 +260,11 @@ public class LoginBean {
     public void setGestore(boolean gestore) {
         this.gestore = gestore;
     }
+
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
 
-    
     public String getFoto() {
         return foto;
     }
@@ -304,7 +305,6 @@ public class LoginBean {
         this.hasPhoto = hasPhoto;
     }
 
-    
     public String getPassword() {
         return password;
     }
@@ -313,7 +313,7 @@ public class LoginBean {
         this.password = password;
     }
 
-      public boolean isReg() {
+    public boolean isReg() {
         return reg;
     }
 
@@ -322,7 +322,7 @@ public class LoginBean {
     }
 
     public String getFburl() {
-        String url="<a href=\"https://www.facebook.com/dialog/oauth?"
+        String url = "<a href=\"https://www.facebook.com/dialog/oauth?"
                 + "client_id=241460472572920&"
                 + "redirect_uri=http://localhost:8080/luncharound-war/FacebookServlet&"
                 + "scope=email,user_location\">"
@@ -335,7 +335,5 @@ public class LoginBean {
     public void setFburl(String fburl) {
         this.fburl = fburl;
     }
-    
-    
     //</editor-fold>
 }
