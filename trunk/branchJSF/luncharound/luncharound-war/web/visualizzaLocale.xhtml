@@ -12,12 +12,12 @@
     <ui:define name="content">
         <f:view contentType="text/html">
 
-            <h:form>
+            <h:form id="visual_loc">
                 <h1>
                     <h:outputText value="#{visualizzaLocale.locale.nome}"/>
                     <h:outputText escape="false" value="#{visualizzaLocale.twitLocale}"/>
                 </h1>
-                <p:accordionPanel tabChangeListener="mymap.checkResize()" activeIndex="1"  >
+                <p:accordionPanel tabChangeListener="mymap.checkResize()" activeIndex="1">
                     <p:tab   title="Dove siamo" >
                         <f:view contentType="text/html">
                             <p:gmap center="#{mapBean.centerLat},#{mapBean.centerLong}"  draggable="true" zoom="16" type="HYBRID" 
@@ -25,10 +25,21 @@
                                     model="#{mapBean.simpleModel}"  widgetVar="mymap"/>
                         </f:view>
                         <h:outputText value="#{visualizzaLocale.locale.indirizzo}"/>
+                        
                     </p:tab>
-
+                    <p:tab title="Descrizione Locale">
+                        <h:outputText value="#{visualizzaLocale.locale.descrizione}"/>
+                    </p:tab>
                     <p:tab title="Menu del Giorno">  
-                        <h:outputText value="#{visualizzaLocale.menu}"/>
+                        <p:dataTable rendered="#{visualizzaLocale.menu.size() > 0}" id="menu_tbl" value="#{visualizzaLocale.menu}" var="piatto" >
+                            <p:column style="text-align: left;width:100%;" headerText="Nome Piatto" >
+                                    <h:outputText  value="#{piatto.nome}" />
+                            </p:column>
+                            <p:column headerText="Prezzo" style="width:100%">
+                                    <h:outputText  value="#{piatto.prezzo}" />
+                            </p:column>
+                        </p:dataTable>
+                        <h:outputText rendered="#{visualizzaLocale.menu.size() == 0}" value="Non sono presenti piatti nel menu"/>
                     </p:tab>
 
                     <p:tab title="Combinazioni e Offerte de locale">  
@@ -51,9 +62,10 @@
                             <p:rating id="pp" value="#{ratingController.pul}" disabled="true" stars="5"/><br/>
                         </h:panelGrid>
                     </p:tab>
+                    
                     <c:if test="#{!visualizzaLocale.gestore &amp;&amp; visualizzaLocale.loggedIn}">
                         <p:tab title="Valuta locale">  
-                            <h:panelGrid columns="6" cellpadding="5" border="10" >
+                            <h:panelGrid columns="12" cellpadding="2">
                                 <h:outputLabel value="Velocità:" for="vel"/><br/>
                                 <p:rating id="vel" value="#{ratingController.velocita}" /><br/>
                                 <h:outputLabel for="cor" value="Cortesia:" /><br/>
@@ -68,9 +80,8 @@
                                 <p:rating id="pul" value="#{ratingController.pulizia}" stars="5"/><br/>
                             </h:panelGrid>
 
-                            <p:commandButton value="Vota" update="displayRatings" style="margin:5px" 
+                            <p:commandButton ajax="false" value="Vota" update="displayRatings  growl visual_loc" style="margin:5px" 
                                              action="#{ratingController.submitRating()}"/>
-                            <!-- <p:growl id="messages" showDetail="true"/> mostra gli errori e gli warning come delle bolle in alto a destra-->
                         </p:tab>
                     </c:if>
                     <c:if test="#{visualizzaLocale.gestore}">

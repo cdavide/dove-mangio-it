@@ -62,7 +62,7 @@ public class LoginBean {
         System.err.println("Inizializzazione bean [LoginBean.java]");
     }
 
-    public String login(ActionEvent actionEvent) {
+    public String login() {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         loggedIn = false;
@@ -115,8 +115,10 @@ public class LoginBean {
         context.addCallbackParam("gestore", gestore);
         httpSession.setAttribute("loggedIn", loggedIn);
         httpSession.setAttribute("gestore", gestore);
+        
         return "home";
     }
+    
 
     public void register(ActionEvent actionEvent) {
         RequestContext context = RequestContext.getCurrentInstance();

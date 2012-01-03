@@ -18,8 +18,11 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import luncharoundpkg.ControlloreLocaleLocal;
+import luncharoundpkg.ControllorePiattiLocal;
 import luncharoundpkg.ControlloreValutazioneLocal;
 import luncharoundpkg.Locale;
+import luncharoundpkg.Menu;
+import luncharoundpkg.Piatto;
 import luncharoundpkg.Valutazione;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -47,12 +50,14 @@ public class VisualizzaLocale implements Serializable {
     @EJB
     private ControlloreLocaleLocal controlloreLocale;
     @EJB
+    private ControllorePiattiLocal controllorePiatto;
+    @EJB
     private ControlloreValutazioneLocal controlloreValutazione;
     Locale locale;
     private StreamedContent chart;
     String mappa;
     String facebook;
-    String menu;
+    List<Piatto> menu;
     String offerte;
     String valutazioni;
     boolean gestore; // per c:if nella jsf
@@ -106,11 +111,15 @@ public class VisualizzaLocale implements Serializable {
 
         System.out.println("mappa: " + mappa);
         facebook = creaFbDialog2(locale);
-
-        menu = controlloreLocale.mostraMenu(idLocale);
+        try{
+        menu = controlloreLocale.menuDiLocale(idLocale).getListaPiatti();
+        }
+        catch(Exception e){
+            menu = new ArrayList<Piatto>();
+        }
         offerte = controlloreLocale.mostraCombo(idLocale);
 
-        //se è il proprietario deve viaualizzare statistiche e altre cose
+        //se è il proprietario deve visualizzare statistiche e altre cose
         // non deve poter valutare
         // statistiche
         try {
@@ -120,8 +129,10 @@ public class VisualizzaLocale implements Serializable {
             ChartUtilities.saveChartAsPNG(chartFile, mychart, 375, 300);
             chart = new DefaultStreamedContent(new FileInputStream(chartFile), "image/png");
         } catch (Exception e) {
+            System.err.println("[VisualizzaLocale.java]: cannot create chart exception");
         }
 
+        
         TwitLocale = "<a href='https://twitter.com/share'"
                 + "class='twitter-share-button' "
                 + "data-text='I love to eat at "
@@ -361,11 +372,11 @@ public class VisualizzaLocale implements Serializable {
         this.TwitLocale = TwitLocale;
     }
     
-    public String getMenu() {
+    public List<Piatto> getMenu() {
         return menu;
     }
 
-    public void setMenu(String menu) {
+    public void setMenu(List<Piatto> menu) {
         this.menu = menu;
     }
 

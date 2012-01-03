@@ -10,7 +10,6 @@
 
     <ui:define name="content">
         <p:tooltip global="true"/>  
-        <p:growl id="msgs" />
         <h:form id="fr_menu">
             <p:tabView dynamic="true" effect="opacity" effectDuration="normal" id="tab_view" style="overflow:hidden;" >
 
@@ -40,7 +39,7 @@
                         </p:column>
                         <!-- CARNE,PESCE,VEGETARIANO,VEGANO,CELIACO,ALCOLICO -->
 
-                        <p:column headerText ="C" style="width:100%">
+                        <p:column headerText ="Crn" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true" />
@@ -50,7 +49,7 @@
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText ="P" style="width:100%">
+                        <p:column headerText ="Psc" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:selectBooleanCheckbox value="#{piatto.pesce}" disabled="true"/>
@@ -60,7 +59,7 @@
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText ="Vg" style="width:100%">
+                        <p:column headerText ="Vgt" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:selectBooleanCheckbox value="#{piatto.vegetariano}" disabled="true"/>
@@ -70,7 +69,7 @@
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText ="V" style="width:100%">
+                        <p:column headerText ="Vgn" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:selectBooleanCheckbox value="#{piatto.vegano}" disabled="true"/>
@@ -80,7 +79,7 @@
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column  headerText ="C" style="width:100%">
+                        <p:column  headerText ="Clc" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:selectBooleanCheckbox value="#{piatto.celiaco}" disabled="true"/>
@@ -95,51 +94,35 @@
                             <p:rowEditor/>
                         </p:column>
                         <p:column style="width:100%" >
-                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:ant growl tab_view" image="ui-icon ui-icon-disk">
+                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:ant growl tab_view fr_menu" image="ui-icon ui-icon-disk">
                                 <f:param name="idOperation" value="0" />
                             </p:commandButton>
-                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:ant growl tab_view" image="ui-icon ui-icon-trash">
+                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:ant growl tab_view fr_menu" image="ui-icon ui-icon-trash">
                                 <f:param name="idPiatto" value="#{piatto.id}" />
+                                <f:param name="idOperation" value="0" />
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
-                    <!-- ESPORTAZIONE MENU -->
-                    <p:panel header="Esporta il tuo menu nel formato che preferisci">  
-                        <h:commandLink>  
-                            <p:graphicImage value="resources/excel.png" />  
-                            <p:dataExporter type="xls" target="ant" fileName="Antipasti" />  
-                        </h:commandLink>  
-
-                        <h:commandLink>  
-                            <p:graphicImage value="resources/pdf.png" />  
-                            <p:dataExporter type="pdf" target="ant" fileName="Antipasti"/>  
-                        </h:commandLink>  
-
-                        <h:commandLink>  
-                            <p:graphicImage value="resources/csv.png" />  
-                            <p:dataExporter type="csv" target="ant" fileName="Antipasti" />  
-                        </h:commandLink>  
-
-                        <h:commandLink>  
-                            <p:graphicImage value="resources/xml.png" />  
-                            <p:dataExporter type="xml" target="ant" fileName="Antipasti" />  
-                        </h:commandLink>  
-                    </p:panel> 
+                    <h:outputText value="Validità menu: " />
                         
+                    <p:calendar value="#{addMenuBean.date}" />
+                    
                 </p:tab>
                 <p:tab id ="tp" title="Primi" >
                     <p:dataTable id="pri" value="#{addMenuBean.primi}" var="piatto" >
-                        <p:column headerText="Nome">
+                       <p:column headerText="Nome" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:outputText value="#{piatto.nome}" />
+                                    <h:outputText  value="#{piatto.nome}" />
+                                    <p:tooltip  value="Nome" />
                                 </f:facet>
                                 <f:facet name="input">
                                     <p:inputText value="#{piatto.nome}" style="width:100%"/>
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText ="Prezzo">
+
+                        <p:column headerText ="Prezzo" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:outputText value="#{piatto.prezzo}" />
@@ -149,373 +132,9 @@
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText ="Carne">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.carne}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Pesce">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Vegetariano">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Vegano">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Celiaco">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" disabled="true" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
+                        <!-- CARNE,PESCE,VEGETARIANO,VEGANO,CELIACO,ALCOLICO -->
 
-                        <p:column headerText="Options">
-                            <p:column headerText="Options">
-                                <p:rowEditor />
-                            </p:column>
-                        </p:column>
-                        <p:column headerText="Salva">
-                            <p:column headerText="Options">
-                                <p:commandButton action="#{addMenuBean.add}"  image="ui-icon ui-icon-disk"/>
-                            </p:column>
-                        </p:column>
-                        <p:column headerText="Elimina">
-                            <p:column headerText="Options">
-                                <p:commandButton action="#{addMenuBean.delete}" image="ui-icon ui-icon-trash"/>
-                            </p:column>
-                        </p:column>
-                    </p:dataTable>
-                </p:tab>
-                <p:tab id="ts" title="Secondi">
-                    <p:dataTable id="sec" value="#{addMenuBean.secondi}" var="piatto" >
-                        <p:column headerText="Nome">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{piatto.nome}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{piatto.nome}" style="width:100%"/>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Prezzo">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{piatto.prezzo}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{piatto.prezzo}" style="width:100%"/>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Carne">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.carne}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Pesce">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.pesce}"/>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Vegetariano">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" disabled="true" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Vegano">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" disabled="true" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Celiaco">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" style="width:100%"/>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-
-                        <p:column headerText="Options">
-                            <p:column headerText="Options">
-                                <p:rowEditor />
-                            </p:column>
-                        </p:column>
-                        <p:column headerText="Salva">
-                            <p:column headerText="Options">
-                                <p:commandButton action="#{addMenuBean.add}"  image="ui-icon ui-icon-disk"/>
-                            </p:column>
-                        </p:column>
-                        <p:column headerText="Elimina">
-                            <p:column headerText="Options">
-                                <p:commandButton action="#{addMenuBean.delete}" image="ui-icon ui-icon-trash"/>
-                            </p:column>
-                        </p:column>
-                    </p:dataTable>
-                </p:tab>
-
-
-                <p:tab id="tc" title="Contorni">
-                    <p:dataTable id="cont" value="#{addMenuBean.contorni}" var="piatto" >
-                        <p:column headerText="Nome">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{piatto.nome}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{piatto.nome}" style="width:100%"/>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Prezzo">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{piatto.prezzo}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{piatto.prezzo}" style="width:100%"/>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Carne">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.carne}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Pesce">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Vegetariano">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" disabled="true" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Vegano">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Celiaco">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-
-                        <p:column headerText="Options">
-                            <p:column headerText="Options">
-                                <p:rowEditor />
-                            </p:column>
-                        </p:column>
-                        <p:column headerText="Salva">
-                            <p:column headerText="Options">
-                                <p:commandButton action="#{addMenuBean.add}"  image="ui-icon ui-icon-disk"/>
-                            </p:column>
-                        </p:column>
-                        <p:column headerText="Elimina">
-                            <p:column headerText="Options">
-                                <p:commandButton action="#{addMenuBean.delete}" image="ui-icon ui-icon-trash"/>
-                            </p:column>
-                        </p:column>
-                    </p:dataTable>
-                </p:tab>
-
-
-
-
-                <p:tab id="td" title="Dolci">
-                    <p:dataTable id="dol" value="#{addMenuBean.dolci}" var="piatto" >
-                        <p:column headerText="Nome">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{piatto.nome}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{piatto.nome}" style="width:100%"/>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Prezzo">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{piatto.prezzo}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{piatto.prezzo}" style="width:100%"/>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Carne">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.carne}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Pesce">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Vegetariano">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Vegano">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Celiaco">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" disabled="true"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-
-                        <p:column headerText="Options">
-                            <p:column headerText="Options">
-                                <p:rowEditor />
-                            </p:column>
-                        </p:column>
-                        <p:column headerText="Salva">
-                            <p:column headerText="Options">
-                                <p:commandButton action="#{addMenuBean.add}"  image="ui-icon ui-icon-disk"/>
-                            </p:column>
-                        </p:column>
-                        <p:column headerText="Elimina">
-                            <p:column headerText="Options">
-                                <p:commandButton action="#{addMenuBean.delete}" image="ui-icon ui-icon-trash"/>
-                            </p:column>
-                        </p:column>
-                    </p:dataTable>
-                </p:tab>
-                <p:tab id="tb" title="Bevande">
-                    <p:dataTable id="bev" value="#{addMenuBean.bevande}" var="piatto" >
-                        <p:column headerText="Nome">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{piatto.nome}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:outputText value="#{piatto.nome}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Prezzo">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{piatto.prezzo}"/>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:outputText value="#{piatto.prezzo}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-                        <p:column headerText ="Carne">
+                        <p:column headerText ="Crn" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true" />
@@ -525,27 +144,27 @@
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText ="Pesce">
+                        <p:column headerText ="Psc" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" disabled="true" />
+                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" disabled="true"/>
                                 </f:facet>
                                 <f:facet name="input">
                                     <h:selectBooleanCheckbox value="#{piatto.pesce}" />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText ="Vegetariano">
+                        <p:column headerText ="Vgt" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" disabled="true" />
+                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" disabled="true"/>
                                 </f:facet>
                                 <f:facet name="input">
                                     <h:selectBooleanCheckbox value="#{piatto.vegetariano}" />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText ="Vegano">
+                        <p:column headerText ="Vgn" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:selectBooleanCheckbox value="#{piatto.vegano}" disabled="true"/>
@@ -555,7 +174,7 @@
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText ="Celiaco">
+                        <p:column  headerText ="Clc" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:selectBooleanCheckbox value="#{piatto.celiaco}" disabled="true"/>
@@ -566,27 +185,398 @@
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="Options">
-                            <p:column headerText="Options">
-                                <p:rowEditor />
-                            </p:column>
+                        <p:column style="width:100%">
+                            <p:rowEditor/>
                         </p:column>
-                        <p:column headerText="Salva">
-                            <p:column headerText="Options">
-                                <p:commandButton action="#{addMenuBean.add}"  image="ui-icon ui-icon-disk"/>
-                            </p:column>
+                        <p:column style="width:100%" >
+                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:ant growl tab_view fr_menu" image="ui-icon ui-icon-disk">
+                                <f:param name="idOperation" value="1" />
+                            </p:commandButton>
+                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:ant growl tab_view fr_menu" image="ui-icon ui-icon-trash">
+                                <f:param name="idPiatto" value="#{piatto.id}" />
+                                <f:param name="idOperation" value="1" />
+                            </p:commandButton>
                         </p:column>
-                        <p:column headerText="Elimina">
-                            <p:column headerText="Options">
-                                <p:commandButton action="#{addMenuBean.delete}" image="ui-icon ui-icon-trash"/>
-                            </p:column>
+                    </p:dataTable>
+                </p:tab>
+                <p:tab id="ts" title="Secondi">
+                    <p:dataTable id="sec" value="#{addMenuBean.secondi}" var="piatto" >
+                        <p:column headerText="Nome" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText  value="#{piatto.nome}" />
+                                    <p:tooltip  value="Nome" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{piatto.nome}" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
                         </p:column>
 
+                        <p:column headerText ="Prezzo" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{piatto.prezzo}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{piatto.prezzo}" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <!-- CARNE,PESCE,VEGETARIANO,VEGANO,CELIACO,ALCOLICO -->
+
+                        <p:column headerText ="Crn" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.carne}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText ="Psc" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText ="Vgt" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText ="Vgn" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column  headerText ="Clc" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column style="width:100%">
+                            <p:rowEditor/>
+                        </p:column>
+                        <p:column style="width:100%" >
+                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:sec growl tab_view fr_menu" image="ui-icon ui-icon-disk">
+                                <f:param name="idOperation" value="2" />
+                            </p:commandButton>
+                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:sec growl tab_view fr_menu" image="ui-icon ui-icon-trash">
+                                <f:param name="idPiatto" value="#{piatto.id}" />
+                                <f:param name="idOperation" value="2" />
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable>
                 </p:tab>
 
 
+                <p:tab id="tc" title="Contorni">
+                    <p:dataTable id="cont" value="#{addMenuBean.contorni}" var="piatto" >
+                       <p:column headerText="Nome" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText  value="#{piatto.nome}" />
+                                    <p:tooltip  value="Nome" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{piatto.nome}" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText ="Prezzo" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{piatto.prezzo}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{piatto.prezzo}" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <!-- CARNE,PESCE,VEGETARIANO,VEGANO,CELIACO,ALCOLICO -->
+
+                        <p:column headerText ="Crn" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.carne}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText ="Psc" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText ="Vgt" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText ="Vgn" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column  headerText ="Clc" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column style="width:100%">
+                            <p:rowEditor/>
+                        </p:column>
+                        <p:column style="width:100%" >
+                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:cont growl tab_view fr_menu" image="ui-icon ui-icon-disk">
+                                <f:param name="idOperation" value="3" />
+                            </p:commandButton>
+                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:cont growl tab_view fr_menu" image="ui-icon ui-icon-trash">
+                                <f:param name="idPiatto" value="#{piatto.id}" />
+                                <f:param name="idOperation" value="3" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+
+
+
+
+                <p:tab id="td" title="Dolci">
+                    <p:dataTable id="dol" value="#{addMenuBean.dolci}" var="piatto" >
+                        <p:column headerText="Nome" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText  value="#{piatto.nome}" />
+                                    <p:tooltip  value="Nome" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{piatto.nome}" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText ="Prezzo" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{piatto.prezzo}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{piatto.prezzo}" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <!-- CARNE,PESCE,VEGETARIANO,VEGANO,CELIACO,ALCOLICO -->
+
+                        <p:column headerText ="Crn" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.carne}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText ="Psc" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText ="Vgt" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText ="Vgn" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column  headerText ="Clc" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column style="width:100%">
+                            <p:rowEditor/>
+                        </p:column>
+                        <p:column style="width:100%" >
+                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:dol growl tab_view fr_menu" image="ui-icon ui-icon-disk">
+                                <f:param name="idOperation" value="4" />
+                            </p:commandButton>
+                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:dol growl tab_view fr_menu" image="ui-icon ui-icon-trash">
+                                <f:param name="idPiatto" value="#{piatto.id}" />
+                                <f:param name="idOperation" value="4" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+                <p:tab id="tb" title="Bevande">
+                    <p:dataTable id="bev" value="#{addMenuBean.bevande}" var="piatto" >
+                        <p:column headerText="Nome" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText  value="#{piatto.nome}" />
+                                    <p:tooltip  value="Nome" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{piatto.nome}" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText ="Prezzo" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{piatto.prezzo}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{piatto.prezzo}" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <!-- CARNE,PESCE,VEGETARIANO,VEGANO,CELIACO,ALCOLICO -->
+
+                        <p:column headerText ="Crn" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.carne}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText ="Psc" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.pesce}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText ="Vgt" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegetariano}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText ="Vgn" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.vegano}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column  headerText ="Clc" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" disabled="true"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column style="width:100%">
+                            <p:rowEditor/>
+                        </p:column>
+                        <p:column style="width:100%" >
+                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:bev growl tab_view fr_menu" image="ui-icon ui-icon-disk">
+                                <f:param name="idOperation" value="5" />
+                            </p:commandButton>
+                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:bev growl tab_view fr_menu" image="ui-icon ui-icon-trash">
+                                <f:param name="idPiatto" value="#{piatto.id}" />
+                                <f:param name="idOperation" value="5" />
+                            </p:commandButton>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:tab>
             </p:tabView>
+            <p:panel header="Esporta il tuo menu nel formato che preferisci (Pdf ?)">  
+                <p:commandLink action="#{addMenuBean.printPdf}" target="_blank" ajax="false" >  
+                    <p:graphicImage value="resources/pdf.png" />  
+                </p:commandLink>  
+            </p:panel>
+
         </h:form>
     </ui:define>
 

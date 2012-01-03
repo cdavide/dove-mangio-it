@@ -203,7 +203,7 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
             quantita+=(int) val.getQuantita();
             cortesia+=(int) val.getCortesia();
         }
-        if(numValutazioni > 0){
+        if(numValutazioni > 1){
             pulizia= pulizia/numValutazioni;
             qualita = qualita / numValutazioni;
             velocita = velocita / numValutazioni;
@@ -218,7 +218,7 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         ret.setQualita((int)qualita);
         ret.setVelocita((int)velocita);
         ret.setAffollamento((int)affollamento);
-        ret.setQuantita((int)qualita);
+        ret.setQuantita((int)quantita);
         ret.setCortesia((int)cortesia);
         System.err.println("[ControlloreValutazione] prima del return");
         return ret;
@@ -241,7 +241,9 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
             valutazioneFacade.edit(userRate);
         }
         catch(Exception e){
-            valutazioneFacade.edit(userRate);
+            System.err.println("[ControlloreValutazione.java]: eccezione save!");
+            
+            
         }
     }
    

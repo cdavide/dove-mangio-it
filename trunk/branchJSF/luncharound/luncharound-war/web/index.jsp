@@ -1,5 +1,4 @@
-<html>
- <body>
-  <jsp:forward page="/faces/home.xhtml" />
- </body>
-</html>
+<%
+    String redirectURL = "faces/home.xhtml";
+    response.sendRedirect(redirectURL);
+%>

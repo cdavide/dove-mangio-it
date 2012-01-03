@@ -194,7 +194,7 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         if(me==null) return "*** NESSUN MENU' TROVATO ***";
         
         //controllo che sia valido
-        if(me.getValidita().compareTo(now.getTime())<=0) ret+="*** MENU' NON AGGIORNATO ***\n\n";
+        if(me.getValidita().compareTo(now.getTime())<0) ret+="*** MENU' NON AGGIORNATO ***\n\n";
         //ottengo e scorro la lista dei piatti del menù    
         lp=me.getListaPiatti();
         for(int j=0; j<lp.size(); j++){

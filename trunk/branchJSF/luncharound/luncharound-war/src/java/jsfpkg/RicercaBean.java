@@ -62,7 +62,7 @@ public class RicercaBean{
     int zoom;
     List<Risultato> lista;
     List<Locale> ll; 
-
+    double v;
     /** Creates a new instance of RicercaBean */
     public RicercaBean() {
         
@@ -76,7 +76,7 @@ public class RicercaBean{
         HttpSession session = request.getSession(); 
         
         if(session.getAttribute("home")!=null){ indirizzo=(String)session.getAttribute("home");}
-        
+        v= 4;
         latitudine=0;
         longitudine=0;
         distanza=1;
@@ -227,13 +227,21 @@ public class RicercaBean{
 
 
 
-
-    
     //<editor-fold defaultstate="collapsed" desc="costruttori">
     public int getTipo() {
         return tipo;
     }
 
+    public double getV() {
+        return v;
+    }
+
+    public void setV(double v) {
+        this.v = v;
+    }
+
+    
+    
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
