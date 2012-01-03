@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -45,12 +46,13 @@ import org.jfree.ui.Layer;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.TextAnchor;
 
+ @RequestScoped
 public class Statistiche extends HttpServlet {
     @EJB
     private ControlloreValutazioneLocal controlloreValutazione;
 
 	private static final long serialVersionUID = 1L;
-
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		response.setContentType("image/png");
@@ -190,12 +192,12 @@ public class Statistiche extends HttpServlet {
             }
 
             Valutazione media = new Valutazione();
-            media.setAffollamento((byte) (affollamento / numValutazioni));
-            media.setCortesia((byte) (cortesia / numValutazioni));
-            media.setVelocita((byte) (velocita / numValutazioni));
-            media.setQuantita((byte) (quantita / numValutazioni));
-            media.setQualita((byte) (qualita / numValutazioni));
-            media.setPulizia((byte) (pulizia / numValutazioni));
+            media.setAffollamento( (affollamento / numValutazioni));
+            media.setCortesia( (cortesia / numValutazioni));
+            media.setVelocita( (velocita / numValutazioni));
+            media.setQuantita( (quantita / numValutazioni));
+            media.setQualita( (qualita / numValutazioni));
+            media.setPulizia( (pulizia / numValutazioni));
             return media;
         }
 }

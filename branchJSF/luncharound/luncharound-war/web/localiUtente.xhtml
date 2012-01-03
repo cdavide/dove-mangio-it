@@ -20,13 +20,12 @@
                     <h:outputLabel value="Descrizione : *" for="descrizione"></h:outputLabel>  
                     <p:editor value="#{localiBean.descrizione}" id="descrizione"/>
                     <h:outputLabel value="Aggiungi Locale : " for="add"></h:outputLabel>  
-                    <p:commandButton id="add" value="Aggiungi" update="left locali myForm msgs @parent"  
+                    <p:commandButton id="add" value="Aggiungi" update="left locali myForm msgs"  
                                      onclick="submitRegForm('myForm:savelink','myForm')" />
-                </h:panelGrid>  
-                
+                </h:panelGrid>
             </p:panel>  
             <p:commandButton  id="savelink" style="display:none; visibility: hidden;" 
-                                  action="#{localiBean.save}" update="messages fr1 left" value="#"/>
+                                  action="#{localiBean.save}" update="messages fr1 left locali growl myForm" value="#"/>
                 <h:inputHidden id="lat" value="#{localiBean.lat}" />
                 <h:inputHidden id="lon" value="#{localiBean.lon}" />
             <p:growl id="messages" showDetail="true"/> 

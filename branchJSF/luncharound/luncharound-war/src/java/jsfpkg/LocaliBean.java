@@ -107,6 +107,7 @@ public class LocaliBean implements Serializable {
                 piva, descrizione);
             httpSession.setAttribute("mioLocale", controlloreLocale.getLocali(idUtente).getId());
             httpSession.setAttribute("idLocale", controlloreLocale.getLocali(idUtente).getId());
+            httpSession.setAttribute("gestore", true);
         }
         catch(Exception e){
             System.out.println("[LocaliBean] eccezione su inserimento in DB"+e.getLocalizedMessage().toString());
@@ -127,17 +128,17 @@ public class LocaliBean implements Serializable {
         } catch (NullPointerException e) {
             System.err.println("[LocaliBean.java] Non ci sono locali nel DB. Lista : " + controlloreLocale.locali());
         }
-        return null;
+        return "home";
     }
 
-    public String clearForm() {
-        Locale nuovo = new Locale();
+    public void clearForm() {
+        nuovo = new Locale();
         locali = null;
         setNome("");
         setIndirizzo("");
         setCitta("");
         setDescrizione("");
-        return null;
+        return;
     }
 
     public String visualizzaLocale() {
