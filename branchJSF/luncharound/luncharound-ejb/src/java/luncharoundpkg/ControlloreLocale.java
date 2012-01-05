@@ -5,6 +5,7 @@
 package luncharoundpkg;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -340,9 +341,16 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
     
         List<Menu> lm= menuFacade.findAll();
         GregorianCalendar now= new GregorianCalendar();
+        now.set(Calendar.HOUR, 0);
+        now.set(Calendar.AM_PM,Calendar.AM);
+        now.set(Calendar.MINUTE, 0);
+        now.set(Calendar.SECOND, 0);
+        now.set(Calendar.MILLISECOND, 0);
+        
         for(Menu menu : lm){
             if(menu.getIdLocale()==idLocale){
-                if(menu.getValidita().compareTo(now.getTime())<=0) return false;
+                System.err.println("menu:"+menu.getValidita()+" now:"+now.getTime());
+                if(menu.getValidita().before(now.getTime())) return false;
                 else return true;
             }
         }
