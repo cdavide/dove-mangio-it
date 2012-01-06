@@ -43,6 +43,11 @@ public class Evento implements Serializable {
     public Date getDataFine() {
         return dataFine;
     }
+    
+    public String getDataFineShort() {
+        String temp = dataInizio.toString();
+        return temp.substring(0, 10);
+    }
 
     public void setDataFine(Date dataFine) {
         this.dataFine = dataFine;
@@ -50,6 +55,11 @@ public class Evento implements Serializable {
 
     public Date getDataInizio() {
         return dataInizio;
+    }
+    
+    public String getDataInizioShort() {
+        String temp = dataInizio.toString();
+        return temp.substring(0, 10);
     }
 
     public void setDataInizio(Date dataInizio) {
@@ -79,6 +89,7 @@ public class Evento implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
 
     @Override
     public int hashCode() {

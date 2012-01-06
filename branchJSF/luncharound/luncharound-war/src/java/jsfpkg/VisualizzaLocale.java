@@ -23,6 +23,7 @@ import luncharoundpkg.ControlloreValutazioneLocal;
 import luncharoundpkg.Locale;
 import luncharoundpkg.Menu;
 import luncharoundpkg.Piatto;
+import luncharoundpkg.PiattoCombo;
 import luncharoundpkg.Valutazione;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -58,7 +59,7 @@ public class VisualizzaLocale implements Serializable {
     String mappa;
     String facebook;
     List<Piatto> menu;
-    String offerte;
+    List<PiattoCombo> offerte;
     String valutazioni;
     boolean gestore; // per c:if nella jsf
     boolean loggedIn;
@@ -117,7 +118,7 @@ public class VisualizzaLocale implements Serializable {
         catch(Exception e){
             menu = new ArrayList<Piatto>();
         }
-        offerte = controlloreLocale.mostraCombo(idLocale);
+        offerte = controlloreLocale.getMenuCombo(idLocale);
 
         //se è il proprietario deve visualizzare statistiche e altre cose
         // non deve poter valutare
@@ -380,11 +381,11 @@ public class VisualizzaLocale implements Serializable {
         this.menu = menu;
     }
 
-    public String getOfferte() {
+    public List<PiattoCombo> getOfferte() {
         return offerte;
     }
 
-    public void setOfferte(String offerte) {
+    public void setOfferte(List<PiattoCombo> offerte) {
         this.offerte = offerte;
     }
 

@@ -33,6 +33,7 @@ public interface ControlloreLocaleLocal {
     public void addLocale(Locale locale);
     //metodo di utilità
     public Menu menuDiLocale(int idLocale);
+    public List<PiattoCombo> getMenuCombo(int idLocale);
     
     //metodi forse solo x test, necessario restituire le liste di oggetti?
     public String mostraMenu(int idLocale);

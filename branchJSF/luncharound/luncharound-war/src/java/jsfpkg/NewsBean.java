@@ -42,7 +42,7 @@ public class NewsBean {
     Date dataInizio;
     String descr;
     String titolo;
-    String tutteNews;
+    String path;
     
     /** Creates a new instance of NewsBean */
     public NewsBean() {
@@ -52,52 +52,54 @@ public class NewsBean {
     public void init(){
         int idLocale;
         long idUtente;
-        System.out.println("[VisualizzaLocale] Inizializzazione bean");
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-        HttpSession httpSession = request.getSession();
-        //Controllo se l'utente e' loggato
-        try {
-            loggedIn = (Boolean) httpSession.getAttribute("loggedIn");
-        } catch (Exception e) {
-            loggedIn = false;
-        }
-        //Recupero l'idUtente se loggato
-        try {
-            idUtente = (Long) httpSession.getAttribute("idUtente");
-            
-        } catch (NullPointerException e) {
-            idUtente = -1;
-        }
-        //Controllo se sto visualizzando un locale
-        try {
-            idLocale = (Integer) httpSession.getAttribute("idLocale");
-        } catch (NullPointerException e) {
-            idLocale = -1;
-        }
-        //Caso in cui sto visualizzando un locale
-        if (idLocale>=0) {
-            locale = controlloreLocale.findById(idLocale);
-            if (idUtente == locale.getIdUtente()) {
-                gestore = true;
+        try{
+            System.out.println("[VisualizzaLocale] Inizializzazione bean");
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+            HttpSession httpSession = request.getSession();
+            path = request.getRequestURI();
+            //Controllo se l'utente e' loggato
+            try {
+                loggedIn = (Boolean) httpSession.getAttribute("loggedIn");
+            } catch (Exception e) {
+                loggedIn = false;
             }
-            else {
-                gestore = false;
+            //Recupero l'idUtente se loggato
+            try {
+                idUtente = (Long) httpSession.getAttribute("idUtente");
+
+            } catch (NullPointerException e) {
+                idUtente = -1;
             }
-            news = controlloreLocale.getNews(idLocale);
-            tutteNews = news.toString();
-            tutteNews = tutteNews+"gestore";
+
+            if(path.matches("/luncharound-war/faces/newsPage.xhtml")){
+                news = controlloreNews.getNews();
+            }
+            else{
+                try {
+                    idLocale = (Integer) httpSession.getAttribute("idLocale");
+                } catch (NullPointerException e) {
+                    idLocale = -1;
+                }
+                //Caso in cui sto visualizzando un locale
+                if (idLocale>=0) {
+                    locale = controlloreLocale.findById(idLocale);
+                    if (idUtente == locale.getIdUtente()) {
+                        gestore = true;
+                    }
+                    else {
+                        gestore = false;
+                    }
+                    news = controlloreLocale.getNews(idLocale);
+                }
+                else{
+                    news = controlloreNews.getNews();
+                }
+            }
         }
-        //Non sto visualizzando un locale ma sono loggato
-        else if (loggedIn & idUtente >= 0){
-            news = controlloreUtente.getNews(idUtente);
-            news.addAll(controlloreNews.getNews());
-            tutteNews = news.toString();
-            tutteNews = tutteNews+"utente";
+        catch (Exception e){
+            news = null;
         }
-        else
-            news = controlloreNews.getNews();
-        tutteNews = news.toString();
     }
     
     public void addNews(){
@@ -106,6 +108,21 @@ public class NewsBean {
         HttpSession httpSession = request.getSession();
         int idLocale = (Integer) httpSession.getAttribute("idLocale");
         controlloreLocale.addNews(idLocale, dataInizio, titolo, descr);
+    }
+    
+    public String visualizzaLocale() {
+        System.out.println("visualizza Locale");
+        // prendo la sessione
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        HttpSession httpSession = request.getSession();
+
+        // prendo il parametro passato dalla jsf
+        Map<String, String> params = context.getExternalContext().getRequestParameterMap();
+        int idlocale = Integer.parseInt(params.get("idLocale"));
+        httpSession.setAttribute("idLocale", idlocale);
+        System.out.println("idLocale: " + idlocale);
+        return "visualizzaLocale";
     }
 
     public Date getDataInizio() {
@@ -172,12 +189,12 @@ public class NewsBean {
         this.titolo = titolo;
     }
 
-    public String getTutteNews() {
-        return tutteNews;
+    public String getPath() {
+        return path;
     }
 
-    public void setTutteNews(String tutteNews) {
-        this.tutteNews = tutteNews;
+    public void setPath(String path) {
+        this.path = path;
     }
     
     

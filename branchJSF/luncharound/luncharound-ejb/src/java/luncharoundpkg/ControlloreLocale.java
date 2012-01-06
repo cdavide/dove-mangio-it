@@ -148,11 +148,13 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         
     
     }
-   
+    
+    @Override
     public List<Menu> allMenu(){
         return menuFacade.findAll();
     }
     
+    @Override
     public List<Piatto> allPiatti(){
      return piattoFacade.findAll();   
     }
@@ -177,6 +179,11 @@ public class ControlloreLocale implements ControlloreLocaleLocal {
         return menuFacade.findByLocale(idLocale);
     }
     
+    @Override
+    public List<PiattoCombo> getMenuCombo(int idLocale){
+        return piattoComboFacade.findByLocale(idLocale);
+        
+    }
     //metodo grezzo, adatto al test.Visualizza il menù del giorno
     //per un dato locale.Se non valido, la stringa ritornata inizierà 
     //con *

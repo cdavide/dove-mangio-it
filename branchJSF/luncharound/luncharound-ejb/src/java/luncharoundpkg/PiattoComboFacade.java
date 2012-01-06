@@ -7,6 +7,8 @@ package luncharoundpkg;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,4 +27,11 @@ public class PiattoComboFacade extends AbstractFacade<PiattoCombo> implements Pi
         super(PiattoCombo.class);
     }
     
+    @Override
+    public List<PiattoCombo> findByLocale(int idLocale) {
+        String selectQuery = "SELECT DISTINCT OBJECT(V) FROM PiattoCombo V WHERE V.idLocale = ?1 ";
+        Query searchById = em.createQuery(selectQuery);
+        searchById.setParameter(1, idLocale);
+        return searchById.getResultList();
+    }
 }

@@ -570,6 +570,49 @@
 
                     </p:dataTable>
                 </p:tab>
+                
+                <p:tab id="tpc" title="Combinazioni">
+                    <p:dataTable id="pc" value="#{addMenuBean.piattoCombo}" var="combo" >
+                        <p:column headerText="Descrizione" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText  value="#{combo.descr}" />
+                                    <p:tooltip  value="Nome" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{combo.descr}" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText ="Prezzo" style="width:100%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{combo.prezzo}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{combo.prezzo}" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column style="width:100%">
+                            <p:rowEditor/>
+                        </p:column>
+                        <p:column style="width:100%" >
+                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:bev growl tab_view fr_menu" image="ui-icon ui-icon-disk">
+                                <f:param name="idOperation" value="6" />
+                            </p:commandButton>
+                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:bev growl tab_view fr_menu" image="ui-icon ui-icon-trash">
+                                <f:param name="idPiatto" value="#{combo.id}" />
+                                <f:param name="idOperation" value="6" />
+                            </p:commandButton>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:tab>
+                
+                
             </p:tabView>
             <p:panel header="Esporta il tuo menu nel formato che preferisci (Pdf ?)">  
                 <p:commandLink action="#{addMenuBean.printPdf}" target="_blank" ajax="false" >  

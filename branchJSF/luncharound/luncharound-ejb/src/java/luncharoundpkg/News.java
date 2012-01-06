@@ -43,6 +43,11 @@ public class News implements Serializable {
     public Date getDataInizio() {
         return dataInizio;
     }
+    
+    public String getDataInizioShort() {
+        String temp = dataInizio.toString();
+        return temp.substring(0, 10);
+    }
 
     public void setDataInizio(Date dataInizio) {
         this.dataInizio = dataInizio;
