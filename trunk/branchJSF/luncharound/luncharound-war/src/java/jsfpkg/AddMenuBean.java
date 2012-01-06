@@ -23,8 +23,10 @@ import javax.servlet.http.HttpSession;
 import luncharoundpkg.Categoria;
 import luncharoundpkg.ControlloreLocaleLocal;
 import luncharoundpkg.ControllorePiattiLocal;
+import luncharoundpkg.ControllorePiattoComboLocal;
 import luncharoundpkg.Menu;
 import luncharoundpkg.Piatto;
+import luncharoundpkg.PiattoCombo;
 
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
@@ -42,6 +44,8 @@ public class AddMenuBean {
     private ControlloreLocaleLocal controlloreLocale;
     @EJB
     private ControllorePiattiLocal controllorePiatto;
+    @EJB
+    private ControllorePiattoComboLocal controllorePiattoCombo;
     private Menu menu;
     private List<Piatto> newListPiatti;
     private List<Piatto> allPiattoNames;
@@ -53,12 +57,14 @@ public class AddMenuBean {
     private List<Piatto> dolci;
     private List<Piatto> bevande;
     private List<Piatto> antipasti;
+    private List<PiattoCombo> piattoCombo;
     private Piatto nuovoPrimo;
     private Piatto nuovoAntipasto;
     private Piatto nuovoSecondo;
     private Piatto nuovoDolce;
     private Piatto nuovaBevanda;
     private Piatto nuovoContorno;
+    private PiattoCombo nuovoPiattoCombo;
     private Date date;
     // serve per eliminare i piatti dal menu
     // direttamente dalla datatable
@@ -95,6 +101,14 @@ public class AddMenuBean {
             newListPiatti = new ArrayList<Piatto>();
         }
         try {
+            piattoCombo = controlloreLocale.getMenuCombo(idLocale);
+            if(piattoCombo == null){
+                piattoCombo = new ArrayList<PiattoCombo>();
+            }
+        } catch (Exception e) {
+            piattoCombo = new ArrayList<PiattoCombo>();
+        }
+        try {
             allPiattoNames = controlloreLocale.allPiatti(); // la predizione del
             // piatto viene fatta su tutti i piatti nel DB, non solo su quelli del locale
         } catch (Exception e) {
@@ -117,6 +131,8 @@ public class AddMenuBean {
         nuovoPrimo = controllorePiatto.createTemplatePiatto(Categoria.PRIMI, idLocale);
 
         nuovoContorno = controllorePiatto.createTemplatePiatto(Categoria.CONTORNI, idLocale);
+        
+        nuovoPiattoCombo = controllorePiattoCombo.createTemplatePiatto(idLocale); 
 
         try {
             primi = controllorePiatto.getCategoriaLocale(idLocale, Categoria.PRIMI);
@@ -142,6 +158,7 @@ public class AddMenuBean {
         contorni.add(nuovoContorno);
         bevande.add(nuovaBevanda);
         dolci.add(nuovoDolce);
+        piattoCombo.add(nuovoPiattoCombo);
         System.err.println("Post constructor OK!");
     }
 
@@ -219,6 +236,12 @@ public class AddMenuBean {
                 nuovaBevanda = controllorePiatto.createTemplatePiatto(Categoria.BEVANDE, idLocale);
                 bevande.add(nuovaBevanda);
                 break;
+            case 6:
+                System.out.println("aggiunto piattoCombo!");
+                controllorePiattoCombo.addPiatto(nuovoPiattoCombo);
+                nuovoPiattoCombo = controllorePiattoCombo.createTemplatePiatto(idLocale);
+                piattoCombo.add(nuovoPiattoCombo);
+                break;
         }
         // la lista è aggiornata, propago le modifice al DB
 
@@ -231,6 +254,7 @@ public class AddMenuBean {
     public void delete() {
         FacesContext context = FacesContext.getCurrentInstance();
         Piatto toRem;
+        PiattoCombo toRemC;
         //controllare id utente altrimenti non si puo procedere, oppure che la sessione sia valida
         if (!checkUserLogin()) {
             addFacesMessage("Devi effettuare il login per registrare un nuovo menu.", "Errore!");
@@ -329,6 +353,19 @@ public class AddMenuBean {
                     System.out.println("[AddMenuBean.java]: non trovato piatto da cancellare, forse id errato?");
                 }
                 break;
+            case 6:
+                System.out.println("Rimozione piattoCombo!");
+                try {
+                    toRemC = controllorePiattoCombo.findById(idPiatto);
+                    // inverto l'ordine delle remove per vincoli integrità db
+                    piattoCombo.remove(toRemC);// rimuovo il piatto dalla lista
+                    editMenu();
+                    controllorePiattoCombo.removePiatto(toRemC); // rimuovo il piatto nel DB;
+                    // speriamo non si inchiodi, altrimenti tocca fare il rollback a mano
+                } catch (Exception e) {
+                    System.out.println("[AddMenuBean.java]: non trovato piattoCombo da cancellare, forse id errato?");
+                }
+                break;
         }
         // la lista è aggiornata, propago le modifice al DB
 
@@ -340,6 +377,7 @@ public class AddMenuBean {
     public void editMenu() {
         try {
             controllorePiatto.editListaPiatti(newListPiatti);
+            controllorePiattoCombo.editListaPiatti(piattoCombo);
             controlloreLocale.editMenu(idLocale, newListPiatti, date);
         } // aggiorno il menu
         catch (Exception e) {
@@ -383,6 +421,7 @@ public class AddMenuBean {
         Paragraph sc = new Paragraph("Secondi");
         Paragraph dol = new Paragraph("Dolci");
         Paragraph be = new Paragraph("Bevande");
+        Paragraph pc = new Paragraph("Combinazioni");
         Font font = new Font(Font.COURIER, 20, Font.BOLD); // 1
         font.setColor(new Color(0x92, 0x90, 0x83));
 
@@ -474,6 +513,22 @@ public class AddMenuBean {
         for (Piatto p : bevande) {
             if (null != p.getNome() && !p.getNome().equals("")) {
                 table.addCell(p.getNome());
+                table.addCell(String.valueOf(p.getPrezzo()) + "  €");
+            }
+        }
+        document.add(table);
+        
+        chunk = new Chunk("Combinazioni", font);
+        par = new Paragraph(chunk);
+        par.setAlignment(Paragraph.ALIGN_CENTER);
+        par.setSpacingBefore(50);
+        par.setSpacingAfter(50);
+        document.add(par);
+        table = new PdfPTable(2);
+        table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+        for (PiattoCombo p : piattoCombo) {
+            if (null != p.getDescr() && !p.getDescr().equals("")) {
+                table.addCell(p.getDescr());
                 table.addCell(String.valueOf(p.getPrezzo()) + "  €");
             }
         }
@@ -634,5 +689,25 @@ public class AddMenuBean {
     public void setNewListPiatti(List<Piatto> newListPiatti) {
         this.newListPiatti = newListPiatti;
     }
+    
+    
+    
+
+    public PiattoCombo getNuovoPiattoCombo() {
+        return nuovoPiattoCombo;
+    }
+
+    public void setNuovoPiattoCombo(PiattoCombo nuovoPiattoCombo) {
+        this.nuovoPiattoCombo = nuovoPiattoCombo;
+    }
+
+    public List<PiattoCombo> getPiattoCombo() {
+        return piattoCombo;
+    }
+
+    public void setPiattoCombo(List<PiattoCombo> piattoCombo) {
+        this.piattoCombo = piattoCombo;
+    }
+    
     //</editor-fold>
 }

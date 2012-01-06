@@ -210,6 +210,7 @@ public class LoginBean {
         httpSession.setAttribute("tipo", "");
         httpSession.setAttribute("foto", "");
         httpSession.setAttribute("mioLocale", null);
+        httpSession.setAttribute("idLocale", null);
         httpSession.setAttribute("oauth_token", null);
         httpSession.setAttribute("oauth_token_secret", null);
         //try{

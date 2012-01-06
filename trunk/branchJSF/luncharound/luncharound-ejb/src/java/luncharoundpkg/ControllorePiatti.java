@@ -55,7 +55,7 @@ public class ControllorePiatti implements ControllorePiattiLocal {
     }
     
     
-        @Override
+    @Override
     public Piatto findById(long idPiatto){
         return piattoFacade.find(idPiatto);
     }

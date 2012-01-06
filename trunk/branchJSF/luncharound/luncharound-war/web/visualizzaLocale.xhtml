@@ -43,7 +43,15 @@
                     </p:tab>
 
                     <p:tab title="Combinazioni e Offerte de locale">  
-                        <h:outputText value="#{visualizzaLocale.offerte}"/>
+                        <p:dataTable rendered="#{visualizzaLocale.offerte.size() > 0}" id="menu_tb2" value="#{visualizzaLocale.offerte}" var="piattocombo" >
+                            <p:column style="text-align: left;width:100%;" headerText="Descrizione Combinazione" >
+                                    <h:outputText  value="#{piattocombo.descr}" />
+                            </p:column>
+                            <p:column headerText="Prezzo" style="width:100%">
+                                    <h:outputText  value="#{piattocombo.prezzo}" />
+                            </p:column>
+                        </p:dataTable>
+                        <h:outputText rendered="#{visualizzaLocale.menu.size() == 0}" value="Non sono presenti piatti nel menu"/>
                     </p:tab>
 
                     <p:tab title="Valutazione Utenti">  
@@ -92,36 +100,41 @@
                     <p:tab title="News Locale" id="newsForm">  
                         <h:form prependId="false">
                             <p:dataList value="#{newsBean.news}" var="news"
-                                        paginator="true" rows="10" effectSpeed="fast"
-                                        paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}">
+                                    paginator="true" rows="10" effectSpeed="fast"
+                                    paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}">
 
-                                <p:column>
-                                    <p:commandLink update="newsDetail" oncomplete="newsDialog.show()" title="View Detail">
-                                        <p:graphicImage value="/resources/news_logo.png"/> 
-                                        <f:setPropertyActionListener value="#{news}" target="#{newsBean.selectedNews}" />
+                                    <p:column>
+                                            <p:commandLink update="newsDetail" oncomplete="newsDialog.show()" title="View Detail">
+                                            <p:graphicImage value="/resources/news_logo.png"/> 
+                                            <f:setPropertyActionListener value="#{news}" target="#{newsBean.selectedNews}" />
                                     </p:commandLink>
 
-                                    <h:outputText value="#{news.titolo}, #{news.dataInizio}" style="margin-left:10px" />
+                                    <h:outputText value="#{news.titolo}, #{news.getDataInizioShort()}" style="margin-left:10px" />
 
-                                </p:column>
+                                    </p:column>
                             </p:dataList>
 
-                            <p:dialog header="News Detail" widgetVar="newsDialog" width="200" height="175" modal="true">
-                                <p:outputPanel id="newsDetail" style="text-align:center;" layout="block">
+                            <p:dialog header="News Detail" widgetVar="newsDialog" width="300" height="400" modal="true">
+                                    <p:outputPanel id="newsDetail" style="text-align:center;" layout="block">
 
-                                    <p:graphicImage value="/resources/ic2.png"/>
+                                            <p:graphicImage value="/resources/ic2.png"/>
 
-                                    <h:panelGrid  columns="2" cellpadding="5">
-                                        <h:outputLabel for="titolo" value="Titolo: " />
-                                        <h:outputText id="titoloNews" value="#{newsBean.selectedNews.titolo}" />
+                                            <h:panelGrid  columns="2" cellpadding="5">
+                                                    <h:outputLabel for="titolo" value="Titolo: " />
+                                                    <h:outputText id="titoloNews" value="#{newsBean.selectedNews.titolo}" />
+                                                
+                                                    <h:outputLabel for="dataInizio" value="Data inizio: " />
+                                                    <h:outputText id="dataInNews" value="#{newsBean.selectedNews.getDataInizioShort()}" />
 
-                                        <h:outputLabel for="dataInizio" value="Data inizio: " />
-                                        <h:outputText id="dataInNews" value="#{newsBean.selectedNews.dataInizio}" />
-
-                                        <h:outputLabel for="descrizione" value="Descrizione: " />
-                                        <h:outputText id="descrNews" value="#{newsBean.selectedNews.descr}"/>
-                                    </h:panelGrid>
-                                </p:outputPanel>
+                                                    <h:outputLabel for="descrizione" value="Descrizione: " />
+                                                    <h:outputText id="descrNews" value="#{newsBean.selectedNews.descr}"/>
+                                                    
+                                                    <p:commandLink   id="openLocNews"  action="#{newsBean.visualizzaLocale}"  ajax="false" >
+                                                        <f:param name="idLocale" value="#{newsBean.selectedNews.idLocale}" />
+                                                        <h:outputText value="Visualizza il locale"></h:outputText>
+                                                    </p:commandLink>
+                                            </h:panelGrid>
+                                    </p:outputPanel>
                             </p:dialog>
 
                         </h:form>
@@ -129,39 +142,44 @@
                     <p:tab title="Eventi Locale" id="eventForm">  
                         <h:form prependId="false">
                             <p:dataList value="#{eventBean.eventi}" var="evento"
-                                        paginator="true" rows="10" effectSpeed="fast"
-                                        paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}">
+                                    paginator="true" rows="10" effectSpeed="fast"
+                                    paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}">
 
-                                <p:column>
-                                    <p:commandLink update="eventDetail" oncomplete="eventDialog.show()" title="View Detail">
-                                        <p:graphicImage value="/resources/calendar.jpg"/> 
-                                        <f:setPropertyActionListener value="#{evento}" target="#{eventBean.selectedEvent}" />
-                                    </p:commandLink>
+                                    <p:column>
+                                        <p:commandLink update="eventDetail" oncomplete="eventDialog.show()" title="View Detail">
+                                            <p:graphicImage value="/resources/calendar.jpg"/> 
+                                            <f:setPropertyActionListener value="#{evento}" target="#{eventBean.selectedEvent}" />
+                                        </p:commandLink>
 
-                                    <h:outputText value="#{evento.titolo}, #{evento.dataInizio}" style="margin-left:10px" />
+                                        <h:outputText value="#{evento.titolo}, #{evento.getDataInizioShort()}" style="margin-left:10px" />
 
-                                </p:column>
+                                    </p:column>
                             </p:dataList>
 
-                            <p:dialog header="Event Detail" widgetVar="eventDialog" width="200" height="175" modal="true">
-                                <p:outputPanel id="eventDetail" style="text-align:center;" layout="block">
+                            <p:dialog header="Event Detail" widgetVar="eventDialog" width="300" height="400" modal="true">
+                                    <p:outputPanel id="eventDetail" style="text-align:center;" layout="block">
 
-                                    <p:graphicImage value="/resources/ic2.png"/>
+                                            <p:graphicImage value="/resources/ic2.png"/>
 
-                                    <h:panelGrid  columns="2" cellpadding="5">
-                                        <h:outputLabel for="titolo" value="Titolo: " />
-                                        <h:outputText id="titolo" value="#{eventBean.selectedEvent.titolo}" />
+                                            <h:panelGrid  columns="2" cellpadding="5">
+                                                    <h:outputLabel for="titolo" value="Titolo: " />
+                                                    <h:outputText id="titoloEv" value="#{eventBean.selectedEvent.titolo}" />
+                                                
+                                                    <h:outputLabel for="dataInizio" value="Data inizio: " />
+                                                    <h:outputText id="dataInEv" value="#{eventBean.selectedEvent.getDataInizioShort()}" />
 
-                                        <h:outputLabel for="dataInizio" value="Data inizio: " />
-                                        <h:outputText id="dataIn" value="#{eventBean.selectedEvent.dataInizio}" />
+                                                    <h:outputLabel for="dataFine" value="Data fine: " />
+                                                    <h:outputText id="dataFinEv" value="#{eventBean.selectedEvent.getDataInizioShort()}" />
 
-                                        <h:outputLabel for="dataFine" value="Data fine: " />
-                                        <h:outputText id="dataFin" value="#{eventBean.selectedEvent.dataFine}" />
-
-                                        <h:outputLabel for="descrizione" value="Descrizione: " />
-                                        <h:outputText id="descr" value="#{eventBean.selectedEvent.descr}"/>
-                                    </h:panelGrid>
-                                </p:outputPanel>
+                                                    <h:outputLabel for="descrizione" value="Descrizione: " />
+                                                    <h:outputText id="descrEv" value="#{eventBean.selectedEvent.descr}"/>
+                                                  
+                                                    <p:commandLink   id="openLocEv"  action="#{eventBean.visualizzaLocale}"  ajax="false" >
+                                                        <f:param name="idLocale" value="#{eventBean.selectedEvent.idLocale}" />
+                                                        <h:outputText value="Visualizza il locale"></h:outputText>
+                                                    </p:commandLink>
+                                            </h:panelGrid>
+                                    </p:outputPanel>
                             </p:dialog>
 
                         </h:form>
@@ -170,7 +188,7 @@
                         <br/>
                         <h:outputText  escape="false" value="#{visualizzaLocale.facebook}"/>
                         <br/><br/>
-                        <h:outputText escape="false" value="#{localiBean.twitLocale}"/>
+                        <h:outputText escape="false" value="#{visualizzaLocale.twitLocale}"/>
 
                     </p:tab>
 

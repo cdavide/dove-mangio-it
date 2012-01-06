@@ -20,7 +20,7 @@
                                             <f:setPropertyActionListener value="#{news}" target="#{newsBean.selectedNews}" />
                                     </p:commandLink>
 
-                                    <h:outputText value="#{news.titolo}, #{news.dataInizio}" style="margin-left:10px" />
+                                    <h:outputText value="#{news.titolo}, #{news.getDataInizioShort()}" style="margin-left:10px" />
 
                                     </p:column>
                             </p:dataList>
@@ -35,11 +35,15 @@
                                                     <h:outputText id="titoloNews" value="#{newsBean.selectedNews.titolo}" />
                                                 
                                                     <h:outputLabel for="dataInizio" value="Data inizio: " />
-                                                    <h:outputText id="dataInNews" value="#{newsBean.selectedNews.dataInizio}" />
+                                                    <h:outputText id="dataInNews" value="#{newsBean.selectedNews.getDataInizioShort()}" />
 
                                                     <h:outputLabel for="descrizione" value="Descrizione: " />
                                                     <h:outputText id="descrNews" value="#{newsBean.selectedNews.descr}"/>
                                                     
+                                                    <p:commandLink   id="openLocNews"  action="#{newsBean.visualizzaLocale}"  ajax="false" >
+                                                        <f:param name="idLocale" value="#{newsBean.selectedNews.idLocale}" />
+                                                        <h:outputText value="Visualizza il locale"></h:outputText>
+                                                    </p:commandLink>
                                             </h:panelGrid>
                                     </p:outputPanel>
                             </p:dialog>

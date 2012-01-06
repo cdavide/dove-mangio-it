@@ -18,6 +18,15 @@ import javax.annotation.PostConstruct;
 import luncharoundpkg.Locale;
 import luncharoundpkg.Evento;
 import luncharoundpkg.ControlloreEventiLocal;
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageProducer;
+import javax.jms.Queue;
+import javax.jms.Session;
+import javax.jms.ObjectMessage;
+import javax.annotation.Resource;
 
 /**
  *
@@ -26,6 +35,10 @@ import luncharoundpkg.ControlloreEventiLocal;
 @ManagedBean(name = "eventBean")
 @RequestScoped
 public class EventBean {
+    //@Resource(mappedName = "jms/EventMsg")//Questa non esiste, dovrebbe essere chi riceve questi messaggi
+    //private Queue filmMsg;
+    //@Resource(mappedName = "jms/EventMsgFactory")//Questa non esiste, dovrebbe essere chi riceve questi messaggi
+    //private ConnectionFactory filmMsgFactory;
     @EJB
     private ControlloreLocaleLocal controlloreLocale;
     @EJB
@@ -41,7 +54,7 @@ public class EventBean {
     Date dataFine;
     String descr;
     String titolo;
-    String tuttiEventi;
+    String path;
     
     /** Creates a new instance of EventBean */
     public EventBean() {
@@ -52,53 +65,85 @@ public class EventBean {
     public void init(){
         int idLocale;
         long idUtente;
-        System.out.println("[EventBean] Inizializzazione bean");
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-        HttpSession httpSession = request.getSession();
-        //Controllo se l'utente e' loggato
-        try {
-            loggedIn = (Boolean) httpSession.getAttribute("loggedIn");
-        } catch (Exception e) {
-            loggedIn = false;
-        }
-        //Recupero l'idUtente se loggato
-        try {
-            idUtente = (Long) httpSession.getAttribute("idUtente");
-            
-        } catch (NullPointerException e) {
-            idUtente = -1;
-        }
-        //Controllo se sto visualizzando un locale
-        try {
-            idLocale = (Integer) httpSession.getAttribute("idLocale");
-        } catch (NullPointerException e) {
-            idLocale = -1;
-        }
-        //Caso in cui sto visualizzando un locale
-        if (idLocale>=0) {
-            locale = controlloreLocale.findById(idLocale);
-            if (idUtente == locale.getIdUtente()) {
-                gestore = true;
+        try{
+            System.out.println("[EventBean] Inizializzazione bean");
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+            HttpSession httpSession = request.getSession();
+            path = request.getRequestURI();
+            //Controllo se l'utente e' loggato
+            try {
+                loggedIn = (Boolean) httpSession.getAttribute("loggedIn");
+            } catch (Exception e) {
+                loggedIn = false;
             }
-            else {
-                gestore = false;
+            //Recupero l'idUtente se loggato
+            try {
+                idUtente = (Long) httpSession.getAttribute("idUtente");
+
+            } catch (NullPointerException e) {
+                idUtente = -1;
             }
-            eventi = controlloreLocale.getEventi(idLocale);
-            tuttiEventi = eventi.toString();
-            tuttiEventi = tuttiEventi+"gestore";
+            //Controllo se sto visualizzando un locale
+            if(path.matches("/luncharound-war/faces/eventiPage.xhtml")){
+                eventi = controlloreEventi.getEventi();
+            }
+            else{
+                try {
+                    idLocale = (Integer) httpSession.getAttribute("idLocale");
+                } catch (NullPointerException e) {
+                    idLocale = -1;
+                }
+               //Caso in cui sto visualizzando un locale
+                if (idLocale>=0) {
+                    locale = controlloreLocale.findById(idLocale);
+                    if (idUtente == locale.getIdUtente()) {
+                        gestore = true;
+                    }
+                    else {
+                        gestore = false;
+                    }
+                    eventi = controlloreLocale.getEventi(idLocale);
+                }
+                else{
+                    eventi = controlloreEventi.getEventi();
+                }
+            }
         }
-        //Non sto visualizzando un locale ma sono loggato
-        else if (loggedIn & idUtente >= 0){
-            eventi = controlloreUtente.getEventi(idUtente);
-            eventi.addAll(controlloreEventi.getEventi());
-            tuttiEventi = eventi.toString();
-            tuttiEventi = tuttiEventi+"utente";
+        catch (Exception e){
+            eventi = null;
         }
-        else
-            eventi = controlloreEventi.getEventi();
-            tuttiEventi = eventi.toString();
     }
+    
+    /*private Message createJMSMessageForjmsEventoMsg(Session session, Object messageData) throws JMSException {
+        // TODO create and populate message to send
+        
+        ObjectMessage tm = session.createObjectMessage();
+        tm.setObject((Evento) messageData);
+        return tm;
+    }
+
+    private void sendJMSMessageToEventoMsg(Object messageData) throws JMSException {
+        Connection connection = null;
+        Session session = null;
+        try {
+            connection = filmMsgFactory.createConnection();
+            session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            MessageProducer messageProducer = session.createProducer(filmMsg);
+            messageProducer.send(createJMSMessageForjmsEventoMsg(session, messageData));
+        } finally {
+            if (session != null) {
+                try {
+                    session.close();
+                } catch (JMSException e) {
+                    System.out.println("Cannot close session");
+                }
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }*/
     
     public void addEvento(){
         FacesContext context = FacesContext.getCurrentInstance();
@@ -106,6 +151,33 @@ public class EventBean {
         HttpSession httpSession = request.getSession();
         int idLocale = (Integer) httpSession.getAttribute("idLocale");
         controlloreLocale.addEvento(idLocale, dataInizio, dataFine, titolo, descr);
+        /*
+        Evento add = new Evento();
+        add.setDataFine(dataFine);
+        add.setDataInizio(dataInizio);
+        add.setDescr(descr);
+        add.setTitolo(titolo);
+        try{
+            sendJMSMessageToEventoMsg((Object) add);
+        }
+        catch (JMSException e){
+            System.err.println("Impossibile mandare il nuovo evento alla jsm");
+        }*/
+    }
+    
+    public String visualizzaLocale() {
+        System.out.println("visualizza Locale");
+        // prendo la sessione
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        HttpSession httpSession = request.getSession();
+
+        // prendo il parametro passato dalla jsf
+        Map<String, String> params = context.getExternalContext().getRequestParameterMap();
+        int idlocale = Integer.parseInt(params.get("idLocale"));
+        httpSession.setAttribute("idLocale", idlocale);
+        System.out.println("idLocale: " + idlocale);
+        return "visualizzaLocale";
     }
     
     public Evento getSelectedEvent() {
@@ -180,11 +252,13 @@ public class EventBean {
         this.titolo = titolo;
     }
 
-    public String getTuttiEventi() {
-        return tuttiEventi;
+    public String getPath() {
+        return path;
     }
 
-    public void setTuttiEventi(String tuttiEventi) {
-        this.tuttiEventi = tuttiEventi;
+    public void setPath(String path) {
+        this.path = path;
     }
+
+    
 }

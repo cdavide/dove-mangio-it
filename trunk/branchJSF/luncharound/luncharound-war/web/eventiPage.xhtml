@@ -20,7 +20,7 @@
                                             <f:setPropertyActionListener value="#{evento}" target="#{eventBean.selectedEvent}" />
                                         </p:commandLink>
 
-                                        <h:outputText value="#{evento.titolo}, #{evento.dataInizio}" style="margin-left:10px" />
+                                        <h:outputText value="#{evento.titolo}, #{evento.getDataInizioShort()}" style="margin-left:10px" />
 
                                     </p:column>
                             </p:dataList>
@@ -35,14 +35,18 @@
                                                     <h:outputText id="titolo" value="#{eventBean.selectedEvent.titolo}" />
                                                 
                                                     <h:outputLabel for="dataInizio" value="Data inizio: " />
-                                                    <h:outputText id="dataIn" value="#{eventBean.selectedEvent.dataInizio}" />
+                                                    <h:outputText id="dataIn" value="#{eventBean.selectedEvent.getDataInizioShort()}" />
 
                                                     <h:outputLabel for="dataFine" value="Data fine: " />
-                                                    <h:outputText id="dataFin" value="#{eventBean.selectedEvent.dataFine}" />
+                                                    <h:outputText id="dataFin" value="#{eventBean.selectedEvent.getDataInizioShort()}" />
 
                                                     <h:outputLabel for="descrizione" value="Descrizione: " />
                                                     <h:outputText id="descr" value="#{eventBean.selectedEvent.descr}"/>
                                                   
+                                                    <p:commandLink   id="openLocEv"  action="#{eventBean.visualizzaLocale}"  ajax="false" >
+                                                        <f:param name="idLocale" value="#{eventBean.selectedEvent.idLocale}" />
+                                                        <h:outputText value="Visualizza il locale"></h:outputText>
+                                                    </p:commandLink>
                                             </h:panelGrid>
                                     </p:outputPanel>
                             </p:dialog>

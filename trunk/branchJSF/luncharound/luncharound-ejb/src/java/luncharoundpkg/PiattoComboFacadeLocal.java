@@ -28,4 +28,6 @@ public interface PiattoComboFacadeLocal {
 
     int count();
     
+    public List<PiattoCombo> findByLocale(int idLocale);
+    
 }
