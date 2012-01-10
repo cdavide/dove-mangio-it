@@ -357,9 +357,7 @@ public class AddMenuBean {
                 System.out.println("Rimozione piattoCombo!");
                 try {
                     toRemC = controllorePiattoCombo.findById(idPiatto);
-                    // inverto l'ordine delle remove per vincoli integrità db
-                    piattoCombo.remove(toRemC);// rimuovo il piatto dalla lista
-                    editMenu();
+                    piattoCombo.remove(toRemC);
                     controllorePiattoCombo.removePiatto(toRemC); // rimuovo il piatto nel DB;
                     // speriamo non si inchiodi, altrimenti tocca fare il rollback a mano
                 } catch (Exception e) {
@@ -377,7 +375,7 @@ public class AddMenuBean {
     public void editMenu() {
         try {
             controllorePiatto.editListaPiatti(newListPiatti);
-            controllorePiattoCombo.editListaPiatti(piattoCombo);
+            //controllorePiattoCombo.editListaPiatti(piattoCombo);
             controlloreLocale.editMenu(idLocale, newListPiatti, date);
         } // aggiorno il menu
         catch (Exception e) {
