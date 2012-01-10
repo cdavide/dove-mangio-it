@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import luncharoundpkg.Locale;
 
-@Generated(value="EclipseLink-2.2.0.v20110202-r8913", date="2011-09-24T09:44:50")
+@Generated(value="EclipseLink-2.2.0.v20110202-r8913", date="2012-01-08T16:22:52")
 @StaticMetamodel(Utente.class)
 public class Utente_ { 
 

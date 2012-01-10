@@ -97,8 +97,8 @@ public class TwitterServlet extends HttpServlet {
                     }
                     httpSession.setAttribute("newLogin",true);
                     httpSession.setAttribute("loggedIn",true);
-                    request.getRequestDispatcher("faces/home.xhtml").forward(request, response); 
-                
+                    request.getRequestDispatcher("faces/home.xhtml").forward(request, response);
+                    
                 } catch (UniformInterfaceException ex) {
                     httpSession.setAttribute("oauth_token",null);
                     httpSession.setAttribute("errore","impossibile effettuare il login da Twitter");

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : newjsp
-    Created on : 16-set-2011, 15.19.48
-    Author     : Dave
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

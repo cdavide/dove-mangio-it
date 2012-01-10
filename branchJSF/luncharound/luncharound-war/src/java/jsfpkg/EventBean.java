@@ -23,7 +23,7 @@ import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageProducer;
-import javax.jms.Queue;
+import javax.jms.Topic;
 import javax.jms.Session;
 import javax.jms.ObjectMessage;
 import javax.annotation.Resource;
@@ -35,10 +35,10 @@ import javax.annotation.Resource;
 @ManagedBean(name = "eventBean")
 @RequestScoped
 public class EventBean {
-    //@Resource(mappedName = "jms/EventMsg")//Questa non esiste, dovrebbe essere chi riceve questi messaggi
-    //private Queue filmMsg;
-    //@Resource(mappedName = "jms/EventMsgFactory")//Questa non esiste, dovrebbe essere chi riceve questi messaggi
-    //private ConnectionFactory filmMsgFactory;
+    @Resource(mappedName = "jms/codaEventi")
+    private Topic eventiMsg;
+    @Resource(mappedName = "jms/codaEventiFactory")
+    private ConnectionFactory eventiMsgFactory;
     @EJB
     private ControlloreLocaleLocal controlloreLocale;
     @EJB
@@ -115,7 +115,7 @@ public class EventBean {
         }
     }
     
-    /*private Message createJMSMessageForjmsEventoMsg(Session session, Object messageData) throws JMSException {
+    private Message createJMSMessageForjmsEventiMsg(Session session, Object messageData) throws JMSException {
         // TODO create and populate message to send
         
         ObjectMessage tm = session.createObjectMessage();
@@ -123,14 +123,14 @@ public class EventBean {
         return tm;
     }
 
-    private void sendJMSMessageToEventoMsg(Object messageData) throws JMSException {
+    private void sendJMSMessageToEventiMsg(Object messageData) throws JMSException {
         Connection connection = null;
         Session session = null;
         try {
-            connection = filmMsgFactory.createConnection();
+            connection = eventiMsgFactory.createConnection();
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            MessageProducer messageProducer = session.createProducer(filmMsg);
-            messageProducer.send(createJMSMessageForjmsEventoMsg(session, messageData));
+            MessageProducer messageProducer = session.createProducer(eventiMsg);
+            messageProducer.send(createJMSMessageForjmsEventiMsg(session, messageData));
         } finally {
             if (session != null) {
                 try {
@@ -143,7 +143,7 @@ public class EventBean {
                 connection.close();
             }
         }
-    }*/
+    }
     
     public void addEvento(){
         FacesContext context = FacesContext.getCurrentInstance();
@@ -151,18 +151,17 @@ public class EventBean {
         HttpSession httpSession = request.getSession();
         int idLocale = (Integer) httpSession.getAttribute("idLocale");
         controlloreLocale.addEvento(idLocale, dataInizio, dataFine, titolo, descr);
-        /*
         Evento add = new Evento();
         add.setDataFine(dataFine);
         add.setDataInizio(dataInizio);
         add.setDescr(descr);
         add.setTitolo(titolo);
         try{
-            sendJMSMessageToEventoMsg((Object) add);
+            sendJMSMessageToEventiMsg((Object) add);
         }
         catch (JMSException e){
-            System.err.println("Impossibile mandare il nuovo evento alla jsm");
-        }*/
+            System.err.println("Impossibile mandare il nuovo evento alla jms");
+        }
     }
     
     public String visualizzaLocale() {

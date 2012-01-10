@@ -40,18 +40,22 @@ public class NewsFacade extends AbstractFacade<News> implements NewsFacadeLocal 
     @Override
     public List<News> findByLocale(int idLocale){
         //deleteOld();
-        String selectQuery = "SELECT DISTINCT OBJECT(V) FROM News V WHERE V.idLocale = ?1 ORDER BY V.dataInizio";
+        String selectQuery = "SELECT DISTINCT OBJECT(V) FROM News V WHERE V.idLocale = ?1 AND V.dataInizio >= ?2 ORDER BY V.dataInizio";
 	Query searchById = em.createQuery(selectQuery);
 	searchById.setParameter(1, idLocale);
+        Date data = new Date();
+        searchById.setParameter(2, data);
         return searchById.getResultList();
     }
     
     @Override
     public List<News> findByLocali(List<Integer> idLocali){
         //deleteOld();
-        String selectQuery = "SELECT OBJECT(V) FROM News V ORDER BY V.dataInizio";
+        String selectQuery = "SELECT OBJECT(V) FROM News V WHERE V.dataInizio >= ?1 ORDER BY V.dataInizio";
 	Query searchById = em.createQuery(selectQuery);
 	//searchById.setParameter(1, idLocali);
+        Date data = new Date();
+        searchById.setParameter(1, data);
         return searchById.getResultList();
     }
     
@@ -59,8 +63,10 @@ public class NewsFacade extends AbstractFacade<News> implements NewsFacadeLocal 
     public List<News> findNext(){
         //deleteOld();
         //La query mi deve restituire un subset degli eventi nel sistema ordinati e più vicini nel tempo
-        String selectQuery = "SELECT OBJECT(V) FROM News V ORDER BY V.dataInizio";
+        String selectQuery = "SELECT OBJECT(V) FROM News V WHERE V.dataInizio ORDER BY V.dataInizio";
 	Query searchById = em.createQuery(selectQuery);
+        Date data = new Date();
+        searchById.setParameter(1, data);
         return searchById.getResultList();
     }
     

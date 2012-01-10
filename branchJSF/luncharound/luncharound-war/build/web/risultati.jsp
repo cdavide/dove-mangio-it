@@ -15,7 +15,7 @@
         <body onload="initialize()">
         <center>
             <div id="map_canvas" style="width:60%; height:70%;" ></div>
-            
+         
             <%= request.getAttribute("contenuto")%>
             <hr>
             <jsp:include page="form_ricerca.jsp"/>

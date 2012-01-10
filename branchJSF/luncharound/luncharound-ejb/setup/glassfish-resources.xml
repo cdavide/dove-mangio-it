@@ -11,4 +11,14 @@
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="luncharound-db" object-type="user" pool-name="derby_net_sample_appPool"/>
+    <admin-object-resource enabled="true" jndi-name="jms/provaCoda"  res-type="javax.jms.Topic"  res-adapter="jmsra">
+        <property name="Name" value="PhysicalTopic"/>
+    </admin-object-resource>
+    <connector-connection-pool name="jms/provaCodaFactoryPool"  connection-definition-name="javax.jms.TopicConnectionFactory"  resource-adapter-name="jmsra"/>
+    <connector-resource enabled="true" jndi-name="jms/provaCodaFactory" pool-name="jms/provaCodaFactoryPool"  />
+    <admin-object-resource enabled="true" jndi-name="jms/codaEventi"  res-type="javax.jms.Topic"  res-adapter="jmsra">
+        <property name="Name" value="PhysicalTopic"/>
+    </admin-object-resource>
+    <connector-connection-pool name="jms/codaEventiFactoryPool"  connection-definition-name="javax.jms.TopicConnectionFactory"  resource-adapter-name="jmsra"/>
+    <connector-resource enabled="true" jndi-name="jms/codaEventiFactory" pool-name="jms/codaEventiFactoryPool"  />
 </resources>
