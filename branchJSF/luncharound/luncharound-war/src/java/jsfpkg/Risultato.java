@@ -19,9 +19,10 @@ public class Risultato {
     public double qual;
     public double quan;
     public double pul;
+    private String direction;
     public double cor;
 
-    public Risultato(int posizione, Locale loc, Valutazione val) {
+    public Risultato(int posizione, Locale loc, Valutazione val, String direction) {
         this.posizione = posizione;
         this.loc = loc;
         vel=val.getVelocita();
@@ -30,6 +31,7 @@ public class Risultato {
         quan=val.getQuantita();
         pul=val.getPulizia();
         cor=val.getCortesia();
+        this.direction=direction;
     }
 
     public Locale getLoc() {
@@ -56,6 +58,16 @@ public class Risultato {
         this.aff = aff;
     }
 
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    
+    
     public double getCor() {
         return cor;
     }
