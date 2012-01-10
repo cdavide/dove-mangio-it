@@ -89,7 +89,7 @@ public class FacebookServlet extends HttpServlet {
                     //problemi di lettura oggetto json
                         httpSession.setAttribute("errore","impossibile effettuare il login da facebook");
                         httpSession.setAttribute("newLogin",true);
-                        request.getRequestDispatcher("faces/home.xhtml").forward(request, response);
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
                     }
                 }//fine lettura dati json
                  
@@ -101,7 +101,7 @@ public class FacebookServlet extends HttpServlet {
                     
                         httpSession.setAttribute("errore", "Impossibile utilizzare l'account Facebook, email già utilizzata da un altro utente");
                         httpSession.setAttribute("newLogin",true);
-                        request.getRequestDispatcher("faces/home.xhtml").forward(request, response);    
+                        request.getRequestDispatcher("index.jsp").forward(request, response);    
                     }
                 }
                 else{//non esiste nel database, lo memorizzo
@@ -124,13 +124,13 @@ public class FacebookServlet extends HttpServlet {
                     System.err.println("[fb]L'utente non ha associato nessun locale personale");
                 }
                 httpSession.setAttribute("newLogin",true);
-                request.getRequestDispatcher("faces/home.xhtml").forward(request, response);    
+                request.getRequestDispatcher("index.jsp").forward(request, response);    
 
             }
             else{//errore nell'interazione iniziale (non ottengo un token per il graph)
                 httpSession.setAttribute("errore","impossibile effettuare il login da facebook");
                 httpSession.setAttribute("newLogin",true);
-                request.getRequestDispatcher("faces/home.xhtml").forward(request, response);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
        
         } finally {            

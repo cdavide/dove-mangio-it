@@ -104,11 +104,15 @@ public class RicercaBean{
         String color;
         String name;
         String description;
-        LatLng tempPoint;    
+        LatLng tempPoint;   
+        String dir;
         advancedModel = new DefaultMapModel();
         
         // creo un marker per la posizione attuale, con icona diversa dalle altre
         tempPoint=new LatLng(latitudine,longitudine);
+        dir = "http://maps.google.it?saddr="+latitudine+","+longitudine+"&daddr=";
+        
+        System.err.println("dir inizio: "+ dir);
         pushPin="https://chart.googleapis.com/chart?chst=d_map_pin_icon&chld=glyphish_target%7C00AAFF";
         advancedModel.addOverlay(new Marker(tempPoint,"La tua posizione","",pushPin));
         
@@ -122,6 +126,7 @@ public class RicercaBean{
         
         zeroResults=false;               
         i=0;
+        
         lista.clear();
         for(Locale loc : ll){
             i++;
@@ -140,11 +145,12 @@ public class RicercaBean{
             
             advancedModel.addOverlay(new Marker(tempPoint,name,description,pushPin));
             
+            tempPoint.toString();
             List<Valutazione> lv = controlloreValutazione.findValutazioni(loc.getId());
             Valutazione media=controlloreValutazione.mediaValutazioni(lv);
-            lista.add(new Risultato(i,loc,media));
+            lista.add(new Risultato(i,loc,media,dir+loc.getIndirizzo()));
             
-    
+  
         }
     }
         
@@ -208,7 +214,7 @@ public class RicercaBean{
     public Marker getMarker() {  
         return marker;  
     }
-    
+   
     
     public void save_location(){
        

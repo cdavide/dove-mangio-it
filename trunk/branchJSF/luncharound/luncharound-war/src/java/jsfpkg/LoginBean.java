@@ -58,6 +58,12 @@ public class LoginBean {
         } catch (Exception e) {
             System.out.println("LoginBean.java fresh session");
         }
+        fburl  = "<a href=\"https://www.facebook.com/dialog/oauth?"
+                + "client_id=241460472572920&"
+                + "redirect_uri=http://localhost:8080/luncharound-war/FacebookServlet&"
+                + "scope=email,user_location\">"
+                + "<img src=\"resources/Facebook.png\">"
+                + "</a>";
 
         System.err.println("Inizializzazione bean [LoginBean.java]");
     }
@@ -325,14 +331,8 @@ public class LoginBean {
     }
 
     public String getFburl() {
-        String url = "<a href=\"https://www.facebook.com/dialog/oauth?"
-                + "client_id=241460472572920&"
-                + "redirect_uri=http://localhost:8080/luncharound-war/FacebookServlet&"
-                + "scope=email,user_location\">"
-                + "<img src=\"https://meetin.gs/images/meetings/facebook_login_button.png\" heigh=\"40\" width=\"280\">"
-                + "</a>";
 
-        return url;
+        return this.fburl;
     }
 
     public void setFburl(String fburl) {

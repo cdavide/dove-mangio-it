@@ -5,8 +5,6 @@
 
 package jsfpkg;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import java.util.*;
@@ -15,15 +13,11 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import luncharoundpkg.ControlloreLocaleLocal;
-import luncharoundpkg.ControlloreUtenteLocal;
-import luncharoundpkg.ControlloreValutazioneLocal;
 import luncharoundpkg.Locale;
-import luncharoundpkg.LocaleFacadeLocal;
 
 /**
  *

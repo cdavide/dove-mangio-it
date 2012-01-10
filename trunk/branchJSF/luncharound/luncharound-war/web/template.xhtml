@@ -31,7 +31,7 @@
                     <h:panelGroup id="comment">
                         <p:graphicImage id="img"  alt="64px" height="64px" value="#{loginBean.foto}" rendered="#{loginBean.loggedIn}"/>
                         <br/>
-                        <h:outputText id="name" rendered="#{loginBean.loggedIn}" value="Bentornato: #{menuBean.username}"/>
+                        <h:outputText id="name" rendered="#{loginBean.loggedIn}" value="Ciao: #{menuBean.username}"/>
                     </h:panelGroup>
                 </ui:insert>
             </div>
@@ -55,14 +55,14 @@
                                     <p:commandButton value="Login" update="fr1 left growl comment"
                                                      actionListener="#{loginBean.login}" 
                                                      oncomplete="handleLoginRequest(xhr, status, args)"/>   
-                                    <b>OR</b><br/><br/>                               
+                                    <br/>OR<br/>
                                 </h:panelGrid>
                             </h:form>
                             <h:outputText  escape="false" value="#{loginBean.fburl}"/>
-                            <br/><br/><b>OR</b><br/><br/>
+                            <br/>
                             <h:form id="logTwit">
                                 <h:commandButton id="act" 
-                                                 image="./resources/stwitter.png"  title="Login"
+                                                 image="./resources/Twitter.png"  title="Login"
                                                  action="#{loginBean.twitLogin}"/>
                             </h:form>
                         </p:dialog>
@@ -157,24 +157,24 @@
                                 <p:submenu label="Menu Ristoranti">  
                                     <p:menuitem value="Tutti i locali" url="locali.xhtml" ajax="false" icon="ui-icon ui-icon-home"/>  
                                     <p:menuitem value="Ricerca" url="ricerca.xhtml" ajax="false" icon="ui-icon ui-icon-search"/>  
-                                    <p:menuitem value="Sfoglia le News" url="newsPage.xhtml" icon="ui-icon ui-icon-home" onclick="jQuery('#content').fadeOut(800);jQuery('#left').fadeOut(800);"/>    
-                                    <p:menuitem value="Visualizza eventi"  url="eventiPage.xhtml" icon="ui-icon ui-icon-home" onclick="jQuery('#content').fadeOut(800);jQuery('#left').fadeOut(800);"/>    
+                                    <p:menuitem value="Sfoglia le News" url="newsPage.xhtml" icon="ui-icon ui-icon-calendar" />    
+                                    <p:menuitem value="Visualizza eventi"  url="eventiPage.xhtml" icon="ui-icon ui-icon-calendar"/>    
                                 </p:submenu>
                                 <p:submenu  id="submenu" label="Menu Gestore"  rendered="#{loginBean.gestore}">
                                     <p:menuitem value="Il tuo locale" url="visualizzaLocale.xhtml" icon="ui-icon ui-icon-home" />  
-                                    <p:menuitem value="Aggiungi Menu" url="menuPage.xhtml" icon="ui-icon ui-icon-document"/>  
+                                    <p:menuitem value="Modifica Menu" url="menuPage.xhtml" icon="ui-icon ui-icon-document"/>  
                                     <!--<p:menuitem value="Aggiungi nuovo" url="localiUtente.xhtml" icon="ui-icon ui-icon-plusthick"/>  -->
-                                    <p:menuitem value="Aggiungi news"  id="addNewsLink" onclick="newsDlg.show()" actionListener="asd" icon="ui-icon ui-icon-disk"/>/>  
-                                    <p:menuitem value="Aggiungi evento"  id="addEventoLink" onclick="evDlg.show()" actionListener="asd" icon="ui-icon ui-icon-disk"/>  
+                                    <p:menuitem value="Aggiungi news"  id="addNewsLink" onclick="newsDlg.show()" actionListener="asd" icon="ui-icon ui-icon-plusthick"/>/>  
+                                    <p:menuitem value="Aggiungi evento"  id="addEventoLink" onclick="evDlg.show()" actionListener="asd" icon="ui-icon ui-icon-plusthick"/>  
                                     
                                 </p:submenu>
                                 <p:submenu id="submenu2" label="Menu Gestore" rendered="#{!loginBean.gestore &amp;&amp; loginBean.loggedIn}">
-                                    <p:menuitem value="Aggiungi il tuo locale" url="localiUtente.xhtml" icon="ui-icon ui-icon-plushick"/>  
+                                    <p:menuitem value="Aggiungi un locale" url="localiUtente.xhtml" icon="ui-icon ui-icon-plushick"/>  
                                 </p:submenu>
                                 <p:submenu id="submenu3" label="Informazioni">
-                                    <p:menuitem value="Chi siamo" url="info.xhtml" icon="ui-icon ui-icon-plushick"/>  
-                                    <p:menuitem value="Contattaci" url="contacts.xhtml" icon="ui-icon ui-icon-plushick"/>
-                                    <p:menuitem value="Privacy" url="privacy.xhtml" icon="ui-icon ui-icon-plushick"/>  
+                                    <p:menuitem value="Chi siamo" url="info.xhtml" icon="ui-icon ui-icon-info"/>  
+                                    <p:menuitem value="Contattaci" url="contacts.xhtml" icon="ui-icon ui-icon-info"/>
+                                    <p:menuitem value="Privacy" url="privacy.xhtml" icon="ui-icon ui-icon-info"/>  
                                 </p:submenu>
                             </p:menu>
                         </h:form>

@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.Serializable;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import javax.ejb.EJB;
 import java.util.*;
 import java.util.List;
@@ -64,9 +66,7 @@ public class VisualizzaLocale implements Serializable {
     boolean gestore; // per c:if nella jsf
     boolean loggedIn;
     private String TwitLocale;
-    
-
-
+    private String validita;
 
 
     /** Creates a new instance of LocaliBean */
@@ -79,8 +79,10 @@ public class VisualizzaLocale implements Serializable {
     // dopo che il container ha fatto la injection degli ejb
     @PostConstruct
     public void init() {
+        Format formatter = new SimpleDateFormat("dd-MMM-yy");
         int idLocale;
         long idUtente;
+        Date data;
         System.out.println("[VisualizzaLocale] Inizializzazione bean");
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
@@ -114,12 +116,16 @@ public class VisualizzaLocale implements Serializable {
         facebook = creaFbDialog2(locale);
         try{
         menu = controlloreLocale.menuDiLocale(idLocale).getListaPiatti();
+        data = controlloreLocale.menuDiLocale(idLocale).getValidita();
+        validita = "aggiornato al ";
+        validita += formatter.format(data);
         }
         catch(Exception e){
             menu = new ArrayList<Piatto>();
+            validita = "Menu non aggiornato";
         }
         offerte = controlloreLocale.getMenuCombo(idLocale);
-
+        
         //se è il proprietario deve visualizzare statistiche e altre cose
         // non deve poter valutare
         // statistiche
@@ -132,7 +138,6 @@ public class VisualizzaLocale implements Serializable {
         } catch (Exception e) {
             System.err.println("[VisualizzaLocale.java]: cannot create chart exception");
         }
-
         
         TwitLocale = "<a href='https://twitter.com/share'"
                 + "class='twitter-share-button' "
@@ -211,9 +216,7 @@ public class VisualizzaLocale implements Serializable {
                 + "   Clicca qui per visualizzare il loro menu' di oggi!&";
         dialog += "redirect_uri=http://www.facebook.com\"";
         dialog += " target=\"_blank\">"
-                + "<img src=http://tuttoilweb.myblog.it/media/00/02/579068133.png"
-                + "  width=\"250\" height=\"30\"></a>";
-
+                + "<img src=resources/fshare.jpg></a>";
         return dialog;
     }
 
@@ -326,6 +329,14 @@ public class VisualizzaLocale implements Serializable {
         return chart;
     }
 
+    public String getValidita() {
+        return validita;
+    }
+
+    public void setValidita(String validita) {
+        this.validita = validita;
+    }    
+    
     public boolean isGestore() {
         return gestore;
     }

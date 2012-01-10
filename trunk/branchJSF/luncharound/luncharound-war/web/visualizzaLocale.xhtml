@@ -14,14 +14,15 @@
 
             <h:form id="visual_loc">
                 <h1>
-                    <h:outputText value="#{visualizzaLocale.locale.nome}"/>
-                    <h:outputText escape="false" value="#{visualizzaLocale.twitLocale}"/>
+                        <h:outputText value="#{visualizzaLocale.locale.nome}" style="text-align: left;"/>
+                     
                 </h1>
+                   <h:outputText escape="false" value="Condividi questo locale su: #{visualizzaLocale.twitLocale} #{visualizzaLocale.facebook}" style="align:right;"/>
                 <p:accordionPanel tabChangeListener="mymap.checkResize()" activeIndex="1">
                     <p:tab   title="Dove siamo" >
                         <f:view contentType="text/html">
                             <p:gmap center="#{mapBean.centerLat},#{mapBean.centerLong}"  draggable="true" zoom="16" type="HYBRID" 
-                                    style="width:600px;height:400px"
+                                    style="width:100%;height:400px"
                                     model="#{mapBean.simpleModel}"  widgetVar="mymap"/>
                         </f:view>
                         <h:outputText value="#{visualizzaLocale.locale.indirizzo}"/>
@@ -30,13 +31,28 @@
                     <p:tab title="Descrizione Locale">
                         <h:outputText value="#{visualizzaLocale.locale.descrizione}"/>
                     </p:tab>
-                    <p:tab title="Menu del Giorno">  
+                    <p:tab title="Menu del Giorno (#{visualizzaLocale.validita})">  
                         <p:dataTable rendered="#{visualizzaLocale.menu.size() > 0}" id="menu_tbl" value="#{visualizzaLocale.menu}" var="piatto" >
                             <p:column style="text-align: left;width:100%;" headerText="Nome Piatto" >
                                     <h:outputText  value="#{piatto.nome}" />
                             </p:column>
+                             <p:column headerText="Carne" style="width:100%">
+                                 <h:selectBooleanCheckbox disabled="true"  value="#{piatto.carne}" />
+                            </p:column>
+                             <p:column headerText="Pesce" style="width:100%">
+                                 <h:selectBooleanCheckbox disabled="true"  value="#{piatto.pesce}" />
+                            </p:column>
+                             <p:column headerText="Celiac" style="width:100%">
+                                 <h:selectBooleanCheckbox disabled="true"  value="#{piatto.celiaco}" />
+                            </p:column>
+                             <p:column headerText="Vegan" style="width:100%">
+                                 <h:selectBooleanCheckbox disabled="true"  value="#{piatto.vegano}" />
+                            </p:column>
+                             <p:column headerText="Veget" style="width:100%">
+                                 <h:selectBooleanCheckbox disabled="true"  value="#{piatto.vegetariano}" />
+                            </p:column>
                             <p:column headerText="Prezzo" style="width:100%">
-                                    <h:outputText  value="#{piatto.prezzo}" />
+                                <h:outputText  value="#{piatto.prezzo}" />
                             </p:column>
                         </p:dataTable>
                         <h:outputText rendered="#{visualizzaLocale.menu.size() == 0}" value="Non sono presenti piatti nel menu"/>
@@ -131,14 +147,6 @@
                             </p:dataList>
 
                     </p:tab>
-                    <p:tab title="Condividi questo locale">
-                        <br/>
-                        <h:outputText  escape="false" value="#{visualizzaLocale.facebook}"/>
-                        <br/><br/>
-                        <h:outputText escape="false" value="#{visualizzaLocale.twitLocale}"/>
-
-                    </p:tab>
-
                 </p:accordionPanel>
             </h:form>
         </f:view>

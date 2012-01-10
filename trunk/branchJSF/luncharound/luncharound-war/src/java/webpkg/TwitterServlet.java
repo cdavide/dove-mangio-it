@@ -69,7 +69,7 @@ public class TwitterServlet extends HttpServlet {
                         if(persona.getTipo()!=2){//ma appartenente al sito o altro social network
                             httpSession.setAttribute("errore", "Impossibile utilizzare l'account Facebook, email già utilizzata da un altro utente");
                             httpSession.setAttribute("newLogin",true);
-                            request.getRequestDispatcher("faces/home.xhtml").forward(request, response);    
+                            request.getRequestDispatcher("index.jsp").forward(request, response);    
                         }
                     }
                     else{//non esiste nel database, lo memorizzo
@@ -97,16 +97,16 @@ public class TwitterServlet extends HttpServlet {
                     }
                     httpSession.setAttribute("newLogin",true);
                     httpSession.setAttribute("loggedIn",true);
-                    request.getRequestDispatcher("faces/home.xhtml").forward(request, response);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                     
                 } catch (UniformInterfaceException ex) {
                     httpSession.setAttribute("oauth_token",null);
                     httpSession.setAttribute("errore","impossibile effettuare il login da Twitter");
                     httpSession.setAttribute("newLogin",true);
-                    request.getRequestDispatcher("faces/home.xhtml").forward(request, response);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
             }
-            if (formAction.equals("login")) {
+            else if (formAction.equals("login")) {
                 TwitterClient twitter = new TwitterClient("xml");
                 twitter.initOAuth(request, response);
                 twitter.makeOAuthRequestUnique();
@@ -128,7 +128,7 @@ public class TwitterServlet extends HttpServlet {
                         if(persona.getTipo()!=2){//ma appartenente al sito o altro social network
                             httpSession.setAttribute("errore", "Impossibile utilizzare l'account Facebook, email già utilizzata da un altro utente");
                             httpSession.setAttribute("newLogin",true);
-                            request.getRequestDispatcher("faces/home.xhtml").forward(request, response);    
+                            request.getRequestDispatcher("index.jsp").forward(request, response);    
                         }
                     }
                     else{//non esiste nel database, lo memorizzo
@@ -156,7 +156,7 @@ public class TwitterServlet extends HttpServlet {
                     }
                     httpSession.setAttribute("newLogin",true);
                     //httpSession.setAttribute("loggedIn",true);
-                    request.getRequestDispatcher("faces/home.xhtml").forward(request, response); 
+                    request.getRequestDispatcher("index.jsp").forward(request, response); 
                 
                 } catch (UniformInterfaceException ex) {
                     httpSession.setAttribute("oauth_token",null);
