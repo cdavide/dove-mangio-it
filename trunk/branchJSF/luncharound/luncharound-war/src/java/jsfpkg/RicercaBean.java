@@ -104,14 +104,20 @@ public class RicercaBean{
         String color;
         String name;
         String description;
-        LatLng tempPoint;   
+        LatLng tempPoint; 
+        
         String dir;
+        String str_from;
+        String str_to;
         advancedModel = new DefaultMapModel();
+        dir = "http://maps.google.it?";
         
         // creo un marker per la posizione attuale, con icona diversa dalle altre
         tempPoint=new LatLng(latitudine,longitudine);
-        dir = "http://maps.google.it?saddr="+latitudine+","+longitudine+"&daddr=";
-        
+        //per google directions
+        if(tipo==1) str_from="saddr="+indirizzo;
+        else str_from="saddr="+latitudine+","+longitudine;
+            
         System.err.println("dir inizio: "+ dir);
         pushPin="https://chart.googleapis.com/chart?chst=d_map_pin_icon&chld=glyphish_target%7C00AAFF";
         advancedModel.addOverlay(new Marker(tempPoint,"La tua posizione","",pushPin));
@@ -142,13 +148,15 @@ public class RicercaBean{
             
             name=loc.getNome();
             description=loc.getIndirizzo();
+            str_to="&daddr="+description;
             
             advancedModel.addOverlay(new Marker(tempPoint,name,description,pushPin));
             
-            tempPoint.toString();
             List<Valutazione> lv = controlloreValutazione.findValutazioni(loc.getId());
             Valutazione media=controlloreValutazione.mediaValutazioni(lv);
-            lista.add(new Risultato(i,loc,media,dir+loc.getIndirizzo()));
+            dir=dir+str_from+str_to;
+            
+            lista.add(new Risultato(i,loc,media,dir));
             
   
         }
