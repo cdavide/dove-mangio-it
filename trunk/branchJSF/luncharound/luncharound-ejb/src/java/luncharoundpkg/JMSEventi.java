@@ -29,16 +29,15 @@ public class JMSEventi implements MessageListener {
     
     @Override
     public void onMessage(Message message) {
-        Evento e = null;
+        String e = null;
         if (message instanceof ObjectMessage){
            ObjectMessage msg = (ObjectMessage) message;
            try{
-                e = (Evento) msg.getObject();
-                System.out.println("Raccolto l'oggetto evento");
+                e = (String) msg.getObject();
+                System.out.println("Raccolto l'oggetto evento: "+e);
            }
            catch(JMSException ex){
-               
-               
+               System.err.println("Errore durante la ricezione del messaggio jms");
            }
            //Completare
         }

@@ -63,7 +63,7 @@ public class NewsFacade extends AbstractFacade<News> implements NewsFacadeLocal 
     public List<News> findNext(){
         //deleteOld();
         //La query mi deve restituire un subset degli eventi nel sistema ordinati e più vicini nel tempo
-        String selectQuery = "SELECT OBJECT(V) FROM News V WHERE V.dataInizio ORDER BY V.dataInizio";
+        String selectQuery = "SELECT OBJECT(V) FROM News V WHERE V.dataInizio >= ?1 ORDER BY V.dataInizio";
 	Query searchById = em.createQuery(selectQuery);
         Date data = new Date();
         searchById.setParameter(1, data);
