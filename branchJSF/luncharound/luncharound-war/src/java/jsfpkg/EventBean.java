@@ -119,7 +119,7 @@ public class EventBean {
         // TODO create and populate message to send
         
         ObjectMessage tm = session.createObjectMessage();
-        tm.setObject((Evento) messageData);
+        tm.setObject((String) messageData);
         return tm;
     }
 
@@ -151,13 +151,15 @@ public class EventBean {
         HttpSession httpSession = request.getSession();
         int idLocale = (Integer) httpSession.getAttribute("idLocale");
         controlloreLocale.addEvento(idLocale, dataInizio, dataFine, titolo, descr);
-        Evento add = new Evento();
-        add.setDataFine(dataFine);
-        add.setDataInizio(dataInizio);
-        add.setDescr(descr);
-        add.setTitolo(titolo);
+        String msg = "<evento>";
+        msg = msg.concat("<dataInizio>"+dataInizio.toString()+"</dataInizio>");
+        msg = msg.concat("<dataFine>"+dataFine.toString()+"</dataFine>");
+        msg = msg.concat("<titolo>"+titolo.toString()+"</titolo>");
+        msg = msg.concat("<descr>"+descr.toString()+"</descr>");
+        Locale loc = controlloreLocale.findById(idLocale);
+        msg = msg.concat("<locale>"+loc.getNome()+"</locale></evento>");
         try{
-            sendJMSMessageToEventiMsg((Object) add);
+            sendJMSMessageToEventiMsg((Object) msg);
         }
         catch (JMSException e){
             System.err.println("Impossibile mandare il nuovo evento alla jms");
