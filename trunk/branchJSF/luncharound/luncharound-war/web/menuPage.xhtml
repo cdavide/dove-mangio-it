@@ -103,9 +103,7 @@
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
-                    <h:outputText value="Validità menu: " />
-                        
-                    <p:calendar value="#{addMenuBean.date}" />
+                   
                     
                 </p:tab>
                 <p:tab id ="tp" title="Primi" >
@@ -610,10 +608,14 @@
                         </p:column>
 
                     </p:dataTable>
+                     
                 </p:tab>
                 
                 
             </p:tabView>
+            <h:outputText value="Validità menu: " />
+                        
+                    <p:calendar value="#{addMenuBean.date}" />
             <p:panel header="Esporta il tuo menu nel formato che preferisci (Pdf ?)">  
                 <p:commandLink action="#{addMenuBean.printPdf}" target="_blank" ajax="false" >  
                     <p:graphicImage value="resources/pdf.png" />  

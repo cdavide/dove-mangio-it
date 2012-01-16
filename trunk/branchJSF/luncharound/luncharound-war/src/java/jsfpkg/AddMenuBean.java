@@ -115,7 +115,7 @@ public class AddMenuBean {
             // non son opresenti piatti nel DB
         }
         date = menu.getValidita();
-        if (date == null) {
+        if (date == null || date.before(new Date())) {
             date = new Date();
         }
 
