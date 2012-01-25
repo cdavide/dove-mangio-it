@@ -18,9 +18,10 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.MenuModel;
 
-/**
+/**Managed bean che contiene metodi e proprietà che servono per il menu laterale
+ * nell'applicazione
  * 
- * @author dave
+ * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
 @ManagedBean(name="menuBean")
 @SessionScoped
@@ -32,8 +33,7 @@ public class MenuBean {
         private boolean gestore;
         private String username;
 
-        /**
-         * 
+        /**Costruttore
          */
         public MenuBean() {
 		model = new DefaultMenuModel();
@@ -67,8 +67,8 @@ public class MenuBean {
 	}
 	
         
-        /**
-         * 
+        /**Post costruttore, invocato dopo il costruttore in modo automatico 
+         * serve per compilare i campi dell'oggetto
          */
         @PostConstruct
         public void init(){
@@ -99,62 +99,64 @@ public class MenuBean {
         }
         
         
+        //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
         /**
-         * 
+         *
          * @return
          */
         public MenuModel getModel() {
-		return model;
-	}
-
+            return model;
+        }
+        
         /**
-         * 
+         *
          * @return
          */
         public boolean isGestore() {
-        return gestore;
-    }
-
+            return gestore;
+        }
+        
         /**
-         * 
+         *
          * @param gestore
          */
         public void setGestore(boolean gestore) {
-        this.gestore = gestore;
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    /**
-     * 
-     * @param loggedIn
-     */
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * 
-     * @param username
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
+            this.gestore = gestore;
+        }
         
+        /**
+         *
+         * @return
+         */
+        public boolean isLoggedIn() {
+            return loggedIn;
+        }
+        
+        /**
+         *
+         * @param loggedIn
+         */
+        public void setLoggedIn(boolean loggedIn) {
+            this.loggedIn = loggedIn;
+        }
+        
+        /**
+         *
+         * @return
+         */
+        public String getUsername() {
+            return username;
+        }
+        
+        /**
+         *
+         * @param username
+         */
+        public void setUsername(String username) {
+            this.username = username;
+        }
+        //</editor-fold>
+  
         
 }
 			

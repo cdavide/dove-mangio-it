@@ -9,7 +9,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author lore0487
+ * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
 @Local
 public interface PiattoComboFacadeLocal {
@@ -58,10 +58,10 @@ public interface PiattoComboFacadeLocal {
      */
     int count();
     
-    /**
+    /**Restituisce la lista delle combinazioni di un locale
      * 
-     * @param idLocale
-     * @return
+     * @param idLocale l'id del locale di cui si vogliono conoscere le combinazioni
+     * @return la lista delle combinazioni di un locale
      */
     public List<PiattoCombo> findByLocale(int idLocale);
     

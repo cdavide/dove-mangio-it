@@ -9,11 +9,7 @@ import java.util.List;
 import javax.faces.bean.RequestScoped;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import luncharoundpkg.ControlloreLocaleLocal;
 import luncharoundpkg.Locale;
 import org.primefaces.model.map.DefaultMapModel;
@@ -21,7 +17,7 @@ import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
-/**
+/**Managed Bean che serve per gestire la homepage
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -42,7 +38,8 @@ public class HomeBean {
     public HomeBean() {
     }
     
-    /**
+    /**Inizializza la mappa principale utilizzando le posizioni dei locali
+     * interrogando il DB attraverso i servizi del backend
      * 
      */
     @PostConstruct
@@ -103,62 +100,7 @@ public class HomeBean {
         
     }
     
-    /**
-     * 
-     * @return
-     */
-    public String getFollowLA() {
-        return FollowLA;
-    }
 
-    /**
-     * 
-     * @param FollowLA
-     */
-    public void setFollowLA(String FollowLA) {
-        this.FollowLA = FollowLA;
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public String getTwitPage() {
-        return TwitPage;
-    }
-
-    /**
-     * 
-     * @param TwitPage
-     */
-    public void setTwitPage(String TwitPage) {
-        this.TwitPage = TwitPage;
-    }
-    
-    /**
-     * 
-     * @return
-     */
-    public String backHome(){
-        return "home";
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public String getFBLike() {
-        return FBLike;
-    }
-
-    /**
-     * 
-     * @param FBLike
-     */
-    public void setFBLike(String FBLike) {
-        this.FBLike = FBLike;
-    }
-    
     //<editor-fold defaultstate="collapsed" desc="Getters and setters">
     /**
      * 
@@ -223,5 +165,63 @@ public class HomeBean {
     public void setSimpleModel(MapModel simpleModel) {
         this.simpleModel = simpleModel;
     }
+    
+    
+        /**
+     * 
+     * @return
+     */
+    public String getFollowLA() {
+        return FollowLA;
+    }
+
+    /**
+     * 
+     * @param FollowLA
+     */
+    public void setFollowLA(String FollowLA) {
+        this.FollowLA = FollowLA;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public String getTwitPage() {
+        return TwitPage;
+    }
+
+    /**
+     * 
+     * @param TwitPage
+     */
+    public void setTwitPage(String TwitPage) {
+        this.TwitPage = TwitPage;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public String backHome(){
+        return "home";
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public String getFBLike() {
+        return FBLike;
+    }
+
+    /**
+     * 
+     * @param FBLike
+     */
+    public void setFBLike(String FBLike) {
+        this.FBLike = FBLike;
+    }
+    
     //</editor-fold>
 }

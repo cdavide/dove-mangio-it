@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author lore0487
+ * @author Lorenzo Bovio, Bronzino Francesco, Concas Davide
  */
 @Stateless
 public class PiattoComboFacade extends AbstractFacade<PiattoCombo> implements PiattoComboFacadeLocal {
@@ -34,10 +34,10 @@ public class PiattoComboFacade extends AbstractFacade<PiattoCombo> implements Pi
         super(PiattoCombo.class);
     }
     
-    /**
+    /**Restituisce la lista di combinazioni offferte da un locale
      * 
-     * @param idLocale
-     * @return
+     * @param idLocale l'id del locale
+     * @return la lista delle combinazioni
      */
     @Override
     public List<PiattoCombo> findByLocale(int idLocale) {
