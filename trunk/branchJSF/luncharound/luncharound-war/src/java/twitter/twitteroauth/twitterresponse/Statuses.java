@@ -44,7 +44,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "statuses")
 public class Statuses {
 
+    /**
+     * 
+     */
     protected List<StatusType> status;
+    /**
+     * 
+     */
     @XmlAttribute(name = "type")
     protected String type;
 
@@ -69,6 +75,7 @@ public class Statuses {
      * {@link StatusType }
      * 
      * 
+     * @return 
      */
     public List<StatusType> getStatus() {
         if (status == null) {

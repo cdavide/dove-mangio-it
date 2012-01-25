@@ -24,9 +24,16 @@ import javax.jms.JMSException;
 })
 public class JMSEventi implements MessageListener {
     
+    /**
+     * 
+     */
     public JMSEventi() {
     }
     
+    /**
+     * 
+     * @param message
+     */
     @Override
     public void onMessage(Message message) {
         String e = null;

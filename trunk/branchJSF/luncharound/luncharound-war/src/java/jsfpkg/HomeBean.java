@@ -42,6 +42,9 @@ public class HomeBean {
     public HomeBean() {
     }
     
+    /**
+     * 
+     */
     @PostConstruct
     public void init(){
         simpleModel = new DefaultMapModel();
@@ -100,63 +103,123 @@ public class HomeBean {
         
     }
     
+    /**
+     * 
+     * @return
+     */
     public String getFollowLA() {
         return FollowLA;
     }
 
+    /**
+     * 
+     * @param FollowLA
+     */
     public void setFollowLA(String FollowLA) {
         this.FollowLA = FollowLA;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getTwitPage() {
         return TwitPage;
     }
 
+    /**
+     * 
+     * @param TwitPage
+     */
     public void setTwitPage(String TwitPage) {
         this.TwitPage = TwitPage;
     }
     
+    /**
+     * 
+     * @return
+     */
     public String backHome(){
         return "home";
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getFBLike() {
         return FBLike;
     }
 
+    /**
+     * 
+     * @param FBLike
+     */
     public void setFBLike(String FBLike) {
         this.FBLike = FBLike;
     }
     
     //<editor-fold defaultstate="collapsed" desc="Getters and setters">
+    /**
+     * 
+     * @return
+     */
     public double getCenterLat() {
         return centerLat;
     }
     
+    /**
+     * 
+     * @param centerLat
+     */
     public void setCenterLat(double centerLat) {
         this.centerLat = centerLat;
     }
     
+    /**
+     * 
+     * @return
+     */
     public double getCenterLong() {
         return centerLong;
     }
     
+    /**
+     * 
+     * @param centerLong
+     */
     public void setCenterLong(double centerLong) {
         this.centerLong = centerLong;
     }
     
+    /**
+     * 
+     * @return
+     */
     public ControlloreLocaleLocal getControlloreLocale() {
         return controlloreLocale;
     }
     
+    /**
+     * 
+     * @param controlloreLocale
+     */
     public void setControlloreLocale(ControlloreLocaleLocal controlloreLocale) {
         this.controlloreLocale = controlloreLocale;
     }
     
+    /**
+     * 
+     * @return
+     */
     public MapModel getSimpleModel() {
         return simpleModel;
     }
     
+    /**
+     * 
+     * @param simpleModel
+     */
     public void setSimpleModel(MapModel simpleModel) {
         this.simpleModel = simpleModel;
     }

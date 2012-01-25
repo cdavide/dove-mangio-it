@@ -18,6 +18,10 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.MenuModel;
 
+/**
+ * 
+ * @author dave
+ */
 @ManagedBean(name="menuBean")
 @SessionScoped
 public class MenuBean {
@@ -28,7 +32,10 @@ public class MenuBean {
         private boolean gestore;
         private String username;
 
-	public MenuBean() {
+        /**
+         * 
+         */
+        public MenuBean() {
 		model = new DefaultMenuModel();
 		
 		//First submenu
@@ -60,6 +67,9 @@ public class MenuBean {
 	}
 	
         
+        /**
+         * 
+         */
         @PostConstruct
         public void init(){
             RequestContext context = RequestContext.getCurrentInstance();
@@ -89,30 +99,58 @@ public class MenuBean {
         }
         
         
-	public MenuModel getModel() {
+        /**
+         * 
+         * @return
+         */
+        public MenuModel getModel() {
 		return model;
 	}
 
-    public boolean isGestore() {
+        /**
+         * 
+         * @return
+         */
+        public boolean isGestore() {
         return gestore;
     }
 
-    public void setGestore(boolean gestore) {
+        /**
+         * 
+         * @param gestore
+         */
+        public void setGestore(boolean gestore) {
         this.gestore = gestore;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isLoggedIn() {
         return loggedIn;
     }
 
+    /**
+     * 
+     * @param loggedIn
+     */
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * 
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }

@@ -155,8 +155,6 @@ public class JSONObject {
      * Missing keys are ignored.
      * @param jo A JSONObject.
      * @param names An array of strings.
-     * @throws JSONException 
-     * @exception JSONException If a value is a non-finite number or if a name is duplicated.
      */
     public JSONObject(JSONObject jo, String[] names) {
         this();
@@ -231,7 +229,6 @@ public class JSONObject {
      *
      * @param map A map object that can be used to initialize the contents of
      *  the JSONObject.
-     * @throws JSONException 
      */
     public JSONObject(Map map) {
         this.map = new HashMap();
@@ -583,6 +580,7 @@ public class JSONObject {
     /**
      * Get an array of field names from a JSONObject.
      *
+     * @param jo 
      * @return An array of field names, or null if there are no names.
      */
     public static String[] getNames(JSONObject jo) {
@@ -604,6 +602,7 @@ public class JSONObject {
     /**
      * Get an array of field names from an Object.
      *
+     * @param object 
      * @return An array of field names, or null if there are no names.
      */
     public static String[] getNames(Object object) {
@@ -1597,6 +1596,7 @@ public class JSONObject {
       * <p>
       * Warning: This method assumes that the data structure is acyclical.
       *
+      * @param writer 
       * @return The writer.
       * @throws JSONException
       */

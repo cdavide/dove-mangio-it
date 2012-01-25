@@ -26,6 +26,10 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
     @EJB
     private NewsFacadeLocal newsFacade;
 
+    /**
+     * 
+     * @param req
+     */
     @Override
     public void addUtenteDaReq(HttpServletRequest req) {
 
@@ -34,6 +38,14 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         utenteFacade.create(ut);
     }
 
+    /**
+     * 
+     * @param username
+     * @param mail
+     * @param home
+     * @param foto
+     * @param tipo
+     */
     @Override
     public void addUtenteEsterno(String username, String mail, String home, String foto, int tipo) {
         Utente ut = new Utente();
@@ -47,6 +59,11 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         utenteFacade.create(ut);
     }
 
+    /**
+     * 
+     * @param idUtente
+     * @param posizione
+     */
     @Override
     public void addPosizione(long idUtente, String posizione) {
 
@@ -55,6 +72,11 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         utenteFacade.edit(ut);
     }
 
+    /**
+     * 
+     * @param idUtente
+     * @param url
+     */
     @Override
     public void addFoto(long idUtente, String url) {
         Utente ut = utenteFacade.find(idUtente);
@@ -63,6 +85,12 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
     }
     //opT true=aggiungere un locale
 
+    /**
+     * 
+     * @param idUtente
+     * @param idLocale
+     * @param opT
+     */
     @Override
     public void editPreferenze(long idUtente, int idLocale, boolean opT) {
 
@@ -79,6 +107,11 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         utenteFacade.edit(ut);
     }
 
+    /**
+     * 
+     * @param idUtente
+     * @param opT
+     */
     @Override
     public void editEventi(long idUtente, boolean opT) {
 
@@ -88,6 +121,11 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
 
     }
 
+    /**
+     * 
+     * @param idUtente
+     * @param opT
+     */
     @Override
     public void editNews(long idUtente, boolean opT) {
 
@@ -98,6 +136,11 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
     }
 
     //eseguire md5 della password!!
+    /**
+     * 
+     * @param idUtente
+     * @param nuovaPwd
+     */
     @Override
     public void editPassword(long idUtente, String nuovaPwd) {
         Utente ut = utenteFacade.find(idUtente);
@@ -106,6 +149,11 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
 
     }
 
+    /**
+     * 
+     * @param idUtente
+     * @param home
+     */
     @Override
     public void editHome(long idUtente, String home) {
         Utente ut = utenteFacade.find(idUtente);
@@ -114,6 +162,12 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
     }
 
     //anche qui manca md5!!
+    /**
+     * 
+     * @param mail
+     * @param password
+     * @return
+     */
     @Override
     public Utente verificaPassword(String mail, String password) {
 
@@ -127,12 +181,25 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
 
     }
 
+    /**
+     * 
+     * @param mail
+     * @return
+     */
     @Override
     public Utente trovaDaEmail(String mail) {
         return utenteFacade.findByEmail(mail);
     }
 
     
+    /**
+     * 
+     * @param username
+     * @param password
+     * @param indirizzo
+     * @param mail
+     * @param foto
+     */
     @Override
     public void addUtente(String username, String password, String indirizzo, String mail, String foto) {
         System.err.println("[ControlloreUtente] aggiungendo utente ");
@@ -155,6 +222,11 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         
     }
     
+    /**
+     * 
+     * @param idUtente
+     * @return
+     */
     @Override
     public List<Evento> getEventi(Long idUtente){
         Utente utente = utenteFacade.find(idUtente);
@@ -166,6 +238,11 @@ public class ControlloreUtente implements ControlloreUtenteLocal {
         return eventoFacade.findByLocali(idLocali);
     }
     
+    /**
+     * 
+     * @param idUtente
+     * @return
+     */
     @Override
     public List<News> getNews(Long idUtente){
         Utente utente = utenteFacade.find(idUtente);

@@ -35,98 +35,193 @@ public class Valutazione implements Serializable {
     private int cortesia;
     private int descrizione;
 
+    /**
+     * 
+     */
     public Valutazione() {
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getAffollamento() {
         return affollamento;
     }
 
+    /**
+     * 
+     * @param affollamento
+     */
     public void setAffollamento(int affollamento) {
         this.affollamento = affollamento;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getCortesia() {
         return cortesia;
     }
 
+    /**
+     * 
+     * @param cortesia
+     */
     public void setCortesia(int cortesia) {
         this.cortesia = cortesia;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Date getDataVal() {
         return dataVal;
     }
 
+    /**
+     * 
+     * @param dataVal
+     */
     public void setDataVal(Date dataVal) {
         this.dataVal = dataVal;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getDescrizione() {
         return descrizione;
     }
 
+    /**
+     * 
+     * @param descrizione
+     */
     public void setDescrizione(int descrizione) {
         this.descrizione = descrizione;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getIdLocale() {
         return idLocale;
     }
 
+    /**
+     * 
+     * @param idLocale
+     */
     public void setIdLocale(int idLocale) {
         this.idLocale = idLocale;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Long getIdUtente() {
         return idUtente;
     }
 
+    /**
+     * 
+     * @param idUtente
+     */
     public void setIdUtente(Long idUtente) {
         this.idUtente = idUtente;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getPulizia() {
         return pulizia;
     }
 
+    /**
+     * 
+     * @param pulizia
+     */
     public void setPulizia(int pulizia) {
         this.pulizia = pulizia;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getQualita() {
         return qualita;
     }
 
+    /**
+     * 
+     * @param qualita
+     */
     public void setQualita(int qualita) {
         this.qualita = qualita;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getQuantita() {
         return quantita;
     }
 
+    /**
+     * 
+     * @param quantita
+     */
     public void setQuantita(int quantita) {
         this.quantita = quantita;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getVelocita() {
         return velocita;
     }
 
+    /**
+     * 
+     * @param velocita
+     */
     public void setVelocita(int velocita) {
         this.velocita = velocita;
     }
 
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -134,6 +229,11 @@ public class Valutazione implements Serializable {
         return hash;
     }
 
+    /**
+     * 
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -147,6 +247,10 @@ public class Valutazione implements Serializable {
         return true;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public String toString() {
         return "luncharoundpkg.Valutazione[ id=" + id + " ]";

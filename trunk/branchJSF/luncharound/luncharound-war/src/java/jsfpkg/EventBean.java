@@ -61,6 +61,9 @@ public class EventBean {
         
     }
     
+    /**
+     * 
+     */
     @PostConstruct
     public void init(){
         int idLocale;
@@ -145,6 +148,9 @@ public class EventBean {
         }
     }
     
+    /**
+     * 
+     */
     public void addEvento(){
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
@@ -166,6 +172,10 @@ public class EventBean {
         }
     }
     
+    /**
+     * 
+     * @return
+     */
     public String visualizzaLocale() {
         System.out.println("visualizza Locale");
         // prendo la sessione
@@ -181,82 +191,162 @@ public class EventBean {
         return "visualizzaLocale";
     }
     
+    /**
+     * 
+     * @return
+     */
     public Evento getSelectedEvent() {
         return selectedEvent;
     }
 
+    /**
+     * 
+     * @param selectedEvent
+     */
     public void setSelectedEvent(Evento selectedEvent) {
         this.selectedEvent = selectedEvent;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<Evento> getEventi() {
         return eventi;
     }
 
+    /**
+     * 
+     * @param eventi
+     */
     public void setEventi(List<Evento> eventi) {
         this.eventi = eventi;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isGestore() {
         return gestore;
     }
 
+    /**
+     * 
+     * @param gestore
+     */
     public void setGestore(boolean gestore) {
         this.gestore = gestore;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Locale getLocale() {
         return locale;
     }
 
+    /**
+     * 
+     * @param locale
+     */
     public void setLocale(Locale locale) {
         this.locale = locale;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isLoggedIn() {
         return loggedIn;
     }
 
+    /**
+     * 
+     * @param loggedIn
+     */
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Date getDataFine() {
         return dataFine;
     }
 
+    /**
+     * 
+     * @param dataFine
+     */
     public void setDataFine(Date dataFine) {
         this.dataFine = dataFine;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Date getDataInizio() {
         return dataInizio;
     }
 
+    /**
+     * 
+     * @param dataInizio
+     */
     public void setDataInizio(Date dataInizio) {
         this.dataInizio = dataInizio;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getDescr() {
         return descr;
     }
 
+    /**
+     * 
+     * @param descr
+     */
     public void setDescr(String descr) {
         this.descr = descr;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getTitolo() {
         return titolo;
     }
 
+    /**
+     * 
+     * @param titolo
+     */
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getPath() {
         return path;
     }
 
+    /**
+     * 
+     * @param path
+     */
     public void setPath(String path) {
         this.path = path;
     }

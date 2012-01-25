@@ -47,17 +47,44 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class StatusType {
 
+    /**
+     * 
+     */
     @XmlElement(name = "created_at")
     protected String createdAt;
+    /**
+     * 
+     */
     protected String id;
+    /**
+     * 
+     */
     protected String text;
+    /**
+     * 
+     */
     protected String source;
+    /**
+     * 
+     */
     protected Boolean truncated;
+    /**
+     * 
+     */
     @XmlElement(name = "in_reply_to_user_id")
     protected String inReplyToUserId;
+    /**
+     * 
+     */
     @XmlElement(name = "in_reply_to_status_id")
     protected String inReplyToStatusId;
+    /**
+     * 
+     */
     protected String favorited;
+    /**
+     * 
+     */
     protected UserType user;
 
     /**

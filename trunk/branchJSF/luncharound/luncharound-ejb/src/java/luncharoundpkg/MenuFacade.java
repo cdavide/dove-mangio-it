@@ -20,14 +20,26 @@ public class MenuFacade extends AbstractFacade<Menu> implements MenuFacadeLocal 
     @PersistenceContext(unitName = "luncharound-ejbPU")
     private EntityManager em;
 
+    /**
+     * 
+     * @return
+     */
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     * 
+     */
     public MenuFacade() {
         super(Menu.class);
     }
 
+    /**
+     * 
+     * @param idLocale
+     * @return
+     */
     @Override
     public Menu findByLocale(int idLocale) {
         Menu ret;

@@ -37,6 +37,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "nilclasses")
 public class Nilclasses {
 
+    /**
+     * 
+     */
     @XmlAttribute(name = "type")
     protected String type;
 

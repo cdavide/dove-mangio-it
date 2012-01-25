@@ -33,6 +33,11 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
      * @return  una stringa contenente le valutazioni
      */
     
+    /**
+     * 
+     * @param request
+     * @return
+     */
     @Override
     public String mostraValutazioni(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -138,6 +143,13 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
      * @comment non è molto bello ma funziona :-p
      */
     
+    /**
+     * 
+     * @param par
+     * @param val
+     * @param opt
+     * @return
+     */
     @Override
     public String createRatingStars(String par, long val,String opt){
         String ret = ""; 
@@ -155,6 +167,10 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         return ret;
     }
         
+    /**
+     * 
+     * @param req
+     */
     @Override
     public void valutazioneDaReq(HttpServletRequest req){
         /*get valutazione precedente
@@ -171,6 +187,12 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         valutazioneFacade.create(val);
 
     }
+    /**
+     * 
+     * @param idlocale
+     * @param week
+     * @return
+     */
     @Override
     public List<Valutazione> valutazioniSettimana(int idlocale, int week){
         List<Valutazione> ll = valutazioneFacade.findByLocaleWeek(idlocale, week);
@@ -178,6 +200,11 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
     }
 
     
+    /**
+     * 
+     * @param vals
+     * @return
+     */
     public Valutazione mediaValutazioni(List<Valutazione> vals){
         System.err.println("[Controllore Valutazione ] media");
         long pulizia = 0;
@@ -224,17 +251,32 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         return ret;
     }
 
+    /**
+     * 
+     * @param idlocale
+     * @return
+     */
     @Override
     public List<Valutazione> findValutazioni(int idlocale) {
          return valutazioneFacade.findByLocale(idlocale);
          
     }
 
+    /**
+     * 
+     * @param idutente
+     * @param idlocale
+     * @return
+     */
     @Override
     public Valutazione findValutazioneUtente(long idutente, int idlocale) {
         return valutazioneFacade.findValutazioneLocFromUtente(idutente, idutente);
     }
     
+    /**
+     * 
+     * @param userRate
+     */
     @Override
     public void saveValutazione(Valutazione userRate){
         try{

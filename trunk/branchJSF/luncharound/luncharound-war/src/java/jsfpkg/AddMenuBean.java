@@ -73,11 +73,17 @@ public class AddMenuBean {
     // il piatto nuovo viene reinizializzato
     //
 
+    /**
+     * 
+     */
     public void AddMenuBean() {
         System.err.println("Costruttore inizio [addmenuBean]!");
 
     }
 
+    /**
+     * 
+     */
     @PostConstruct
     public void init() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -162,9 +168,17 @@ public class AddMenuBean {
         System.err.println("Post constructor OK!");
     }
 
+    /**
+     * 
+     */
     public void remove() {
     }
 
+    /**
+     * 
+     * @param query
+     * @return
+     */
     public List<String> complete(String query) {
         List<String> results = new ArrayList<String>();
         // creare query nel controllore che chiama la facade per avere i risultati
@@ -179,6 +193,9 @@ public class AddMenuBean {
         return results;
     }
 
+    /**
+     * 
+     */
     public void add() {
         FacesContext context = FacesContext.getCurrentInstance();
         //controllare id utente altrimenti non si puo procedere, oppure che la sessione sia valida
@@ -250,6 +267,9 @@ public class AddMenuBean {
 
 
     /*Funzione richiamata quando viene cancellata una entry dalla tabella dei piatti
+     */
+    /**
+     * 
      */
     public void delete() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -367,11 +387,14 @@ public class AddMenuBean {
         }
         // la lista è aggiornata, propago le modifice al DB
 
-        editMenu();
+        //editMenu();
 
 
     }
 
+    /**
+     * 
+     */
     public void editMenu() {
         try {
             controllorePiatto.editListaPiatti(newListPiatti);
@@ -385,6 +408,11 @@ public class AddMenuBean {
         addFacesMessage("Modifiche menu effettuate correttamente", "Success!");
     }
 
+    /**
+     * 
+     * @param str
+     * @param severity
+     */
     public void addFacesMessage(String str, String severity) {
         FacesMessage msg = null;
         System.out.println(str);
@@ -393,18 +421,28 @@ public class AddMenuBean {
 
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean checkUserLogin() {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         HttpSession httpSession = request.getSession();
         idUtente = (Long) httpSession.getAttribute("idUtente");
-        idLocale = (Integer) httpSession.getAttribute("idLocale");
+        idLocale = (Integer) httpSession.getAttribute("mioLocale");
 
         return (idUtente == null || // user not logged in
                 !request.isRequestedSessionIdValid() || // sessione scaduta
                 idLocale != controlloreLocale.getLocali(idUtente).getIdUtente()); // l'utente non è padrone del locale
     }
 
+    /**
+     * 
+     * @throws DocumentException
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void printPdf() throws DocumentException, FileNotFoundException, IOException {
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.setResponseHeader("Content-Type", "application/pdf");
@@ -536,154 +574,306 @@ public class AddMenuBean {
     }
 //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
 
+    /**
+     * 
+     * @return
+     */
     public List<Piatto> getAllPiattoNames() {
         return allPiattoNames;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Piatto getNuovaBevanda() {
         return nuovaBevanda;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Piatto getCurrentPiatto() {
         return currentPiatto;
     }
 
+    /**
+     * 
+     * @param currentPiatto
+     */
     public void setCurrentPiatto(Piatto currentPiatto) {
         this.currentPiatto = currentPiatto;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * 
+     * @param date
+     */
     public void setDate(Date date) {
         this.date = date;
     }
 
+    /**
+     * 
+     * @param nuovaBevanda
+     */
     public void setNuovaBevanda(Piatto nuovaBevanda) {
         this.nuovaBevanda = nuovaBevanda;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Piatto getNuovoAntipasto() {
         return nuovoAntipasto;
     }
 
+    /**
+     * 
+     * @param nuovoAntipasto
+     */
     public void setNuovoAntipasto(Piatto nuovoAntipasto) {
         this.nuovoAntipasto = nuovoAntipasto;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Piatto getNuovoContorno() {
         return nuovoContorno;
     }
 
+    /**
+     * 
+     * @param nuovoContorno
+     */
     public void setNuovoContorno(Piatto nuovoContorno) {
         this.nuovoContorno = nuovoContorno;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Piatto getNuovoDolce() {
         return nuovoDolce;
     }
 
+    /**
+     * 
+     * @param nuovoDolce
+     */
     public void setNuovoDolce(Piatto nuovoDolce) {
         this.nuovoDolce = nuovoDolce;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Piatto getNuovoPrimo() {
         return nuovoPrimo;
     }
 
+    /**
+     * 
+     * @param nuovoPrimo
+     */
     public void setNuovoPrimo(Piatto nuovoPrimo) {
         this.nuovoPrimo = nuovoPrimo;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Piatto getNuovoSecondo() {
         return nuovoSecondo;
     }
 
+    /**
+     * 
+     * @param nuovoSecondo
+     */
     public void setNuovoSecondo(Piatto nuovoSecondo) {
         this.nuovoSecondo = nuovoSecondo;
     }
 
+    /**
+     * 
+     * @param allPiattoNames
+     */
     public void setAllPiattoNames(List<Piatto> allPiattoNames) {
         this.allPiattoNames = allPiattoNames;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Integer getIdLocale() {
         return idLocale;
     }
 
+    /**
+     * 
+     * @param idLocale
+     */
     public void setIdLocale(Integer idLocale) {
         this.idLocale = idLocale;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<Piatto> getAntipasti() {
         return antipasti;
     }
 
+    /**
+     * 
+     * @param antipasti
+     */
     public void setAntipasti(List<Piatto> antipasti) {
         this.antipasti = antipasti;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<Piatto> getBevande() {
         return bevande;
     }
 
+    /**
+     * 
+     * @param bevande
+     */
     public void setBevande(List<Piatto> bevande) {
         this.bevande = bevande;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<Piatto> getContorni() {
         return contorni;
     }
 
+    /**
+     * 
+     * @param contorni
+     */
     public void setContorni(List<Piatto> contorni) {
         this.contorni = contorni;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<Piatto> getDolci() {
         return dolci;
     }
 
+    /**
+     * 
+     * @param dolci
+     */
     public void setDolci(List<Piatto> dolci) {
         this.dolci = dolci;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<Piatto> getPrimi() {
         return primi;
     }
 
+    /**
+     * 
+     * @param primi
+     */
     public void setPrimi(List<Piatto> primi) {
         this.primi = primi;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<Piatto> getSecondi() {
         return secondi;
     }
 
+    /**
+     * 
+     * @param secondi
+     */
     public void setSecondi(List<Piatto> secondi) {
         this.secondi = secondi;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Long getIdUtente() {
         return idUtente;
     }
 
+    /**
+     * 
+     * @param idUtente
+     */
     public void setIdUtente(Long idUtente) {
         this.idUtente = idUtente;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Menu getMenu() {
         return menu;
     }
 
+    /**
+     * 
+     * @param menu
+     */
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<Piatto> getNewListPiatti() {
         return newListPiatti;
     }
 
+    /**
+     * 
+     * @param newListPiatti
+     */
     public void setNewListPiatti(List<Piatto> newListPiatti) {
         this.newListPiatti = newListPiatti;
     }
@@ -691,18 +881,34 @@ public class AddMenuBean {
     
     
 
+    /**
+     * 
+     * @return
+     */
     public PiattoCombo getNuovoPiattoCombo() {
         return nuovoPiattoCombo;
     }
 
+    /**
+     * 
+     * @param nuovoPiattoCombo
+     */
     public void setNuovoPiattoCombo(PiattoCombo nuovoPiattoCombo) {
         this.nuovoPiattoCombo = nuovoPiattoCombo;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<PiattoCombo> getPiattoCombo() {
         return piattoCombo;
     }
 
+    /**
+     * 
+     * @param piattoCombo
+     */
     public void setPiattoCombo(List<PiattoCombo> piattoCombo) {
         this.piattoCombo = piattoCombo;
     }

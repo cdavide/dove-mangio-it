@@ -14,20 +14,55 @@ import javax.ejb.Local;
 @Local
 public interface LocaleFacadeLocal {
 
+    /**
+     * 
+     * @param locale
+     */
     void create(Locale locale);
 
+    /**
+     * 
+     * @param locale
+     */
     void edit(Locale locale);
 
+    /**
+     * 
+     * @param locale
+     */
     void remove(Locale locale);
 
+    /**
+     * 
+     * @param id
+     * @return
+     */
     Locale find(Object id);
 
+    /**
+     * 
+     * @return
+     */
     List<Locale> findAll();
 
+    /**
+     * 
+     * @param range
+     * @return
+     */
     List<Locale> findRange(int[] range);
 
+    /**
+     * 
+     * @return
+     */
     int count();
     
+    /**
+     * 
+     * @param idUtente
+     * @return
+     */
     public Locale findByUtente(long idUtente);
     
 

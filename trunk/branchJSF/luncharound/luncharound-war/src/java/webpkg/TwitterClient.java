@@ -45,6 +45,10 @@ public class TwitterClient {
     private OAuthSecrets oauth_secrets;
     private OAuthClientFilter oauth_filter;
 
+    /**
+     * 
+     * @param format
+     */
     public TwitterClient(String format) {
         com.sun.jersey.api.client.config.ClientConfig config = new com.sun.jersey.api.client.config.DefaultClientConfig();
         client = Client.create(config);
@@ -52,18 +56,24 @@ public class TwitterClient {
         webResource = client.resource(BASE_URI).path(resourcePath);
     }
 
+    /**
+     * 
+     * @param format
+     */
     public void setResourcePath(String format) {
         String resourcePath = java.text.MessageFormat.format("statuses/user_timeline.{0}", new Object[]{format});
         webResource = client.resource(BASE_URI).path(resourcePath);
     }
 
     /**
+     * @param <T> 
      * @param responseType Class representing the response
      * @param since query parameter
      * @param since_id query parameter
      * @param page query parameter
      * @param count query parameter
      * @return response object (instance of responseType class)
+     * @throws UniformInterfaceException  
      */
     public <T> T getUserTimeline(Class<T> responseType, String since, String since_id, String page, String count) throws UniformInterfaceException {
         String[] queryParamNames = new String[]{"since", "since_id", "page", "count"};
@@ -81,6 +91,9 @@ public class TwitterClient {
         return qParams;
     }
 
+    /**
+     * 
+     */
     public void close() {
         client.destroy();
     }
@@ -107,6 +120,9 @@ public class TwitterClient {
 
     /**
      * The method sets the OAuth parameters for webResource.
+     * @param request 
+     * @param response 
+     * @throws IOException 
      */
     public void initOAuth(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
@@ -138,14 +154,28 @@ public class TwitterClient {
         }
     }
 
+    /**
+     * 
+     * @param request
+     */
     public static void logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.removeAttribute("oauth_token");
         session.removeAttribute("oauth_token_secret");
     }
 
+    /**
+     * 
+     */
     public static class OAuthLoginServlet extends HttpServlet {
         
+        /**
+         * 
+         * @param request
+         * @param response
+         * @throws ServletException
+         * @throws IOException
+         */
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
@@ -172,8 +202,18 @@ public class TwitterClient {
         }
     }
 
+    /**
+     * 
+     */
     public static class OAuthCallbackServlet extends HttpServlet {
         
+        /**
+         * 
+         * @param request
+         * @param response
+         * @throws ServletException
+         * @throws IOException
+         */
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");

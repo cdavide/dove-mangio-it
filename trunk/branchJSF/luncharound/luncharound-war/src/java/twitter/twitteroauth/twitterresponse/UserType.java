@@ -63,53 +63,119 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 })
 public class UserType {
 
+    /**
+     * 
+     */
     protected String id;
+    /**
+     * 
+     */
     protected String name;
+    /**
+     * 
+     */
     @XmlElement(name = "screen_name")
     protected String screenName;
+    /**
+     * 
+     */
     protected String location;
+    /**
+     * 
+     */
     protected String description;
+    /**
+     * 
+     */
     @XmlElement(name = "profile_image_url")
     @XmlSchemaType(name = "anyURI")
     protected String profileImageUrl;
+    /**
+     * 
+     */
     @XmlSchemaType(name = "anyURI")
     protected String url;
+    /**
+     * 
+     */
     @XmlElement(name = "protected")
     protected Boolean _protected;
+    /**
+     * 
+     */
     @XmlElement(name = "followers_count")
     protected Integer followersCount;
+    /**
+     * 
+     */
     @XmlElement(name = "profile_background_color", type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
     @XmlSchemaType(name = "hexBinary")
     protected byte[] profileBackgroundColor;
+    /**
+     * 
+     */
     @XmlElement(name = "profile_text_color", type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
     @XmlSchemaType(name = "hexBinary")
     protected byte[] profileTextColor;
+    /**
+     * 
+     */
     @XmlElement(name = "profile_link_color", type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
     @XmlSchemaType(name = "hexBinary")
     protected byte[] profileLinkColor;
+    /**
+     * 
+     */
     @XmlElement(name = "profile_sidebar_fill_color", type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
     @XmlSchemaType(name = "hexBinary")
     protected byte[] profileSidebarFillColor;
+    /**
+     * 
+     */
     @XmlElement(name = "profile_sidebar_border_color", type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
     @XmlSchemaType(name = "hexBinary")
     protected byte[] profileSidebarBorderColor;
+    /**
+     * 
+     */
     @XmlElement(name = "friends_count")
     protected Integer friendsCount;
+    /**
+     * 
+     */
     @XmlElement(name = "favourites_count")
     protected Integer favouritesCount;
+    /**
+     * 
+     */
     @XmlElement(name = "utc_offset")
     protected Integer utcOffset;
+    /**
+     * 
+     */
     @XmlElement(name = "time_zone")
     protected String timeZone;
+    /**
+     * 
+     */
     protected Boolean following;
+    /**
+     * 
+     */
     @XmlElement(name = "statuses_count")
     protected Integer statusesCount;
+    /**
+     * 
+     */
     protected StatusType status;
+    /**
+     * 
+     */
     @XmlElement(name = "created_at")
     protected String createdAt;
 

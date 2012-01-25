@@ -35,41 +35,80 @@ public class Menu implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private  Date validita;
 
+    /**
+     * 
+     */
     public Menu() {
     }
     
+    /**
+     * 
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getIdLocale() {
         return idLocale;
     }
 
+    /**
+     * 
+     * @param idLocale
+     */
     public void setIdLocale(int idLocale) {
         this.idLocale = idLocale;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<Piatto> getListaPiatti() {
         return listaPiatti;
     }
 
+    /**
+     * 
+     * @param listaPiatti
+     */
     public void setListaPiatti(List<Piatto> listaPiatti) {
         this.listaPiatti = listaPiatti;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Date getValidita() {
         return validita;
     }
 
+    /**
+     * 
+     * @param validita
+     */
     public void setValidita(Date validita) {
         this.validita = validita;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -77,6 +116,11 @@ public class Menu implements Serializable {
         return hash;
     }
 
+    /**
+     * 
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -90,6 +134,10 @@ public class Menu implements Serializable {
         return true;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public String toString() {
         return "luncharoundpkg.Menu[ id=" + id + " ]";

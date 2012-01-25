@@ -14,20 +14,55 @@ import javax.ejb.Local;
 @Local
 public interface PiattoComboFacadeLocal {
 
+    /**
+     * 
+     * @param piattoCombo
+     */
     void create(PiattoCombo piattoCombo);
 
+    /**
+     * 
+     * @param piattoCombo
+     */
     void edit(PiattoCombo piattoCombo);
 
+    /**
+     * 
+     * @param piattoCombo
+     */
     void remove(PiattoCombo piattoCombo);
 
+    /**
+     * 
+     * @param id
+     * @return
+     */
     PiattoCombo find(Object id);
 
+    /**
+     * 
+     * @return
+     */
     List<PiattoCombo> findAll();
 
+    /**
+     * 
+     * @param range
+     * @return
+     */
     List<PiattoCombo> findRange(int[] range);
 
+    /**
+     * 
+     * @return
+     */
     int count();
     
+    /**
+     * 
+     * @param idLocale
+     * @return
+     */
     public List<PiattoCombo> findByLocale(int idLocale);
     
 }

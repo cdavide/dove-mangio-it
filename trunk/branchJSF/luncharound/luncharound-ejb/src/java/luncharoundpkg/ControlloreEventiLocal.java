@@ -7,7 +7,7 @@ package luncharoundpkg;
 import javax.ejb.Local;
 import java.util.List;
 
-/**
+/** Interfaccia controllore eventi
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -15,6 +15,10 @@ import java.util.List;
 @Local
 public interface ControlloreEventiLocal {
     
+    /** Interfaccia get Eventi
+     * 
+     * @return una lista di tutti gli eventi presenti nel DB
+     */
     public List<Evento> getEventi();
     
 }

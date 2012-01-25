@@ -19,14 +19,26 @@ public class PiattoFacade extends AbstractFacade<Piatto> implements PiattoFacade
     @PersistenceContext(unitName = "luncharound-ejbPU")
     private EntityManager em;
 
+    /**
+     * 
+     * @return
+     */
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     * 
+     */
     public PiattoFacade() {
         super(Piatto.class);
     }
     
+    /**
+     * 
+     * @param idLocale
+     * @return
+     */
     @Override
     public Menu findByLocale(int idLocale) {
         Menu ret;
@@ -44,6 +56,12 @@ public class PiattoFacade extends AbstractFacade<Piatto> implements PiattoFacade
     }
     
 
+    /**
+     * 
+     * @param idLocale
+     * @param cat
+     * @return
+     */
     @Override
     public List<Piatto> getCategoriaLocale(int idLocale,Categoria cat) {
         List<Piatto> ret;

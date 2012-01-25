@@ -4,8 +4,34 @@
  */
 package luncharoundpkg;
 
-/**
+/** Classe che definisce la categoria di un piatto come tipo enumerativo
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
- public enum Categoria{ANTIPASTI,PRIMI,SECONDI,CONTORNI,PIZZE,DOLCI,BEVANDE};
+public enum Categoria {
+
+    /** Antipasto
+     * 
+     */
+    ANTIPASTI,
+    /** Primo
+     * 
+     */
+    PRIMI,
+    /** Secondo
+     * 
+     */
+    SECONDI,
+    /** Contorno
+     * 
+     */
+    CONTORNI,
+    /**Dolci
+     * 
+     */
+    DOLCI,
+    /**Bevande
+     * 
+     */
+    BEVANDE
+};

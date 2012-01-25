@@ -18,6 +18,10 @@ public class ControllorePiattoCombo implements ControllorePiattoComboLocal {
     @EJB
     private PiattoComboFacadeLocal piattoComboFacade;
 
+    /**
+     * 
+     * @param lista
+     */
     @Override
     public void addPersistency(List<PiattoCombo> lista) {
         for (PiattoCombo pp : lista){
@@ -26,18 +30,31 @@ public class ControllorePiattoCombo implements ControllorePiattoComboLocal {
         
     }
     
+    /**
+     * 
+     * @param lista
+     */
     @Override
     public void editListaPiatti(List<PiattoCombo> lista){
         for (PiattoCombo pp : lista){
             piattoComboFacade.edit(pp);
         }
     }
+    /**
+     * 
+     * @param p
+     */
     @Override
     public void addPiatto(PiattoCombo p){
         piattoComboFacade.create(p);
     }
     
     
+    /**
+     * 
+     * @param idLocale
+     * @return
+     */
     @Override
     public PiattoCombo createTemplatePiatto(int idLocale ){
         PiattoCombo ret = new PiattoCombo();
@@ -45,12 +62,21 @@ public class ControllorePiattoCombo implements ControllorePiattoComboLocal {
         return ret;
     }
     
+    /**
+     * 
+     * @param p
+     */
     @Override
     public void removePiatto(PiattoCombo p){
         piattoComboFacade.remove(p);
     }
     
     
+    /**
+     * 
+     * @param idPiattoCombo
+     * @return
+     */
     @Override
     public PiattoCombo findById(long idPiattoCombo){
         return piattoComboFacade.find(idPiattoCombo);

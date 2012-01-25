@@ -19,15 +19,27 @@ public class LocaleFacade extends AbstractFacade<Locale> implements LocaleFacade
     @PersistenceContext(unitName = "luncharound-ejbPU")
     private EntityManager em;
 
+    /**
+     * 
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     * 
+     */
     public LocaleFacade() {
         super(Locale.class);
     }
 
+    /**
+     * 
+     * @param idUtente
+     * @return
+     */
     @Override
     public Locale findByUtente(long idUtente ){
         Locale ll;

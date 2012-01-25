@@ -19,14 +19,26 @@ public class UtenteFacade extends AbstractFacade<Utente> implements UtenteFacade
     @PersistenceContext(unitName = "luncharound-ejbPU")
     private EntityManager em;
 
+    /**
+     * 
+     * @return
+     */
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     * 
+     */
     public UtenteFacade() {
         super(Utente.class);
     }
     
+    /**
+     * 
+     * @param mail
+     * @return
+     */
     @Override
     public Utente findByEmail(String mail){
         String selectQuery = "SELECT U FROM Utente U WHERE U.mail = ?1";
