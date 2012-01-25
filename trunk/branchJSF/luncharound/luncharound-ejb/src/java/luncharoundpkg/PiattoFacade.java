@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author lore0487
+ * @author Bovio Lorenzo,Bronzino Francesco, Concas Davide
  */
 @Stateless
 public class PiattoFacade extends AbstractFacade<Piatto> implements PiattoFacadeLocal {
@@ -34,10 +34,10 @@ public class PiattoFacade extends AbstractFacade<Piatto> implements PiattoFacade
         super(Piatto.class);
     }
     
-    /**
+    /**Restituisce il menu di un locale
      * 
-     * @param idLocale
-     * @return
+     * @param idLocale l'id del locale di cui si vuole ottenere il menu
+     * @return il menu del locale
      */
     @Override
     public Menu findByLocale(int idLocale) {
@@ -56,11 +56,11 @@ public class PiattoFacade extends AbstractFacade<Piatto> implements PiattoFacade
     }
     
 
-    /**
+    /**Restituisce la lista di piatti di un locale
      * 
-     * @param idLocale
-     * @param cat
-     * @return
+     * @param idLocale l'id del locale di cui si vogliono ricevere i piatti
+     * @param cat la categoria dei piatti
+     * @return la lista di tutti i piatti presenti nel locale che appartengono alla categoria cat
      */
     @Override
     public List<Piatto> getCategoriaLocale(int idLocale,Categoria cat) {

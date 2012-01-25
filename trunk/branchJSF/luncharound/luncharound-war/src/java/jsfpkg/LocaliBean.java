@@ -19,7 +19,8 @@ import javax.servlet.http.HttpSession;
 import luncharoundpkg.ControlloreLocaleLocal;
 import luncharoundpkg.Locale;
 
-/**
+/**Session Bean che contiene le funzioni per gestire la parte di presentazione 
+ * dei locali
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -38,6 +39,7 @@ public class LocaliBean implements Serializable {
     double lat;
     String piva = "";
     String twitLocale;
+    
     /** Creates a new instance of LocaliBean */
     public LocaliBean() {
         // non fa nulla
@@ -45,10 +47,10 @@ public class LocaliBean implements Serializable {
         twitLocale= "";
     }
 
-    //questo viene chiamato dopo il costruttore, 
-    // dopo che il container ha fatto la injection degli ejb
-    /**
-     * 
+
+    /**Metodo che inizializza le variabili nel frontend richiamando i servizi nel backend
+     * questo viene chiamato dopo il costruttore, 
+     * dopo che il container ha fatto la injection degli ejb
      */
     @PostConstruct
     public void init() {
@@ -59,7 +61,7 @@ public class LocaliBean implements Serializable {
             System.err.println("[LocaliBean.java] Non ci sono locali nel DB. Lista: " + controlloreLocale.locali());
             locali = new ArrayList<Locale>();
         }
-        System.out.println("Locali presenti: " + controlloreLocale.locali());
+        //System.out.println("Locali presenti: " + controlloreLocale.locali());
         twitLocale = "<a href='https://twitter.com/share'"
                 + "class='twitter-share-button' "
                 + "data-text='I love to eat at "
@@ -74,9 +76,9 @@ public class LocaliBean implements Serializable {
     }
     
 
-    /**
+    /**Aggiunge un locale nel DB
      * 
-     * @return
+     * @return null in modo da ricaricare la pagina (serve per le JSF)
      */
     public String save() {
         FacesMessage msg = null;
@@ -132,7 +134,8 @@ public class LocaliBean implements Serializable {
         return "home";
     }
 
-    /**
+    
+    /**Pulisce le variabili locali per il form
      * 
      */
     public void clearForm() {
@@ -145,7 +148,8 @@ public class LocaliBean implements Serializable {
         return;
     }
 
-    /**
+    /**Metodo che riceve l'id di un locale,aggiunge alla sessione 
+     * il valore id locale e reindirizza l'utente sulla pagina visualizzalocale.xhtml
      * 
      * @return
      */

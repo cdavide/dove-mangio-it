@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
+/**Classe che descrive le combinazioni di piatti
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -23,81 +23,81 @@ public class PiattoCombo implements Serializable {
     private String descr;
     private float prezzo;
     private int idLocale;
-    //Bisogna aggiungere un campo flag???
 
-    /**
+
+    /**Costruttore vuoto
      * 
      */
     public PiattoCombo() {
     }
 
-    /**
+    /**Restituisce la descrizione della combinazione piatti
      * 
-     * @return
+     * @return la descrizione della combinazione piatti
      */
     public String getDescr() {
         return descr;
     }
 
-    /**
+    /**Imposta la descrizione di una combinazione piatti
      * 
-     * @param descr
+     * @param descr una stringa contenente la descrizione della combinazione
      */
     public void setDescr(String descr) {
         this.descr = descr;
     }
 
-    /**
+    /**Restituisce l'id del locale a cui la combinazione è associata
      * 
-     * @return
+     * @return l'id del locale a cui la combinazione è associata
      */
     public int getIdLocale() {
         return idLocale;
     }
 
-    /**
+    /**Imposta l'id del locale a cui la combinazione è associata
      * 
-     * @param idLocale
+     * @param idLocale l'id del locale a cui la combinazione è associata
      */
     public void setIdLocale(int idLocale) {
         this.idLocale = idLocale;
     }
 
-    /**
+    /** Restituisce il prezzo della combinazione
      * 
-     * @return
+     * @return il prezzo della combinazione
      */
     public float getPrezzo() {
         return prezzo;
     }
 
-    /**
+    /**Imposta il prezzo della combinazione
      * 
-     * @param prezzo
+     * @param prezzo il prezzo della combinazione
      */
     public void setPrezzo(float prezzo) {
         this.prezzo = prezzo;
     }
 
-    /**
+    /**Restituisce l'id della combinazione
      * 
-     * @return
+     * @return l'id della combinazione
      */
     public Long getId() {
         return id;
     }
 
-    /**
+    /**Imposta l'id di una combinazione
      * 
-     * @param id
+     * @param id l'id della combinazione
      */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
+    /**Restituisce l'hashcode dell'oggetto
      * 
-     * @return
+     * @return l'hashcode dell'oggetto
      */
     @Override
     public int hashCode() {
@@ -106,10 +106,10 @@ public class PiattoCombo implements Serializable {
         return hash;
     }
 
-    /**
+    /**Confronta un oggetto di tipo piattocombo
      * 
-     * @param object
-     * @return
+     * @param object l'oggetto con cui effettuare il confronto
+     * @return true se gli oggetti sono uguali o false altrimenti
      */
     @Override
     public boolean equals(Object object) {

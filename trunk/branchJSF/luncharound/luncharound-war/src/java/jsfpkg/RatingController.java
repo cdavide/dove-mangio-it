@@ -6,28 +6,20 @@ package jsfpkg;
 
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import luncharoundpkg.ControlloreLocaleLocal;
 import luncharoundpkg.ControlloreValutazioneLocal;
 import luncharoundpkg.Valutazione;
 
-/**
- * 
- * @author dave
+/**Session Bean che contiene le funzioni di backend per gestire le valutazioni dei locali
+ * View Scoped
+ * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
 @ManagedBean(name = "ratingController")
 @ViewScoped
@@ -53,9 +45,7 @@ public class RatingController {
     double quan = 0;
     double cort = 0;
 
-    /* Empty constructor
-     */
-    /**
+    /**Costruttore
      * 
      */
     public RatingController() {
@@ -77,11 +67,9 @@ public class RatingController {
         cort = 0;
     }
 
-    /* Questo metodo inizializza tutte le variabili con le medie di tutti e 
-     * la votazione di un particolare utente
-     */
-    /**
-     * 
+    /** Questo metodo inizializza tutte le variabili con le medie di tutti e 
+     * la votazione di un particolare utente, viene invocato automaticamente 
+     * al termine della chiamata del costruttore principale
      */
     @PostConstruct
     public void init() {
@@ -125,11 +113,10 @@ public class RatingController {
 
     }
 
-    /* Questo metodo deve sottomettere la votazione e ricaricare le medie.
-     */
-    /**
+
+    /**Questo metodo deve sottomettere la votazione e ricaricare le medie
      * 
-     * @return
+     * @return null per ricaricare la pagina (serve per le JSF)
      */
     public String submitRating() {
         if (userRate == null) {
