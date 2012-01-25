@@ -42,7 +42,7 @@ import org.jfree.data.xy.XYSeries;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-/**
+/**Managed Bean che contiene le funzioni di backend usate in visualizzaLocale.xhtml
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -77,7 +77,7 @@ public class VisualizzaLocale implements Serializable {
 
     //questo viene chiamato dopo il costruttore, 
     // dopo che il container ha fatto la injection degli ejb
-    /**
+    /**Inizializza le variabili del session bean ricavando i dettagli del locale dal controlloreLocale e dal controlloreValutazione
      * 
      */
     @PostConstruct
@@ -189,10 +189,10 @@ public class VisualizzaLocale implements Serializable {
         return dataset;
     }
 
-    /**
+    /**Calcola la media delle valutazioni di una settimana per il locale visualizzato
      * 
-     * @param request
-     * @param week
+     * @param request la HttpServletRequest
+     * @param week il numero della settimana
      * @return
      */
     public Valutazione mediaSettimana(HttpServletRequest request, int week) {
@@ -289,10 +289,10 @@ public class VisualizzaLocale implements Serializable {
 
     /*Metodo pubblico per calcolare la media di una lista di valutazioni
      */
-    /**
+    /**Metodo pubblico per calcolare la media di una lista di valutazioni
      * 
-     * @param val
-     * @return
+     * @param val Lista delle valutazioni
+     * @return la valutazione
      */
     public Valutazione mediaValutazioni(List<Valutazione> val) {
         if (val == null || val.isEmpty()) {

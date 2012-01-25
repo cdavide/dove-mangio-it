@@ -28,7 +28,7 @@ import javax.jms.Session;
 import javax.jms.ObjectMessage;
 import javax.annotation.Resource;
 
-/**
+/**Managed Bean che contiene le funzioni di backend visualizzaLocale.xhtml e in eventiPage.xhtml
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -61,7 +61,7 @@ public class EventBean {
         
     }
     
-    /**
+    /**Inizializza le variabili del session bean ricavando la lista degli eventi dal controlloreEventi o dal controlloreLocale a seconda della pagina
      * 
      */
     @PostConstruct
@@ -119,8 +119,6 @@ public class EventBean {
     }
     
     private Message createJMSMessageForjmsEventiMsg(Session session, Object messageData) throws JMSException {
-        // TODO create and populate message to send
-        
         ObjectMessage tm = session.createObjectMessage();
         tm.setObject((String) messageData);
         return tm;
@@ -148,7 +146,7 @@ public class EventBean {
         }
     }
     
-    /**
+    /**Aggiunge un evento al sistema a partire dai volori contenuti nei paramentri del bean
      * 
      */
     public void addEvento(){
@@ -172,9 +170,9 @@ public class EventBean {
         }
     }
     
-    /**
+    /**Imposta l'id del locale come variabile di sessione e ritorna la pagina per visualizzarlo
      * 
-     * @return
+     * @return Ritorna il nome della pagina da aprire
      */
     public String visualizzaLocale() {
         System.out.println("visualizza Locale");
@@ -191,165 +189,167 @@ public class EventBean {
         return "visualizzaLocale";
     }
     
+    //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
     /**
-     * 
+     *
      * @return
      */
     public Evento getSelectedEvent() {
         return selectedEvent;
     }
-
+    
     /**
-     * 
+     *
      * @param selectedEvent
      */
     public void setSelectedEvent(Evento selectedEvent) {
         this.selectedEvent = selectedEvent;
     }
-
+    
     /**
-     * 
+     *
      * @return
      */
     public List<Evento> getEventi() {
         return eventi;
     }
-
+    
     /**
-     * 
+     *
      * @param eventi
      */
     public void setEventi(List<Evento> eventi) {
         this.eventi = eventi;
     }
-
+    
     /**
-     * 
+     *
      * @return
      */
     public boolean isGestore() {
         return gestore;
     }
-
+    
     /**
-     * 
+     *
      * @param gestore
      */
     public void setGestore(boolean gestore) {
         this.gestore = gestore;
     }
-
+    
     /**
-     * 
+     *
      * @return
      */
     public Locale getLocale() {
         return locale;
     }
-
+    
     /**
-     * 
+     *
      * @param locale
      */
     public void setLocale(Locale locale) {
         this.locale = locale;
     }
-
+    
     /**
-     * 
+     *
      * @return
      */
     public boolean isLoggedIn() {
         return loggedIn;
     }
-
+    
     /**
-     * 
+     *
      * @param loggedIn
      */
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
-
+    
     /**
-     * 
+     *
      * @return
      */
     public Date getDataFine() {
         return dataFine;
     }
-
+    
     /**
-     * 
+     *
      * @param dataFine
      */
     public void setDataFine(Date dataFine) {
         this.dataFine = dataFine;
     }
-
+    
     /**
-     * 
+     *
      * @return
      */
     public Date getDataInizio() {
         return dataInizio;
     }
-
+    
     /**
-     * 
+     *
      * @param dataInizio
      */
     public void setDataInizio(Date dataInizio) {
         this.dataInizio = dataInizio;
     }
-
+    
     /**
-     * 
+     *
      * @return
      */
     public String getDescr() {
         return descr;
     }
-
+    
     /**
-     * 
+     *
      * @param descr
      */
     public void setDescr(String descr) {
         this.descr = descr;
     }
-
+    
     /**
-     * 
+     *
      * @return
      */
     public String getTitolo() {
         return titolo;
     }
-
+    
     /**
-     * 
+     *
      * @param titolo
      */
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
-
+    
     /**
-     * 
+     *
      * @return
      */
     public String getPath() {
         return path;
     }
-
+    
     /**
-     * 
+     *
      * @param path
      */
     public void setPath(String path) {
         this.path = path;
     }
+    //</editor-fold>
 
     
 }

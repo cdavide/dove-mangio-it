@@ -58,17 +58,17 @@ public interface PiattoFacadeLocal {
      */
     int count();
 
-    /**
+    /**Ritorna il Menu appartentente ad un locale
      * 
-     * @param idLocale
-     * @return
+     * @param idLocale L'id del locale
+     * @return il menu
      */
     public Menu findByLocale(int idLocale);
-    /**
+    /**Ritorna la lista di Piatti appartententi ad una categoria
      * 
-     * @param idLocale
-     * @param cat
-     * @return
+     * @param idLocale L'id del locale
+     * @param cat la categoria dei piatti
+     * @return La lista dei piatti
      */
     public java.util.List<luncharoundpkg.Piatto> getCategoriaLocale(int idLocale, luncharoundpkg.Categoria cat);
     

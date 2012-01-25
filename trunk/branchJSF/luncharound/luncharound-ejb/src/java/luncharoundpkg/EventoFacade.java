@@ -11,7 +11,7 @@ import java.util.List;
 import javax.persistence.Query;
 import java.util.Date;
 
-/**
+/**Facade degli eventi
  *
  * @author lore0487
  */
@@ -36,7 +36,7 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
     }
     
     /**
-     * 
+     * @deprecated 
      */
     @Override
     public void deleteOld(){
@@ -47,10 +47,10 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
         deleteOldEvents.executeUpdate();
     }
     
-    /**
+    /**Ritorna gli eventi associati ad un locale
      * 
-     * @param idLocale
-     * @return
+     * @param idLocale L'id del locale
+     * @return la lista degli eventi
      */
     @Override
     public List<Evento> findByLocale(int idLocale){
@@ -64,7 +64,7 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
     }
     
     /**
-     * 
+     * @deprecated 
      * @param idLocali
      * @return
      */
@@ -80,9 +80,9 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
         return searchById.getResultList();
     }
     
-    /**
+    /**Ritorna tutti gli eventi non scaduti del sistema
      * 
-     * @return
+     * @return La lista degli eventi
      */
     @Override
     public List<Evento> findNext(){

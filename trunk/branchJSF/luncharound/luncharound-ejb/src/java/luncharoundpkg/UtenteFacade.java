@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
+/**Facade dell'oggetto utente
  *
  * @author lore0487
  */
@@ -34,10 +34,10 @@ public class UtenteFacade extends AbstractFacade<Utente> implements UtenteFacade
         super(Utente.class);
     }
     
-    /**
+    /**Trova un utente a partire dall'email
      * 
-     * @param mail
-     * @return
+     * @param mail la mail con cui effettuare la ricerca
+     * @return L'utente se trovato, null altrimenti
      */
     @Override
     public Utente findByEmail(String mail){

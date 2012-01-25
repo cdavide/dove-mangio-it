@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
+/**Entity EJB che definisce gli eventi
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -35,97 +35,97 @@ public class Evento implements Serializable {
     public Evento() {
     }
 
-    /**
+    /**Get titolo
      * 
-     * @return
+     * @return titolo dell'evento
      */
     public String getTitolo() {
         return titolo;
     }
 
-    /**
+    /**Set titolo
      * 
-     * @param titolo
+     * @param titolo imposto il titolo
      */
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
 
-    /**
+    /**Get la data finale
      * 
-     * @return
+     * @return la data
      */
     public Date getDataFine() {
         return dataFine;
     }
     
-    /**
+    /**Get una stringa semplificata rappresentante la data finale dell'evento
      * 
-     * @return
+     * @return La stringa della data
      */
     public String getDataFineShort() {
         String temp = dataFine.toString();
         return temp.substring(0, 10);
     }
 
-    /**
+    /**Imposta la data finale di un evento
      * 
-     * @param dataFine
+     * @param dataFine la data da impostare
      */
     public void setDataFine(Date dataFine) {
         this.dataFine = dataFine;
     }
 
-    /**
+    /**Get la data iniziale di un evento
      * 
-     * @return
+     * @return la data iniziale
      */
     public Date getDataInizio() {
         return dataInizio;
     }
     
-    /**
+    /**Get una stringa semplificata rappresentante la data iniziale dell'evento
      * 
-     * @return
+     * @return la stringa rappresentante la data
      */
     public String getDataInizioShort() {
         String temp = dataInizio.toString();
         return temp.substring(0, 10);
     }
 
-    /**
+    /**Imposta la data iniziale
      * 
-     * @param dataInizio
+     * @param dataInizio La data da impostare
      */
     public void setDataInizio(Date dataInizio) {
         this.dataInizio = dataInizio;
     }
 
-    /**
+    /**Get la descrizione
      * 
-     * @return
+     * @return la descrizione
      */
     public String getDescr() {
         return descr;
     }
 
-    /**
+    /**Imposta la descrizione
      * 
-     * @param descr
+     * @param descr La descrizione da impostare
      */
     public void setDescr(String descr) {
         this.descr = descr;
     }
 
-    /**
+    /**Get l'id del locale associato
      * 
-     * @return
+     * @return l'id
      */
     public int getIdLocale() {
         return idLocale;
     }
 
-    /**
+    /**Imposta l'id del locale
      * 
      * @param idLocale
      */
@@ -133,17 +133,17 @@ public class Evento implements Serializable {
         this.idLocale = idLocale;
     }
 
-    /**
+    /**Get l'id dell'evento
      * 
-     * @return
+     * @return l'id
      */
     public Long getId() {
         return id;
     }
 
-    /**
+    /**Set l'id dell'evento
      * 
-     * @param id
+     * @param id L'id da impostare
      */
     public void setId(Long id) {
         this.id = id;
@@ -189,16 +189,3 @@ public class Evento implements Serializable {
     }
     
 }
-
-
-
-
-/*Cose da fare e come farle(più o meno uguale per le news):
- *  -creare il controlloreEvento
- *  -Fare la selezione di tutti gli eventi ordinati dal più vicino in poi(per le new ordinate dalla più nuova indietro)
- *  -Fare la selezione degli eventi di un locale ordinati dal più vicino(per le new ordinate dalla più nuova indietro)
- *  -Fare l'eventoBean per le jsf.
- *  -Capire come fare per prendere tutti quelli dei preferiti e ordinarli dal più vicino(news dal più nuovo)
- *  -Soluzione per la riga di sopra: fare una query con la lista degli id dei locali e li si ordina veloce.
- *  -Lista degli eventi è mostrata. quando si clicca sopra si apre un pop up con la descrizione dell'evento(uguale per la news)
- */

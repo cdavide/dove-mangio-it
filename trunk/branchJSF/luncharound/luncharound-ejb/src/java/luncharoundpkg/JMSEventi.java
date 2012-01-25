@@ -30,9 +30,9 @@ public class JMSEventi implements MessageListener {
     public JMSEventi() {
     }
     
-    /**
+    /**Ricevitore dei messaggi del topic rappersentato nel jms codaEventi
      * 
-     * @param message
+     * @param message Il messagio ricevuto
      */
     @Override
     public void onMessage(Message message) {

@@ -19,7 +19,7 @@ import luncharoundpkg.Locale;
 import luncharoundpkg.News;
 import luncharoundpkg.ControlloreNewsLocal;
 
-/**
+/**Managed Bean che contiene le funzioni di backend visualizzaLocale.xhtml e in newsPage.xhtml
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -48,7 +48,7 @@ public class NewsBean {
     public NewsBean() {
     }
     
-    /**
+    /**Inizializza le variabili del session bean ricavando la lista delle news dal controlloreNews o dal controlloreLocale a seconda della pagina
      * 
      */
     @PostConstruct
@@ -105,7 +105,7 @@ public class NewsBean {
         }
     }
     
-    /**
+    /**Aggiunge una news al sistema a partire dai volori contenuti nei paramentri del bean
      * 
      */
     public void addNews(){
@@ -116,9 +116,9 @@ public class NewsBean {
         controlloreLocale.addNews(idLocale, dataInizio, titolo, descr);
     }
     
-    /**
+    /**Imposta l'id del locale come variabile di sessione e ritorna la pagina per visualizzarlo
      * 
-     * @return
+     * @return Ritorna il nome della pagina da aprire
      */
     public String visualizzaLocale() {
         System.out.println("visualizza Locale");
@@ -135,149 +135,151 @@ public class NewsBean {
         return "visualizzaLocale";
     }
 
-    /**
-     * 
-     * @return
+    //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
+    /**Ritorna la data iniziale della variabile del bean
+     *
+     * @return la data iniziale
      */
     public Date getDataInizio() {
         return dataInizio;
     }
-
-    /**
-     * 
-     * @param dataInizio
+    
+    /**Imposta la data iniziale della variabile del bean
+     *
+     * @param dataInizio la data da impostare
      */
     public void setDataInizio(Date dataInizio) {
         this.dataInizio = dataInizio;
     }
-
-    /**
-     * 
-     * @return
+    
+    /**Ritorna la descrizione della variabile del bean
+     *
+     * @return la descrizione
      */
     public String getDescr() {
         return descr;
     }
-
-    /**
-     * 
-     * @param descr
+    
+    /**Imposta la descrizione della variabile del bean
+     *
+     * @param descr la descrizione da impostare
      */
     public void setDescr(String descr) {
         this.descr = descr;
     }
-
-    /**
-     * 
-     * @return
+    
+    /**Ritorna il booleano che mi dice se il locale visualizzato è quello dell'utente che lo sta visualizzando
+     *
+     * @return true se è il gestore, false altrimenti
      */
     public boolean isGestore() {
         return gestore;
     }
-
-    /**
-     * 
-     * @param gestore
+    
+    /**Imposta il booleano che indica se un utente è il gestore del locale visualizzato
+     *
+     * @param gestore il valore da impostare
      */
     public void setGestore(boolean gestore) {
         this.gestore = gestore;
     }
-
-    /**
-     * 
-     * @return
+    
+    /**Il locale visualizzato
+     *
+     * @return il locale
      */
     public Locale getLocale() {
         return locale;
     }
-
-    /**
-     * 
-     * @param locale
+    
+    /**Imposta il locale visualizzato
+     *
+     * @param locale il locale da impostare
      */
     public void setLocale(Locale locale) {
         this.locale = locale;
     }
-
-    /**
-     * 
-     * @return
+    
+    /**Controlla il booleano che mi dice se l'utente è loggato o meno
+     *
+     * @return true se è loggato, false altrimenti
      */
     public boolean isLoggedIn() {
         return loggedIn;
     }
-
-    /**
-     * 
-     * @param loggedIn
+    
+    /**Imposta il booleano che mi dice se l'utente è loggato o meno
+     *
+     * @param loggedIn valore da impostare
      */
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
-
-    /**
-     * 
-     * @return
+    
+    /**Ritorna la lista di news da visualizzare
+     *
+     * @return lista di news
      */
     public List<News> getNews() {
         return news;
     }
-
-    /**
-     * 
-     * @param news
+    
+    /**Imposta la lista di news da visualizzare
+     *
+     * @param news la lista di news
      */
     public void setNews(List<News> news) {
         this.news = news;
     }
-
-    /**
-     * 
-     * @return
+    
+    /**Ritorna la news selezionata
+     *
+     * @return la news selezionata
      */
     public News getSelectedNews() {
         return selectedNews;
     }
-
-    /**
-     * 
-     * @param selectedNews
+    
+    /**Imposta la news selezionata
+     *
+     * @param selectedNews la news da impostare
      */
     public void setSelectedNews(News selectedNews) {
         this.selectedNews = selectedNews;
     }
-
-    /**
-     * 
-     * @return
+    
+    /**Ritorna il titolo della variabile del bean
+     *
+     * @return il titolo
      */
     public String getTitolo() {
         return titolo;
     }
-
-    /**
-     * 
-     * @param titolo
+    
+    /**Imposta il titolo della variabile del bean
+     *
+     * @param titolo il titolo da impostare
      */
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
-
-    /**
-     * 
-     * @return
+    
+    /**Path della pagina visualizzata
+     *
+     * @return il path
      */
     public String getPath() {
         return path;
     }
-
-    /**
-     * 
-     * @param path
+    
+    /**Imposta il path della pagina visualizzata
+     *
+     * @param path il path da impostare
      */
     public void setPath(String path) {
         this.path = path;
     }
+    //</editor-fold>
     
     
 }

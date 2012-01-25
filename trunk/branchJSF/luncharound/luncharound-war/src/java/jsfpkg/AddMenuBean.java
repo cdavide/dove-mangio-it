@@ -32,7 +32,7 @@ import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
 import javax.faces.context.ExternalContext;
 
-/**
+/**Managed Bean che contiene le funzioni di backend usate in menuPage.xhtml
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -81,7 +81,7 @@ public class AddMenuBean {
 
     }
 
-    /**
+    /**Inizializza le variabili del session bean ricavando la lista degli eventi dal controlloreLocale, controllorePiatto e controllorePiattoCombo
      * 
      */
     @PostConstruct
@@ -169,13 +169,13 @@ public class AddMenuBean {
     }
 
     /**
-     * 
+     * @deprecated 
      */
     public void remove() {
     }
 
     /**
-     * 
+     * @deprecated
      * @param query
      * @return
      */
@@ -193,7 +193,7 @@ public class AddMenuBean {
         return results;
     }
 
-    /**
+    /**Aggiunge il piatto icontenuto nella variabile del bean a seconda del valore passato nella variabile di sessione idOperation 
      * 
      */
     public void add() {
@@ -266,9 +266,7 @@ public class AddMenuBean {
     }
 
 
-    /*Funzione richiamata quando viene cancellata una entry dalla tabella dei piatti
-     */
-    /**
+    /**Funzione richiamata quando viene cancellata una entry dalla tabella dei piatti
      * 
      */
     public void delete() {
@@ -392,7 +390,7 @@ public class AddMenuBean {
 
     }
 
-    /**
+    /**Aggiorna il menu nel backend a seconda delle modifiche effetuate dall'utente
      * 
      */
     public void editMenu() {
@@ -408,10 +406,10 @@ public class AddMenuBean {
         addFacesMessage("Modifiche menu effettuate correttamente", "Success!");
     }
 
-    /**
+    /**Aggiunge un messaggio all'interfaccia delle faces
      * 
-     * @param str
-     * @param severity
+     * @param str Stringa da visualizzare
+     * @param severity Titolo del messagio
      */
     public void addFacesMessage(String str, String severity) {
         FacesMessage msg = null;
@@ -421,9 +419,9 @@ public class AddMenuBean {
 
     }
 
-    /**
+    /**Controlla se l'utente è loggato
      * 
-     * @return
+     * @return true se l'utente è loggato, false altrimenti
      */
     public boolean checkUserLogin() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -437,7 +435,7 @@ public class AddMenuBean {
                 idLocale != controlloreLocale.getLocali(idUtente).getIdUtente()); // l'utente non è padrone del locale
     }
 
-    /**
+    /**Stampa il pdf del menù
      * 
      * @throws DocumentException
      * @throws FileNotFoundException
