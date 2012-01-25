@@ -7,7 +7,7 @@ package luncharoundpkg;
 import java.util.List;
 import javax.ejb.Local;
 
-/**
+/**Interfaccia degli eventi
  *
  * @author lore0487
  */
@@ -63,23 +63,23 @@ public interface EventoFacadeLocal {
      */
     public void deleteOld();
     
-    /**
+    /**Ritorna gli eventi associati ad un locale
      * 
-     * @param idLocale
-     * @return
+     * @param idLocale L'id del locale
+     * @return la lista degli eventi
      */
     public List<Evento> findByLocale(int idLocale );
     
     /**
-     * 
+     * @deprecated 
      * @param idLocali
      * @return
      */
     public List<Evento> findByLocali(List<Integer> idLocali );
     
-    /**
+    /**Ritorna tutti gli eventi non scaduti del sistema
      * 
-     * @return
+     * @return La lista degli eventi
      */
     public List<Evento> findNext();
     

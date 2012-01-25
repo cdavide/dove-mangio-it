@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import luncharoundpkg.Locale;
 import luncharoundpkg.Valutazione;
 
-/**
+/**Session Bean delle valutazioni
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -27,16 +27,10 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
     @EJB
     private ValutazioneFacadeLocal valutazioneFacade;
 
-     /*Mostra valutazione locale
-     * @param idLocale  l'identificativo unico del locale
-     * @param idLocale  l'identificativo unico dell'utente
-     * @return  una stringa contenente le valutazioni
-     */
-    
-    /**
-     * 
-     * @param request
-     * @return
+    /**Mostra valutazione locale
+     * @param idLocale  L'identificativo unico del locale
+     * @param idLocale  L'identificativo unico dell'utente
+     * @return  Una stringa contenente le valutazioni
      */
     @Override
     public String mostraValutazioni(HttpServletRequest request) {
@@ -136,19 +130,11 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         return ret;
     }
     
-    /* Metodo di appoggio che crea il form per visualizzare il rating
+    /** Metodo di appoggio che crea il form per visualizzare il rating
      * @param par il parametro di cui si vuole ottenere il form del rating
      * @param val il valore medio del rating  del parametro di valutazione
      * @param opt opzioni varie disabled ecc, guardare help jquery rating plugin
      * @comment non è molto bello ma funziona :-p
-     */
-    
-    /**
-     * 
-     * @param par
-     * @param val
-     * @param opt
-     * @return
      */
     @Override
     public String createRatingStars(String par, long val,String opt){
@@ -167,9 +153,9 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         return ret;
     }
         
-    /**
+    /**Aggiunge una valutazione contenuta in una HttpServletRequest
      * 
-     * @param req
+     * @param req La HttpServletRequest che contiene la valutazione
      */
     @Override
     public void valutazioneDaReq(HttpServletRequest req){
@@ -187,11 +173,11 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         valutazioneFacade.create(val);
 
     }
-    /**
+    /** Ritorna le valutazione di una settimana per un locale
      * 
-     * @param idlocale
-     * @param week
-     * @return
+     * @param idlocale L'id del locale a cui aggiungere
+     * @param week La settimana
+     * @return La lista delle valutazione  per la settimana specificata
      */
     @Override
     public List<Valutazione> valutazioniSettimana(int idlocale, int week){
@@ -200,10 +186,10 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
     }
 
     
-    /**
+    /**Calcola la media delle valutazioni a partire da una lista di valutazioni
      * 
-     * @param vals
-     * @return
+     * @param vals La lista delle valutazioni
+     * @return La media ottenuta
      */
     public Valutazione mediaValutazioni(List<Valutazione> vals){
         System.err.println("[Controllore Valutazione ] media");
@@ -251,10 +237,10 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
         return ret;
     }
 
-    /**
+    /**Ritorna le valutazioni di un locale
      * 
-     * @param idlocale
-     * @return
+     * @param idlocale L'id del locale
+     * @return Le valutazioni del locale
      */
     @Override
     public List<Valutazione> findValutazioni(int idlocale) {
@@ -262,20 +248,20 @@ public class ControlloreValutazione implements ControlloreValutazioneLocal {
          
     }
 
-    /**
+    /**Cerca le valutazioni di un utente per un dato utente e un dato locale
      * 
-     * @param idutente
-     * @param idlocale
-     * @return
+     * @param idutente L'id dell'utente
+     * @param idlocale L'id del locale
+     * @return Le valutazioni
      */
     @Override
     public Valutazione findValutazioneUtente(long idutente, int idlocale) {
         return valutazioneFacade.findValutazioneLocFromUtente(idutente, idutente);
     }
     
-    /**
+    /**Salva la valutazione 
      * 
-     * @param userRate
+     * @param userRate La valutazione da usare
      */
     @Override
     public void saveValutazione(Valutazione userRate){

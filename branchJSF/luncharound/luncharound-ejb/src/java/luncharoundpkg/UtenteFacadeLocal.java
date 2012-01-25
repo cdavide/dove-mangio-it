@@ -7,7 +7,7 @@ package luncharoundpkg;
 import java.util.List;
 import javax.ejb.Local;
 
-/**
+/**Interfaccia della facade dell'oggetto utente
  *
  * @author lore0487
  */
@@ -52,10 +52,10 @@ public interface UtenteFacadeLocal {
      */
     List<Utente> findRange(int[] range);
     
-    /**
+    /**Trova un utente a partire dall'email
      * 
-     * @param mail
-     * @return
+     * @param mail la mail con cui effettuare la ricerca
+     * @return L'utente se trovato, null altrimenti
      */
     Utente findByEmail(String mail);
     

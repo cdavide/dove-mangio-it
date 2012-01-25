@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 
-/**
+/**Entity EJB rappresentante un utente
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -49,7 +49,7 @@ public class Utente implements Serializable {
     }
 
     /**
-     * 
+     * @deprecated 
      * @return
      */
     public boolean isEventi() {
@@ -57,79 +57,79 @@ public class Utente implements Serializable {
     }
 
     /**
-     * 
+     * @deprecated 
      * @param eventi
      */
     public void setEventi(boolean eventi) {
         this.eventi = eventi;
     }
 
-    /**
+    /**Ritorna l'url della foto
      * 
-     * @return
+     * @return l'url
      */
     public String getFoto() {
         return foto;
     }
 
-    /**
+    /**Imposta la foto
      * 
-     * @param foto
+     * @param foto foto in formato url
      */
     public void setFoto(String foto) {
         this.foto = foto;
     }
 
-    /**
+    /**Ritorna l'indirizzo di un utente
      * 
-     * @return
+     * @return l'indirizzo
      */
     public String getHome() {
         return home;
     }
 
-    /**
+    /**Imposta l'indirizzo
      * 
-     * @param home
+     * @param home l'indirizzo
      */
     public void setHome(String home) {
         this.home = home;
     }
 
-    /**
+    /**Imposta l'id dell'utente
      * 
-     * @return
+     * @return l'id da impostare
      */
     public Long getId() {
         return id;
     }
 
-    /**
+    /**Imposta l'id
      * 
-     * @param id
+     * @param id l'id da impostare
      */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
+    /**Ritorna l'email
      * 
-     * @return
+     * @return l'email
      */
     public String getMail() {
         return mail;
     }
 
-    /**
+    /**Imposta l'email
      * 
-     * @param mail
+     * @param mail l'eamil
      */
     public void setMail(String mail) {
         this.mail = mail;
     }
 
     /**
-     * 
+     * @deprecated
      * @return
      */
     public boolean isNews() {
@@ -137,31 +137,31 @@ public class Utente implements Serializable {
     }
 
     /**
-     * 
+     * @deprecated 
      * @param news
      */
     public void setNews(boolean news) {
         this.news = news;
     }
 
-    /**
+    /**Ritorna la password dell'utente
      * 
-     * @return
+     * @return la password
      */
     public String getPassword() {
         return password;
     }
 
-    /**
+    /**Imposta la password
      * 
-     * @param password
+     * @param password la password
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
     /**
-     * 
+     * @deprecated 
      * @return
      */
     public List<Locale> getPreferiti() {
@@ -169,40 +169,40 @@ public class Utente implements Serializable {
     }
 
     /**
-     * 
+     * @deprecated 
      * @param preferiti
      */
     public void setPreferiti(List<Locale> preferiti) {
         this.preferiti = preferiti;
     }
 
-    /**
+    /**Ritorna lo username
      * 
-     * @return
+     * @return lo username
      */
     public String getUsername() {
         return username;
     }
 
-    /**
+    /**Imposta lo username
      * 
-     * @param username
+     * @param username lo username
      */
     public void setUsername(String username) {
         this.username = username;
     }
 
-    /**
+    /**Ritorna il tipo dell'utente
      * 
-     * @return
+     * @return 1 nostro, 2 facebook, 3 twitter, 4 google
      */
     public int getTipo() {
         return tipo;
     }
 
-    /**
+    /**Imposta il tipo dell'utente
      * 
-     * @param tipo
+     * @param tipo 1 nostro, 2 facebook, 3 twitter, 4 google
      */
     public void setTipo(int tipo) {
         this.tipo = tipo;
