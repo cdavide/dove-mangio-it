@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 
-/**
+/**Entity EJB che mantiene le informazioni relative al menù del giorno
  *
  * @author Bovio Lerenzo, Bronzino Francesco, Concas Davide
  */
@@ -35,79 +35,79 @@ public class Menu implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private  Date validita;
 
-    /**
+    /** costruttore vuoto della classe menù
      * 
      */
     public Menu() {
     }
     
-    /**
+    /** restituisce l'id del menù
      * 
-     * @return
+     * @return id del menù
      */
     public int getId() {
         return id;
     }
 
-    /**
+    /** set dell'id del menù
      * 
-     * @param id
+     * @param id l'id della news
      */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
+    /** restituisce l'id del locale
      * 
-     * @return
+     * @return id del locale
      */
     public int getIdLocale() {
         return idLocale;
     }
-
-    /**
+ 
+    /** set dell'id del locale
      * 
-     * @param idLocale
+     * @param idLocale l'id del locale
      */
     public void setIdLocale(int idLocale) {
         this.idLocale = idLocale;
     }
 
-    /**
+    /** restituisce un ArrayList contenente oggetti Piatto, il menù del giorno
      * 
-     * @return
+     * @return la lista di piatti
      */
     public List<Piatto> getListaPiatti() {
         return listaPiatti;
     }
 
-    /**
+    /** set della lista di piatti, deve essere un ArrayList
      * 
-     * @param listaPiatti
+     * @param listaPiatti la lista dei piatti del menù del giorno
      */
     public void setListaPiatti(List<Piatto> listaPiatti) {
         this.listaPiatti = listaPiatti;
     }
 
-    /**
+    /** restituise la data oltre la quale il menù non è più valido
      * 
-     * @return
+     * @return la data di validità
      */
     public Date getValidita() {
         return validita;
     }
 
-    /**
+    /** set della data di validità
      * 
-     * @param validita
+     * @param validita la data di validità
      */
     public void setValidita(Date validita) {
         this.validita = validita;
     }
 
-    /**
+    /** restituisce l'hashcode
      * 
-     * @return
+     * @return hashcode
      */
     @Override
     public int hashCode() {
@@ -116,10 +116,10 @@ public class Menu implements Serializable {
         return hash;
     }
 
-    /**
+    /** confronta due istanze di menù
      * 
-     * @param object
-     * @return
+     * @param object l'oggetto da confrontare
+     * @return true se uguali, false se diversi
      */
     @Override
     public boolean equals(Object object) {
@@ -134,9 +134,9 @@ public class Menu implements Serializable {
         return true;
     }
 
-    /**
+    /** descrizione testuale dell'oggetto
      * 
-     * @return
+     * @return una descrizione dell'oggetto menù
      */
     @Override
     public String toString() {

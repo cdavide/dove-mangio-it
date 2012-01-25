@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
-/**
+/** facade dell'oggetto valutazione
  *
  *@author Bovio Lorenzo Bronzino Francesco Concas Davide
  */
@@ -39,10 +39,10 @@ public class ValutazioneFacade extends AbstractFacade<Valutazione> implements Va
         super(Valutazione.class);
     }
     
-    /**
+    /** ricerca per id locale
      * 
-     * @param idLocale
-     * @return
+     * @param idLocale l'id del locale
+     * @return lista delle valutazione
      */
     @Override
     public List<Valutazione> findByLocale(long idLocale){
@@ -51,10 +51,10 @@ public class ValutazioneFacade extends AbstractFacade<Valutazione> implements Va
 	searchById.setParameter(1, idLocale);
         return searchById.getResultList();
     }
-    /**
+    /** ricerca per id utenti
      * 
-     * @param idUtente
-     * @return
+     * @param idUtente l'id dell'utente
+     * @return la lista delle valutazioni
      */
     @Override
     public List<Valutazione> findByUtente(long idUtente){
@@ -64,10 +64,10 @@ public class ValutazioneFacade extends AbstractFacade<Valutazione> implements Va
         return searchById.getResultList();
     }
     
-    /**
+    /** ricerca valutazione di un utente per un dato locale
      * 
-     * @param idLocale
-     * @param idUtente
+     * @param idLocale l'id del locale
+     * @param idUtente l'utente che ha valutato
      * @return
      */
     @Override
@@ -85,11 +85,11 @@ public class ValutazioneFacade extends AbstractFacade<Valutazione> implements Va
         return val;
     }
     
-    /**
+    /** restituisce la lista di valutazioni di una settimana dato un locale
      * 
-     * @param idLocale
-     * @param week
-     * @return
+     * @param idLocale l'id del locale
+     * @param week numero della settimana
+     * @return la lista delle valutazioni
      */
     @Override
     public List<Valutazione> findByLocaleWeek(long idLocale, int week){

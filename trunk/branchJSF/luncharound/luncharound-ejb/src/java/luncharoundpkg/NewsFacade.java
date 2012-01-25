@@ -11,7 +11,7 @@ import java.util.List;
 import javax.persistence.Query;
 import java.util.Date;
 
-/**
+/** facade dell'oggetto news
  *
  * @author lore0487
  */
@@ -20,7 +20,7 @@ public class NewsFacade extends AbstractFacade<News> implements NewsFacadeLocal 
     @PersistenceContext(unitName = "luncharound-ejbPU")
     private EntityManager em;
 
-    /**
+    /** 
      * 
      * @return
      */
@@ -35,7 +35,7 @@ public class NewsFacade extends AbstractFacade<News> implements NewsFacadeLocal 
         super(News.class);
     }
     
-    /**
+    /** @deprecated 
      * 
      */
     @Override
@@ -47,10 +47,10 @@ public class NewsFacade extends AbstractFacade<News> implements NewsFacadeLocal 
         deleteOldNews.executeUpdate();
     }
     
-    /**
+    /** restituisce tutte le news di un dato locale
      * 
-     * @param idLocale
-     * @return
+     * @param idLocale l'id del locale
+     * @return la lista di news del locale
      */
     @Override
     public List<News> findByLocale(int idLocale){
@@ -63,7 +63,7 @@ public class NewsFacade extends AbstractFacade<News> implements NewsFacadeLocal 
         return searchById.getResultList();
     }
     
-    /**
+    /** @deprecated 
      * 
      * @param idLocali
      * @return
@@ -79,9 +79,9 @@ public class NewsFacade extends AbstractFacade<News> implements NewsFacadeLocal 
         return searchById.getResultList();
     }
     
-    /**
+    /** restituisce una lista degli eventi nel sistema ordinati e più vicini nel tempo
      * 
-     * @return
+     * @return la lista di news
      */
     @Override
     public List<News> findNext(){

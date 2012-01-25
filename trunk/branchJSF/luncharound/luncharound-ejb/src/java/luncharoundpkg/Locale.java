@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-/**
+/**Entity EJB che descrive il locale
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -39,147 +39,147 @@ public class Locale implements Serializable {
     public Locale() {
     }
 
-    /**
+    /** get della descrizione del locale
      * 
-     * @return
+     * @return la descrizione del locale
      */
     public String getDescrizione() {
         return descrizione;
     }
 
-    /**
+    /** set della descrizione nel locale
      * 
-     * @param descrizione
+     * @param descrizione la descrizione del locale
      */
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
 
     
-    /**
+    /** set dell'id del proprietario del locale
      * 
-     * @param idUtente
+     * @param idUtente l'id dell'utente
      */
     public void setIdUtente(long idUtente){
         this.idUtente = idUtente;
     }
     
-    /**
+    /** get del proprietario del locale
      * 
-     * @return
+     * @return il proprietario del locale
      */
     public long getIdUtente(){
         return this.idUtente;
     }
     
     
-    /**
+    /** get dell'indirizzo
      * 
-     * @return
+     * @return l'indirizzo del locale
      */
     public String getIndirizzo() {
         return indirizzo;
     }
 
-    /**
+    /**set dell'indirizzo del locale
      * 
-     * @param indirizzo
+     * @param indirizzo l'indirizzo del locale
      */
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }
 
-    /**
+    /** det della latitudine del locale
      * 
-     * @return
+     * @return latitudine del locale
      */
     public double getLatitudine() {
         return latitudine;
     }
 
-    /**
+    /** se latitudine del locale
      * 
-     * @param latitudine
+     * @param latitudine la latitudine del locale
      */
     public void setLatitudine(double latitudine) {
         this.latitudine = latitudine;
     }
 
-    /**
+    /** get longitudine del locale
      * 
-     * @return
+     * @return longitudine del locale
      */
     public double getLongitudine() {
         return longitudine;
     }
 
-    /**
+    /** set longitudine del locale
      * 
-     * @param longitudine
+     * @param longitudine la longitudine del locale
      */
     public void setLongitudine(double longitudine) {
         this.longitudine = longitudine;
     }
 
-    /**
+    /** get del nome del locale
      * 
-     * @return
+     * @return il nome del locale
      */
     public String getNome() {
         return nome;
     }
 
-    /**
+    /** set del nome del locale
      * 
-     * @param nome
+     * @param nome il nome del locale
      */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    /**
+    /** get partita iva
      * 
-     * @return
+     * @return parita iva
      */
     public String getpIVA() {
         return pIVA;
     }
 
-    /**
+    /** set paritita iva
      * 
-     * @param pIVA
+     * @param pIVA la partita iva
      */
     public void setpIVA(String pIVA) {
         this.pIVA = pIVA;
     }
 
-    /**
+    /** il nome del proprietario del locale
      * 
-     * @return
+     * @return il nome del proprietario
      */
     public String getProprietario() {
         return proprietario;
     }
 
-    /**
+    /** set del nome del proprietario del locale
      * 
-     * @param proprietario
+     * @param proprietario il nome del propietario
      */
     public void setProprietario(String proprietario) {
         this.proprietario = proprietario;
     }
 
-    /**
+    /** get dell'id del locale
      * 
-     * @return
+     * @return id del locale
      */
     public int getId() {
         return id;
     }
 
-    /**
+    /** set dell'id del locale
      * 
-     * @param id
+     * @param id l'id del locale
      */
     public void setId(int id) {
         this.id = id;
@@ -196,10 +196,10 @@ public class Locale implements Serializable {
         return hash;
     }
 
-    /**
+    /** confronta due oggetti di tipo locale
      * 
-     * @param object
-     * @return
+     * @param object l'oggetto da confrontare
+     * @return true se uguali, false se diversi
      */
     @Override
     public boolean equals(Object object) {
@@ -214,9 +214,9 @@ public class Locale implements Serializable {
         return true;
     }
 
-    /**
+    /** Restituisce una descrizione del locale sottoforma di stringa
      * 
-     * @return
+     * @return la stringa con informzioni sul locale
      */
     @Override
     public String toString() {

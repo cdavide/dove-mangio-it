@@ -32,7 +32,7 @@ import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
 
-/**
+/** Managed Bean per ottenere i risultati della ricerca in base a distanza
  *
  * @author Bovio Lorenzo, Bronzino Francesco e Concas Davide
  */
@@ -68,7 +68,7 @@ public class RicercaBean{
         
     }
     
-    /**
+    /** postcostruttore
      * 
      */
     @PostConstruct
@@ -94,7 +94,7 @@ public class RicercaBean{
         
     }
     
-    /**
+    /** metodo per visualizzare i risultati
      * 
      */
     public void submit(){
@@ -104,7 +104,7 @@ public class RicercaBean{
         noSearch=false;
     }
   
-    /**
+    /** metodo per riempire le variabili del bean con  dati dei locali ricercati
      * 
      */
     public void create_results(){
@@ -172,7 +172,7 @@ public class RicercaBean{
     }
         
     
-    /**
+    /** metodo per impostare lo zoom della mappa
      * 
      */
     public void set_zoom(){
@@ -204,7 +204,7 @@ public class RicercaBean{
     
     }
 
-    /**
+    /** metodo per redirigere alla pagina del locale
      * 
      * @return
      */
@@ -224,7 +224,7 @@ public class RicercaBean{
         
     }
     
-    /**
+    /**@deprecated 
      * 
      * @return
      */
@@ -233,8 +233,8 @@ public class RicercaBean{
         return "visualizzaLocale";
     } 
     
-    //metodo per nuvoletta sulla mappa
-    /**
+    //
+    /** metodo per nuvoletta sulla mappa
      * 
      * @param event
      */
@@ -243,16 +243,16 @@ public class RicercaBean{
         marker = (Marker) event.getOverlay();  
     } 
       
-    /**
+    /** restitisce il marker cliccato
      * 
-     * @return
+     * @return il marker cliccato
      */
     public Marker getMarker() {  
         return marker;  
     }
    
     
-    /**
+    /** salva la località ricercata
      * 
      */
     public void save_location(){

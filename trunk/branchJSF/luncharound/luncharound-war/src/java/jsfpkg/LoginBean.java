@@ -18,7 +18,7 @@ import luncharoundpkg.Locale;
 import luncharoundpkg.Utente;
 import org.primefaces.context.RequestContext;
 
-/**
+/** Managed Bean che gestisce il login
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -43,7 +43,7 @@ public class LoginBean {
     //serve per il menu laterale
 
     // empty constructor
-    /**
+    /** costruttore della classe
      * 
      */
     public LoginBean() {
@@ -68,9 +68,9 @@ public class LoginBean {
         System.err.println("Inizializzazione bean [LoginBean.java]");
     }
 
-    /**
+    /** effettua il login dell'utente
      * 
-     * @return
+     * @return la stringa "home"
      */
     public String login() {
         RequestContext context = RequestContext.getCurrentInstance();
@@ -130,9 +130,9 @@ public class LoginBean {
     }
     
 
-    /**
+    /** metodo per registrare i dati dell'utente
      * 
-     * @param actionEvent
+     * @param actionEvent l'evento che genera la chiamata
      */
     public void register(ActionEvent actionEvent) {
         RequestContext context = RequestContext.getCurrentInstance();
@@ -149,8 +149,8 @@ public class LoginBean {
         }
     }
 
-    //metodo per controllare se è stato tentato un login
-    /**
+    //
+    /** metodo per controllare se è stato tentato un login
      * 
      */
     public void checkLogin() {
@@ -208,12 +208,12 @@ public class LoginBean {
 
     }
 
-    /* Metodo per invalidare la sessione utente
+    /* 
      * 
      */
-    /**
+    /** Metodo per invalidare la sessione utente
      * 
-     * @return
+     * @return la stringa "home"
      */
     public String logout() {
         System.out.println("[Login Bean ] logout");
@@ -249,15 +249,15 @@ public class LoginBean {
         return "home";
     }
 
-    /**
+    /** metodo per ritornare alla home
      * 
-     * @return
+     * @return stringa "home"
      */
     public String doNavigation() {
         return "home";
     }
 
-    /**
+    /** metodo per il login da twitter
      * 
      */
     public void twitLogin() {
@@ -281,9 +281,9 @@ public class LoginBean {
 
     
     
-    /**
+    /** metodo per visualizzare il mio locale
      * 
-     * @return
+     * @return la stringa "visualizzalocale"
      */
     public   String visualizzaMioLocale(){
          HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();

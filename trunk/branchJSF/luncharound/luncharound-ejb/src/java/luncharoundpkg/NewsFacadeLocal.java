@@ -7,7 +7,7 @@ package luncharoundpkg;
 import java.util.List;
 import javax.ejb.Local;
 
-/**
+/** facade local di news
  *
  * @author lore0487
  */
@@ -58,28 +58,28 @@ public interface NewsFacadeLocal {
      */
     int count();
     
-    /**
+    /** @deprecated 
      * 
      */
     public void deleteOld();
     
-    /**
+    /** restituisce una lista di news appartenenti ad un locale
      * 
-     * @param idLocale
-     * @return
+     * @param idLocale l'id del locale
+     * @return la lista di news
      */
     public List<News> findByLocale(int idLocale);
     
-    /**
+    /** @deprecated 
      * 
      * @param idLocali
      * @return
      */
     public List<News> findByLocali(List<Integer> idLocali);
     
-    /**
+    /**restituisce una lista con eventi del sistema ordinati e più vicini nel tempo 
      * 
-     * @return
+     * @return la lista di news
      */
     public List<News> findNext();
     

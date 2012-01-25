@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
+/** Entity EJB che descrive la singola pietanza
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -36,40 +36,40 @@ public class Piatto implements Serializable {
     private boolean alcolico;
     private int idLocale; 
     
-    /**
+    /** Costruttore vuoto
      * 
      */
     public Piatto() {
     }
 
-    /**
+    /** set dell'id del locale di appartenza
      * 
-     * @param idLocale
+     * @param idLocale l'id del locale
      */
     public void setIdLocale(int idLocale) {
         this.idLocale = idLocale;
     }
 
     
-    /**
+    /** restutisce l'id del piatto
      * 
-     * @return
+     * @return id del piatto
      */
     public Long getId() {
         return id;
     }
 
-    /**
+    /** set dell'id del locale
      * 
-     * @param id
+     * @param id l'id del locale
      */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
+    /** restituisce l'hashcode
      * 
-     * @return
+     * @return hashcode
      */
     @Override
     public int hashCode() {
@@ -77,11 +77,11 @@ public class Piatto implements Serializable {
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
-
-    /**
+ 
+    /** confronta oggetti di tipo Piatto
      * 
-     * @param object
-     * @return
+     * @param object il piatto da confrontare
+     * @return true se uguali, false se diversi
      */
     @Override
     public boolean equals(Object object) {
@@ -96,24 +96,24 @@ public class Piatto implements Serializable {
         return true;
     }
 
-    /**
+    /** la descrizione del piatto in forma testuale
      * 
-     * @return
+     * @return stringa contenente la descrizione del piatto
      */
     @Override
     public String toString() {
         return "luncharoundpkg.Piatto[ id=" + id + " ]";
     }
 
-    /**
+    /** restituisce la categoria del piatto
      * 
-     * @return
+     * @return la categoria 
      */
     public Categoria getCategoria() {
         return categoria;
     }
 
-    /**
+    /** set della categoria
      * 
      * @param categoria
      */
@@ -121,23 +121,23 @@ public class Piatto implements Serializable {
         this.categoria = categoria;
     }
 
-    /**
+    /** indica se il piatto è attualmente esposto 
      * 
-     * @return
+     * @return true se piatto corrente, false se non utilizzato
      */
     public boolean isCorrente() {
         return corrente;
     }
 
-    /**
+    /** set se il piatto è attualmente esposto oppure no 
      * 
-     * @param corrente
+     * @param corrente booleano che indica se espososto
      */
     public void setCorrente(boolean corrente) {
         this.corrente = corrente;
     }
 
-    /**
+    /**@deprecated 
      * 
      * @return
      */
@@ -145,7 +145,7 @@ public class Piatto implements Serializable {
         return alcolico;
     }
 
-    /**
+    /**@deprecated 
      * 
      * @param alcolico
      */
@@ -153,81 +153,81 @@ public class Piatto implements Serializable {
         this.alcolico = alcolico;
     }
 
-    /**
+    /** se il piatto contiene carne
      * 
-     * @return
+     * @return se contiene carne
      */
     public boolean isCarne() {
         return carne;
     }
 
-    /**
+    /** imposta se il piatto contiene
      * 
-     * @param carne
+     * @param carne se contiene carne
      */
     public void setCarne(boolean carne) {
         this.carne = carne;
     }
 
-    /**
+    /** se il piatto è adatto per celiaci
      * 
-     * @return
+     * @return se adatto a celiai
      */
     public boolean isCeliaco() {
         return celiaco;
     }
 
-    /**
+    /** imposta se adatto  celiaci
      * 
-     * @param celiaco
+     * @param celiaco se adatto a celiaci
      */
     public void setCeliaco(boolean celiaco) {
         this.celiaco = celiaco;
     }
 
-    /**
+    /** se contiene pesce
      * 
-     * @return
+     * @return se contiene pesce
      */
     public boolean isPesce() {
         return pesce;
     }
 
-    /**
+    /** imposta se contiene pesce
      * 
-     * @param pesce
+     * @param pesce se contiene pesce
      */
     public void setPesce(boolean pesce) {
         this.pesce = pesce;
     }
 
-    /**
+    /** se adatto a vegani
      * 
-     * @return
+     * @return se adatto a vegani
      */
     public boolean isVegano() {
         return vegano;
     }
 
-    /**
+    /** set se adatto a vegani
      * 
-     * @param vegano
+     * @param vegano se adatto a vegani
      */
     public void setVegano(boolean vegano) {
         this.vegano = vegano;
     }
 
-    /**
+    /** se adatto a vegetariani
      * 
-     * @return
+     * @return se adatto a vegetariani
      */
     public boolean isVegetariano() {
         return vegetariano;
     }
 
-    /**
+    /** set se adatto a vegetariani
      * 
-     * @param vegetariano
+     * @param vegetariano se adatto a vegani
      */
     public void setVegetariano(boolean vegetariano) {
         this.vegetariano = vegetariano;
@@ -235,33 +235,33 @@ public class Piatto implements Serializable {
 
 
 
-    /**
+    /** restituisce il nome
      * 
-     * @return
+     * @return il nome del piatto
      */
     public String getNome() {
         return nome;
     }
 
-    /**
+    /** set del nome del piatto
      * 
-     * @param nome
+     * @param nome il nome del piatto
      */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    /**
+    /** get del prezzo
      * 
-     * @return
+     * @return il prezzo del piatto
      */
     public float getPrezzo() {
         return prezzo;
     }
 
-    /**
+    /** set prezzo del piatto
      * 
-     * @param prezzo
+     * @param prezzo del piatto
      */
     public void setPrezzo(float prezzo) {
         this.prezzo = prezzo;
