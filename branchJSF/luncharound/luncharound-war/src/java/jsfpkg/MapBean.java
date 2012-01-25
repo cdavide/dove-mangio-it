@@ -26,9 +26,9 @@ import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
-/**
+/**Managed Bean che crea una mappa per la homepage
  * 
- * @author dave
+ * 
  */
 @ManagedBean(name="mapBean")
 @RequestScoped
@@ -41,14 +41,13 @@ public class MapBean implements Serializable {
     double centerLong;
 
     /*Costruttore vuoto*/
-    /**
+    /** costruttore vuoto
      * 
      */
     public MapBean() {
     }
     
-    /*Post costruttore chiamato dopo l'injection delle dipendenze sul backend*/
-    /**
+    /** Post costruttore chiamato dopo l'injection delle dipendenze sul backend
      * 
      */
     @PostConstruct

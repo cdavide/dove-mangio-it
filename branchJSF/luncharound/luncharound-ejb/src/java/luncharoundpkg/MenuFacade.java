@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
+/** facade dell' oggetto menù
  *
  * @author lore0487
  */
@@ -35,10 +35,10 @@ public class MenuFacade extends AbstractFacade<Menu> implements MenuFacadeLocal 
         super(Menu.class);
     }
 
-    /**
+    /** restituisce il menù relativo al locale il cui id è passato come parametro
      * 
-     * @param idLocale
-     * @return
+     * @param idLocale l'id del locale 
+     * @return il menù del locale
      */
     @Override
     public Menu findByLocale(int idLocale) {

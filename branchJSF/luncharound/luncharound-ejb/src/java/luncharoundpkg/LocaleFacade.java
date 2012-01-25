@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
+/** facade dell'oggetto locale
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -35,10 +35,10 @@ public class LocaleFacade extends AbstractFacade<Locale> implements LocaleFacade
         super(Locale.class);
     }
 
-    /**
+    /** dato un id utente restituisce il locale posseduto dall'utente
      * 
-     * @param idUtente
-     * @return
+     * @param idUtente l'id del proprietario del locale
+     * @return il locale posseduto dall'utente
      */
     @Override
     public Locale findByUtente(long idUtente ){

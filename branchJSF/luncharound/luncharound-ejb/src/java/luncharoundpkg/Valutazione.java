@@ -14,7 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
+/** Entity EJB che mantiene le valutazioni di un locale
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -35,192 +35,192 @@ public class Valutazione implements Serializable {
     private int cortesia;
     private int descrizione;
 
-    /**
+    /**costruttore vuoto
      * 
      */
     public Valutazione() {
     }
 
-    /**
+    /** restituisce la valutazione su  affollamento
      * 
-     * @return
+     * @return la valutazione su affollamento
      */
     public int getAffollamento() {
         return affollamento;
     }
 
-    /**
+    /** set della valutazione su affolamento 
      * 
-     * @param affollamento
+     * @param affollamento la valutazione su affollamento
      */
     public void setAffollamento(int affollamento) {
         this.affollamento = affollamento;
     }
 
-    /**
+    /** get della valutazione su cortesia
      * 
-     * @return
+     * @return la valutazione su cortesia
      */
     public int getCortesia() {
         return cortesia;
     }
 
-    /**
+    /** set della valutazione su cortesia
      * 
-     * @param cortesia
+     * @param cortesia la valutazione su cortesia
      */
     public void setCortesia(int cortesia) {
         this.cortesia = cortesia;
     }
 
-    /**
+    /** get della data di valutazione
      * 
-     * @return
+     * @return data di valutazione 
      */
     public Date getDataVal() {
         return dataVal;
     }
 
-    /**
+    /** set della data di valutazione
      * 
-     * @param dataVal
+     * @param dataVal la data di valutazione
      */
     public void setDataVal(Date dataVal) {
         this.dataVal = dataVal;
     }
 
-    /**
+    /** get della descrizione
      * 
-     * @return
+     * @return la descizione
      */
     public int getDescrizione() {
         return descrizione;
     }
 
-    /**
+    /** set della descrizione
      * 
-     * @param descrizione
+     * @param descrizione la descrizione del locale
      */
     public void setDescrizione(int descrizione) {
         this.descrizione = descrizione;
     }
 
-    /**
+    /** get id della valutazione 
      * 
-     * @return
+     * @return id della valutazione
      */
     public Long getId() {
         return id;
     }
 
-    /**
+    /** set id della valutazione
      * 
-     * @param id
+     * @param id della valutazione
      */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
+    /** get dell'id del locale
      * 
-     * @return
+     * @return id del locale
      */
     public int getIdLocale() {
         return idLocale;
     }
 
-    /**
+    /** set dell'id locale
      * 
-     * @param idLocale
+     * @param idLocale l'id del locale
      */
     public void setIdLocale(int idLocale) {
         this.idLocale = idLocale;
     }
 
-    /**
+    /** get dell'id dell'utente
      * 
-     * @return
+     * @return l'id dell'utente
      */
     public Long getIdUtente() {
         return idUtente;
     }
 
-    /**
+    /** set id dell'utente
      * 
-     * @param idUtente
+     * @param idUtente id dell'utente
      */
     public void setIdUtente(Long idUtente) {
         this.idUtente = idUtente;
     }
 
-    /**
+    /** get della valutazione su pulizia
      * 
-     * @return
+     * @return la valutazione su pulizia
      */
     public int getPulizia() {
         return pulizia;
     }
 
-    /**
+    /** set della valutazione su pulizia
      * 
-     * @param pulizia
+     * @param cortesia la valutazione su pulizia
      */
     public void setPulizia(int pulizia) {
         this.pulizia = pulizia;
     }
 
-    /**
+/** get della valutazione su qualità
      * 
-     * @return
+     * @return la valutazione su qualità
      */
     public int getQualita() {
         return qualita;
     }
 
-    /**
+/** set della valutazione su pulizia
      * 
-     * @param qualita
+     * @param cortesia la valutazione su pulizia
      */
     public void setQualita(int qualita) {
         this.qualita = qualita;
     }
 
-    /**
+/** get della valutazione su quantità
      * 
-     * @return
+     * @return la valutazione su quantità
      */
     public int getQuantita() {
         return quantita;
     }
 
-    /**
+/** set della valutazione su quantità
      * 
-     * @param quantita
+     * @param cortesia la valutazione su quantità
      */
     public void setQuantita(int quantita) {
         this.quantita = quantita;
     }
 
-    /**
+/** get della valutazione su velocità
      * 
-     * @return
+     * @return la valutazione su velocità
      */
     public int getVelocita() {
         return velocita;
     }
 
-    /**
+/** set della valutazione su velocità
      * 
-     * @param velocita
+     * @param cortesia la valutazione su velocità
      */
     public void setVelocita(int velocita) {
         this.velocita = velocita;
     }
 
 
-    /**
+    /** get dell'hashcode
      * 
-     * @return
+     * @return hashcode
      */
     @Override
     public int hashCode() {
@@ -229,10 +229,10 @@ public class Valutazione implements Serializable {
         return hash;
     }
 
-    /**
+    /** confronto tra oggetti
      * 
-     * @param object
-     * @return
+     * @param object l'oggetto da confrontare
+     * @return true se uguale, false se diversi
      */
     @Override
     public boolean equals(Object object) {
@@ -247,9 +247,9 @@ public class Valutazione implements Serializable {
         return true;
     }
 
-    /**
+    /** descrizione testuale della valutazione
      * 
-     * @return
+     * @return stringa di descrizione
      */
     @Override
     public String toString() {

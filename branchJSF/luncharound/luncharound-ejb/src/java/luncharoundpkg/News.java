@@ -14,7 +14,8 @@ import java.util.GregorianCalendar;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
+/** Entity EBJ che descrive le news del locale, quindi notizie con 
+ *  interesse duratura nel tempo
  *
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
@@ -29,104 +30,104 @@ public class News implements Serializable {
     private String descr;
     private String titolo;
 
-    /**
+    /** costruttore vuoto della classe News
      * 
      */
     public News() {
     }
 
-    /**
+    /** restituisce il titolo della news
      * 
-     * @return
+     * @return il titolo della news
      */
     public String getTitolo() {
         return titolo;
     }
 
-    /**
+    /** set del titolo della news
      * 
-     * @param titolo
+     * @param titolo il titolo della news
      */
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
 
-    /**
+    /** restitisce il giorno in cui è stata resa nota la news 
      * 
-     * @return
+     * @return data di inizio della news
      */
     public Date getDataInizio() {
         return dataInizio;
     }
     
-    /**
+    /** restituisce una stringa formatta DD-MM-YY con la data di inizio della news
      * 
-     * @return
+     * @return la stringa contenete la data di inizio
      */
     public String getDataInizioShort() {
         String temp = dataInizio.toString();
         return temp.substring(0, 10);
     }
 
-    /**
+    /** set della data di inizio della news
      * 
-     * @param dataInizio
+     * @param dataInizio la data di inizio validità della news
      */
     public void setDataInizio(Date dataInizio) {
         this.dataInizio = dataInizio;
     }
 
-    /**
+    /** restituisce la descrizione testuale della news
      * 
-     * @return
+     * @return la descrizione della news
      */
     public String getDescr() {
         return descr;
     }
 
-    /**
+    /** set della descrizione della news
      * 
-     * @param descr
+     * @param descr la descrizione della news
      */
     public void setDescr(String descr) {
         this.descr = descr;
     }
 
-    /**
+    /** restituisce l'id del locale a cui la news appartiene
      * 
-     * @return
+     * @return l'ide del locale di appartenenza
      */
     public int getIdLocale() {
         return idLocale;
     }
 
-    /**
+    /** set dell'id del locale di appartenenza
      * 
-     * @param idLocale
+     * @param idLocale l'id del locale
      */
     public void setIdLocale(int idLocale) {
         this.idLocale = idLocale;
     }
     
-    /**
+    /** restutisce l'id della news
      * 
-     * @return
+     * @return l'id del locale
      */
     public Long getId() {
         return id;
     }
 
-    /**
+    /** set dell'id del locale
      * 
-     * @param id
+     * @param id l'id della news
      */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
+    /** restituisce l'hashcode
      * 
-     * @return
+     * @return hashcode della news
      */
     @Override
     public int hashCode() {
@@ -135,10 +136,10 @@ public class News implements Serializable {
         return hash;
     }
 
-    /**
+    /**confronta due oggetti di tipo news
      * 
-     * @param object
-     * @return
+     * @param object l'oggetto da confrontare
+     * @return true se l'oggetto è uguale, false se l'oggetto è diverso
      */
     @Override
     public boolean equals(Object object) {
@@ -153,9 +154,9 @@ public class News implements Serializable {
         return true;
     }
 
-    /**
+    /** descrizione testuale della news
      * 
-     * @return
+     * @return la descrizione dell'oggetto news
      */
     @Override
     public String toString() {

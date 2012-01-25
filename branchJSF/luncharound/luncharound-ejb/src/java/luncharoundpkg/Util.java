@@ -12,13 +12,14 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.BeanUtils;
 
-/**
+/** classe inutilizzata 
+ * @deprecated 
  *
  * @author Bovio Lorenzo, Bronzino Francesco e Concas Davide
  */
 public class Util {
     
-    /**
+    /** @deprecated 
      * 
      * @param req
      * @param o
