@@ -47,19 +47,46 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class DirectMessageType {
 
+    /**
+     * 
+     */
     protected String id;
+    /**
+     * 
+     */
     protected String text;
+    /**
+     * 
+     */
     @XmlElement(name = "sender_id")
     protected String senderId;
+    /**
+     * 
+     */
     @XmlElement(name = "recipient_id")
     protected String recipientId;
+    /**
+     * 
+     */
     @XmlElement(name = "created_at")
     protected String createdAt;
+    /**
+     * 
+     */
     @XmlElement(name = "sender_screen_name")
     protected String senderScreenName;
+    /**
+     * 
+     */
     @XmlElement(name = "recipient_screen_name")
     protected String recipientScreenName;
+    /**
+     * 
+     */
     protected UserType sender;
+    /**
+     * 
+     */
     protected UserType recipient;
 
     /**

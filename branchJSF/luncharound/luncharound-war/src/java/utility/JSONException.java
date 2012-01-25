@@ -17,11 +17,19 @@ public class JSONException extends Exception {
         super(message);
     }
 
+    /**
+     * 
+     * @param cause
+     */
     public JSONException(Throwable cause) {
         super(cause.getMessage());
         this.cause = cause;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Throwable getCause() {
         return this.cause;
     }

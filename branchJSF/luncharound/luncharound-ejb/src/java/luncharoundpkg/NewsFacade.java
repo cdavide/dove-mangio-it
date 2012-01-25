@@ -20,14 +20,24 @@ public class NewsFacade extends AbstractFacade<News> implements NewsFacadeLocal 
     @PersistenceContext(unitName = "luncharound-ejbPU")
     private EntityManager em;
 
+    /**
+     * 
+     * @return
+     */
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     * 
+     */
     public NewsFacade() {
         super(News.class);
     }
     
+    /**
+     * 
+     */
     @Override
     public void deleteOld(){
         Date oggi = new Date();
@@ -37,6 +47,11 @@ public class NewsFacade extends AbstractFacade<News> implements NewsFacadeLocal 
         deleteOldNews.executeUpdate();
     }
     
+    /**
+     * 
+     * @param idLocale
+     * @return
+     */
     @Override
     public List<News> findByLocale(int idLocale){
         //deleteOld();
@@ -48,6 +63,11 @@ public class NewsFacade extends AbstractFacade<News> implements NewsFacadeLocal 
         return searchById.getResultList();
     }
     
+    /**
+     * 
+     * @param idLocali
+     * @return
+     */
     @Override
     public List<News> findByLocali(List<Integer> idLocali){
         //deleteOld();
@@ -59,6 +79,10 @@ public class NewsFacade extends AbstractFacade<News> implements NewsFacadeLocal 
         return searchById.getResultList();
     }
     
+    /**
+     * 
+     * @return
+     */
     @Override
     public List<News> findNext(){
         //deleteOld();

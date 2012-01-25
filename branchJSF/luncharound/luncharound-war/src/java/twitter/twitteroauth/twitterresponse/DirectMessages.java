@@ -45,8 +45,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "direct-messages")
 public class DirectMessages {
 
+    /**
+     * 
+     */
     @XmlElement(name = "direct_message")
     protected List<DirectMessageType> directMessage;
+    /**
+     * 
+     */
     @XmlAttribute(name = "type")
     protected String type;
 
@@ -71,6 +77,7 @@ public class DirectMessages {
      * {@link DirectMessageType }
      * 
      * 
+     * @return 
      */
     public List<DirectMessageType> getDirectMessage() {
         if (directMessage == null) {

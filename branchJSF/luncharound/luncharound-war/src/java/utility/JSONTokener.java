@@ -68,6 +68,8 @@ public class JSONTokener {
     
     /**
      * Construct a JSONTokener from an InputStream.
+     * @param inputStream 
+     * @throws JSONException 
      */
     public JSONTokener(InputStream inputStream) throws JSONException {
         this(new InputStreamReader(inputStream));    	
@@ -88,6 +90,7 @@ public class JSONTokener {
      * Back up one character. This provides a sort of lookahead capability,
      * so that you can test for a digit or letter before attempting to parse
      * the next number or identifier.
+     * @throws JSONException 
      */
     public void back() throws JSONException {
         if (usePrevious || index <= 0) {
@@ -119,6 +122,10 @@ public class JSONTokener {
         return -1;
     }
     
+    /**
+     * 
+     * @return
+     */
     public boolean end() {
     	return eof && !usePrevious;    	
     }
@@ -128,6 +135,7 @@ public class JSONTokener {
      * Determine if the source string still contains characters that next()
      * can consume.
      * @return true if not yet at the end of the source.
+     * @throws JSONException  
      */
     public boolean more() throws JSONException {
         next();
@@ -143,6 +151,7 @@ public class JSONTokener {
      * Get the next character in the source string.
      *
      * @return The next character, or 0 if past the end of the source string.
+     * @throws JSONException  
      */
     public char next() throws JSONException {
         int c;
@@ -303,6 +312,7 @@ public class JSONTokener {
      * end of line, whichever comes first.
      * @param  delimiter A delimiter character.
      * @return   A string.
+     * @throws JSONException  
      */
     public String nextTo(char delimiter) throws JSONException {
         StringBuffer sb = new StringBuffer();
@@ -324,6 +334,7 @@ public class JSONTokener {
      * characters or the end of line, whichever comes first.
      * @param delimiters A set of delimiter characters.
      * @return A string, trimmed.
+     * @throws JSONException  
      */
     public String nextTo(String delimiters) throws JSONException {
         char c;
@@ -395,6 +406,7 @@ public class JSONTokener {
      * @param to A character to skip to.
      * @return The requested character, or zero if the requested character
      * is not found.
+     * @throws JSONException  
      */
     public char skipTo(char to) throws JSONException {
         char c;

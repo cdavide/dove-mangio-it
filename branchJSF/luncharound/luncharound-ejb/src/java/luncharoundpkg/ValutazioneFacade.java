@@ -23,15 +23,27 @@ public class ValutazioneFacade extends AbstractFacade<Valutazione> implements Va
     @PersistenceContext(unitName = "luncharound-ejbPU")
     private EntityManager em;
 
+    /**
+     * 
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     * 
+     */
     public ValutazioneFacade() {
         super(Valutazione.class);
     }
     
+    /**
+     * 
+     * @param idLocale
+     * @return
+     */
     @Override
     public List<Valutazione> findByLocale(long idLocale){
         String selectQuery = "SELECT A FROM Valutazione A WHERE A.idLocale = ?1";
@@ -39,6 +51,11 @@ public class ValutazioneFacade extends AbstractFacade<Valutazione> implements Va
 	searchById.setParameter(1, idLocale);
         return searchById.getResultList();
     }
+    /**
+     * 
+     * @param idUtente
+     * @return
+     */
     @Override
     public List<Valutazione> findByUtente(long idUtente){
         String selectQuery = "SELECT V FROM Valutazione V WHERE V.idUtente = ?1";
@@ -47,6 +64,12 @@ public class ValutazioneFacade extends AbstractFacade<Valutazione> implements Va
         return searchById.getResultList();
     }
     
+    /**
+     * 
+     * @param idLocale
+     * @param idUtente
+     * @return
+     */
     @Override
     public Valutazione findValutazioneLocFromUtente(long idLocale, long idUtente){
         Valutazione val;
@@ -62,7 +85,13 @@ public class ValutazioneFacade extends AbstractFacade<Valutazione> implements Va
         return val;
     }
     
-     @Override
+    /**
+     * 
+     * @param idLocale
+     * @param week
+     * @return
+     */
+    @Override
     public List<Valutazione> findByLocaleWeek(long idLocale, int week){
         List<Valutazione> val;
         String selectQuery = "SELECT V FROM Valutazione V WHERE (V.idLocale = ?1) AND V.dataVal  BETWEEN ?2 AND ?3";

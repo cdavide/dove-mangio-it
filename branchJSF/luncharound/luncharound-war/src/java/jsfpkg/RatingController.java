@@ -25,6 +25,10 @@ import luncharoundpkg.ControlloreLocaleLocal;
 import luncharoundpkg.ControlloreValutazioneLocal;
 import luncharoundpkg.Valutazione;
 
+/**
+ * 
+ * @author dave
+ */
 @ManagedBean(name = "ratingController")
 @ViewScoped
 public class RatingController {
@@ -51,6 +55,9 @@ public class RatingController {
 
     /* Empty constructor
      */
+    /**
+     * 
+     */
     public RatingController() {
         // inizializzo le variabili
         media = new Valutazione();
@@ -72,6 +79,9 @@ public class RatingController {
 
     /* Questo metodo inizializza tutte le variabili con le medie di tutti e 
      * la votazione di un particolare utente
+     */
+    /**
+     * 
      */
     @PostConstruct
     public void init() {
@@ -117,6 +127,10 @@ public class RatingController {
 
     /* Questo metodo deve sottomettere la votazione e ricaricare le medie.
      */
+    /**
+     * 
+     * @return
+     */
     public String submitRating() {
         if (userRate == null) {
             System.err.println("Nullo!!!");
@@ -139,130 +153,258 @@ public class RatingController {
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getter  and Setter">
+    /**
+     * 
+     * @return
+     */
     public int getIdLocale() {
         return idLocale;
     }
 
+    /**
+     * 
+     * @param idLocale
+     */
     public void setIdLocale(int idLocale) {
         this.idLocale = idLocale;
     }
 
+    /**
+     * 
+     * @return
+     */
     public long getIdUtente() {
         return idUtente;
     }
 
+    /**
+     * 
+     * @param idUtente
+     */
     public void setIdUtente(long idUtente) {
         this.idUtente = idUtente;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Valutazione getMedia() {
         return media;
     }
 
+    /**
+     * 
+     * @param media
+     */
     public void setMedia(Valutazione media) {
         this.media = media;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Valutazione getUserRate() {
         return userRate;
     }
 
+    /**
+     * 
+     * @param userRate
+     */
     public void setUserRate(Valutazione userRate) {
         this.userRate = userRate;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getAffollamento() {
         return affollamento;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getAff() {
         return aff;
     }
 
+    /**
+     * 
+     * @param aff
+     */
     public void setAff(double aff) {
         this.aff = aff;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getCort() {
         return cort;
     }
 
+    /**
+     * 
+     * @param cort
+     */
     public void setCort(double cort) {
         this.cort = cort;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getPul() {
         return pul;
     }
 
+    /**
+     * 
+     * @param pul
+     */
     public void setPul(double pul) {
         this.pul = pul;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getQual() {
         return qual;
     }
 
+    /**
+     * 
+     * @param qual
+     */
     public void setQual(double qual) {
         this.qual = qual;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getQuan() {
         return quan;
     }
 
+    /**
+     * 
+     * @param quan
+     */
     public void setQuan(double quan) {
         this.quan = quan;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getVel() {
         return vel;
     }
 
+    /**
+     * 
+     * @param vel
+     */
     public void setVel(double vel) {
         this.vel = vel;
     }
 
+    /**
+     * 
+     * @param affollamento
+     */
     public void setAffollamento(double affollamento) {
         this.affollamento = affollamento;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getCortesia() {
         return cortesia;
     }
 
+    /**
+     * 
+     * @param cortesia
+     */
     public void setCortesia(double cortesia) {
         this.cortesia = cortesia;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getPulizia() {
         return pulizia;
     }
 
+    /**
+     * 
+     * @param pulizia
+     */
     public void setPulizia(double pulizia) {
         this.pulizia = pulizia;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getQualita() {
         return qualita;
     }
 
+    /**
+     * 
+     * @param qualita
+     */
     public void setQualita(double qualita) {
         this.qualita = qualita;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getQuantita() {
         return quantita;
     }
 
+    /**
+     * 
+     * @param quantita
+     */
     public void setQuantita(double quantita) {
         this.quantita = quantita;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getVelocita() {
         return velocita;
     }
 
+    /**
+     * 
+     * @param velocita
+     */
     public void setVelocita(double velocita) {
         this.velocita = velocita;
     }

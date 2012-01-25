@@ -29,54 +29,105 @@ public class News implements Serializable {
     private String descr;
     private String titolo;
 
+    /**
+     * 
+     */
     public News() {
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getTitolo() {
         return titolo;
     }
 
+    /**
+     * 
+     * @param titolo
+     */
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Date getDataInizio() {
         return dataInizio;
     }
     
+    /**
+     * 
+     * @return
+     */
     public String getDataInizioShort() {
         String temp = dataInizio.toString();
         return temp.substring(0, 10);
     }
 
+    /**
+     * 
+     * @param dataInizio
+     */
     public void setDataInizio(Date dataInizio) {
         this.dataInizio = dataInizio;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getDescr() {
         return descr;
     }
 
+    /**
+     * 
+     * @param descr
+     */
     public void setDescr(String descr) {
         this.descr = descr;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getIdLocale() {
         return idLocale;
     }
 
+    /**
+     * 
+     * @param idLocale
+     */
     public void setIdLocale(int idLocale) {
         this.idLocale = idLocale;
     }
     
+    /**
+     * 
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -84,6 +135,11 @@ public class News implements Serializable {
         return hash;
     }
 
+    /**
+     * 
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -97,6 +153,10 @@ public class News implements Serializable {
         return true;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public String toString() {
         return "luncharoundpkg.News[ id=" + id + " ]";

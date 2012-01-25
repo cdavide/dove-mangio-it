@@ -163,6 +163,7 @@ public class JSONArray {
     
     /**
      * Construct a JSONArray from an array
+     * @param array 
      * @throws JSONException If not an array.
      */
     public JSONArray(Object array) throws JSONException {
@@ -886,6 +887,7 @@ public class JSONArray {
      * <p>
      * Warning: This method assumes that the data structure is acyclical.
      *
+     * @param writer 
      * @return The writer.
      * @throws JSONException
      */

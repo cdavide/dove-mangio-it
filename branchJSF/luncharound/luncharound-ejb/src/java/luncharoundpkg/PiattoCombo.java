@@ -25,41 +25,80 @@ public class PiattoCombo implements Serializable {
     private int idLocale;
     //Bisogna aggiungere un campo flag???
 
+    /**
+     * 
+     */
     public PiattoCombo() {
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getDescr() {
         return descr;
     }
 
+    /**
+     * 
+     * @param descr
+     */
     public void setDescr(String descr) {
         this.descr = descr;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getIdLocale() {
         return idLocale;
     }
 
+    /**
+     * 
+     * @param idLocale
+     */
     public void setIdLocale(int idLocale) {
         this.idLocale = idLocale;
     }
 
+    /**
+     * 
+     * @return
+     */
     public float getPrezzo() {
         return prezzo;
     }
 
+    /**
+     * 
+     * @param prezzo
+     */
     public void setPrezzo(float prezzo) {
         this.prezzo = prezzo;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -67,6 +106,11 @@ public class PiattoCombo implements Serializable {
         return hash;
     }
 
+    /**
+     * 
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -80,6 +124,10 @@ public class PiattoCombo implements Serializable {
         return true;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public String toString() {
         return "luncharoundpkg.PiattoCombo[ id=" + id + " ]";

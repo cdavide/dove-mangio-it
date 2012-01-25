@@ -84,16 +84,34 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlRootElement(name = "hash")
 public class Hash {
 
+    /**
+     * 
+     */
     @XmlElement(name = "remaining-hits")
     protected Hash.RemainingHits remainingHits;
+    /**
+     * 
+     */
     @XmlElement(name = "hourly-limit")
     protected Hash.HourlyLimit hourlyLimit;
+    /**
+     * 
+     */
     @XmlElement(name = "reset-time-in-seconds")
     protected Hash.ResetTimeInSeconds resetTimeInSeconds;
+    /**
+     * 
+     */
     @XmlElement(name = "reset-time")
     protected Hash.ResetTime resetTime;
+    /**
+     * 
+     */
     @XmlElementRef(name = "error", type = JAXBElement.class)
     protected JAXBElement<String> error;
+    /**
+     * 
+     */
     protected String request;
 
     /**
@@ -264,14 +282,21 @@ public class Hash {
     })
     public static class HourlyLimit {
 
+        /**
+         * 
+         */
         @XmlValue
         protected int value;
+        /**
+         * 
+         */
         @XmlAttribute(name = "type")
         protected String type;
 
         /**
          * Gets the value of the value property.
          * 
+         * @return 
          */
         public int getValue() {
             return value;
@@ -280,6 +305,7 @@ public class Hash {
         /**
          * Sets the value of the value property.
          * 
+         * @param value 
          */
         public void setValue(int value) {
             this.value = value;
@@ -335,14 +361,21 @@ public class Hash {
     })
     public static class RemainingHits {
 
+        /**
+         * 
+         */
         @XmlValue
         protected int value;
+        /**
+         * 
+         */
         @XmlAttribute(name = "type")
         protected String type;
 
         /**
          * Gets the value of the value property.
          * 
+         * @return 
          */
         public int getValue() {
             return value;
@@ -351,6 +384,7 @@ public class Hash {
         /**
          * Sets the value of the value property.
          * 
+         * @param value 
          */
         public void setValue(int value) {
             this.value = value;
@@ -406,9 +440,15 @@ public class Hash {
     })
     public static class ResetTime {
 
+        /**
+         * 
+         */
         @XmlValue
         @XmlSchemaType(name = "dateTime")
         protected XMLGregorianCalendar value;
+        /**
+         * 
+         */
         @XmlAttribute(name = "type")
         protected String type;
 
@@ -486,14 +526,21 @@ public class Hash {
     })
     public static class ResetTimeInSeconds {
 
+        /**
+         * 
+         */
         @XmlValue
         protected int value;
+        /**
+         * 
+         */
         @XmlAttribute(name = "type")
         protected String type;
 
         /**
          * Gets the value of the value property.
          * 
+         * @return 
          */
         public int getValue() {
             return value;
@@ -502,6 +549,7 @@ public class Hash {
         /**
          * Sets the value of the value property.
          * 
+         * @param value 
          */
         public void setValue(int value) {
             this.value = value;

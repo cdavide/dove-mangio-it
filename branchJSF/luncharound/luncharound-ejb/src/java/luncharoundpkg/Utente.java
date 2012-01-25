@@ -42,90 +42,177 @@ public class Utente implements Serializable {
     private int tipo;
 
 
+    /**
+     * 
+     */
     public Utente() {
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isEventi() {
         return eventi;
     }
 
+    /**
+     * 
+     * @param eventi
+     */
     public void setEventi(boolean eventi) {
         this.eventi = eventi;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getFoto() {
         return foto;
     }
 
+    /**
+     * 
+     * @param foto
+     */
     public void setFoto(String foto) {
         this.foto = foto;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getHome() {
         return home;
     }
 
+    /**
+     * 
+     * @param home
+     */
     public void setHome(String home) {
         this.home = home;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getMail() {
         return mail;
     }
 
+    /**
+     * 
+     * @param mail
+     */
     public void setMail(String mail) {
         this.mail = mail;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isNews() {
         return news;
     }
 
+    /**
+     * 
+     * @param news
+     */
     public void setNews(boolean news) {
         this.news = news;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * 
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<Locale> getPreferiti() {
         return preferiti;
     }
 
+    /**
+     * 
+     * @param preferiti
+     */
     public void setPreferiti(List<Locale> preferiti) {
         this.preferiti = preferiti;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * 
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getTipo() {
         return tipo;
     }
 
+    /**
+     * 
+     * @param tipo
+     */
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
     
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -133,6 +220,11 @@ public class Utente implements Serializable {
         return hash;
     }
 
+    /**
+     * 
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -146,6 +238,10 @@ public class Utente implements Serializable {
         return true;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public String toString() {
         return "luncharoundpkg.Utente[ id=" + id + " ]";

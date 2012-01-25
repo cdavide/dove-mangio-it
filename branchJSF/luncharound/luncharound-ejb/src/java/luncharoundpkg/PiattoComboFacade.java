@@ -19,14 +19,26 @@ public class PiattoComboFacade extends AbstractFacade<PiattoCombo> implements Pi
     @PersistenceContext(unitName = "luncharound-ejbPU")
     private EntityManager em;
 
+    /**
+     * 
+     * @return
+     */
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     * 
+     */
     public PiattoComboFacade() {
         super(PiattoCombo.class);
     }
     
+    /**
+     * 
+     * @param idLocale
+     * @return
+     */
     @Override
     public List<PiattoCombo> findByLocale(int idLocale) {
         String selectQuery = "SELECT DISTINCT OBJECT(V) FROM PiattoCombo V WHERE V.idLocale = ?1 ";

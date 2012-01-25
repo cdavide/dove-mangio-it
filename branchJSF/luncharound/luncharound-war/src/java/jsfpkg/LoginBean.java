@@ -8,9 +8,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +23,7 @@ import org.primefaces.context.RequestContext;
  * @author Bovio Lorenzo, Bronzino Francesco, Concas Davide
  */
 @ManagedBean(name = "loginBean")
-@ViewScoped
+@SessionScoped
 public class LoginBean {
 
     @EJB
@@ -46,6 +43,9 @@ public class LoginBean {
     //serve per il menu laterale
 
     // empty constructor
+    /**
+     * 
+     */
     public LoginBean() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession httpSession = request.getSession();
@@ -68,6 +68,10 @@ public class LoginBean {
         System.err.println("Inizializzazione bean [LoginBean.java]");
     }
 
+    /**
+     * 
+     * @return
+     */
     public String login() {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
@@ -126,6 +130,10 @@ public class LoginBean {
     }
     
 
+    /**
+     * 
+     * @param actionEvent
+     */
     public void register(ActionEvent actionEvent) {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
@@ -142,6 +150,9 @@ public class LoginBean {
     }
 
     //metodo per controllare se è stato tentato un login
+    /**
+     * 
+     */
     public void checkLogin() {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
@@ -200,6 +211,10 @@ public class LoginBean {
     /* Metodo per invalidare la sessione utente
      * 
      */
+    /**
+     * 
+     * @return
+     */
     public String logout() {
         System.out.println("[Login Bean ] logout");
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -234,10 +249,17 @@ public class LoginBean {
         return "home";
     }
 
+    /**
+     * 
+     * @return
+     */
     public String doNavigation() {
         return "home";
     }
 
+    /**
+     * 
+     */
     public void twitLogin() {
         String url = "/TwitterServlet?metodo=login";
         RequestContext context = RequestContext.getCurrentInstance();
@@ -257,84 +279,180 @@ public class LoginBean {
         }
     }
 
+    
+    
+    /**
+     * 
+     * @return
+     */
+    public   String visualizzaMioLocale(){
+         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpSession httpSession = request.getSession();
+        httpSession.setAttribute("idLocale",httpSession.getAttribute("mioLocale"));
+        return "visualizzaLocale";
+    }
+    
+    
+    
+    
     //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
+    /**
+     * 
+     * @return
+     */
     public boolean isLoggedIn() {
         return loggedIn;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isGestore() {
         return gestore;
     }
 
+    /**
+     * 
+     * @param gestore
+     */
     public void setGestore(boolean gestore) {
         this.gestore = gestore;
     }
 
+    /**
+     * 
+     * @param loggedIn
+     */
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getFoto() {
         return foto;
     }
 
+    /**
+     * 
+     * @param foto
+     */
     public void setFoto(String foto) {
         this.foto = foto;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getMail() {
         return mail;
     }
 
+    /**
+     * 
+     * @param mail
+     */
     public void setMail(String mail) {
         this.mail = mail;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getIndirizzo() {
         return indirizzo;
     }
 
+    /**
+     * 
+     * @param indirizzo
+     */
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * 
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isHasPhoto() {
         return hasPhoto;
     }
 
+    /**
+     * 
+     * @param hasPhoto
+     */
     public void setHasPhoto(boolean hasPhoto) {
         this.hasPhoto = hasPhoto;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * 
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isReg() {
         return reg;
     }
 
+    /**
+     * 
+     * @param reg
+     */
     public void setReg(boolean reg) {
         this.reg = reg;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getFburl() {
 
         return this.fburl;
     }
 
+    /**
+     * 
+     * @param fburl
+     */
     public void setFburl(String fburl) {
         this.fburl = fburl;
     }

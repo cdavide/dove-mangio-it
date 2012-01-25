@@ -47,6 +47,9 @@ public class LocaliBean implements Serializable {
 
     //questo viene chiamato dopo il costruttore, 
     // dopo che il container ha fatto la injection degli ejb
+    /**
+     * 
+     */
     @PostConstruct
     public void init() {
         System.out.println("[LocaliBean] Inizializzazione bean");
@@ -71,6 +74,10 @@ public class LocaliBean implements Serializable {
     }
     
 
+    /**
+     * 
+     * @return
+     */
     public String save() {
         FacesMessage msg = null;
         // prendo la sessione
@@ -125,6 +132,9 @@ public class LocaliBean implements Serializable {
         return "home";
     }
 
+    /**
+     * 
+     */
     public void clearForm() {
         nuovo = new Locale();
         locali = null;
@@ -135,6 +145,10 @@ public class LocaliBean implements Serializable {
         return;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String visualizzaLocale() {
         System.out.println("visualizza Locale");
         // prendo la sessione
@@ -151,81 +165,157 @@ public class LocaliBean implements Serializable {
     }
     //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
 
+    /**
+     * 
+     * @return
+     */
     public String getTwitLocale() {
         return twitLocale;
     }
 
   
     
+    /**
+     * 
+     * @param twitLocale
+     */
     public void setTwitLocale(String twitLocale) {
         this.twitLocale = twitLocale;
     }
     
+    /**
+     * 
+     * @return
+     */
     public List<Locale> getLocali() {
         return locali;
     }
     
 
+    /**
+     * 
+     * @return
+     */
     public Locale getNuovo() {
         return nuovo;
     }
 
+    /**
+     * 
+     * @param nuovo
+     */
     public void setNuovo(Locale nuovo) {
         this.nuovo = nuovo;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getDescrizione() {
         return descrizione;
     }
 
+    /**
+     * 
+     * @param descrizione
+     */
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
 
+    /**
+     * 
+     * @param nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     * 
+     * @param indirizzo
+     */
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getIndirizzo() {
         return indirizzo;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getCitta() {
         return citta;
     }
 
+    /**
+     * 
+     * @param citta
+     */
     public void setCitta(String citta) {
         this.citta = citta;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getLat() {
         return lat;
     }
 
+    /**
+     * 
+     * @param lat
+     */
     public void setLat(double lat) {
         this.lat = lat;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getLon() {
         return lon;
     }
 
+    /**
+     * 
+     * @param lon
+     */
     public void setLon(double lon) {
         this.lon = lon;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getPiva() {
         return piva;
     }
 
+    /**
+     * 
+     * @param piva
+     */
     public void setPiva(String piva) {
         this.piva = piva;
     }

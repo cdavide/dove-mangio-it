@@ -36,22 +36,41 @@ public class Piatto implements Serializable {
     private boolean alcolico;
     private int idLocale; 
     
+    /**
+     * 
+     */
     public Piatto() {
     }
 
+    /**
+     * 
+     * @param idLocale
+     */
     public void setIdLocale(int idLocale) {
         this.idLocale = idLocale;
     }
 
     
+    /**
+     * 
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -59,6 +78,11 @@ public class Piatto implements Serializable {
         return hash;
     }
 
+    /**
+     * 
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -72,89 +96,173 @@ public class Piatto implements Serializable {
         return true;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public String toString() {
         return "luncharoundpkg.Piatto[ id=" + id + " ]";
     }
 
+    /**
+     * 
+     * @return
+     */
     public Categoria getCategoria() {
         return categoria;
     }
 
+    /**
+     * 
+     * @param categoria
+     */
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isCorrente() {
         return corrente;
     }
 
+    /**
+     * 
+     * @param corrente
+     */
     public void setCorrente(boolean corrente) {
         this.corrente = corrente;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isAlcolico() {
         return alcolico;
     }
 
+    /**
+     * 
+     * @param alcolico
+     */
     public void setAlcolico(boolean alcolico) {
         this.alcolico = alcolico;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isCarne() {
         return carne;
     }
 
+    /**
+     * 
+     * @param carne
+     */
     public void setCarne(boolean carne) {
         this.carne = carne;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isCeliaco() {
         return celiaco;
     }
 
+    /**
+     * 
+     * @param celiaco
+     */
     public void setCeliaco(boolean celiaco) {
         this.celiaco = celiaco;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isPesce() {
         return pesce;
     }
 
+    /**
+     * 
+     * @param pesce
+     */
     public void setPesce(boolean pesce) {
         this.pesce = pesce;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isVegano() {
         return vegano;
     }
 
+    /**
+     * 
+     * @param vegano
+     */
     public void setVegano(boolean vegano) {
         this.vegano = vegano;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isVegetariano() {
         return vegetariano;
     }
 
+    /**
+     * 
+     * @param vegetariano
+     */
     public void setVegetariano(boolean vegetariano) {
         this.vegetariano = vegetariano;
     }
 
 
 
+    /**
+     * 
+     * @return
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * 
+     * @param nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     * 
+     * @return
+     */
     public float getPrezzo() {
         return prezzo;
     }
 
+    /**
+     * 
+     * @param prezzo
+     */
     public void setPrezzo(float prezzo) {
         this.prezzo = prezzo;
     }

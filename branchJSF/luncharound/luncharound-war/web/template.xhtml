@@ -121,7 +121,6 @@
                                                   actionListener="#{eventBean.addEvento}"/>
                             </h:form>
                         </p:dialog>
-
                         <p:dialog id="addNews" header="Aggiunti news"  modal="true" widgetVar=" newsDlg" width ="550">
                             <h:form id="newsForm">
                                 <h:panelGrid columns="2" cellpadding="5">
@@ -163,7 +162,7 @@
                                     <p:menuitem value="Visualizza eventi"  url="eventiPage.xhtml" icon="ui-icon ui-icon-calendar"/>    
                                 </p:submenu>
                                 <p:submenu  id="submenu" label="Menu Gestore"  rendered="#{loginBean.gestore}">
-                                    <p:menuitem value="Il tuo locale" url="visualizzaLocale.xhtml" icon="ui-icon ui-icon-home" />  
+                                    <p:menuitem value="Il tuo locale" action="#{loginBean.visualizzaMioLocale()}" icon="ui-icon ui-icon-home" />  
                                     <p:menuitem value="Modifica Menu" url="menuPage.xhtml" icon="ui-icon ui-icon-document"/>  
                                     <!--<p:menuitem value="Aggiungi nuovo" url="localiUtente.xhtml" icon="ui-icon ui-icon-plusthick"/>  -->
                                     <p:menuitem value="Aggiungi news"  id="addNewsLink" onclick="newsDlg.show()" actionListener="asd" icon="ui-icon ui-icon-plusthick"/>/>  

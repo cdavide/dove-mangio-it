@@ -50,6 +50,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Hash.HourlyLimit }
      * 
+     * @return 
      */
     public Hash.HourlyLimit createHashHourlyLimit() {
         return new Hash.HourlyLimit();
@@ -58,6 +59,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Nilclasses }
      * 
+     * @return 
      */
     public Nilclasses createNilclasses() {
         return new Nilclasses();
@@ -66,6 +68,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link UserType }
      * 
+     * @return 
      */
     public UserType createUserType() {
         return new UserType();
@@ -74,6 +77,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link DirectMessageType }
      * 
+     * @return 
      */
     public DirectMessageType createDirectMessageType() {
         return new DirectMessageType();
@@ -82,6 +86,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link StatusType }
      * 
+     * @return 
      */
     public StatusType createStatusType() {
         return new StatusType();
@@ -90,6 +95,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Hash.ResetTime }
      * 
+     * @return 
      */
     public Hash.ResetTime createHashResetTime() {
         return new Hash.ResetTime();
@@ -98,6 +104,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Hash }
      * 
+     * @return 
      */
     public Hash createHash() {
         return new Hash();
@@ -106,6 +113,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link DirectMessages }
      * 
+     * @return 
      */
     public DirectMessages createDirectMessages() {
         return new DirectMessages();
@@ -114,6 +122,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Statuses }
      * 
+     * @return 
      */
     public Statuses createStatuses() {
         return new Statuses();
@@ -122,6 +131,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Hash.RemainingHits }
      * 
+     * @return 
      */
     public Hash.RemainingHits createHashRemainingHits() {
         return new Hash.RemainingHits();
@@ -130,6 +140,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Hash.ResetTimeInSeconds }
      * 
+     * @return 
      */
     public Hash.ResetTimeInSeconds createHashResetTimeInSeconds() {
         return new Hash.ResetTimeInSeconds();
@@ -138,6 +149,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Boolean }{@code >}}
      * 
+     * @param value
+     * @return  
      */
     @XmlElementDecl(namespace = "", name = "authorized")
     public JAXBElement<Boolean> createAuthorized(Boolean value) {
@@ -147,6 +160,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Boolean }{@code >}}
      * 
+     * @param value
+     * @return  
      */
     @XmlElementDecl(namespace = "", name = "friends")
     public JAXBElement<Boolean> createFriends(Boolean value) {
@@ -156,6 +171,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link StatusType }{@code >}}
      * 
+     * @param value 
+     * @return 
      */
     @XmlElementDecl(namespace = "", name = "status")
     public JAXBElement<StatusType> createStatus(StatusType value) {
@@ -165,6 +182,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Boolean }{@code >}}
      * 
+     * @param value
+     * @return  
      */
     @XmlElementDecl(namespace = "", name = "authenticated")
     public JAXBElement<Boolean> createAuthenticated(Boolean value) {
@@ -174,6 +193,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Boolean }{@code >}}
      * 
+     * @param value
+     * @return  
      */
     @XmlElementDecl(namespace = "", name = "ok")
     public JAXBElement<Boolean> createOk(Boolean value) {
@@ -183,6 +204,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link UserType }{@code >}}
      * 
+     * @param value
+     * @return  
      */
     @XmlElementDecl(namespace = "", name = "user")
     public JAXBElement<UserType> createUser(UserType value) {
@@ -192,6 +215,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link DirectMessageType }{@code >}}
      * 
+     * @param value 
+     * @return 
      */
     @XmlElementDecl(namespace = "", name = "direct_message")
     public JAXBElement<DirectMessageType> createDirectMessage(DirectMessageType value) {
@@ -201,6 +226,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
+     * @param value 
+     * @return 
      */
     @XmlElementDecl(namespace = "", name = "error", scope = Hash.class)
     public JAXBElement<String> createHashError(String value) {

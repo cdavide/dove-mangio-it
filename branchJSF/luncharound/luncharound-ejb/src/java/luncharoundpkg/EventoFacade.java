@@ -20,14 +20,24 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
     @PersistenceContext(unitName = "luncharound-ejbPU")
     private EntityManager em;
 
+    /**
+     * 
+     * @return
+     */
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     * 
+     */
     public EventoFacade() {
         super(Evento.class);
     }
     
+    /**
+     * 
+     */
     @Override
     public void deleteOld(){
         Date oggi = new Date();
@@ -37,6 +47,11 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
         deleteOldEvents.executeUpdate();
     }
     
+    /**
+     * 
+     * @param idLocale
+     * @return
+     */
     @Override
     public List<Evento> findByLocale(int idLocale){
         //deleteOld();
@@ -48,6 +63,11 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
         return searchById.getResultList();
     }
     
+    /**
+     * 
+     * @param idLocali
+     * @return
+     */
     @Override
     public List<Evento> findByLocali(List<Integer> idLocali){
         //deleteOld();
@@ -60,6 +80,10 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
         return searchById.getResultList();
     }
     
+    /**
+     * 
+     * @return
+     */
     @Override
     public List<Evento> findNext(){
         //deleteOld();

@@ -68,6 +68,9 @@ public class RicercaBean{
         
     }
     
+    /**
+     * 
+     */
     @PostConstruct
     public void init(){
     
@@ -91,6 +94,9 @@ public class RicercaBean{
         
     }
     
+    /**
+     * 
+     */
     public void submit(){
         create_results();
         set_zoom();
@@ -98,6 +104,9 @@ public class RicercaBean{
         noSearch=false;
     }
   
+    /**
+     * 
+     */
     public void create_results(){
         int i;
         String pushPin;
@@ -163,6 +172,9 @@ public class RicercaBean{
     }
         
     
+    /**
+     * 
+     */
     public void set_zoom(){
         //visualizzazione ottimale della mappa
         switch (distanza) {
@@ -192,6 +204,10 @@ public class RicercaBean{
     
     }
 
+    /**
+     * 
+     * @return
+     */
     public String visualizzaLocale() {
         System.err.println("sono in visualizza Locale");
         // prendo la sessione
@@ -208,22 +224,37 @@ public class RicercaBean{
         
     }
     
+    /**
+     * 
+     * @return
+     */
     public String go(){
         System.err.println("sono in go");
         return "visualizzaLocale";
     } 
     
     //metodo per nuvoletta sulla mappa
+    /**
+     * 
+     * @param event
+     */
     public void onMarkerSelect(OverlaySelectEvent event) { 
         System.err.println("dentro!");
         marker = (Marker) event.getOverlay();  
     } 
       
+    /**
+     * 
+     * @return
+     */
     public Marker getMarker() {  
         return marker;  
     }
    
     
+    /**
+     * 
+     */
     public void save_location(){
        
         if(salva){
@@ -242,111 +273,215 @@ public class RicercaBean{
 
 
     //<editor-fold defaultstate="collapsed" desc="costruttori">
+    /**
+     * 
+     * @return
+     */
     public int getTipo() {
         return tipo;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getV() {
         return v;
     }
 
+    /**
+     * 
+     * @param v
+     */
     public void setV(double v) {
         this.v = v;
     }
 
     
     
+    /**
+     * 
+     * @param tipo
+     */
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<Risultato> getLista() {
         return lista;
     }
 
+    /**
+     * 
+     * @param lista
+     */
     public void setLista(List<Risultato> lista) {
         this.lista = lista;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<Locale> getLl() {
         return ll;
     }
 
+    /**
+     * 
+     * @param ll
+     */
     public void setLl(List<Locale> ll) {
         this.ll = ll;
     }
 
     
     
+    /**
+     * 
+     * @return
+     */
     public int getZoom() {
         return zoom;
     }
 
+    /**
+     * 
+     * @param zoom
+     */
     public void setZoom(int zoom) {
         this.zoom = zoom;
     }
     
+    /**
+     * 
+     * @return
+     */
     public boolean isZeroResults() {
         return zeroResults;
     }
 
+    /**
+     * 
+     * @param zeroResults
+     */
     public void setZeroResults(boolean zeroResults) {
         this.zeroResults = zeroResults;
     }
 
+    /**
+     * 
+     * @return
+     */
     public MapModel getAdvancedModel() {
         return advancedModel;
     }
 
+    /**
+     * 
+     * @param advancedModel
+     */
     public void setAdvancedModel(MapModel advancedModel) {
         this.advancedModel = advancedModel;
     }
     
       
+    /**
+     * 
+     * @return
+     */
     public boolean isNoSearch() {
         return noSearch;
     }
 
+    /**
+     * 
+     * @param noSearch
+     */
     public void setNoSearch(boolean noSearch) {
         this.noSearch = noSearch;
     }
     
+    /**
+     * 
+     * @return
+     */
     public String getIndirizzo() {
         return indirizzo;
     }
     
+    /**
+     * 
+     * @param indirizzo
+     */
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getDistanza() {
         return distanza;
     }
 
+    /**
+     * 
+     * @param distanza
+     */
     public void setDistanza(int distanza) {
         this.distanza = distanza;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getLatitudine() {
         return latitudine;
     }
 
+    /**
+     * 
+     * @param latitudine
+     */
     public void setLatitudine(double latitudine) {
         this.latitudine = latitudine;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getLongitudine() {
         return longitudine;
     }
 
+    /**
+     * 
+     * @param longitudine
+     */
     public void setLongitudine(double longitudine) {
         this.longitudine = longitudine;
     }
     
+    /**
+     * 
+     * @return
+     */
     public boolean isSalva() {
         return salva;
     }
     
+    /**
+     * 
+     * @param salva
+     */
     public void setSalva(boolean salva) {
         this.salva = salva;
     }

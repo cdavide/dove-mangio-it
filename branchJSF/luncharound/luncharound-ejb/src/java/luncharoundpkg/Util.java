@@ -18,6 +18,11 @@ import org.apache.commons.beanutils.BeanUtils;
  */
 public class Util {
     
+    /**
+     * 
+     * @param req
+     * @param o
+     */
     public static void riempi(HttpServletRequest req, Object o){
 
         HashMap map = new HashMap();

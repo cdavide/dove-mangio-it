@@ -10,7 +10,7 @@
 
     <ui:define name="content">
         <p:tooltip global="true"/>  
-        <h:form id="fr_menu">
+        <h:form id="fr_menu"  >
             <p:tabView dynamic="true" effect="opacity" effectDuration="normal" id="tab_view" style="overflow:hidden;" >
 
                 <p:tab id="ta" title="Antipasti"> 
@@ -42,7 +42,7 @@
                         <p:column headerText ="Crn" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true" />
+                                    <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true"  />
                                 </f:facet>
                                 <f:facet name="input">
                                     <h:selectBooleanCheckbox value="#{piatto.carne}" />
@@ -94,16 +94,17 @@
                             <p:rowEditor/>
                         </p:column>
                         <p:column style="width:100%" >
-                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:ant growl tab_view fr_menu" image="ui-icon ui-icon-disk">
+                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:ant growl tab_view fr_menu"   image="ui-icon ui-icon-disk">
                                 <f:param name="idOperation" value="0" />
                             </p:commandButton>
-                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:ant growl tab_view fr_menu" image="ui-icon ui-icon-trash">
+                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:ant growl tab_view fr_menu"   image="ui-icon ui-icon-trash">
                                 <f:param name="idPiatto" value="#{piatto.id}" />
                                 <f:param name="idOperation" value="0" />
                             </p:commandButton>
                         </p:column>
+                        
                     </p:dataTable>
-                   
+
                     
                 </p:tab>
                 <p:tab id ="tp" title="Primi" >
@@ -135,7 +136,7 @@
                         <p:column headerText ="Crn" style="width:100%">
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true" />
+                                        <h:selectBooleanCheckbox value="#{piatto.carne}" disabled="true" />
                                 </f:facet>
                                 <f:facet name="input">
                                     <h:selectBooleanCheckbox value="#{piatto.carne}" />
@@ -187,15 +188,16 @@
                             <p:rowEditor/>
                         </p:column>
                         <p:column style="width:100%" >
-                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:ant growl tab_view fr_menu" image="ui-icon ui-icon-disk">
+                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:ant growl tab_view fr_menu"   image="ui-icon ui-icon-disk">
                                 <f:param name="idOperation" value="1" />
                             </p:commandButton>
-                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:ant growl tab_view fr_menu" image="ui-icon ui-icon-trash">
+                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:ant growl tab_view fr_menu"   image="ui-icon ui-icon-trash">
                                 <f:param name="idPiatto" value="#{piatto.id}" />
                                 <f:param name="idOperation" value="1" />
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
+                   
                 </p:tab>
                 <p:tab id="ts" title="Secondi">
                     <p:dataTable id="sec" value="#{addMenuBean.secondi}" var="piatto" >
@@ -278,15 +280,21 @@
                             <p:rowEditor/>
                         </p:column>
                         <p:column style="width:100%" >
-                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:sec growl tab_view fr_menu" image="ui-icon ui-icon-disk">
+                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:sec growl tab_view fr_menu"   image="ui-icon ui-icon-disk">
                                 <f:param name="idOperation" value="2" />
                             </p:commandButton>
-                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:sec growl tab_view fr_menu" image="ui-icon ui-icon-trash">
+                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:sec growl tab_view fr_menu"   image="ui-icon ui-icon-trash">
                                 <f:param name="idPiatto" value="#{piatto.id}" />
                                 <f:param name="idOperation" value="2" />
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
+                    <p:commandButton value="Aggiungi nuovo piatto" update="tab_view growl" action="#{addMenuBean.addSpace}"  >
+                        <f:param name="idOperation" value="2" />
+                    </p:commandButton>
+                     <p:commandButton value="Salva Menu" update="tab_view growl" action="#{addMenuBean.add}"  >
+                        <f:param name="idOperation" value="0" />
+                    </p:commandButton> 
                 </p:tab>
 
 
@@ -380,6 +388,7 @@
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
+                  
                 </p:tab>
 
 
@@ -457,7 +466,7 @@
                                     <h:selectBooleanCheckbox value="#{piatto.celiaco}" disabled="true"/>
                                 </f:facet>
                                 <f:facet name="input">
-                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}" />
+                                    <h:selectBooleanCheckbox value="#{piatto.celiaco}"/>
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
@@ -475,6 +484,7 @@
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
+               
                 </p:tab>
                 <p:tab id="tb" title="Bevande">
                     <p:dataTable id="bev" value="#{addMenuBean.bevande}" var="piatto" >
@@ -567,6 +577,7 @@
                         </p:column>
 
                     </p:dataTable>
+               
                 </p:tab>
                 
                 <p:tab id="tpc" title="Combinazioni">
@@ -598,17 +609,17 @@
                             <p:rowEditor/>
                         </p:column>
                         <p:column style="width:100%" >
-                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:bev growl tab_view fr_menu" image="ui-icon ui-icon-disk">
+                            <p:commandButton action="#{addMenuBean.add}" update="fr_menu:bev growl tab_view fr_menu" image="ui-icon ui-icon-disk"  >
                                 <f:param name="idOperation" value="6" />
                             </p:commandButton>
-                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:bev growl tab_view fr_menu" image="ui-icon ui-icon-trash">
+                            <p:commandButton action="#{addMenuBean.delete}" update="fr_menu:bev growl tab_view fr_menu" image="ui-icon ui-icon-trash"  >
                                 <f:param name="idPiatto" value="#{combo.id}" />
                                 <f:param name="idOperation" value="6" />
                             </p:commandButton>
                         </p:column>
-
+                    
                     </p:dataTable>
-                     
+                    
                 </p:tab>
                 
                 
@@ -617,7 +628,7 @@
                         
                     <p:calendar value="#{addMenuBean.date}" />
             <p:panel header="Esporta il tuo menu nel formato che preferisci (Pdf ?)">  
-                <p:commandLink action="#{addMenuBean.printPdf}" target="_blank" ajax="false" >  
+                <p:commandLink action="#{addMenuBean.printPdf}" target="_blank"   >  
                     <p:graphicImage value="resources/pdf.png" />  
                 </p:commandLink>  
             </p:panel>

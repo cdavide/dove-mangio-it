@@ -77,6 +77,9 @@ public class VisualizzaLocale implements Serializable {
 
     //questo viene chiamato dopo il costruttore, 
     // dopo che il container ha fatto la injection degli ejb
+    /**
+     * 
+     */
     @PostConstruct
     public void init() {
         Format formatter = new SimpleDateFormat("dd-MMM-yy");
@@ -186,6 +189,12 @@ public class VisualizzaLocale implements Serializable {
         return dataset;
     }
 
+    /**
+     * 
+     * @param request
+     * @param week
+     * @return
+     */
     public Valutazione mediaSettimana(HttpServletRequest request, int week) {
         HttpSession session = request.getSession();
         int idLocale;
@@ -280,6 +289,11 @@ public class VisualizzaLocale implements Serializable {
 
     /*Metodo pubblico per calcolare la media di una lista di valutazioni
      */
+    /**
+     * 
+     * @param val
+     * @return
+     */
     public Valutazione mediaValutazioni(List<Valutazione> val) {
         if (val == null || val.isEmpty()) {
             System.err.println("[Statistiche.java ]Non sono  state trovate valutazioni per il locale");
@@ -313,55 +327,107 @@ public class VisualizzaLocale implements Serializable {
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
+    /**
+     * 
+     * @return
+     */
     public Locale getLocale() {
         return locale;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isLoggedIn() {
         return loggedIn;
     }
 
+    /**
+     * 
+     * @param loggedIn
+     */
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
 
+    /**
+     * 
+     * @return
+     */
     public StreamedContent getChart() {
         return chart;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getValidita() {
         return validita;
     }
 
+    /**
+     * 
+     * @param validita
+     */
     public void setValidita(String validita) {
         this.validita = validita;
     }    
     
+    /**
+     * 
+     * @return
+     */
     public boolean isGestore() {
         return gestore;
     }
 
+    /**
+     * 
+     * @param gestore
+     */
     public void setGestore(boolean gestore) {
         this.gestore = gestore;
     }
 
+    /**
+     * 
+     * @param chart
+     */
     public void setChart(StreamedContent chart) {
         this.chart = chart;
     }
 
+    /**
+     * 
+     * @param locale
+     */
     public void setLocale(Locale locale) {
         this.locale = locale;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getMappa() {
         return mappa;
     }
 
-        public String getFacebook() {
+    /**
+     * 
+     * @return
+     */
+    public String getFacebook() {
         return facebook;
     }
 
-    public void setFacebook(String facebook) {
+        /**
+         * 
+         * @param facebook
+         */
+        public void setFacebook(String facebook) {
         this.facebook = facebook;
     }
     
@@ -384,30 +450,58 @@ public class VisualizzaLocale implements Serializable {
         this.TwitLocale = TwitLocale;
     }
     
+    /**
+     * 
+     * @return
+     */
     public List<Piatto> getMenu() {
         return menu;
     }
 
+    /**
+     * 
+     * @param menu
+     */
     public void setMenu(List<Piatto> menu) {
         this.menu = menu;
     }
 
+    /**
+     * 
+     * @return
+     */
     public List<PiattoCombo> getOfferte() {
         return offerte;
     }
 
+    /**
+     * 
+     * @param offerte
+     */
     public void setOfferte(List<PiattoCombo> offerte) {
         this.offerte = offerte;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getValutazioni() {
         return valutazioni;
     }
     
+    /**
+     * 
+     * @param url
+     */
     public void setMappa(String url) {
         this.mappa = url;
     }
 
+    /**
+     * 
+     * @param valutazioni
+     */
     public void setValutazioni(String valutazioni) {
         this.valutazioni = valutazioni;
     }

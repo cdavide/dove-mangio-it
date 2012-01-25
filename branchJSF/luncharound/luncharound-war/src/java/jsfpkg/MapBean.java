@@ -26,6 +26,10 @@ import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
+/**
+ * 
+ * @author dave
+ */
 @ManagedBean(name="mapBean")
 @RequestScoped
 public class MapBean implements Serializable {
@@ -37,10 +41,16 @@ public class MapBean implements Serializable {
     double centerLong;
 
     /*Costruttore vuoto*/
+    /**
+     * 
+     */
     public MapBean() {
     }
     
     /*Post costruttore chiamato dopo l'injection delle dipendenze sul backend*/
+    /**
+     * 
+     */
     @PostConstruct
     public void init(){
         simpleModel = new DefaultMapModel();
@@ -62,22 +72,42 @@ public class MapBean implements Serializable {
     }
     
     //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
+    /**
+     * 
+     * @return
+     */
     public double getCenterLat() {
         return centerLat;
     }
 
+    /**
+     * 
+     * @param centerLat
+     */
     public void setCenterLat(double centerLat) {
         this.centerLat = centerLat;
     }
 
+    /**
+     * 
+     * @return
+     */
     public double getCenterLong() {
         return centerLong;
     }
 
+    /**
+     * 
+     * @param centerLong
+     */
     public void setCenterLong(double centerLong) {
         this.centerLong = centerLong;
     }
 
+    /**
+     * 
+     * @return
+     */
     public MapModel getSimpleModel() {
         return simpleModel;
     }
